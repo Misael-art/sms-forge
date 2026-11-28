@@ -1,0 +1,131 @@
+{
+  "scope": "Preserved evidence custody; no new playback or acceptance",
+  "cases": [
+    {
+      "checkpoint": "SMS_projects/master_of_fighters/doc/hayato_short_cut_timing_only_v7_checkpoint.json",
+      "checkpoint_sha256": "a5202da26e30e549e8e19054624cd53a6561a9f9ae818fcc85ebadf584dd52b5",
+      "verified_refs": [
+        {
+          "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png",
+          "sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d"
+        },
+        {
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/converted_right/R02.png",
+          "sha256": "968b546748aaf3ab1b77b171d5923e96726141e7024fb633a2c993d151a6e6aa"
+        },
+        {
+          "path": "out/candidates/hayato_short_cut_timing_only_v7_right/rom/master_of_fighters.sms",
+          "sha256": "2d5afcbb497fdedd61dc1498782d3d97508cac7553cc024a14f5650ee0d03022"
+        },
+        {
+          "path": "doc/hayato_short_cut_body_SMS_independent_review_v4.json",
+          "sha256": "cef012df0797095ce503d9b9d6365025f49ecf55555ac013ecab71f6fec0145f"
+        },
+        {
+          "path": "doc/hayato_short_cut_body_SMS_independent_review_v4.json",
+          "sha256": "cef012df0797095ce503d9b9d6365025f49ecf55555ac013ecab71f6fec0145f"
+        },
+        {
+          "path": "doc/decisions/hayato-short-cut-timing-only_owner_approval.json",
+          "sha256": "a23cc829d5352dd7f1fcb9c1bfef41a21a343db748ae370e49990bce0afb92d0"
+        },
+        {
+          "path": "doc/decisions/hayato-short-cut-timing-only_owner_approval.json",
+          "sha256": "a23cc829d5352dd7f1fcb9c1bfef41a21a343db748ae370e49990bce0afb92d0"
+        },
+        {
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/pixel_timeline_analysis.json",
+          "sha256": "b10099c9ae021ae84be5b1d877c4afcf5dc72c78081e38bf801c8b081fc05953"
+        },
+        {
+          "path": "out/diagnostics/hayato_short_cut_v2/timing_only_v7/performance/b346785d4d914ba299e5325b67419b4a/pixel_timeline_analysis.json",
+          "sha256": "b10099c9ae021ae84be5b1d877c4afcf5dc72c78081e38bf801c8b081fc05953"
+        }
+      ],
+      "actual_report": {
+        "schema": "sms_art_temporal_review_report_v1",
+        "status": "pass",
+        "exit_code": 0,
+        "problems": [],
+        "failed_axes": [],
+        "pending_axes": [],
+        "next_decision": "keep",
+        "owner_decision_closed": false,
+        "claim_ceiling": "declared_observation_scope_and_custody_only; not perception_authentication_or_artistic_quality"
+      },
+      "closure_contract": {
+        "schema": "sms_art_temporal_review_report_v1",
+        "status": "pass",
+        "exit_code": 0,
+        "problems": [],
+        "failed_axes": [],
+        "pending_axes": [],
+        "next_decision": "keep",
+        "owner_decision_closed": true,
+        "claim_ceiling": "declared_observation_scope_and_custody_only; not perception_authentication_or_artistic_quality"
+      },
+      "negative_changed_timing": [
+        "owner_accepts_selected_cut: owner-approved timing differs from sequence"
+      ]
+    },
+    {
+      "checkpoint": "SMS_projects/master_of_fighters/doc/jj_zillion_character_checkpoint_v7.json",
+      "checkpoint_sha256": "97cf86b1e9685f9ea5b331fae5ff2ee0d7650e4ffabb07f4e785aa1d7463198d",
+      "verified_refs": [
+        {
+          "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/shot_source.png",
+          "sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b"
+        },
+        {
+          "path": "out/candidates/jj_zillion_single_shot_v5_right/rom/master_of_fighters.sms",
+          "sha256": "aed6db173058ccad03d84ff36eaf088a33235bc7f57cef96025d30e0e510eab4"
+        },
+        {
+          "path": "doc/jj_zillion_proportion_no_fx_independent_addendum_v6.json",
+          "sha256": "8678d6ccf58288dcac9e842e0a04c3fd1dc617c1c8fe987db7830c74f5e9bbeb"
+        },
+        {
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/performance/5f94496d541d4b8ea7656756cd63acd8/pixel_timeline_analysis.json",
+          "sha256": "24d26afc0ff220a3c373bdac5a8e65d5f9a658b7edad968a8d7ed299059f4197"
+        },
+        {
+          "path": "out/diagnostics/jj_zillion_single_shot_v5/performance/5f94496d541d4b8ea7656756cd63acd8/pixel_timeline_analysis.json",
+          "sha256": "24d26afc0ff220a3c373bdac5a8e65d5f9a658b7edad968a8d7ed299059f4197"
+        },
+        {
+          "path": "doc/decisions/jj-zillion-character_owner_approval.json",
+          "sha256": "6909b7de5c7e3d5c8e31cd07eb46de9539553724a0fdea2a46e6c8302a7b7c21"
+        }
+      ],
+      "actual_report": {
+        "schema": "sms_art_temporal_review_report_v1",
+        "status": "pending",
+        "exit_code": 2,
+        "problems": [],
+        "failed_axes": [],
+        "pending_axes": [
+          "continuous_motion"
+        ],
+        "next_decision": "keep_control",
+        "owner_decision_closed": true,
+        "claim_ceiling": "declared_observation_scope_and_custody_only; not perception_authentication_or_artistic_quality"
+      },
+      "closure_contract": {
+        "schema": "sms_art_temporal_review_report_v1",
+        "status": "pending",
+        "exit_code": 2,
+        "problems": [],
+        "failed_axes": [],
+        "pending_axes": [
+          "continuous_motion"
+        ],
+        "next_decision": "keep_control",
+        "owner_decision_closed": true,
+        "claim_ceiling": "declared_observation_scope_and_custody_only; not perception_authentication_or_artistic_quality"
+      },
+      "negative_changed_timing": [
+        "owner_acceptance: owner-approved timing differs from sequence"
+      ]
+    }
+  ]
+}

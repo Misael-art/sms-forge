@@ -1,0 +1,533 @@
+{
+  "artifact_kind": "independent_quality_review",
+  "claim_ceiling": "independent_quality_review_only",
+  "stage": "diagnostic_conversion",
+  "producer": "/root",
+  "reviewer": "/root/hayato_art_review",
+  "domains": [
+    "art"
+  ],
+  "execution_mode": "read_only_derivative_art_review",
+  "status": "revise_before_growth",
+  "request_id": "hayato-social-common-p1-static-rom-v1",
+  "request": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_cps2_pair_derivative_review_request_v1.json",
+    "sha256": "ea4afe7342ea4d22d88503157336bac6e597c896a260a0d78e023a1c1267766d"
+  },
+  "approval_scope": "Independent artistic inspection of the fixed-common-P1 static derivative and four supplied native-ROM framebuffers only; material-role drift blocks static conversion acceptance. Prior source review is unchanged. No motion, owner, hardware-performance, production or delivery approval.",
+  "artifacts": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_cps2_idle_independent_review_v2.json",
+      "sha256": "8aeb62d570f9241ef4c8cae81676c0d8fdc148199663903c41da10426ec516c4",
+      "observed_sha256": "8aeb62d570f9241ef4c8cae81676c0d8fdc148199663903c41da10426ec516c4"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/guard_v2_left/conversion.json",
+      "sha256": "72ebc8d254f4584d93dae8ffe87f6065e9d7688a3ad07f682f03b8b31c1b4421",
+      "observed_sha256": "72ebc8d254f4584d93dae8ffe87f6065e9d7688a3ad07f682f03b8b31c1b4421"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/guard_v2_right/conversion.json",
+      "sha256": "42f0eb7ac6a5382f443219696e3a517ab36d21688b29361c0c511589f241f4a1",
+      "observed_sha256": "42f0eb7ac6a5382f443219696e3a517ab36d21688b29361c0c511589f241f4a1"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/.mddev/hayato_cps2_guard_left.json",
+      "sha256": "3730dcd3c6038236cac4c3e3399327e49e8dc4bf680f2a8bfdb613c80a7ae66b",
+      "observed_sha256": "3730dcd3c6038236cac4c3e3399327e49e8dc4bf680f2a8bfdb613c80a7ae66b"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa/guard_left/run_5f1227337b984642a779b85a5599d698/report.json",
+      "sha256": "5dcbcbd2f3c86071eaf27e451f6e8260efcc7416a05e8720852a7d8ededb55d4",
+      "observed_sha256": "5dcbcbd2f3c86071eaf27e451f6e8260efcc7416a05e8720852a7d8ededb55d4"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa/guard_left/run_5f1227337b984642a779b85a5599d698/case_0_frame.png",
+      "sha256": "a1a5adbe95334eb5629e538e41d1fc8bf987d1ba3312b1940a1898541cd85e4e",
+      "observed_sha256": "a1a5adbe95334eb5629e538e41d1fc8bf987d1ba3312b1940a1898541cd85e4e"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa/guard_right/run_d2d13ce3589b40ce9bc4b0ff09b0117b/report.json",
+      "sha256": "9cc47a089292d6bcbcec2b2f1dfa0bbfe3824c1a8b7a568f60af9a4b7542b5f5",
+      "observed_sha256": "9cc47a089292d6bcbcec2b2f1dfa0bbfe3824c1a8b7a568f60af9a4b7542b5f5"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa/guard_right/run_d2d13ce3589b40ce9bc4b0ff09b0117b/case_0_frame.png",
+      "sha256": "94cb1b214fb0a9fd37d95230027909b701d934d7bb38f67ca20f8130fc6e2f8f",
+      "observed_sha256": "94cb1b214fb0a9fd37d95230027909b701d934d7bb38f67ca20f8130fc6e2f8f"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa/social_jab_left/run_40da28fbb12f47e18f8c080cbbe84a8f/report.json",
+      "sha256": "6349d35a82f52695db90121d623bae77747f8d6d57b322263ac76c090cc52ddc",
+      "observed_sha256": "6349d35a82f52695db90121d623bae77747f8d6d57b322263ac76c090cc52ddc"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa/social_jab_left/run_40da28fbb12f47e18f8c080cbbe84a8f/case_0_frame.png",
+      "sha256": "94cb1b214fb0a9fd37d95230027909b701d934d7bb38f67ca20f8130fc6e2f8f",
+      "observed_sha256": "94cb1b214fb0a9fd37d95230027909b701d934d7bb38f67ca20f8130fc6e2f8f"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa/social_jab_right/run_f4a5b0e7c9c64154b97b490e16fac021/report.json",
+      "sha256": "84dc6c9648e5ff7c396214cf1eac090892eeccb9aea4adbf9aa909259e4fc037",
+      "observed_sha256": "84dc6c9648e5ff7c396214cf1eac090892eeccb9aea4adbf9aa909259e4fc037"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa/social_jab_right/run_f4a5b0e7c9c64154b97b490e16fac021/case_0_frame.png",
+      "sha256": "a1a5adbe95334eb5629e538e41d1fc8bf987d1ba3312b1940a1898541cd85e4e",
+      "observed_sha256": "a1a5adbe95334eb5629e538e41d1fc8bf987d1ba3312b1940a1898541cd85e4e"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/guard_v2_left/idle.png",
+      "sha256": "b7c83d93a457c682d7f2aaa0d12cd4e13497a2e9e5372f0069a60601ba57749b",
+      "observed_sha256": "b7c83d93a457c682d7f2aaa0d12cd4e13497a2e9e5372f0069a60601ba57749b"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/guard_v2_left/reference.png",
+      "sha256": "ce956fe51fe159afeef292655a024dd473bfa6009612268fb948d231947be432",
+      "observed_sha256": "ce956fe51fe159afeef292655a024dd473bfa6009612268fb948d231947be432"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/guard_v2_right/idle.png",
+      "sha256": "9e9747853ea0683de3745b46fff06839751f88f128c23cb56a155ac0e358faf8",
+      "observed_sha256": "9e9747853ea0683de3745b46fff06839751f88f128c23cb56a155ac0e358faf8"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/guard_v2_right/reference.png",
+      "sha256": "9ae6af2a4900fd8e613c81792f66d98b319bc634aa9cd8ffe63f94b7d43fddbd",
+      "observed_sha256": "9ae6af2a4900fd8e613c81792f66d98b319bc634aa9cd8ffe63f94b7d43fddbd"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/guard_revision_v2/idle_source.png",
+      "sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1",
+      "observed_sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1",
+      "role": "unchanged native source inspected for material roles"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png",
+      "sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95",
+      "observed_sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95",
+      "role": "approved identity/costume concept"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/contact_grid_v8/converted/idle.png",
+      "sha256": "98cb888a808b865e384a058a6f1c740827fd9759dd5af393a7253ba6912d0360",
+      "observed_sha256": "98cb888a808b865e384a058a6f1c740827fd9759dd5af393a7253ba6912d0360",
+      "role": "frozen Social v8 RGB and palette comparison"
+    }
+  ],
+  "review_axes": {
+    "pixel_clusters": {
+      "status": "pass",
+      "note": "A derivada conserva a construção geral em planos e os contornos escalonados; a falha identificada é de destino cromático de alguns índices, não ausência de células ou alteração da geometria. Não inferi qualidade artística de diferenças de hash."
+    },
+    "face_detail_readability": {
+      "status": "pass",
+      "note": "Hayato ainda lê como jovem de cabelo preso, laço vermelho e rosto voltado ao adversário; Social conserva cabelo cinza e assinatura de óculos. Olhos/expressão e pequenos metais são muito reduzidos na escala SMS; este pass é de leitura básica, não equivalência ao detalhamento da fonte."
+    },
+    "outline_and_cutout": {
+      "status": "pass",
+      "note": "Nas capturas estáticas dos dois lados, vi ponta e extensão da katana, bainha, laço, pés e bengala completos, sem recorte ou membro perdido. O drift bordô no contorno da lâmina é registrado no eixo de material."
+    },
+    "material_shading": {
+      "status": "fail",
+      "note": "O quimono branco/cinza recebe pequenos claros amarelos e a lâmina recebe pontos bordô. A nova P1 preserva Social, mas o nearest RGB aplicado aos tons-fonte de Hayato não conserva todos os papéis de material."
+    },
+    "material_shadow_flow_coherence": {
+      "status": "pass",
+      "note": "A estrutura espacial das sombras e dobras permanece coerente com a fonte e com a luz superior/esquerda. Isso não aprova os destinos cromáticos incorretos indicados em material_shading."
+    },
+    "semantic_palette_role_confinement": {
+      "status": "fail",
+      "note": "Identifiquei amarelo-claro de código47 em quimono e código1/código22 em segmentos da lâmina. Os pontos e índices-fonte estão registrados; não se trata de efeito ou adorno aprovado do samurai."
+    },
+    "hand_weapon_attachment": {
+      "status": "pass",
+      "note": "Mesmo reduzidas, as duas massas de mãos continuam ligadas ao mesmo cabo, guarda e lâmina; não vi perda de mão, troca de arma ou desconexão anatômica na chave estática."
+    },
+    "equipment_geometry": {
+      "status": "pass",
+      "note": "Katana, bainha e bengala têm terminais visíveis nos dois sentidos. Espelhamento mantém a relação de pega/equipamento e não encurta a lâmina; não avaliei alcance competitivo ou colisões."
+    },
+    "frame_pose_integrity": {
+      "status": "pass",
+      "note": "As quatro capturas atribuídas mostram a guarda de Hayato e a guarda/idle do Social, com os dois voltados um ao outro. Não tratei essas imagens iguais em duas ROMs como prova de ação ou timing."
+    },
+    "native_size_readability": {
+      "status": "pass",
+      "note": "O contraste branco/laranja do Hayato e azul/bordô do Social separa os atores em1x. Armas e apoios são legíveis. A leitura geral passa, enquanto o acabamento cromático específico continua reprovado."
+    },
+    "roster_harmony": {
+      "status": "pass",
+      "note": "Estatura corporal aparente, biotipos esguios e densidade geral de desenho convivem na mesma baseline. A altura extra da katana é equipamento, não corpo maior. Esse pass de escala/linguagem não sobrepõe a falha de material da conversão."
+    },
+    "social_non_regression": {
+      "status": "pass",
+      "note": "Conferi diretamente os PNGs finais: as16entradas PLTE são idênticas ao idle SMS v8. RGB opaco relativo ao pivô é idêntico na orientação direita e a reflexão exata na orientação esquerda. Não foi necessário substituir/editar a fonte Social."
+    },
+    "continuous_motion": {
+      "status": "not_applicable",
+      "note": "Pedido limitado a inspeção artística estática das derivadas. Não reproduzi vídeo continuamente nem avaliei percepção temporal."
+    },
+    "owner_approval": {
+      "status": "pending",
+      "note": "A decisão do proprietário não foi atribuída ao revisor e não foi inferida de aprovação do método ou de Social."
+    }
+  },
+  "findings": [
+    {
+      "priority": 1,
+      "domain": "art",
+      "kind": "defect",
+      "severity": "blocking_for_derivative_art_acceptance",
+      "scope": "Hayato common-P1 conversion, both orientations",
+      "axes": [
+        "material_shading",
+        "semantic_palette_role_confinement"
+      ],
+      "note": "A tradução nearest RGB transforma alguns neutros/quase-neutros da fonte em cores de outros materiais: o contorno da ponta da katana fica bordô(85,0,0), outro trecho da lâmina fica rosa/bordô(170,85,85) e pequenos claros do quimono ficam amarelo-claro(255,255,170). Os pontos são visíveis nos PNGs e nas capturas reais, incluindo o espelhamento. Não recomendo promover a conversão nesta forma.",
+      "evidence_samples": [
+        {
+          "material": "blade tip contour",
+          "sms_left_xy": [
+            42,
+            5
+          ],
+          "framebuffer_left_xy": [
+            74,
+            77
+          ],
+          "sms_right_xy": [
+            22,
+            5
+          ],
+          "framebuffer_right_xy": [
+            166,
+            77
+          ],
+          "source_xy": [
+            91,
+            11
+          ],
+          "source_index": 26,
+          "source_rgb": [
+            43,
+            25,
+            33
+          ],
+          "sms_rgb": [
+            85,
+            0,
+            0
+          ],
+          "sms_code": 1
+        },
+        {
+          "material": "blade middle edge",
+          "sms_left_xy": [
+            39,
+            26
+          ],
+          "framebuffer_left_xy": [
+            71,
+            98
+          ],
+          "sms_right_xy": [
+            25,
+            26
+          ],
+          "framebuffer_right_xy": [
+            169,
+            98
+          ],
+          "source_xy": [
+            83,
+            47
+          ],
+          "source_index": 13,
+          "source_rgb": [
+            144,
+            117,
+            104
+          ],
+          "sms_rgb": [
+            170,
+            85,
+            85
+          ],
+          "sms_code": 22
+        },
+        {
+          "material": "white kimono shoulder",
+          "sms_left_xy": [
+            32,
+            25
+          ],
+          "framebuffer_left_xy": [
+            64,
+            97
+          ],
+          "sms_right_xy": [
+            32,
+            25
+          ],
+          "framebuffer_right_xy": [
+            176,
+            97
+          ],
+          "source_xy": [
+            68,
+            46
+          ],
+          "source_index": 5,
+          "source_rgb": [
+            223,
+            216,
+            212
+          ],
+          "sms_rgb": [
+            255,
+            255,
+            170
+          ],
+          "sms_code": 47
+        },
+        {
+          "material": "white kimono shoulder adjacent pixel",
+          "sms_left_xy": [
+            32,
+            26
+          ],
+          "framebuffer_left_xy": [
+            64,
+            98
+          ],
+          "source_xy": [
+            68,
+            47
+          ],
+          "source_index": 5,
+          "source_rgb": [
+            223,
+            216,
+            212
+          ],
+          "sms_rgb": [
+            255,
+            255,
+            170
+          ],
+          "sms_code": 47
+        },
+        {
+          "material": "white kimono sleeve",
+          "sms_left_xy": [
+            21,
+            32
+          ],
+          "framebuffer_left_xy": [
+            53,
+            104
+          ],
+          "sms_right_xy": [
+            43,
+            32
+          ],
+          "framebuffer_right_xy": [
+            187,
+            104
+          ],
+          "source_xy": [
+            43,
+            58
+          ],
+          "source_index": 5,
+          "source_rgb": [
+            223,
+            216,
+            212
+          ],
+          "sms_rgb": [
+            255,
+            255,
+            170
+          ],
+          "sms_code": 47
+        },
+        {
+          "material": "white kimono sleeve adjacent pixel",
+          "sms_left_xy": [
+            22,
+            32
+          ],
+          "framebuffer_left_xy": [
+            54,
+            104
+          ],
+          "sms_right_xy": [
+            42,
+            32
+          ],
+          "framebuffer_right_xy": [
+            186,
+            104
+          ],
+          "source_xy": [
+            46,
+            58
+          ],
+          "source_index": 5,
+          "source_rgb": [
+            223,
+            216,
+            212
+          ],
+          "sms_rgb": [
+            255,
+            255,
+            170
+          ],
+          "sms_code": 47
+        }
+      ],
+      "required_delta": "Corrigir a camada responsável a partir da fonte original e dos papéis de material, conservando geometria/alpha/escala/pivô e o Social. Se cada índice tiver papel inequívoco, um mapeamento explícito auditável no adaptador oficial pode ser candidato; se o mesmo índice misturar pele/equipamento/tecido, não corrigir um papel às custas de outro por remapglobal. Nesse caso, separar a semântica na fonte em revisão própria. Não retocar a saída SMS nem trocar a P1 sem revisar efeito nos dois atores. Exigir novo PNG/ROM/QA/review para o novo resultado."
+    },
+    {
+      "priority": 2,
+      "domain": "art",
+      "kind": "opportunity",
+      "severity": "opportunity",
+      "scope": "native-size facial and grip detail",
+      "axes": [
+        "face_detail_readability",
+        "native_size_readability"
+      ],
+      "note": "Olho/expressão de Hayato, dedos/guarda e óculos/lapela/colete do Social comprimem-se em poucos pixels. A identidade geral está legível, mas a preferência por esse nível de simplificação permanece para o dono; não proponho engrossar corpo, encurtar arma ou apagar quadros para acomodá-la.",
+      "required_delta": "Mostrar fonte e novo framebuffer nativo juntos no checkpoint do dono após fechar o drift de material."
+    }
+  ],
+  "source_index_ownership_observations": [
+    {
+      "index": 5,
+      "rgb": [
+        223,
+        216,
+        212
+      ],
+      "opaque_source_occurrences": 96,
+      "observed_roles": [
+        "quimono branco/cinza",
+        "lâmina/prata",
+        "faixas/tabi"
+      ],
+      "skin_fill_observed": false,
+      "note": "Não identifiquei preenchimento legítimo de pele nessa cor na inspeção ampliada; claro quente muito próximo do neutro foi quantizado para código47. Exemplos exatos de tecido estão nos evidence_samples. Não se trata de uma máscara de material aprovada."
+    },
+    {
+      "index": 26,
+      "rgb": [
+        43,
+        25,
+        33
+      ],
+      "opaque_source_occurrences": 103,
+      "observed_roles": [
+        "contorno escuro",
+        "cabelo",
+        "bainha",
+        "limites de equipamento/roupa"
+      ],
+      "skin_fill_observed": false,
+      "note": "O quase-preto quente da fonte vira bordô de código1. Aparece na ponta da lâmina em(91,11) e em vários contornos; um destino neutro precisa ser revisado globalmente, não aplicado só à ponta na saída SMS."
+    },
+    {
+      "index": 13,
+      "rgb": [
+        144,
+        117,
+        104
+      ],
+      "opaque_source_occurrences": 77,
+      "observed_roles": [
+        "claros quentes do cabelo",
+        "sombras de quimono/faixas",
+        "contorno quente do equipamento",
+        "borda sombreada do pescoço"
+      ],
+      "skin_fill_observed": "ambiguous_at_neck_boundary",
+      "source_neck_boundary_examples": [
+        [
+          55,
+          52
+        ],
+        [
+          55,
+          53
+        ],
+        [
+          55,
+          54
+        ],
+        [
+          56,
+          55
+        ],
+        [
+          56,
+          56
+        ]
+      ],
+      "note": "Não é um índice de papel único. A cor ocorre junto da borda do pescoço, além de cabelo/roupa/lâmina. A classificação dessa borda como sombra de pele ou junção roupa/cabelo requer decisão visual; não a trato automaticamente como neutro descartável. Remapglobal exige regressão focada do rosto/pescoço e pode requerer separação semântica da fonte."
+    }
+  ],
+  "correspondence_method": {
+    "mode": "read_only_in_memory",
+    "description": "Li PNGs-fonte, PLTE e os PNGs finais. Para rastrear os pontos, usei load_pose/convert_poses do adaptador oficial com a mesma escala explícita e, somente em memória, campos de coordenadas sourceX/sourceY com alpha idêntico através do mesmo nearest. Isso localiza o índice amostrado sem pintar ou salvar fonte/saída. RGB final foi conferido diretamente nos pontos espelhados. A atribuição de papel material veio da inspeção visual, não desse rastreio.",
+    "native_coordinates": "zero-based; sms_xy are within80x80 PNG; framebuffer coordinates within256x192. Left actor origin32,72; right actor origin144,72."
+  },
+  "session_evidence_scope": {
+    "provided_reports": [
+      {
+        "request": "SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa/guard_left/request.json",
+        "report": "SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa/guard_left/run_5f1227337b984642a779b85a5599d698/report.json",
+        "sha256": "5dcbcbd2f3c86071eaf27e451f6e8260efcc7416a05e8720852a7d8ededb55d4",
+        "rom_sha256": "d6c007bae56ee77f19a9c37b4ca208a220286dbe17a0433a688609afcde991ac"
+      },
+      {
+        "request": "SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa/guard_right/request.json",
+        "report": "SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa/guard_right/run_d2d13ce3589b40ce9bc4b0ff09b0117b/report.json",
+        "sha256": "9cc47a089292d6bcbcec2b2f1dfa0bbfe3824c1a8b7a568f60af9a4b7542b5f5",
+        "rom_sha256": "758d4a44239cfbaeb7aa0356cc942dac9ca7f300fcc2ba30a9d1ec47a84d8bae"
+      },
+      {
+        "request": "SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa/social_jab_left/request.json",
+        "report": "SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa/social_jab_left/run_40da28fbb12f47e18f8c080cbbe84a8f/report.json",
+        "sha256": "6349d35a82f52695db90121d623bae77747f8d6d57b322263ac76c090cc52ddc",
+        "rom_sha256": "42da7531bd647da73712afb2411f53f3e64108721b96b91e240ab189373e9ea7"
+      },
+      {
+        "request": "SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa/social_jab_right/request.json",
+        "report": "SMS_projects/master_of_fighters/out/diagnostics/hayato_cps2_sample_v1/independent_qa/social_jab_right/run_f4a5b0e7c9c64154b97b490e16fac021/report.json",
+        "sha256": "84dc6c9648e5ff7c396214cf1eac090892eeccb9aea4adbf9aa909259e4fc037",
+        "rom_sha256": "656d10e88c796e6e59ca2c6786e0c28ff044add43a543352a6a44a681acfd472"
+      }
+    ],
+    "observation": "Inspecionei diretamente os quatro case_0_frame.png em1x e NN. guard_left e social_jab_right contêm o mesmo RGB inicial; guard_right e social_jab_left também. São imagens estáticas de orientação correspondente, não quatro estados de animação distintos. Li a custódia/ROM/sessão dos relatórios fornecidos; não criei nem reutilizei sessão mutável.",
+    "new_session_by_this_reviewer": false
+  },
+  "resolution_of_previous_review": {
+    "prior_source_review_unchanged": true,
+    "source_v2_sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1",
+    "static_source_axes": "passed_in_prior_hash_bound_review",
+    "source_geometry_or_identity_defect_introduced": "not_observed",
+    "previous_sms_pending_axis": "now_reviewed_and_failed_for_specific_material_mapping",
+    "social_palette_non_regression": "independently_confirmed_for_supplied_guard_PNGs"
+  },
+  "limits": [
+    "Este parecer negativo da conversão não reescreve nem retira o pass da fonte v2. A revisão de fonte e a da derivada são estados separados.",
+    "Nenhuma percepção de playback contínuo, timing, FPS, VBlank, áudio, SAT/scanline, throughput, gameplay, hitbox, balanceamento ou AAA foi avaliada ou aprovada.",
+    "Os valores de fidelidade e cleanup dos relatórios QA não foram usados como prova de acabamento artístico. A tarefa do revisor foi leitura de artefatos, sem build ou emulador.",
+    "A única escrita persistente deste revisor é este parecer; painéis/crops/localizadores usados na inspeção ficaram somente em memória. Nenhuma fonte, PNG derivado, pedido, relatório anterior, registry, memória ou Git foi modificado.",
+    "Os16inputs congelados coincidiram com hashes esperados no início e antes da escrita. Material/semântica não é autenticado por hash nem por contagem de cores.",
+    "Aprovação humana, promoção e decisão de solução pertencem ao coordenador/dono no escopo vigente."
+  ]
+}

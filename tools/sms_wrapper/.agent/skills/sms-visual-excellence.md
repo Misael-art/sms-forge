@@ -7,6 +7,23 @@ HUD ou promoção para `res/` / ROM. Complementa `sms-pixel-strict-rules`
 Canvas: **256×192** (224 só com `VDPFEATURE_224LINES` medido). Não copie
 320×224, 4 subpaletas, DMA ou Shadow/Highlight do Mega Drive.
 
+## Como dirigir o primeiro quadro e o primeiro movimento
+
+Comece pelo que o jogador percebe. Escolha a linguagem visual na bíblia do
+projeto. Uma referência de 1987 pode definir quem é o personagem ou de onde
+vem a arena. O acabamento perseguido em 2026 aparece em decisões verificáveis
+de enquadramento, atuação, cor e resposta. Nomeie a característica de cada
+referência que serve à cena. Uma produção original pode partir da sua própria
+bíblia, das formas do mundo e da tarefa do jogador.
+
+No storyboard a 1×, cubra o nome da cena e confronte a composição com a
+intenção. Em Palma, a escala do guarda, o leitor de passaportes e a nave
+contavam onde a luta acontecia. Ver essas pistas entre duas silhuetas foi
+mais informativo que inspecionar o panorama ampliado. Num puzzle, a mesma
+pergunta recai sobre a peça ativa, o destino possível e o retorno após a jogada.
+Se algo desaparece, ajuste enquadramento, contraste ou reserva de tiles no
+primeiro trecho. Volte à mesma situação com a correção antes de ampliar o lote.
+
 ## Teto honesto
 
 ```
@@ -35,11 +52,9 @@ com licença/proveniência explícita.
 4. Triagem em 1×, 2×/3×, NEAREST 8×, silhueta, fundos claro/escuro, composição 256×192.
 5. Limpeza nativa: olhar legível, contorno consistente, ≤15 úteis + idx0,
    RGB no grid 6-bit, sem halo.
-6. Escala vem do GDD. Para Master of Fighters, use a referência de composição
-   *Fatal Fury Special* Game Gear: alvo de corpo 66–72 px na tela SMS, centro
-   70 px. O valor é faixa visual de projeto, não hardware. Reduzir para caber
-   numa pose ou economizar tiles continua proibido; a conversão nearest-neighbor
-   declarada só pode aplicar a escala-alvo do GDD.
+6. Escala vem do GDD vigente da cena. Se ele designar uma referência histórica
+   de composição, aplique-a ao atributo indicado e confira a altura anatômica
+   dentro do palco. A conversão nearest-neighbor declarada mantém a escala-alvo.
    `scale_density_mismatch` com escala `locked` → reautor no grid, não probe maior.
 7. Em jogo com roster, compare todos os personagens em prancha comum antes de
    aprovar uma nova folha: fontes conceituais aceitas, sprite-fonte em tamanho
@@ -125,8 +140,8 @@ com licença/proveniência explícita.
 15. Paletas por personagem são estudos de autoria. Antes de promover uma luta,
     declare P0 (BG/HUD) e P1 (uma tabela comum de sprites), papéis de HUD
     estáveis, cores de cenário livres e mapeamento de todas as cores do roster;
-    tiles BG podem selecionar P1 sem criar outra tabela CRAM. Em Master of
-    Fighters, o mapa comum de até 15 cores úteis ainda está pending (L111).
+    tiles BG podem selecionar P1 sem criar outra tabela CRAM. Confira o estado
+    da paleta no recibo da candidata em revisão (L111).
 
 ## Palco e HUD
 
@@ -136,10 +151,14 @@ Revisar a folha final no eixo obrigatório `document_and_layout` (§104): índic
 título, texto, silhuetas/equipamentos, régua/baseline, clipping e alinhamento.
 Parecer anatômico da raw não aprova layout novo nem aprovação do dono.
 
-- BG_A/B coerentes; sem splash de engine, logo de toolkit ou tela de referência.
-- Lutador/jogador é o pico de leitura; BG_B respira; BG_A estrutura.
-  BG/HUD não podem ser o objeto mais saturado com forma de sprite —
-  sequestram o detector de gameplay (L042).
+- Componha a profundidade na name table do SMS. Use escala relativa,
+  sobreposição e contraste para separar figura, pista e horizonte. Se o GDD
+  pede paralaxe, escolha as faixas do scroll e confira a primeira e a última
+  linha de cada emenda com a câmera parada, andando e voltando.
+- Confira o foco junto ao HUD no momento de impacto ou seleção. Se houver
+  iluminação animada, identifique os tiles compartilhados e compare a região
+  que muda com uma vizinha que deve permanecer estável. Em Palma, a margem
+  do medidor precisava conservar o céu até durante o pisca de vida crítica.
 - HUD autoral sem overlap/clipping; nomes, barras, timer quando o GDD pedir.
 - ROM cheia: composição (paleta, pose, fonte já carregada) **antes** de
   gerar asset novo (L049).

@@ -1,0 +1,92 @@
+{
+  "scope": "factory maintenance; no new game runtime validation",
+  "checks": [
+    {
+      "check": "mastery_selfcheck",
+      "args": [
+        "audit_mastery_registry.py",
+        "--self-check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09,
+      "log": "doc/curation/evidence/2026-10-27_production_capability/mastery_selfcheck.log",
+      "sha256": "2199132f8a20f1be26b496eb118c38a4509cf44197551cc005f93be9ede27f61"
+    },
+    {
+      "check": "mastery_registry",
+      "args": [
+        "audit_mastery_registry.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.07,
+      "log": "doc/curation/evidence/2026-10-27_production_capability/mastery_registry.log",
+      "sha256": "7edd93b72b91ad89d1ca2010d6f4d41445e8d1b92ad3c62a894cb7cce76b92be"
+    },
+    {
+      "check": "selftest",
+      "args": [
+        "selftest.py"
+      ],
+      "exit_code": 0,
+      "seconds": 13.12,
+      "log": "doc/curation/evidence/2026-10-27_production_capability/selftest.log",
+      "sha256": "7883c05da370dd4cdf872226a3c015a270c8850b863c15b35ff1744b89f3a217"
+    },
+    {
+      "check": "measurement_tools",
+      "args": [
+        "validate_measurement_tools.py",
+        "--json",
+        "doc/curation/evidence/2026-10-27_production_capability/measurement_tools.json"
+      ],
+      "exit_code": 1,
+      "seconds": 9.0,
+      "log": "doc/curation/evidence/2026-10-27_production_capability/measurement_tools.log",
+      "sha256": "845666bef58243349c361ec143acfc93156568efc79d9c3a493ef1ef18bf2b5d"
+    },
+    {
+      "check": "doc_sync",
+      "args": [
+        "audit_doc_sync.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1,
+      "log": "doc/curation/evidence/2026-10-27_production_capability/doc_sync.log",
+      "sha256": "6867943f29076df5b887dd0df23bd041ce83a8c9eef59b6748019c36309e49a4"
+    },
+    {
+      "check": "learning_capture",
+      "args": [
+        "audit_learning_capture.py",
+        "--root",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.2,
+      "log": "doc/curation/evidence/2026-10-27_production_capability/learning_capture.log",
+      "sha256": "9561d5d3e6c2fcfecd7c1b4d11f8b64b4858b2e97a2f990b9441b25ecd6433f3"
+    },
+    {
+      "check": "hardware_selfcheck",
+      "args": [
+        "audit_hardware_constants.py",
+        "--self-check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.06,
+      "log": "doc/curation/evidence/2026-10-27_production_capability/hardware_selfcheck.log",
+      "sha256": "b9936b3d53ea90045fc8d054fb5d3c5948eb1f08f6b9a42bdeb1c5a4f5fafe04"
+    },
+    {
+      "check": "hardware",
+      "args": [
+        "audit_hardware_constants.py"
+      ],
+      "exit_code": 1,
+      "seconds": 1.45,
+      "log": "doc/curation/evidence/2026-10-27_production_capability/hardware.log",
+      "sha256": "93a9592e76a893524ceec2096909b703306df669fe952c016e5b71521c0b5c6d"
+    }
+  ],
+  "complete": true
+}

@@ -1,0 +1,88 @@
+[
+  {
+    "check": "focused",
+    "args": [
+      "-m",
+      "pytest",
+      "-q",
+      "tools/sms_wrapper/tests/test_art_temporal_review.py",
+      "tools/sms_wrapper/tests/test_authored_sprite_sample.py"
+    ],
+    "exit_code": 0,
+    "seconds": 18.73
+  },
+  {
+    "check": "selftest",
+    "args": [
+      "tools/sms_wrapper/selftest.py"
+    ],
+    "exit_code": 0,
+    "seconds": 10.19
+  },
+  {
+    "check": "measurement_tools",
+    "args": [
+      "tools/sms_wrapper/validate_measurement_tools.py"
+    ],
+    "exit_code": 0,
+    "seconds": 7.41
+  },
+  {
+    "check": "doc_sync",
+    "args": [
+      "tools/sms_wrapper/audit_doc_sync.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.08
+  },
+  {
+    "check": "learning",
+    "args": [
+      "tools/sms_wrapper/audit_learning_capture.py",
+      "--root",
+      "."
+    ],
+    "exit_code": 1,
+    "seconds": 0.19
+  },
+  {
+    "check": "hardware",
+    "args": [
+      "tools/sms_wrapper/audit_hardware_constants.py"
+    ],
+    "exit_code": 0,
+    "seconds": 1.46
+  },
+  {
+    "check": "registry_selfcheck",
+    "args": [
+      "tools/sms_wrapper/artifact_registry.py",
+      "--self-check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.07
+  },
+  {
+    "check": "registry",
+    "args": [
+      "tools/sms_wrapper/artifact_registry.py",
+      "check",
+      "--project",
+      "SMS_projects/master_of_fighters",
+      "--scan"
+    ],
+    "exit_code": 1,
+    "seconds": 0.08
+  },
+  {
+    "check": "learning_corrected",
+    "args": [
+      "tools/sms_wrapper/audit_learning_capture.py",
+      "--root",
+      "."
+    ],
+    "exit_code": 0,
+    "log": "learning_corrected.log",
+    "correction": "applications field distinguishes reuse from new lesson declarations"
+  }
+]

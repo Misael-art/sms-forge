@@ -1,0 +1,46 @@
+{
+  "scene": "Cena 02 — Alis × Alis",
+  "status": "candidato_a_curadoria",
+  "baseline": {
+    "candidate": "b49",
+    "rom_sha256": "2458fdecfccce8a33f29b7843860886893b6c205d8f2eda4bb6028a8c556e9da",
+    "reproduction": "out/diagnostics/alis_mirror_20261122/qa-b49-shield-shove/input.json"
+  },
+  "revision": {
+    "candidate": "b52",
+    "rom_sha256": "47c0a4027d39b1d45bfe48a53ec819fb6ac3d046243c702fa848b3edd3ca8fe9",
+    "visual_audit": "out/diagnostics/alis_mirror_20261122/art-b52-final/audit.json",
+    "framebuffer": "out/diagnostics/alis_mirror_20261122/qa-b52-shield-shove/shove-phases.json",
+    "continuous": "out/diagnostics/alis_mirror_20261122/qa-b52-shield-shove/continuous/round-continuo.json",
+    "reset": "out/diagnostics/alis_mirror_20261122/qa-b52-reset/input.json",
+    "ntsc_fps": [33.675591334654854, 39.78064478101405],
+    "fps_acceptance": "pendente"
+  },
+  "entries": [
+    {
+      "topic": "Consequência do chute aéreo",
+      "diagnosis": "A tabela da b49 marcava o chute aéreo forte para queda. O roteiro anterior comprovava acerto e ação consumida, com a reação final fora da assertiva.",
+      "action": "Definir duração da reação e recuo por intensidade. Registrar a sequência de estados do alvo inteiro após o contato. Exercitar em voo e contra alvo em pé, guarda aérea e retomada.",
+      "verification": "O cenário shield_shove diferencia HIT, FALL, DOWNED e READY. A calibração compara 8 e 12 ticks no espelho e comprova recuo de 7 px com alvo no solo."
+    },
+    {
+      "topic": "Escala e materiais com o concept como autoridade",
+      "diagnosis": "O giro da b49 usava divisores diferentes para os dois papéis. A atacante chegava a 60 px contra 52 px neutros e a vítima encolhia sob um teto de largura. A referência intermediária usada na b50 já continha faixa ciano, que foi perpetuada na arte gerada. Uma única paleta SMS válida aceitava todos esses desvios.",
+      "action": "Vincular a fonte ao concept v4. Conferir cabeça, tronco, joelhos e pivô contra a guarda. Declarar materiais por região com ciano para espada empunhada, índigo no peitoral e rosa ou verde na túnica. Fazer recorte da arma e do corpo por pose para distinguir escala de anatomia e equipamento.",
+      "verification": "audit_alis_shove_art.py, executado nas duas faces e nos dois trajes. Revisar a folha nativa e a ampliação nearest-neighbor e abrir os quadros do emulador."
+    },
+    {
+      "topic": "Legibilidade do agarrão pelos dois corpos",
+      "diagnosis": "A b49 elevava e girava a rival. O primeiro protótipo terrestre corrigia a física e ainda mostrava a preparação quando a vida baixava. O deslocamento da rival alterava a página P0 continuamente durante os quadros largos.",
+      "action": "Coreografar alcance, pega, puxada, apoio, contato com escudo, passos para trás, queda e retomada. Usar sprites no percurso móvel e reservar o fundo para o quadro largo estável da atacante. Conferir que a arma segue distinta e que a transferência de peso se lê no par.",
+      "verification": "O roteiro exige a sequência física com ambos os controles, dano único e recuo limitado pela parede. No instante do dano, testa se o framebuffer mostra o escudo avançado e a reação da rival."
+    }
+  ],
+  "handoff": [
+    "Prender a identidade ao hash do model sheet aprovado antes de gerar ou importar novas poses. Em uma referência suplementar, declarar o papel de coreografia e revisar explicitamente o equipamento, as divisões do traje e a proporção de cada peça.",
+    "Comparar cada quadro novo ou reaproveitado ao corpo neutro com a mesma régua, inclusive os quadros intermediários e o corpo da vítima. Medir cabeça e tronco separados de cabelo, espada e escudo quando um desvio for detectado. Registrar os limites e a exceção de flexão com a imagem.",
+    "Separar cor válida na CRAM de cor correta no material. Exigir um teste que reprove uma variante com o ciano sobre o peitoral ou sem lâmina separada, ainda que a cor esteja na paleta do SMS. Conferir também recorte, punhos e contorno em escala nativa.",
+    "Fixar resultado e consequência em testes de combate. Amostrar o contato, a recuperação e a volta ao controle. Usar a mesma ROM para as capturas estáticas, o par de fases e o replay contínuo. Revisar se o gesto é legível com a cabeça, os braços e o equipamento parcialmente sobrepostos.",
+    "Propor ao curador a generalização das regras de material e escala usando exemplares válidos e reprovados, com tolerâncias por pose e proveniência. Promover somente após revisão do curador e evidência no alvo. O roteiro e os limites de Alis ficam no consumidor."
+  ]
+}

@@ -4,7 +4,8 @@ Pré-condição: os 7 eixos TRUE simultâneos (schema status_axes_v1).
 Aplicar `product-quality-checkpoint.md`: declarar público/critério, contexto
 completo da cena e evidência conjunta de controles, visual, áudio e fluidez.
 Campo `constante_50_60` histórico ou título do emulador não sustenta sozinho
-o alvo regional. Probe privado classifica NTSC60/PAL50 com tolerância explícita;
+o aceite. Probe privado exige alvo60/piso58FPS em cada janela sem arredondar
+(SMS_GLOBAL §133); PAL50 é diagnóstico regional, não exceção automática;
 worst-frame/pacing e resposta do jogo são provas adicionais.
 
 0. **Build em modo estrito** — prova as ferramentas antes de confiar na leitura delas:

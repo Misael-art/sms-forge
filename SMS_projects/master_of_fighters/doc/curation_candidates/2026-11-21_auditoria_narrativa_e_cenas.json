@@ -1,0 +1,315 @@
+{
+  "schema": "smsforge_game_design_curation_candidate_v1",
+  "id": "mof_auditoria_narrativa_e_cenas_2026-11-21",
+  "dedup_key": "mof-cutscene-convivencia-escopo-transicao-e-prova",
+  "status": "documented_pending_homologation",
+  "owner_project": "SMS_projects/master_of_fighters",
+  "review_path": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-11-21_auditoria_narrativa_e_cenas.md",
+  "scope": {
+    "review_attachment_sha256": "8301d1d618fdd6e520f0e2afb823287f91376104fc105feecbfb9f785368a362",
+    "scope_of_references": "As obras citadas no anexo são exemplos de linguagem narrativa. As decisões vigentes do jogo resolvem conteúdo, mecânica, orçamento, arte e uso de referências.",
+    "coverage": {
+      "reference_groups": 7,
+      "cinematic_techniques": 6,
+      "narrative_beats": 4
+    },
+    "limits": "Revisão de contratos, consumidores e evidências arquivadas. A D01 qualifica aspectos recortados de composição e atuação em viewer. A b11-r2 qualifica observações do duelo direto. O estudo de retratos de Social serve para auditoria de método e sua produção in-game continua congelada."
+  },
+  "findings": [
+    {
+      "id": "narrative-authority-by-beat",
+      "priority": "P0",
+      "owner": "Proprietário + roteiro + direção de jogo",
+      "scope": [
+        "abertura",
+        "prólogo",
+        "rival",
+        "epílogo"
+      ],
+      "evidence_ids": [
+        "direcao",
+        "gdd",
+        "roteiro",
+        "spec"
+      ],
+      "gap": "O arco tem decisões de direção e propostas por beat. Faltam motivações, falas e consequências fechadas por nó. A mesma ação de finalização aparece como especial, golpe mais forte e Super em materiais de escopos distintos.",
+      "disposition": "Versionar no roteiro e na ficha de cena os papéis, condição, comando ou cue, função e aceites do beat. Resolver FC02, FC04 e GD04 no recorte antes de finalizar assets. Definir arco, foco visual, duração e benefício de cada variação.",
+      "exercise_pass": "Um beat de apresentação aprovado referencia par, intenção, versão da fala, ação autorizada, estado de entrada e destino. O desfecho paga a pista da abertura no modo correto.",
+      "exercise_fail": "Uma referência externa ou um cabeçalho provisório promove Super, presença de terceiro lutador ou epílogo sem decisão do proprietário."
+    },
+    {
+      "id": "natural-finish-and-skip",
+      "priority": "P0",
+      "owner": "Programação + QA + direção de jogo",
+      "scope": [
+        "atuação com sprites",
+        "Cena 03/07 → duelo 02"
+      ],
+      "evidence_ids": [
+        "roteiro",
+        "spec",
+        "tdd",
+        "d01",
+        "duelo"
+      ],
+      "gap": "Há contrato de encenação, teardown e espera pela arena pronta. O corpus não demonstra a passagem de apresentação narrativa para o round e a primeira entrada consumida sob as mesmas condições.",
+      "disposition": "Comparar término normal e skip sob o mesmo modo e configuração. Na fronteira observar nó, atores, lado, posição, vida/Super, objetos, hitbox, áudio, VRAM pronta e primeiro comando legal depois de soltar a tecla da cena.",
+      "exercise_pass": "Um trecho de fala termina em guarda e controle com o mesmo estado jogável no término natural, no skip e na reentrada controlada.",
+      "exercise_fail": "Pular durante upload, gesto ou troca de fala deixa portal, nota PSG, objeto/hitbox, tile residual ou botão do diálogo consumido como primeiro ataque."
+    },
+    {
+      "id": "result-reward-and-mode-isolation",
+      "priority": "P0 para a rota de resultado",
+      "owner": "Direção de jogo + programação + QA",
+      "scope": [
+        "resultado 02 → evolução 08 / desfecho 09"
+      ],
+      "evidence_ids": [
+        "direcao",
+        "spec",
+        "tdd",
+        "duelo"
+      ],
+      "gap": "O KO do diagnóstico cobre o fim do round. Recompensa, prévia/confirmação, encerramento individual, reentrada e isolamento História/Versus têm contrato de projeto com decisões de persistência abertas.",
+      "disposition": "Vincular a recompensa ao resultado consumido uma vez, isolar prévia e confirmação e testar saída após vitória, derrota, skip, tentativa de reentrada e retorno ao Versus.",
+      "exercise_pass": "A mesma ocorrência de resultado confirma pontos uma vez em História e o Versus reinicia com seu perfil fixo.",
+      "exercise_fail": "Repetir o evento, manter confirmação ou reabrir a escolha altera pontos duas vezes ou carrega atributos de História no Versus."
+    },
+    {
+      "id": "camera-planes-and-living-keys",
+      "priority": "P1 após autorização e orçamento do beat",
+      "owner": "Arte de cena + engenharia VDP",
+      "scope": [
+        "A: planos e câmera",
+        "B: ilustrações com microanimação"
+      ],
+      "evidence_ids": [
+        "roteiro",
+        "spec",
+        "tdd",
+        "d01"
+      ],
+      "gap": "Camadas e montagem têm intenção documentada. Faltam recorte efetivo, via de movimento e custo medido da coexistência e da troca de planos/padrões.",
+      "disposition": "Medir primeiro corte autoral ou deslocamento seletivo de BG e uma chave com detalhe vivo. Registrar foco, estado, posição, camadas lógicas e como P0/P1, PNT/VRAM e SAT/scanline as representam. Definir degradação por cena antes de acrescentar planos.",
+      "exercise_pass": "O foco permanece legível a 1×, o detalhe vivo é observável e o quadro de troca conserva HUD, bordas e setup correto no destino.",
+      "exercise_fail": "O preview usa câmera arbitrária e a implementação abandona escala corporal, perde HUD, pisca pela borda ou depende de staging ocultado na captura."
+    },
+    {
+      "id": "impact-temporal-cue",
+      "priority": "P1 após a pose e a consequência estarem ligadas",
+      "owner": "Direção de cena + arte + QA",
+      "scope": [
+        "D: corte e impacto"
+      ],
+      "evidence_ids": [
+        "roteiro",
+        "spec",
+        "duelo",
+        "poses"
+      ],
+      "gap": "Ruptura e corte para logo têm beats descritos. Falta prova de legibilidade do acento, efeito, recuperação e sincronismo da consequência com a pose publicada.",
+      "disposition": "Qualificar um corte e um acento local no quadro observado. Se houver tremor, flash ou alteração de paleta, documentar efeito e restauração e provar leitura do impacto e conforto de visão. Manter relógio de roteiro distinto do relógio de combate.",
+      "exercise_pass": "O observador localiza pista, ápice e consequência na reprodução normal e no mudo, com fase e frame de saída conferíveis.",
+      "exercise_fail": "O efeito esconde pose ainda atrasada, movimenta placar, muda o sentido do golpe percebido ou persiste depois do corte."
+    },
+    {
+      "id": "portrait-and-text-admission",
+      "priority": "P0 antes de arte final de diálogo",
+      "owner": "Roteiro + direção de arte + programação de texto",
+      "scope": [
+        "E: retratos",
+        "F: tipografia"
+      ],
+      "evidence_ids": [
+        "roteiro",
+        "spec",
+        "portrait_attention",
+        "portrait_speech",
+        "portrait_versus",
+        "social_freeze"
+      ],
+      "gap": "Previews históricos medem layouts, glifos e padrões teóricos. As falas, o conjunto de expressões por necessidade, a fonte em jogo e a coexistência no pior trecho precisam de aprovação e teste próprios.",
+      "disposition": "Mapear falante/expressão por beat, travar texto autorizado, glifos com acento, largura, paginação e estado de revelação/avanço. Medir painel inteiro com palco, atores e HUD. Separar retrato de História e HUD de Versus.",
+      "exercise_pass": "A fala mais larga e a troca de falante permanecem legíveis a 1× nos dois lados, com acentos e resposta correta a avanço, skip e silêncio.",
+      "exercise_fail": "A prova usa fala de teste, rival vazio ou Sprite Social congelado como aceite de uma composição jogável de produção."
+    },
+    {
+      "id": "audio-cue-ownership",
+      "priority": "P1 em paralelo ao beat autorizado",
+      "owner": "Áudio + engenharia Z80 + QA",
+      "scope": [
+        "F: PSG, bipe de texto, silêncio e sincronismo"
+      ],
+      "evidence_ids": [
+        "direcao",
+        "roteiro",
+        "tdd",
+        "duelo",
+        "cont_receipt"
+      ],
+      "gap": "O áudio de contato do duelo tem nível observado. Trilha, bipe de fala, prioridades, silêncio, PCM e retomada pela arena ainda carecem de prova no recorte novo.",
+      "disposition": "Contratar cue autorizado, canais, evento lógico, trecho audível e dono na entrada e saída. Testar prioridade entre trilha, fala e efeitos em sessão isolada, com mudo funcional. Medir PCM separadamente após decisão em FC03/FC06.",
+      "exercise_pass": "O evento visual e o cue são reconhecíveis no mesmo roteiro, e fim normal, skip ou pausa devolvem o PSG ao dono correto sem nota presa.",
+      "exercise_fail": "Áudio presente é usado como aprovação do mix narrativo ou a tecla de pausa deixa PCM/cue ativo na luta."
+    },
+    {
+      "id": "transition-budget-coverage-and-evidence",
+      "priority": "P0 para homologar promoção",
+      "owner": "Curadoria + engenharia + QA",
+      "scope": [
+        "autoridade da prova temporal",
+        "medição por fase e aresta"
+      ],
+      "evidence_ids": [
+        "pipeline",
+        "budget_schema",
+        "release_workflow",
+        "cont_receipt",
+        "direction_review"
+      ],
+      "gap": "O pipeline lista captura pontual na etapa de evidência, embora o workflow de release peça vídeo para mudanças temporais. O schema de cena declara totais sem provar a fase e a transição mais caras.",
+      "disposition": "Vincular nas estruturas existentes cada fase e pior troca ao caso, ROM, sessão, medidor, método, VDP, áudio e input. Combinar playback normal com fronteira quadro a quadro. Aplicar alvo 60 e piso 58, sem arredondamento, a cada janela funcional válida.",
+      "exercise_pass": "O caso contém vídeo de tempo real, frame/pior fase, SAT/PNT/VRAM/VBlank e o estado de destino, com evidência lateral da janela de input e da restauração de áudio.",
+      "exercise_fail": "Uma imagem de boot, recorte de outro SHA ou trecho frio supera a validação de uma cena que reprovou sob carga, perdeu atualização ou atingiu destino com estado residual."
+    }
+  ],
+  "future_curation": {
+    "status": "queued_not_homologated",
+    "workflows": [
+      "new-scene.md",
+      "first-playable-slice.md",
+      "product-quality-checkpoint.md",
+      "release-rom.md",
+      "curation-learning.md"
+    ],
+    "agents": [
+      "sms-game-director.md",
+      "sms-pixel-engineer.md",
+      "sms-hardware-budget-guardian.md",
+      "sms-audio-engineer.md",
+      "sms-qa-emulator-tester.md"
+    ],
+    "skills": [
+      "sms-state-transitions.md",
+      "sms-vdp-tiles.md",
+      "sms-vram-vblank-budget.md",
+      "sms-video-evidence.md",
+      "sms-observed-case-evidence.md",
+      "sms-psg-audio.md"
+    ],
+    "existing_checks": [
+      "audit_observed_cases.py",
+      "audit_sprite_line_sim.py",
+      "measure_vram_map.py",
+      "measure_worst_frame.py",
+      "measure_runtime_probe.py",
+      "capture_video.py",
+      "capture_audio.py"
+    ],
+    "promotion_condition": "Exercitar as condições positivas e negativas no menor recorte, confirmar o comportamento no consumidor oficial e submeter eventual mudança canônica à homologação humana."
+  },
+  "evidence": [
+    {
+      "id": "direcao",
+      "path": "SMS_projects/master_of_fighters/doc/decisions/fan-campaign-and-character-expression_owner_direction_20261101.json",
+      "sha256": "415ca4876762a251228c8e941f63f9a2e2c2d0e1c9502194b9b7063c714ac3cb",
+      "role": "Direção do dono e decisões FC01–FC06 pendentes"
+    },
+    {
+      "id": "gdd",
+      "path": "SMS_projects/master_of_fighters/doc/11-gdd.md",
+      "sha256": "73f5e7a017b9298dcf6797a803350ed4002a114f4e34105b9df7d2c0e7b79035",
+      "role": "Modos, progressão e fronteiras de design"
+    },
+    {
+      "id": "roteiro",
+      "path": "SMS_projects/master_of_fighters/doc/12-roteiro.md",
+      "sha256": "38f54895bc32ebd8ed1a01c05f570349d5e130ce732c9f6c4394b0ed2daba5b7",
+      "role": "Beat sheets da abertura/revelação/duelo, texto e desfecho"
+    },
+    {
+      "id": "spec",
+      "path": "SMS_projects/master_of_fighters/doc/13-spec-cenas.md",
+      "sha256": "a68c665bb6eb663c6c585a082b8762e1c555441c33f08aef06685e766f88010e",
+      "role": "Estados de cenas, autoria e critérios de aceite"
+    },
+    {
+      "id": "tdd",
+      "path": "SMS_projects/master_of_fighters/doc/15-tdd.md",
+      "sha256": "b966453f4043a403fcbb41138962f21ec89361a2f18f1d33d540b041d5eadb0e",
+      "role": "Contrato de aresta e montagem/custo em SMS"
+    },
+    {
+      "id": "direction_review",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/fan_direction_20261101/documentation_review.json",
+      "sha256": "e3c7561fdbe4de038b82809ec4a1ab6e6305564005aa41ca3c0d9d279b47eba4",
+      "role": "Recibo documental do lote que registrou a direção"
+    },
+    {
+      "id": "d01",
+      "path": "SMS_projects/master_of_fighters/doc/cena01_duel_read_checkpoint_v1.json",
+      "sha256": "fec00a44107733935ded3956b1b4a520208472512bfd2d35575ed09a067aa4ac",
+      "role": "Prova arquivada e limitada da placa experimental de duelo"
+    },
+    {
+      "id": "duelo",
+      "path": "SMS_projects/master_of_fighters/doc/repertorio_alis_hayato_provas.md",
+      "sha256": "19578b0a01fa9a387e55741613f4e4f955aa84ac4396d6bcb3f8103c1380d172",
+      "role": "Índice da prova b11-r2 sem passagem narrativa"
+    },
+    {
+      "id": "poses",
+      "path": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-11-21_scene02_identidade_por_pose.md",
+      "sha256": "0e26355a884368acb6f3a20caa6c5d65efe7954453855e0e174ef19d6e1a6740",
+      "role": "Diagnóstico de divergência de apresentação no contato"
+    },
+    {
+      "id": "cont_receipt",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/scene02-actions-continuous6-b11-r2-v2/6-continuous/round-continuo.json",
+      "sha256": "ad343477bc223e8253bbd0c3210694910a9eaa656276b599f089432129faef68",
+      "role": "Recibo de vídeo, áudio e cadência do duelo"
+    },
+    {
+      "id": "portrait_attention",
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/preview/conversa07_sms_attention_v1.json",
+      "sha256": "771a95baa67e530b41c8a11d316d68b62785b7d2aec7054b7adc83b2aa7b8a57",
+      "role": "Contagem estática experimental de tiles e glifos na atenção"
+    },
+    {
+      "id": "portrait_speech",
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/preview/conversa07_sms_speech_v1.json",
+      "sha256": "7e9a1d8dbfdcdf46ff1ba6a97310c7aa38b8a5aac4afdb0266e1ef908eae4fbf",
+      "role": "Contagem estática experimental de tiles e glifos na fala"
+    },
+    {
+      "id": "portrait_versus",
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/preview/versus_neutral_sms_v1.json",
+      "sha256": "1bd3d7c96667b605b432dd82bab9e320404bbf5d089e6a7acbf615e087083552",
+      "role": "Estudo estático de HUD com rival vazio"
+    },
+    {
+      "id": "social_freeze",
+      "path": "SMS_projects/master_of_fighters/doc/dr_social_ingame_freeze_20261104.md",
+      "sha256": "4aa84fd24910f411da76a01f8d91b5d1c929fc48e44a51d10562a58541f82d72",
+      "role": "Limite de consulta aos estudos históricos"
+    },
+    {
+      "id": "pipeline",
+      "path": "tools/sms_wrapper/.agent/pipelines/aaa_scene_v1.json",
+      "sha256": "8e44a206197645e34b3374afecfcb24244348277c84f98ca93da4a5156ffe64f",
+      "role": "Etapa de evidência do pipeline de cena"
+    },
+    {
+      "id": "budget_schema",
+      "path": "tools/sms_wrapper/schemas/scene_budget_v1.schema.json",
+      "sha256": "3e67e3cec25f1014eab60678d7132440be512a8607d75d9e5c3cf8eea62fa056",
+      "role": "Estrutura atual do orçamento de cena"
+    },
+    {
+      "id": "release_workflow",
+      "path": "tools/sms_wrapper/.agent/workflows/release-rom.md",
+      "sha256": "52b534c422f9a448c51524e0cfddffd342b9045b55026536e99e77696b17cdb7",
+      "role": "Contrato existente de vídeo e prova para transições"
+    }
+  ]
+}

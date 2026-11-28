@@ -71,7 +71,7 @@ DESKTOP_PIXELS = 1_500_000
 # O que um screenshot, sozinho, NUNCA prova.
 NEVER_PROVEN_BY_SCREENSHOT = {
     "gameplay": "screenshot nao prova interacao — exige diff entre passos de input",
-    "fps_constante": "screenshot nao prova taxa de quadros — exige measure_fps.py",
+    "fps_constante": "screenshot nao prova taxa de quadros — exige measure_runtime_probe.py e piso58 da ROM",
     "audio": "screenshot nao prova audio — exige captura de onda",
     "validado_budget": "screenshot nao prova orcamento — exige medicao worst-frame",
 }

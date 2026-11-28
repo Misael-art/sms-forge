@@ -1199,6 +1199,148 @@
     "tools/sms_wrapper/reconcile_claims.py"
    ],
    "dedup_key": "l138_projecao_rom_sha_20261019"
+  },
+  {
+   "ts": "2026-10-24",
+   "kind": "curation_application",
+   "summary": "Aplicação das lições existentes: Mugenesis→rev2, 55 pendências, prompt executável; diagnósticos composição/sola corrigidos e mantidos fora de gates globais. Skills e workflow revistos, sem ID novo nem promoção de jogo. Validação detalhada no pacote; EIO legado não é mascarado.",
+   "sources": [
+    "doc/curation/2026-10-24_mugenesis_rev2.json"
+   ],
+   "dedup_key": "mugenesis_rev2_application_20261024"
+  },
+  {
+   "ts": "2026-10-24",
+   "kind": "curation_application",
+   "summary": "Continuidade para novo host: bootstrap Ubuntu/WSL2 isolado, dependências fixadas, reconstrução ABI do SDK, restauração com hashes e conflitos explícitos, guia e prompt de retomada. Aplicação de L004/L083/L093/L138 e prática de recuperação; sem ID novo, sem promoção de ROM. Validação e links remotos no pacote de continuidade.",
+   "sources": [
+    "doc/continuity/20261024-start-here.md",
+    "doc/continuity/20261024-validation.json"
+   ],
+   "dedup_key": "clean_host_bootstrap_recovery_20261024"
+  },
+  {
+   "ts": "2026-10-27",
+   "kind": "curation_application",
+   "summary": "Avaliacao de capacidade produtiva; aplicacao L003/L138 na custodia da maestria, reconciliacao de 32 claims legados, rotas por tarefa, slice/checkpoint no pipeline e orientacao de design/audio adaptada ao SMS. Nenhuma tecnica/ROM promovida.",
+   "sources": [
+    "doc/curation/2026-10-27_production_capability_review.json"
+   ],
+   "dedup_key": "production_capability_review_20261027",
+   "implementation_commit": "f5d3dcb777554b7bceb309abe45e1bb98856ecb0"
+  },
+  {
+   "ts": "2026-10-27",
+   "kind": "curation",
+   "summary": "L139 (§131): a ROM rev2 de 28 bancos mostrou alias de quatro bancos no BlastEm; a imagem idêntica preenchida a 32 bancos coincidiu com 14/14 spans observados. -pp passa a ser verificado no build; não é prova de mapper físico.",
+   "sources": [
+    "doc/curation/2026-10-27_l139_mapper_image_alias.json"
+   ],
+   "dedup_key": "l139_blastem_mapper_alias_non_power_two_image_20261027"
+  },
+  {
+   "ts": "2026-10-27",
+   "kind": "curation",
+   "summary": "L140 (§132): pose e face identificam o cache; o gerador declara a convenção P1-direita/P2-esquerda e o runtime rejeita header legado, valida spans e usa metadata da face residente. Travessia observada, sem aprovar contato, SAT completa ou prazo.",
+   "sources": [
+    "doc/curation/2026-10-27_l140_facing_cache_contract.json"
+   ],
+   "dedup_key": "l140_versus_adjacent_facing_identity_20261027"
+  },
+  {
+   "ts": "2026-10-29",
+   "kind": "application_of_existing_lessons",
+   "dedup_key": "art_method_social_hayato_20261029",
+   "summary": "L113/L123/L124/L127: direção artística, gesto corporal antes do acabamento e checkpoint de seis modalidades no gate existente; replay Social/Hayato sem mudar conversão/runtime. Aceite temporal, rota curta repetível e relatório histórico ausente continuam abertos.",
+   "sources": [
+    "doc/curation/2026-10-29_art_method_social_hayato.json"
+   ],
+   "implementation_commit": "de3a7fd71338a5954a2b292c634515574bc411cb"
+  },
+  {
+   "ts": "2026-10-30",
+   "kind": "application_of_existing_lessons",
+   "dedup_key": "owner_scope_equipment_derivative_curation_20261030",
+   "summary": "L113/L123/L124/L127: owner acceptance closes its scope independently of agent playback; decision contents and timing checked; equipment authority, preserved shared palette and zero-runtime-delta reuse integrated.",
+   "sources": [
+    "doc/curation/2026-10-30_owner_scope_equipment_derivatives.json"
+   ],
+   "implementation_commit": "463333d9e04c7f2785f3e5cb0ea723041e43f247"
+  },
+  {
+   "ts": "2026-11-01",
+   "kind": "curation",
+   "summary": "L013/L035/L138: decisão do dono fixa objetivo60FPS/piso58 em todas as janelas não arredondadas da ROM. Booleano legado/título/PAL50 não paga o eixo; funcionalidade e pior frame continuam obrigatórios. SMS_GLOBAL §133. Sem aprovação de nova ROM.",
+   "sources": [
+    "doc/curation/2026-11-01_aceite_fps_60_piso_58.json"
+   ],
+   "dedup_key": "owner_fps_target60_floor58_20261101"
+  },
+  {
+   "ts": "2026-11-02",
+   "kind": "application_of_existing_lessons",
+   "summary": "L013/L035/L138: selecao exata da ROM/recibo, midia vinculada a sessao/SHA, escopo atual de pre-gates/memoria e projecao revalidada. Negativos temporarios e positivo nativo; nenhum produto promovido.",
+   "sources": [
+    "doc/curation/2026-10-19_l138_projecao_rom_sha.json"
+   ],
+   "dedup_key": "l138_explicit_build_and_media_identity_20261102"
+  },
+  {
+   "ts": "2026-11-21",
+   "kind": "application_of_existing_lessons",
+   "dedup_key": "mof-contrato-de-feedback-input-estado-e-producao",
+   "summary": "L060/L075/L098/L138: onze exercícios de duelo vinculados ao fluxo de produção. Calibração MFD1 da b11-r2 localiza dano com pose atrasada nos recibos do mesmo SHA.",
+   "sources": [
+    "doc/curation/2026-11-21_mof_impacto_sistemas_pipeline.json"
+   ],
+   "implementation_commit": "db574e69b9f5bf5b23ca6cc906da4c2fad5f4aa2"
+  },
+  {
+   "ts": "2026-11-21",
+   "kind": "application_of_existing_lessons",
+   "dedup_key": "bootstrap_primeiro_trecho_cobertura_multigenero_20261121",
+   "summary": "L001/L037/L098: o bootstrap encaminha ao roteiro comum, o plano exige casos por beat e o modelo materializa o contrato de paleta e FPS vigente. Duelo, plataforma e puzzle calibram a cobertura documental.",
+   "sources": [
+    "doc/curation/2026-11-21_roteiro_primeiro_trecho.json"
+   ],
+   "implementation_commit": "5de51e8f9cd40950c89797434dfa8ef5036a8f5f"
+  },
+  {
+   "ts": "2026-11-21",
+   "kind": "application_of_existing_lessons",
+   "dedup_key": "mof-alis-dois-controles-repertorio-e-vitima",
+   "summary": "B32 documenta decolagem e contato com cache frio. Aplicar os testes existentes ao repertório inteiro, às duas instâncias e à atuação da vítima no agarrão. Cadência e duelo espelhado pendentes.",
+   "sources": ["doc/curation/2026-11-21_alis_espelho.json"]
+  },
+  {
+   "ts": "2026-11-21",
+   "kind": "application_of_existing_lessons",
+   "dedup_key": "mof-espelho-exposicao-dupla-entrada-material-escala",
+   "summary": "Cinco cenários b39–b49 reproduzidos dos recibos. O diagnóstico por atriz distingue os quatro atrasos da vítima na b47. O fluxo incorpora entrada pelo lançador, geometria dos trajes, revisão de material e escala e distinção entre relincagem de arte e build integral.",
+   "sources": ["doc/curation/2026-11-21_alis_espelho_revisao.json"]
+  },
+  {
+   "ts": "2026-11-22",
+   "kind": "application_of_existing_lessons",
+   "dedup_key": "mof-pouso-puxada-consequencia-e-material",
+   "summary": "B52 e b53: fixar consequência do impacto e primeira leitura livre no pouso. Conferir a recuperação dos dois corpos e medir a presença de material na imagem composta. Calibração do peitoral em dois trajes e duas faces na b49 e b52. Áudio e cadência da b53 pendentes.",
+   "sources": ["doc/curation/2026-11-22_alis_pouso_e_puxada.json"]
+  },
+  {
+   "ts": "2026-11-27",
+   "kind": "application_of_existing_lessons",
+   "dedup_key": "direcao-contemporanea-palco-material-por-quadro",
+   "summary": "L001/L103/L104/L107/L124/L138. Direção artística do GDD no bootstrap e na cena, distinção de índice 0 entre fundo e sprite, amostras de material por posição e quadro. Calibração em Alis e Kage Matsuri; recibo da Palma V3 R6b mantém a reprovação de cadência.",
+   "sources": ["doc/curation/2026-11-27_mof_capitulo_alis.json"]
+  },
+  {
+   "ts": "2026-11-27",
+   "kind": "curation",
+   "dedup_key": "ficha_edicao_exportada_e_imagem_ativa",
+   "summary": "L141 (§136). Conservar a edição Word e PDF da ficha por personagem, conferir figuras que têm raster e SVG ativos e repetir a exportação ao mudar o contrato. Calibração no par de Alis R8 e na edição R6b arquivada.",
+   "sources": [
+    "doc/curation/2026-11-27_l141_ficha_ilustrada.json"
+   ]
   }
  ]
 }

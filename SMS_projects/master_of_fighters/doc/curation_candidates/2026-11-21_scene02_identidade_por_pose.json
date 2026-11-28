@@ -1,0 +1,400 @@
+{
+  "schema": "smsforge_art_curation_candidate_v1",
+  "id": "mof_scene02_identidade_por_pose_2026-11-21",
+  "status": "observed_in_archived_rom_pending_curation",
+  "dedup_key": "mof-source-native-pose-framebuffer-idle-comparison",
+  "owner_project": "SMS_projects/master_of_fighters",
+  "review_path": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-11-21_scene02_identidade_por_pose.md",
+  "scope": {
+    "scene": "02",
+    "rom_sha256": "f76fe86f5b3d874a7317c7727f350aa8e750af7a1dba9d85b8d71722c3a126b7",
+    "stepped_session_id": "734bb99e3d0647bf8081588578a37133",
+    "continuous_session_id": "de180cf34ed04e0485e837df32434594",
+    "idle_pose_ids": [
+      0,
+      16
+    ],
+    "verified_banks": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "pose_ids_in_plan": 51,
+    "poses_with_staged_png_verified_in_both_faces": 40,
+    "gameplay_orientation_observed": "Hayato para a direita, Alis para a esquerda",
+    "qualification": "Revisão offline de duas sessões Emulicious arquivadas e fechadas. O pareamento usa uma amostra por pose, com análise de fronteira em casos selecionados. A decisão de qualidade, as correções e os testes de gameplay e de budget seguem em aberto."
+  },
+  "observed_failures": [
+    {
+      "id": "normal_category_and_input",
+      "pose_ids": [17, 18, 19, 45, 46, 47, 48, 49, 50],
+      "observation": "O proprietário identificou que o golpe no espaço de soco forte foi tratado como especial. Em Alis, segurar 1 deve chamar a espadada direta como normal forte. Na ROM observada, #17–19 pertencem ao 1 longo e #45–50 pertencem ao ensaio direcional de Saque em passada e Passo de escudo.",
+      "owner_decision_path": "SMS_projects/master_of_fighters/doc/decisions/scene02-normais-dois-botoes_owner_20261121.json",
+      "correction_to_test": "Fixar entrada, ID e categoria antes de atribuir função e coreografia. Fazer o designer e o agente de arte cotejarem a ficha com o mapa de comandos. Exigir uma única espadada via botão 1 sustentado e verificar o ciclo de ataque e resposta pelo ID de normal da ROM."
+    },
+    {
+      "id": "hayato_source_identity",
+      "pose_ids": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        45,
+        46,
+        47
+      ],
+      "observation": "Cabelo, volume de roupa e encadeamento da arma se afastam da guarda. A marcha e os seis chutes da folha interpretam a katana junto ao quadril. As fontes já mostram a mudança de desenho e postura da arma.",
+      "correction_to_test": "Ancorar rosto, cabelo, materiais e mão da arma no idle nativo e na ficha. Validar pose-chave e retorno antes de gerar passagens. Separar escorço ou troca de empunhadura justificados de deriva de identidade."
+    },
+    {
+      "id": "hayato_walk_anisotropy",
+      "pose_ids": [
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36
+      ],
+      "observation": "A receita da marcha limita a largura a 31 px para usar quatro sprites por faixa. A razão scale_x/scale_y é cerca de 0,633, com um ajuste de piso de 1 px em #29. As poses equipadas da marcha têm largura de 25–31 px, frente a 35 px no idle.",
+      "correction_to_test": "Comparar uma conversão uniforme e limpeza regional no tamanho SMS. Manter o mesmo gesto, medir o par nas fases X e investigar residência e planos que preservem a silhueta no orçamento."
+    },
+    {
+      "id": "alis_material_roles",
+      "pose_ids": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        48,
+        49,
+        50
+      ],
+      "observation": "O magenta da guarda e as divisões do escudo perdem presença na conversão por RGB mais próximo. #38/#42/#43 não conservam pixels 0x23. O especial tem 299–328 pixels brancos diante de 122 na guarda. As folhas de marcha e especial ainda mostram rosa e ouro por região.",
+      "correction_to_test": "Pré-atribuir materiais, máscara e rampa. Rever a túnica, as meias, o escudo, o cabelo e a arma separadamente na pose indexada. Começar em #38/#42/#43."
+    },
+    {
+      "id": "move_distinction_and_staging",
+      "pose_ids": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        48,
+        49,
+        50
+      ],
+      "observation": "Câmaras e recuperações dos chutes curto/forte oferecem leitura próxima. Em #21 a ação lê primeiro como escudo. Em #11/#14/#27/#49 a sobreposição do par dificulta ver o terminal da ameaça na composição arquivada.",
+      "correction_to_test": "Usar apoios, ombros e quadril para distinguir função, peso e abertura de punição. Conferir punho, bota, mão/arma e escudo isolados e com o par. Provar contato, alcance, guarda, erro e recuperação com input observado."
+    },
+    {
+      "id": "presentation_boundary",
+      "pose_ids": [
+        2,
+        5,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "observation": "#02/#05 e a marcha precisaram de conferência de vizinhança temporal e espacial. No VDP 674 do stepping, #46 pedida e residente produz dano com #45 apresentada. No contínuo, a pose #46 aparece no índice 552, com diferença RGB residual de 242/1409 pixels comparáveis.",
+      "correction_to_test": "Selar posição, pose, VDP e buffer efetivamente publicados com SAT/PNT e pixels. Conservar índice de decodificação em vídeo variável. Provar as três fronteiras do Saque e os dois roteiros. Investigar composição residual e medir carga em execução contínua."
+    }
+  ],
+  "observed_controls": [
+    {
+      "pose_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "role": "Guarda e Corte curto de Hayato como controle de identidade e trajetória na mesma ROM. A versão histórica aprovada conserva seus próprios recibos."
+    },
+    {
+      "pose_ids": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "role": "Guarda e Estocada forte de Alis como controle de identidade e rampa. 38–39 pixels 0x23 nas três poses de ação, 39 na guarda."
+    }
+  ],
+  "future_curation": {
+    "status": "queued_not_homologated",
+    "existing_doctrine": [
+      "L105–L107 / §§90–92",
+      "L109–L113 / §§105–107 e 109",
+      "L091 / §76",
+      "L137 / §129",
+      "§133"
+    ],
+    "workflow_targets": [
+      "playable-fighter.md",
+      "art-review.md",
+      "product-quality-checkpoint.md"
+    ],
+    "agent_targets": [
+      "sms-pixel-engineer",
+      "sms-game-director",
+      "sms-hardware-budget-guardian",
+      "sms-qa-emulator-tester"
+    ],
+    "skill_targets": [
+      "sms-fighter-direction.md",
+      "sms-sprite-animation.md",
+      "sms-asset-to-rom.md",
+      "sms-visual-excellence.md",
+      "sms-video-evidence.md"
+    ],
+    "future_validation": [
+      "Classificar a espadada de Alis pelo comando do normal forte. Reprovar ficha, catálogo ou teste que use a sequência direcional do ensaio como prova da vaga de 1 longo.",
+      "O gate verifica cobertura por pose e vínculo do controle no checklist existente. Revisão independente decide identidade, atuação e material na leitura real.",
+      "Uma fixture positiva com os controles históricos e casos negativos de escala não declarada, perda de rampa, pose residente porém atrasada e índice de vídeo variável errado.",
+      "Casos em ROM com o par e ambas as faces. Exercitar acerto, defesa, erro, punição, pior frame e por sessão o aceite das janelas contínuas conforme §133."
+    ]
+  },
+  "evidence": [
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/revisao_visual_b11_r2_20261121/observacoes.json",
+      "sha256": "09176ddbb0d43e5cbadd9fd1724cce200702b386a9165990e6e5094afd197288",
+      "role": "Matriz de IDs, amostras cruas, pixels comparáveis, métricas de paleta e hashes dos mosaicos"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/revisao_visual_b11_r2_20261121/fronteiras.json",
+      "sha256": "1a64aeb16bb7cfc9a5dcd00d79ea244f84935dab00b275e3f5c0e92db433b244",
+      "role": "Vizinhancas de alinhamento, Saque nas duas sessões e comparação separada P0/P1 em seis impactos"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/scene02-actions-qa6-b11-r2/6-closed-session.json",
+      "sha256": "17510d9636ce84ca25b5ddff16042aefab2a8c533a782c1a14dbe23aebeea718",
+      "role": "Fechamento da sessão por VDP"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/scene02-actions-continuous6-b11-r2-v2/6-closed-session.json",
+      "sha256": "09781dc7362d9933045816b63cfa9f58e80905650d3ed0e87af37ffd39b1e62e",
+      "role": "Fechamento da sessão contínua"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/scene02-actions-continuous6-b11-r2-v2/6-continuous/round-continuo.json",
+      "sha256": "ad343477bc223e8253bbd0c3210694910a9eaa656276b599f089432129faef68",
+      "role": "Recibo, cadência contínua e hashes de ROM e vídeo"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/scene02-actions-plan-v2.json",
+      "sha256": "1feab3854ae916b040390c8f70f8c0219239fdcf7ba1a6f03a71ace6d6094e92",
+      "role": "Decomposição exata das poses indexadas em SAT/P1 e fundo/P0"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/standing-art-b05/staging-report.json",
+      "sha256": "5eb7014d877905632e24f76de5ec847d74a9906b464009e77b3d810cba4ef342",
+      "role": "Lineage dos normais indexados"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/scene02-walk-staging-v4/walk-staging.json",
+      "sha256": "6a145f4a9d85ac377be15be730a9e2b8758a523cf6cedba921e6779cfa3bf5a7",
+      "role": "Lineage e escalas X/Y da marcha indexada"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/scene02-special-staging-v1/special-staging.json",
+      "sha256": "441d3238492c6ce5f2fc81ee977e6fe036ced04d34d459d5aec9c7e93aab18a4",
+      "role": "Lineage e calibração dos especiais indexados"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/scene02_standing_20261119/generated-art-receipt.json",
+      "sha256": "2c2723c68dcdf159254177019a7f11f7d1ba9de282d7d96029aecbac4d2439e3",
+      "role": "Procedência das seis folhas de novos normais"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/scene02_walk_20261119/source-receipt.json",
+      "sha256": "bbf77910de5b3aeb23adbcf468b6853a041769684dc1ccfce71f3688ee5b333b",
+      "role": "Procedência e registro de células das duas folhas de marcha"
+    },
+    {
+      "path": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/scene02_specials_20261119/source-receipt.json",
+      "sha256": "33543bb69616a0ec259c277d07a18ced5db10999bafc9d7843c4cc8cbfd1f4c5",
+      "role": "Procedência e pivôs das duas folhas de especiais"
+    }
+  ],
+  "diagnostic_results": {
+    "opaque_alis_sms_0x23_counts_by_pose": {
+      "16": 39,
+      "17": 39,
+      "18": 38,
+      "19": 38,
+      "20": 16,
+      "21": 11,
+      "22": 9,
+      "23": 19,
+      "24": 24,
+      "25": 19,
+      "26": 12,
+      "27": 14,
+      "28": 14,
+      "37": 2,
+      "38": 0,
+      "39": 4,
+      "40": 2,
+      "41": 1,
+      "42": 0,
+      "43": 0,
+      "44": 2,
+      "48": 16,
+      "49": 19,
+      "50": 21
+    },
+    "sampled_rgb_differences_by_projected_layer": {
+      "8": {
+        "P0": {
+          "expected": 82,
+          "different": 76,
+          "observed_rgb_0_0_85": 62
+        },
+        "P1": {
+          "expected": 820,
+          "different": 0,
+          "observed_rgb_0_0_85": 0
+        }
+      },
+      "11": {
+        "P0": {
+          "expected": 149,
+          "different": 130,
+          "observed_rgb_0_0_85": 84
+        },
+        "P1": {
+          "expected": 767,
+          "different": 0,
+          "observed_rgb_0_0_85": 0
+        }
+      },
+      "14": {
+        "P0": {
+          "expected": 183,
+          "different": 156,
+          "observed_rgb_0_0_85": 85
+        },
+        "P1": {
+          "expected": 832,
+          "different": 0,
+          "observed_rgb_0_0_85": 0
+        }
+      },
+      "27": {
+        "P0": {
+          "expected": 51,
+          "different": 35,
+          "observed_rgb_0_0_85": 11
+        },
+        "P1": {
+          "expected": 692,
+          "different": 0,
+          "observed_rgb_0_0_85": 0
+        }
+      },
+      "49": {
+        "P0": {
+          "expected": 40,
+          "different": 18,
+          "observed_rgb_0_0_85": 6
+        },
+        "P1": {
+          "expected": 791,
+          "different": 0,
+          "observed_rgb_0_0_85": 0
+        }
+      },
+      "46": {
+        "P0": {
+          "expected": 287,
+          "different": 242,
+          "observed_rgb_0_0_85": 177
+        },
+        "P1": {
+          "expected": 1122,
+          "different": 0,
+          "observed_rgb_0_0_85": 0
+        }
+      }
+    },
+    "functional_fps_floor": 58,
+    "continuous_wall_updates_per_second": [
+      15.1878595,
+      20.5018315
+    ],
+    "continuous_nominal_vdp_updates_per_second": [
+      40.113572,
+      42.8019596
+    ]
+  }
+}

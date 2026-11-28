@@ -1,0 +1,31 @@
+{
+  "curation_id": "2026-10-27_l139_mapper_image_alias",
+  "date": "2026-10-27",
+  "title": "Imagem bancária não potência de dois pode mascarar bancos no emulador",
+  "kind": "curation",
+  "scope": "Diagnóstico do consumidor luta_mugem_rev2 e proteção explícita de builds que pedem makesms -pp; não é lei de todos os mappers ou prova de hardware.",
+  "authorization": "O pedido humano de evolução da engine autorizou corrigir a fábrica e o consumidor, testar, atualizar contratos, documentação, backlog e memória e publicar os incrementos conforme as regras do workspace.",
+  "lessons": [
+    {
+      "id": "L139",
+      "status": "fechada_com_ferramenta_e_correcao",
+      "lesson": "Dados presentes na ROM podem ser lidos de outro banco em runtime quando a imagem e o mapper não concordam sobre o tamanho. O tamanho correto é necessário no perfil exercitado, mas não substitui ler padrões realmente residentes.",
+      "root_cause": "O manifesto usava makesms -pm e gerava uma imagem de 28 bancos; no BlastEm fixado, padrões de alguns bancos mapeavam aos mesmos offsets quatro bancos antes. A verificação estática dos descritores e bytes do arquivo não detectava a leitura bancária efetiva.",
+      "evidence": {
+        "unpadded_rom_sha256": "5e79efa2c995f3dce23bc758e8478a367e6e498d7178b0808ce84f69a0fe3196",
+        "padded_rom_sha256": "ad0e148c3b1f12a2981f17b02a8d9fa9f42642137e734d9bb9bcc0422e6a3eea",
+        "comparison": "Os primeiros 458752 bytes são iguais; o mesmo roteiro e a mesma ferramenta BlastEm observaram 9/14 spans divergentes na imagem de 28 bancos e 14/14 corretos na imagem preenchida para 32 bancos. Todos os nove divergentes coincidiram com o mesmo offset quatro bancos antes.",
+        "unpadded_session": "blastem-sms-cc1bc86deb08442c876b6fc57e2cf17c",
+        "padded_session": "blastem-sms-c646913e95f84f7194ad9c57bee59b45",
+        "historical_antecedent": "O experimento de 20/10 já havia identificado a máscara de bancos em outra ROM de 52 bancos e deixado L139 proposta para curadoria: out/evidence/loteB2b_20261019/b2b3_blastem_bankmask/ e out/logs/runs/20261020T004000Z_b2b2_addendum_blastem_bankmask.json. O teste atual revalida o efeito no corte de 28 bancos; não é uma descoberta inédita.",
+        "local_evidence": "SMS_projects/luta_mugem_rev2/out/evidence/20261027_blastem_facing/ e 20261027_blastem_power2/; bundles auditados e scripts de leitura com self-check",
+        "regression": "build_inner.py reconhece -pp, recusa políticas de padding concorrentes e rejeita saída não potência de dois antes de publicar recibo; test_candidate_build.py cobre política e falha com ROM nominal preservada."
+      },
+      "rule_section": "SMS_GLOBAL §131",
+      "tool_that_measures": "build_inner.py; blastem_sms.py; audit_blastem_sms.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
+      "measurement_limits": "Observação apenas nas ROMs e fronteiras identificadas, com BlastEm como diagnóstico complementar. Não prova hardware, todos os mappers, integridade visual, scanline, VBlank, FPS ou delivery. O teste de tamanho do builder só se aplica quando -pp é declarado."
+    }
+  ],
+  "dedup_key": "l139_blastem_mapper_alias_non_power_two_image_20261027"
+}

@@ -30,3 +30,18 @@ mantém fluxo/zeros durante pausas; feche por ID e descarregue sink após a JVM.
 Vídeo por stepping não inclui áudio. Capture sinal separadamente e compare
 trechos alinhados para fidelidade; peak positivo não prova música/notas certas.
 Não liberar música só por gate de sinal ou teste silencioso de outra ROM.
+
+## Eventos de combate e catálogo (L041/L058/L078–L081/L093)
+
+Receita do Mugenesis: fila limitada, idade máxima, relógio declarado,
+overflow/expiração separados e política no adaptador do consumidor. Ao
+implementar no SMS, dimensionar pool/custo no Z80 e testar canal ocupado,
+mute, pausa, wrap, fim de round e evento antigo. O TTL de 6 VInts do doador
+não é default SMS. Grupo 0 do SND não significa voz universalmente.
+
+Soundtest enumera entradas reais, origem/grupo/amostra e categorias vazias.
+Lista textual não prova áudio integrado. BGM/SFX/cue compartilham quatro
+canais; consultar PSGlib.h antes de implementar play, pause/stop ou arbitragem.
+A espera de ACK do XGM2 pertence ao driver MD: copiar a distinção intenção/
+estado apenas se o driver SMS realmente a exigir. Fonte e decisão:
+`doc/curation/2026-10-24_mugenesis_rev2.md`.

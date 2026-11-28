@@ -4,8 +4,8 @@
 Reprova:
 - PNG fora do grid 8x8 (BG) ou tamanho fora de {8x8,16x16} (sprite)
 - cor fora dos codigos 6-bit (contrato canal*85)
-- >15 cores uteis por subpaleta (indice 0 = transparente, nao conta como util)
-- indice 0 opaco (sem tRNS)
+- indices usados fora da paleta ou da faixa 4bpp
+- sprite/folha sem transparência exclusiva no índice 0. No BG os 16 índices são visíveis
 - folha de sprite com cor usada fora da paleta declarada do personagem
 
 Uso: audit_validate_resources.py --project <dir> [--kind bg|sprite|sheet] <png...>
@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from png_io import read_indexed_png, PngError
 import sms_palette as pal
 
-MAX_USEFUL = 15
+MAX_4BPP_INDEX = 15
 SPRITE_RESOURCE_GEOMETRIES = {(8, 8), (8, 16), (16, 16)}
 
 def check_png(path, kind, character_colors=None):
@@ -33,13 +33,12 @@ def check_png(path, kind, character_colors=None):
         errors.append(f"grid 8x8 violado: {w}x{h}")
     if kind == "sprite" and (w, h) not in SPRITE_RESOURCE_GEOMETRIES:
         errors.append(f"sprite {w}x{h} fora de {{8x8,8x16,16x16}}")
-    else:
-        errors += _palette_errors(path, img)
+    errors += _palette_errors(path, img, kind)
     if character_colors is not None:
-        errors += _character_palette_errors(path, img, character_colors)
+        errors += _character_palette_errors(path, img, character_colors, kind)
     return errors
 
-def _palette_errors(path, img):
+def _palette_errors(path, img, kind):
     errors = []
     plte = img["palette"] or []
     for idx, rgb in enumerate(plte):
@@ -49,18 +48,18 @@ def _palette_errors(path, img):
     used = set()
     for row in img["pixels"]:
         used.update(row)
-    useful = len([i for i in used if i != 0])
-    if useful > MAX_USEFUL:
-        errors.append(f"{path}: {useful} cores uteis > {MAX_USEFUL} (indice 0 nao conta)")
-    if 0 not in img["trns"]:
-        errors.append(f"{path}: indice 0 deve ser transparente (tRNS)")
+    if any(i >= len(plte) or i > MAX_4BPP_INDEX for i in used):
+        errors.append(f"{path}: índice usado fora da PLTE ou da faixa 4bpp (0..15)")
+    if kind != "bg" and (img["trns"] != {0} or img["partial_alpha"]):
+        errors.append(f"{path}: sprite exige índice 0 transparente e os demais opacos (tRNS)")
     return errors
 
-def _character_palette_errors(path, img, allowed_colors):
+def _character_palette_errors(path, img, allowed_colors, kind):
     used = set()
     for row in img["pixels"]:
         used.update(row)
-    used.discard(0)
+    if kind != "bg":
+        used.discard(0)
     palette = img["palette"] or []
     actual = {tuple(palette[i]) for i in used if i < len(palette)}
     outside = sorted(actual - set(allowed_colors))
@@ -119,9 +118,18 @@ def main():
         assert not e1, f"self-check falhou em fixture valida: {e1}"
         assert any("grid" in x for x in e2), "self-check: gate nao reprovou grid invalido"
         assert any("fora dos codigos 6-bit" in x for x in e3), "self-check: gate nao reprovou cor fora do grid SMS"
-        assert any("cores uteis > 15" in x for x in e4), "self-check: gate nao reprovou mais de 15 cores uteis"
+        assert any("4bpp" in x for x in e4), "self-check: gate nao reprovou índice 16"
         assert any("fora da paleta declarada" in x for x in e5), "self-check: gate nao reprovou paleta de personagem divergente"
         assert not e6, f"sprite SMS 8x16 válido não deveria reprovar: {e6}"
+        tile = os.path.join(d, "palette.png")
+        rows = [bytes(range(i, i+8)) for i in (0, 8) * 4]
+        for alpha, sprite_ok in (((), False), ((0, 255), True), ((255, 0), False),
+                                 ((0, 127), False), ((0, 0), False)):
+            write_indexed_png(tile, 8, 8, good, rows, trns=alpha)
+            assert not check_png(tile, "bg")
+            assert (not check_png(tile, "sprite")) == sprite_ok
+        write_indexed_png(tile, 8, 8, many_colors, [bytes([16] * 8)] * 8)
+        assert any("4bpp" in e for e in check_png(tile, "bg"))
         print("[SELF-CHECK OK] validate_resources: sheet, sprite 8x8/8x16/16x16, grid, 6-bit, limite 15 e paleta de personagem")
         return 0
 

@@ -1,0 +1,359 @@
+{
+  "rom": "out/candidates/alis_ficha_r5/rom/master_of_fighters.sms",
+  "sha256": "7d12cc75fe2891ce46025b1e60fed13e581df65f6f59ef19f4054894672b2c4b",
+  "confronto": "Versus do Espaçoporto, Alis × Alis com os dois controles.",
+  "vinculo": {
+    "tiara_lutz": [
+      {
+        "exposicao": 0,
+        "fase": 0,
+        "caixa": [
+          74,
+          54,
+          96,
+          62
+        ],
+        "pixels": 59
+      },
+      {
+        "exposicao": 0,
+        "fase": 1,
+        "caixa": [
+          74,
+          54,
+          96,
+          62
+        ],
+        "pixels": 59
+      },
+      {
+        "exposicao": 0,
+        "fase": 2,
+        "caixa": [
+          74,
+          54,
+          96,
+          62
+        ],
+        "pixels": 59
+      },
+      {
+        "exposicao": 1,
+        "fase": 0,
+        "caixa": [
+          74,
+          54,
+          96,
+          62
+        ],
+        "pixels": 59
+      },
+      {
+        "exposicao": 1,
+        "fase": 1,
+        "caixa": [
+          74,
+          54,
+          96,
+          62
+        ],
+        "pixels": 59
+      },
+      {
+        "exposicao": 1,
+        "fase": 2,
+        "caixa": [
+          74,
+          54,
+          96,
+          62
+        ],
+        "pixels": 59
+      }
+    ],
+    "pico_scanline_por_lutador": 4,
+    "limite_sat_dos_dois": 52,
+    "rom_sha256": "7d12cc75fe2891ce46025b1e60fed13e581df65f6f59ef19f4054894672b2c4b",
+    "bytes": 1048576,
+    "bancos_inicio_contagem": {
+      "mirror-banks.bin": [
+        2,
+        22
+      ],
+      "panels.bin": [
+        24,
+        13
+      ],
+      "magic.bin": [
+        39,
+        20
+      ],
+      "matchup.bin": [
+        59,
+        2
+      ]
+    },
+    "poses_verificadas": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      42,
+      44,
+      47,
+      54,
+      55,
+      56,
+      66
+    ],
+    "variantes_nativas": 60,
+    "planos_base_exatos": [
+      "alis",
+      "odin",
+      "laconiana"
+    ],
+    "pixels_por_plano": 25088,
+    "reacoes_e_corte_iguais_a_g6": true,
+    "corte_tiles": 25,
+    "corte_pico_scanline": 4
+  },
+  "atlas_sha256": "68d259f9ae5f4885bdab57e3934322f979af49c2c1e5365f2cdb152befb0148b",
+  "contrato_das_camadas": "out/diagnostics/alis_ficha_r4/magic/camadas/contrato.json",
+  "origem_da_tiara": "data/source_art/scenes/alis_guardioes/lineage.json#tiara_lutz",
+  "correcao_da_marcha": "Na primeira candidata os dois controles solicitaram 01–08, porém a gravação de 190 VBlanks exibiu apenas a pose parada durante a marcha. O ciclo agora espera a apresentação do quadro corrente antes de passar ao próximo se a carga dos dois trajes exceder o intervalo de quatro ticks.",
+  "amostra_anterior": "out/qa/alis_ficha_r1/caminhada/observations.json",
+  "hospedagem": "Jupiter com Fôlego. Uma compilação ou sessão de emulador por vez. CPUQuota de 50% de um núcleo e limite de 625 MiB no build da ROM.",
+  "aceite": "Candidata de revisão visual. A carga mista de combate ficou abaixo de 58 FPS em janelas individuais. O aceite de desempenho permanece reprovado.",
+  "ficha": {
+    "documento": "doc/ficha_tecnica_alis_g6e_v1.docx",
+    "sha256": "db9def18c253b6dbeee557f06e940b3fd725bd712e9b006fa7d86830cc2303e4",
+    "paginas": 21,
+    "paginas_revisadas_nesta_edicao": [
+      4,
+      10,
+      17,
+      19,
+      20
+    ],
+    "alturas_nativas_em_pixels": {
+      "42": 56,
+      "44": 55,
+      "47": 55,
+      "66": 40
+    }
+  },
+  "correcao_do_passo": "Caso os padrões de vídeo ainda estejam carregando no fim da fase ativa, o Passo de Escudo pode apresentar a pose 55 no início da recuperação. O teste de impacto continua a usar o tempo do golpe.",
+  "emulicious_versus": {
+    "caminhada": {
+      "observacoes": "out/qa/alis_ficha_r5/caminhada/observations.json",
+      "sessao": "895820ac14df45c1b7e3351a189759f5",
+      "encerrada": true,
+      "poses_por_controle": {
+        "P1": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "P2": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "vida_final": [
+        100,
+        100
+      ],
+      "video": "out/qa/alis_ficha_r5/caminhada/walk-art.mp4",
+      "fps_por_janela_vdp60": [
+        59.92274340431231,
+        58.924031014240434,
+        57.92531862416856
+      ]
+    },
+    "passo-final": {
+      "observacoes": "out/qa/alis_ficha_r5/passo-final/observations.json",
+      "sessao": "5dea96867425470c80509979cc12f4a2",
+      "encerrada": true,
+      "shield_whiff_poses": {
+        "0": [
+          54,
+          55,
+          56
+        ],
+        "1": [
+          54,
+          55,
+          56
+        ]
+      },
+      "shield_damage_events": [
+        {
+          "player": 1,
+          "frame": 562,
+          "action": 12,
+          "pose": 55,
+          "contact": 1,
+          "damage": 13
+        },
+        {
+          "player": 2,
+          "frame": 667,
+          "action": 12,
+          "pose": 55,
+          "contact": 0,
+          "damage": 13
+        }
+      ],
+      "poses_por_controle": {
+        "P1": [
+          54,
+          55,
+          56
+        ],
+        "P2": [
+          54,
+          55,
+          56
+        ]
+      },
+      "vida_final": [
+        87,
+        87
+      ],
+      "video": "out/qa/alis_ficha_r5/passo-final/shield-art.mp4",
+      "fps_por_janela_vdp60": [
+        46.939482333377974,
+        32.95750887237177,
+        53.93046906388108,
+        46.939482333377974,
+        54.92918145395295,
+        42.94463277309048
+      ]
+    },
+    "guarda-r2": {
+      "observacoes": "out/qa/alis_ficha_r5/guarda-r2/observations.json",
+      "sessao": "ccde3e90f24a4debae8dfa7f24c649c3",
+      "encerrada": true,
+      "poses_por_controle": {
+        "P1": [
+          42,
+          44,
+          47,
+          66
+        ],
+        "P2": [
+          42,
+          44,
+          47,
+          66
+        ]
+      },
+      "vida_final": [
+        100,
+        100
+      ],
+      "video": "out/qa/alis_ficha_r5/guarda-r2/air-guard-art.mp4",
+      "fps_por_janela_vdp60": [
+        44.94205755323423,
+        35.95364604258738,
+        40.94720799294674,
+        39.94849560287487,
+        59.92274340431231,
+        51.93304428373733,
+        54.92918145395295,
+        50.93433189366546
+      ]
+    },
+    "guardioes-confirmado": {
+      "observacoes": "out/qa/alis_ficha_r5/guardioes-confirmado/observations.json",
+      "sessao": "4c37342aea234c4d98da85ac90782c42",
+      "encerrada": true,
+      "seen": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "finisher_player": 1,
+      "video": "out/qa/alis_ficha_r5/guardioes-confirmado/guardioes.mp4",
+      "composicao": "out/qa/alis_ficha_r5/guardioes-confirmado/prova_camadas.json",
+      "corte": 40,
+      "duas_exposicoes": true,
+      "tres_fases": true,
+      "vitima": "p2",
+      "reacao": "reacao_alis"
+    },
+    "guardioes-p2-confirmado": {
+      "observacoes": "out/qa/alis_ficha_r5/guardioes-p2-confirmado/observations.json",
+      "sessao": "ac78ccb4fc9b4487bf1757e5d6daeeee",
+      "encerrada": true,
+      "seen": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "finisher_player": 2,
+      "video": "out/qa/alis_ficha_r5/guardioes-p2-confirmado/guardioes.mp4",
+      "composicao": "out/qa/alis_ficha_r5/guardioes-p2-confirmado/prova_camadas.json",
+      "corte": 40,
+      "duas_exposicoes": true,
+      "tres_fases": true,
+      "vitima": "p1",
+      "reacao": "reacao_alis"
+    },
+    "cadencia": {
+      "observacoes": "out/qa/alis_ficha_r5/cadencia/observations.json",
+      "sessao": "3435c852808b4482988693d1c4801877",
+      "encerrada": true,
+      "fps_mistos_por_janela": [
+        48.93690711352171,
+        48.437550918485776,
+        46.939482333377974
+      ],
+      "pior_quadro": {
+        "overruns": 0,
+        "min_vcount": 200,
+        "frames": 3013
+      }
+    }
+  },
+  "previa_visual": {
+    "arquivo": "out/qa/alis_ficha_r5/revisao-visual.png",
+    "sha256": "47e8ffd83fda281f080831d3a7754318e9dee7a687303d0ba47eb481a68122a6",
+    "origem": "Recortes das capturas nativas de P1 nas poses 42, 44, 47, 66 com o fundo isolado pela máscara validada e detalhe do terceiro plano dos Guardiões. Ampliação inteira de 3×."
+  },
+  "bancada": "test_alis_magic.c passou nas duas orientações, alcances, cura interrompida, Chat, reflexão e Myau.",
+  "escopo_da_arena": "Versus do Espaçoporto da ficha G6e. A experiência paralela do horizonte de Palma tem uma candidata própria.",
+  "limites_de_cobertura": [
+    "O Versus disponível no capítulo usa Alis contra Alis. A reação de Hayato foi conferida no pacote da ROM e na ficha. P1 e P2 receberam a reação de Alis nas duas sessões filmadas.",
+    "O último plano tem duração nominal de 41 VBlanks. Em cada final foram identificadas 40 posições distintas do corte no framebuffer, do tick 0 ao 39.",
+    "No ensaio de contato, a queda de 13 PV e a pose ativa 55 confirmam cada lado. O sinal transitório de contato de P2 passou entre publicações completas da sonda."
+  ],
+  "repeticoes_de_qa": {
+    "passo-confirmado": "O processo Python de condução encerrou por sinal 11. A sessão própria foi fechada e o caso foi reexecutado.",
+    "aereas-defesa-confirmadas": "O pé do atacante cobria dois pixels do contorno da pose 66 de P2. O replay com um passo de distância documentou os oito quadros sem oclusão.",
+    "passo-r2": "O marcador transitório de contato de P2 passou entre leituras. O teste final associa as duas perdas de vida ao ID 12 e à pose ativa."
+  }
+}

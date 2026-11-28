@@ -11,6 +11,8 @@
 ## Como usar
 1. AGENTS.md da raiz é o contrato de entrada; SMS_GLOBAL.md é a lei.
 2. Antes de trabalhar num domínio, leia a skill correspondente.
+   Para preparar a construção, investigar pressão do host ou usar Windows,
+   consulte `skills/host-build-monitoring.md`.
 3. Siga o workflow do tipo de tarefa; pipelines definem gates obrigatórios.
    Antes de produzir ou retomar arte, `workflows/artifact-organization.md`
    resolve um registro por projeto, separa candidata/aprovada e reserva saídas
@@ -22,6 +24,10 @@
    Use `workflows/artwork-to-rom-lifecycle.md` para os estados e limites de
    promoção entre concept, harmonia do elenco, animação, prova, ROM diagnóstica
    e produção.
+   Para construir um lutador jogável, comece em
+   [`workflows/playable-fighter.md`](workflows/playable-fighter.md). Ele reúne
+   a ficha parametrizada, a folha de exposição e a verificação de movimento,
+   reação e balanceamento no duelo.
 4. Erro vira lição via workflow `curation-learning.md`.
 
 ## Princípios (herdados do SGDKForge)

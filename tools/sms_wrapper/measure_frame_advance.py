@@ -59,7 +59,7 @@ MIN_RUN = 2
 MIN_STATES = 5
 # Dispersao maxima em torno da mediana para o ritmo ser chamado de CONSTANTE.
 TOLERANCIA = 0.10
-FPS_MIN, FPS_MAX = 50, 60
+FPS_MIN, FPS_MAX = 58, 61
 
 
 def cell_signature(rows, x0, y0, col, row, scale=1.0):
@@ -256,15 +256,17 @@ def verdict(samples, period_frames):
         return base
     artefatos = [d for d in dur if abs(d - med) / med > TOLERANCIA]
     limite = max(1, len(dur) // 3)
-    fps = round(period_frames / med, 1)
+    fps_raw = period_frames / med
+    fps = round(fps_raw, 1)
     base.update({
         "duracao_mediana_s": round(med, 3),
         "estados_fora_da_tolerancia": len(artefatos),
         "limite_de_artefatos": limite,
         "constante": len(artefatos) <= limite,
         "fps_estimado": fps,
+        "fps_sem_arredondamento": fps_raw,
         "aprovado": bool(trans > 0 and ok_ns and len(artefatos) <= limite
-                         and FPS_MIN <= fps <= FPS_MAX),
+                         and FPS_MIN <= fps_raw <= FPS_MAX),
     })
     return base
 

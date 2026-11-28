@@ -1,0 +1,40 @@
+{
+  "kind": "application_of_existing_lessons",
+  "existing_lesson_ids": ["L037", "L075", "L098", "L113", "L138"],
+  "dedup_key": "mof-alis-dois-controles-repertorio-e-vitima",
+  "owner": "SMS_projects/master_of_fighters",
+  "decision": "O dono pede Alis × Alis na Cena 02, trajes por controle, normais em três posturas, agarrão com atuação da vítima, reações localizadas e queda. O duelo com Hayato permanece como controle histórico.",
+  "baseline": {
+    "revision": "b32",
+    "match": "Alis P1 × Hayato P2",
+    "rom_sha256": "201757c38220c8890bd1bb09b00f6b1fad2a0ace4e5b92184578fe3cfb57e03e",
+    "rom": "out/candidates/scene02_alis_jump_mix_b32/rom/master_of_fighters.sms",
+    "evidence_root": "out/diagnostics/alis_20261121_salto/qa-b32",
+    "stepped": {"session": "0eff089ffae144cd97e855493e3fd9d9", "receipts": ["pixels.json", "runtime.json", "flights.json", "special-regression.json", "stepped-closed.json"]},
+    "continuous": {"session": "951e17d1d82d4fda8708aa174fffc7b4", "receipts": ["continuous/round-continuo.json", "continuous/alis-b32-saltos-e-espadada.json", "continuous-closed.json"]},
+    "verified_exposures": 33,
+    "hud_frames_examined": 269,
+    "worst_gap_vdp": 4,
+    "nominal_updates_per_second": [37.951070822731126, 43.943345163162356],
+    "floor": 58,
+    "cadence_passed": false
+  },
+  "review": [
+    {"area": "Normais", "finding": "Quatro normais em pé têm contatos no histórico. B17 registra chutes ativos #24 e #27, com 8 e 12 de dano. B23-r3 distingue escudo #21 e espada #18. Na b32 a primeira estocada mostrou #17, #18 no acerto e #19 na recuperação, esta um tick após o pedido. Os oito normais baixos e aéreos constam como fichas. A documentação da b32 limita os ataques selecionáveis à postura em pé.", "apply": "Provar as 12 entradas na mesma ROM final com o adversário do novo lote. Preservar as funções dos quatro golpes em pé."},
+    {"area": "Arte e som", "finding": "B21 recompôs rosto, torso, escudo e ponta de espada. B23-r3 integrou transferência de peso na marcha e distinguiu os dois impactos do botão 1. Na b32 o vídeo de apresentação adiantou o áudio em 0,57 s.", "apply": "Usar guarda e sola como régua, separar materiais e equipamento e inspecionar 1× nas duas faces. Comparar contato e PSG no registro bruto. A sonoridade da espada de Phantasy Star é direção artística pendente de comparação."},
+    {"area": "Salto e guarda", "finding": "B26 mostrou três bloqueios com vida preservada. B29 fixou o arco aprovado, mas perdeu a nova pressão de salto na recuperação e reteve a pose #59 na guarda aérea. B32 manteve 78 px e 20 ticks de voo, recuperou as travessias e mostrou as fases da guarda. O Passo de Escudo #49 voltou a acertar.", "apply": "Repetir boot frio, sequência mista e pouso com botão retido. Relacionar pivô e pixels à entrada e à residência. Provar o impacto na guarda em cada postura."},
+    {"area": "Duplo e agarrão", "finding": "mof_duel_init deriva o segundo personagem pelo complemento do primeiro. O estado alis_motion pertence ao duelo. Alternar qual controle pilota Alis conserva um único exemplar. As fontes consultadas não demonstram o par Alis × Alis, agarrão pareado, cabeça versus abdômen nem ciclo completo de queda de Alis.", "apply": "Separar estado mutável por controle, testar ações assimétricas simultâneas e inverter atacante e vítima. Conferir duas silhuetas e dois trajes no contato e na queda."},
+    {"area": "Orçamento", "finding": "Na b32 o trecho medido atingiu oito sprites na linha e 48 na SAT nas amostras. Houve zero falhas registradas de render e zero términos de envio em área ativa. As duas janelas funcionais ficaram abaixo de 58.", "apply": "Medir a sobreposição mais cara com dois equipamentos, HUD, impactos e áudio. Conservar escopo e corrigir a primeira divergência de lógica ou apresentação."}
+  ],
+  "source_files": [
+    "doc/10-memory-bank.md",
+    "doc/repertorio_alis_hayato.md",
+    "doc/scene02-comandos.md",
+    "doc/scene02_hayato_alis_qa.md",
+    "doc/curation_candidates/2026-11-21_alis_paleta_movimento_audio.json",
+    "doc/curation_candidates/2026-11-21_alis_salto_comandos_montagem.json",
+    "src/duel_rules.c"
+  ],
+  "reuse": "Em plataforma, aplicar a cadeia entrada, pose, publicação, pixels, efeito e retomada a salto, projétil, dano e troca de cena previstos no roteiro. A grade de 12 e o agarrão bilateral pertencem ao escopo deste jogo.",
+  "claim_limit": "Revisão do código e de recibos arquivados. O aceite do novo confronto exige ROM e evidências próprias."
+}

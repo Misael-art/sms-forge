@@ -84,11 +84,13 @@ def record_private_pcm(sink, seconds):
 def duration_sufficient(pcm, requested):
     return requested > 0 and len(pcm) / 2 / RATE >= requested * 0.95
 
-def capture_session(session, seconds=6, out_name="audio"):
+def capture_session(session, seconds=6, out_name="audio", active_floor=90):
     """Audio real da sessao privada: sink nulo da sessao + fluxo do PID exato."""
     from session_bridge import isolated
     if not re.fullmatch(r"[A-Za-z0-9_-]+", out_name):
         raise ValueError("audio output must be a simple session-local name")
+    if type(active_floor) not in (int, float) or not 5 <= active_floor <= 100:
+        raise ValueError("active-floor must be 5..100; SFX-only scope uses 5")
     root, meta = isolated.load(session)
     sink, pid = meta.get("audio_sink"), meta["emulator_process"]["pid"]
     if not sink or not isolated.alive(meta["emulator_process"]):
@@ -100,6 +102,7 @@ def capture_session(session, seconds=6, out_name="audio"):
               f"{meta.get('audio_error')}); captura recusada"); return 2
     if not isolated.request(root, "status")["audio_enabled"]:
         print("[FAIL_AMBIENTE] sessao ainda em mute; captura recusada"); return 2
+    capture_started_at = time.time()
     isolated.request(root, "run")
     moved = list(meta["audio_route"]["sink_inputs"])
     try:
@@ -115,7 +118,8 @@ def capture_session(session, seconds=6, out_name="audio"):
     wav = str(root / f"{out_name}.wav"); write_wav(wav, pcm)
     peak = _peak(pcm)
     import hashlib
-    rec = {"session_id": meta["session_id"], "pid": pid, "rom_sha256": meta["rom_sha256"], "sink": sink,
+    rec = {"session_id": meta["session_id"], "captured_at": time.time(),
+           "capture_started_at": capture_started_at, "active_floor": active_floor, "pid": pid, "rom_sha256": meta["rom_sha256"], "sink": sink,
            "moved_sink_inputs": moved, "requested_seconds": seconds, "effective_seconds": round(effective, 3),
            "audio_route": meta["audio_route"], "samples": len(pcm)//2, "peak": peak,
            "wav_sha256": hashlib.sha256(open(wav, "rb").read()).hexdigest(),
@@ -324,6 +328,8 @@ def main():
     ap.add_argument("--session",help="private session ID; sink privado por sessao, fluxo do PID exato")
     ap.add_argument("--seconds", type=int, default=6)
     ap.add_argument("--out", default="audio")
+    ap.add_argument("--active-floor", type=float, default=90,
+                    help="atividade exigida pelo audit_audio; somente SFX usa 5 explicitamente")
     ap.add_argument("--reference-rom",
                     help="ROM historica com som conhecido (controle L048)")
     ap.add_argument("--self-check", action="store_true")
@@ -331,7 +337,7 @@ def main():
     if a.self_check:
         return _self_check()
     if a.session:
-        return capture_session(a.session, a.seconds, a.out)
+        return capture_session(a.session, a.seconds, a.out, a.active_floor)
     if not (a.project and a.rom):
         print("[FAIL] --project e --rom obrigatorios", file=sys.stderr)
         return 3

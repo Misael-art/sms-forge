@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 
 from mugen2sms.converters.sms_cmd import route_command_symbol
+from mugen2sms.generators import fight_runtime_data
 from mugen2sms.generators.fight_runtime_data import render
 
 
@@ -37,6 +38,42 @@ def _manifest(path: Path, delta: int = 0):
                          "lk": "a", "hk": "c"},
             "runtime_constants": dict(CONSTANTS, life=1000 + delta)}
     path.write_text(json.dumps(data), encoding="utf-8")
+
+
+def test_recovery_cli_preserves_existing_output_and_discards_partial_results(tmp_path, monkeypatch):
+    out = tmp_path / "recovery"
+    out.mkdir()
+    existing = out / "p1_scene_manifest.json"
+    existing.write_bytes(b"previous profile")
+    p1 = tmp_path / "p1.json"
+    p2 = tmp_path / "p2.json"
+    args = [
+        "--p1-manifest", str(p1), "--p1-source", "source1", "--p1-def", "p1.def",
+        "--p2-manifest", str(p2), "--p2-source", "source2", "--p2-def", "p2.def",
+        "--scene-header", "scene.h", "--out-dir", str(out),
+    ]
+    staged = []
+
+    def annotate(manifest, _source, _def_name, dest):
+        if manifest == p2:
+            raise ValueError("second slot rejected")
+        dest.parent.mkdir()
+        dest.write_bytes(b"first slot staged")
+        staged.append(dest)
+
+    monkeypatch.setattr(fight_runtime_data, "annotate_hit_timing", annotate)
+    with pytest.raises(SystemExit, match="2"):
+        fight_runtime_data.main(args)
+    assert existing.read_bytes() == b"previous profile"
+    assert not staged
+
+    existing.unlink()
+    out.rmdir()
+    with pytest.raises(ValueError, match="second slot rejected"):
+        fight_runtime_data.main(args)
+    assert len(staged) == 1 and not staged[0].exists()
+    assert not out.exists()
+    assert not list(tmp_path.glob(".hit-timing-*"))
 
 
 def _shared_source_routes():
@@ -529,3 +566,80 @@ def test_runtime_command_generation_fails_closed_when_pattern_is_missing(tmp_pat
 
     with pytest.raises(ValueError, match="missing command pattern P2_CUT_CMD_HP_SIZE"):
         render((p1, p2), scene_header)
+
+
+def _timing(stop_a, stop_d, hittime, guardtime, airtime, source="ground.hittime"):
+    return {
+        "stop_a": stop_a, "stop_d": stop_d, "hittime": hittime,
+        "guardtime": guardtime, "airtime": airtime,
+        "guardtime_source": source, "fidelity": "approximate",
+    }
+
+
+def test_schema_7_emits_per_state_recovery_and_schema_5_stays_compact(tmp_path):
+    p1, p2 = tmp_path / "p1.json", tmp_path / "p2.json"
+    _manifest(p1)
+    _manifest(p2, 100)
+    scene_header = tmp_path / "scene.h"
+    scene_header.write_text(_header(), encoding="ascii")
+    plain, plain_report = render((p1, p2), scene_header)
+    assert "#define FIGHT_RUNTIME_DATA_SCHEMA 5" in plain
+    assert plain_report["schema"] == "sms_fight_runtime_data_v5"
+    assert "{ 65535, P1_CUT_ANIM_PUNCH, S_HIT, 0, 30 }" in plain
+
+    p1_data = json.loads(p1.read_text())
+    p2_data = json.loads(p2.read_text())
+    p1_data["hit_timing"] = {"hp": _timing(16, 16, 21, 21, 20)}
+    p2_data["hit_timing"] = {"hp": _timing(10, 12, 15, 15, 20)}
+    p1.write_text(json.dumps(p1_data), encoding="utf-8")
+    p2.write_text(json.dumps(p2_data), encoding="utf-8")
+
+    output, report = render((p1, p2), scene_header)
+
+    assert "#define FIGHT_RUNTIME_DATA_SCHEMA 7" in output
+    assert report["schema"] == "sms_fight_runtime_data_v7"
+    assert "{ 70, P1_CUT_ANIM_HP, S_HIT, 0, 20, 16, 16, 21, 21, 20 }" in output
+    assert "{ 70, P2_CUT_ANIM_HP, S_HIT, 0, 20, 10, 12, 15, 15, 20 }" in output
+    assert "{ 0, P1_CUT_ANIM_IDLE, S_CONTROL, 0, 0, 0, 0, 0, 0, 0 }" in output
+    assert report["hit_recovery_contract"]["fidelity"] == "approximate"
+    p1_data.pop("hit_timing")
+    p1.write_text(json.dumps(p1_data), encoding="utf-8")
+    with pytest.raises(ValueError, match="both runtime slots"):
+        render((p1, p2), scene_header)
+
+
+def test_hit_recovery_uses_authored_times_and_documented_defaults():
+    from mugen2sms.generators.scene_cut import hit_recovery
+
+    class Param:
+        def __init__(self, name, const):
+            self.name = name
+            self.const = const
+
+    class Hit:
+        source_type = "hitdef"
+        params = [
+            Param("pausetime[0]", 16), Param("pausetime[1]", 16),
+            Param("ground.hittime[0]", 21), Param("air.hittime[0]", 16),
+            Param("guard.hittime[0]", None),
+        ]
+
+    class Later:
+        source_type = "hitdef"
+        params = [Param("ground.hittime[0]", 99), Param("pausetime[0]", 1),
+                  Param("pausetime[1]", 1)]
+
+    class State:
+        controllers = [Hit(), Later()]
+
+    class Character:
+        states = {280: State()}
+
+    timing = hit_recovery(Character(), 280)
+    assert timing["stop_a"] == 16
+    assert timing["stop_d"] == 16
+    assert timing["hittime"] == 21
+    assert timing["guardtime"] == 21
+    assert timing["guardtime_source"] == "ground.hittime"
+    assert timing["airtime"] == 16
+    assert timing["fidelity"] == "approximate"

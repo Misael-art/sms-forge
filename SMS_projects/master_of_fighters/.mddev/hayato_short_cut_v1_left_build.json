@@ -1,0 +1,36 @@
+{
+  "name": "master_of_fighters",
+  "platform": "sega_master_system",
+  "region_target": [
+    "NTSC",
+    "PAL"
+  ],
+  "toolchain": {
+    "compiler": "sdcc>=4.2",
+    "sdk": "devkitSMS",
+    "libs": [
+      "SMSlib",
+      "PSGlib"
+    ],
+    "defines": {
+      "MOF_HAYATO_SAMPLE": 5
+    }
+  },
+  "skeleton_version": 1,
+  "doc_authority": [
+    "doc/10-memory-bank.md",
+    "doc/11-gdd.md",
+    "doc/13-spec-cenas.md",
+    "doc/15-tdd.md"
+  ],
+  "gates": [
+    "build",
+    "resources",
+    "sprite_scanline",
+    "luma_floor",
+    "provenance",
+    "evidence",
+    "claims"
+  ],
+  "specialization": "fighting"
+}

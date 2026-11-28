@@ -1,0 +1,299 @@
+{
+  "artifact_kind": "independent_quality_review",
+  "claim_ceiling": "independent_quality_review_only",
+  "stage": "pre_growth",
+  "requested_stage": "source_single_point_repair_only",
+  "producer": "/root",
+  "reviewer": "/root/jj_shot_art_review",
+  "domains": [
+    "art",
+    "animation"
+  ],
+  "execution_mode": "read_only_single_source_point_addendum",
+  "status": "passed",
+  "request_id": "jj-zillion-single-source-orphan-addendum-v6",
+  "request": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/jj_zillion_proportion_no_fx_addendum_request_v6.json",
+    "sha256": "af453375bb4019622e29a2562e7dda75478d33dc18ede1cab92a144bcc4718c9"
+  },
+  "reviewed_at_utc": "2026-10-30T09:39:18.299557+00:00",
+  "approval_scope": "Closes only v5 B01: isolated source I00pixel(105,99). Reuses unchanged v5 static concept/body/equipment/SMS judgments by exact content. No equivalent broad art review performed; no continuous motion, ROM, human acceptance or production approval.",
+  "artifacts": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/shot_source.png",
+      "sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b",
+      "observed_sha256": "0d4b12d236530063340c59f68b77219e3159940e0413e9cf284d04ddf7a6bf2b"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/native/I00.png",
+      "sha256": "0c5df990c1d35949dbd4256f848a9782d94050355939903f85a1538c68451f70",
+      "observed_sha256": "0c5df990c1d35949dbd4256f848a9782d94050355939903f85a1538c68451f70"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v6/source_assembly.json",
+      "sha256": "fb22604e9aa621fd8edbaa7c28baf67a5e6b6f81d51fed8f267f8cb3fe2ab66b",
+      "observed_sha256": "fb22604e9aa621fd8edbaa7c28baf67a5e6b6f81d51fed8f267f8cb3fe2ab66b"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v6/identity_to_v5.json",
+      "sha256": "64212a29d6239d1605edabab7acd2bcb10c6cd0f1226f9e3a6956d238840381b",
+      "observed_sha256": "64212a29d6239d1605edabab7acd2bcb10c6cd0f1226f9e3a6956d238840381b"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/jj_zillion_proportion_no_fx_independent_review_v5.json",
+      "sha256": "07748eebe4bb42a9cd9c4737ceabd4ac74ae8dc55631b50b5e04d3ae52234144",
+      "observed_sha256": "07748eebe4bb42a9cd9c4737ceabd4ac74ae8dc55631b50b5e04d3ae52234144"
+    }
+  ],
+  "prior_review": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/jj_zillion_proportion_no_fx_independent_review_v5.json",
+    "sha256": "07748eebe4bb42a9cd9c4737ceabd4ac74ae8dc55631b50b5e04d3ae52234144",
+    "preserved_unchanged": true,
+    "original_status": "revise_before_growth",
+    "sole_blocker": "B01sourceI00(105,99)isolatednavypoint"
+  },
+  "conclusion": "B01 is closed for exact sourcev6. Only the isolated index2 pixel becomes transparent0; palette, canvas and every other source index remain exact. The value is bound to an already-transparent sample from the existing ImageGen v5 output. Recomputed idle indices through official functions match the existing SMS output in both facings; no converted visual delta or new runtime profile is introduced.",
+  "closed_defects": [
+    {
+      "id": "B01",
+      "status": "closed_for_exact_source_v6_only",
+      "source_coordinate": [
+        105,
+        99
+      ],
+      "old_index": 2,
+      "new_index": 0,
+      "native_delta_count": 1,
+      "sheet_delta_count": 1,
+      "all_other_source_indices_exact": true,
+      "full_PLTE_exact": true,
+      "canvas_exact": true,
+      "local_visual_inspection": "Viewed repaired160x160I00; the previously detached navy point beside the front knee is absent. No broader visual rerender or review needed for this single-point delta.",
+      "source_component_check": {
+        "tool": "tools/sms_wrapper/audit_sprite_cutout.py",
+        "mode": "components_only",
+        "minimum_opaque_component_px": 4,
+        "connectivity": 8,
+        "result": [],
+        "self_check": "Passed in immediately preceding v5review with unchanged tool; not repeated for this unchanged tool.",
+        "material_regions_status": "pending; separate visual material review reused fromv5"
+      }
+    }
+  ],
+  "sample_provenance": {
+    "raw_generated": {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/raw_generated.png",
+      "sha256": "bd751d55b7c633d37ce3ad841e17e3f3b2028a4db17e2b2272ba7a921a30fc51"
+    },
+    "extraction_recipe": {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/extraction_recipe.json",
+      "sha256": "5a2f7018a3146df996d7d7c7b514521b8f9593d5215692f2acab651a1085a375"
+    },
+    "source_pixel": [
+      105,
+      99
+    ],
+    "nearest_resized_generated_sample": [
+      78,
+      74
+    ],
+    "generated_RGBA_observed": [
+      77,
+      54,
+      84,
+      0
+    ],
+    "alpha_threshold": 128,
+    "observed_generated_alpha": 0,
+    "source_alpha_after": 0,
+    "method": "Independently recropped existing generated raster with declared source rect and same7/30nearest scale; at the corresponding sample alpha is0. This justifies this bounded transparency copy, not permission to paint character pixels by code.",
+    "new_generation_calls_in_addendum": 0
+  },
+  "review_axes": {
+    "source_single_point_cutout": {
+      "status": "pass",
+      "note": "Only reported1pxorphan removed; changed I00passes officialmin4/c8components. Other five source component passes reused by exactSHA."
+    },
+    "preservation_and_binding": {
+      "status": "pass",
+      "note": "NativeI00 and source sheet have exactly one index2→0change at105,99; fullPLTE/canvas/otherindices exact. Other five source paths/SHAs and corrected concept remain the v5inputs."
+    },
+    "other_static_art_axes": {
+      "status": "pass",
+      "note": "Reuse v5 static identity/proportion/grip/equipment/material/anatomy and bothSMSfacing judgments for unchanged pixels only. No second full art review or new artistic conclusion."
+    },
+    "SMS_presentation_content": {
+      "status": "pass",
+      "note": "Both idle outputs independently recomputed using officialload_pose/convert_poses/map_source_indices and declared reflection/canvas; exact indexed equality with v5idlePNG. All14SMSPNGs remain prior-reviewed hashes; fullheaders match identityreceipt."
+    },
+    "continuous_motion": {
+      "status": "needs_evidence",
+      "note": "No continuous playback perceived. Existing pending timing/force/recovery/native equipment-detail judgment stays pending."
+    },
+    "ROM_hardware_owner": {
+      "status": "pending",
+      "note": "No build/emulator/input/ROMpresentation/FPS/VBlank/audio/PAL/owner work by this reviewer. Runtime profile v5 is a coordinator identity choice because output pixels are unchanged; this report does not newly approve runtime or owner acceptance."
+    }
+  },
+  "source_other_five_reused": [
+    {
+      "id": "S01",
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/native/S01.png",
+      "sha256": "b02cf76f671809bde71e3274fda5f0a41cb1fd6345f686a12601cf6f9a15b56c",
+      "prior_components_pass_reused": true
+    },
+    {
+      "id": "S02",
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/native/S02.png",
+      "sha256": "81e3802f9492e7d0b0eda49042188c6fd4652aefb3cac7f86dc5ebae414f3c1f",
+      "prior_components_pass_reused": true
+    },
+    {
+      "id": "S03",
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/native/S03.png",
+      "sha256": "055c78053aaf2d3d25f5947171570ef6d44d676622d2b6b5d65236d4a7275426",
+      "prior_components_pass_reused": true
+    },
+    {
+      "id": "S04",
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/native/S04.png",
+      "sha256": "68bd4ee3ea1743ab1858ea0cfd6297e087cf0ace4c96ab38d866ebfa26b26654",
+      "prior_components_pass_reused": true
+    },
+    {
+      "id": "S05",
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/native/S05.png",
+      "sha256": "083b8ac6aa11dee39569d729c18ec04735cb32a69b752efa2394dad370f3fded",
+      "prior_components_pass_reused": true
+    }
+  ],
+  "concept_and_SMS_reused": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/concept_source.png",
+      "sha256": "e81e0f9cc81b1552ff2ace0e046ecb5c36be00119e6b6f5d60d17a7b17f518e9",
+      "same_as_v5_review": true
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/converted_left/idle.png",
+      "sha256": "20fced105ca07966403021713d165327c7a7890f65228a83a5535d7824d6c6ba",
+      "same_as_v5_review": true
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/converted_left/S01.png",
+      "sha256": "0e118a6dcb0858243ec6f76075bfd65475f921bec4cf97b3fbe32599a1d94381",
+      "same_as_v5_review": true
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/converted_left/S02.png",
+      "sha256": "f977c142c2ffced7f9345a109d6007ca9fd680c72b4f6fba855feadcc78b139a",
+      "same_as_v5_review": true
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/converted_left/S03.png",
+      "sha256": "f7126c3e24cc7f2637b186808ee25b3badd2a1d5bbf74fa259b2f3ad059cae5e",
+      "same_as_v5_review": true
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/converted_left/S04.png",
+      "sha256": "ba6a7cdd5f2b8994623ece82041a184e3e2bb667bf029b8dcac0a50e78e22d61",
+      "same_as_v5_review": true
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/converted_left/S05.png",
+      "sha256": "16b00f081eb1f675355333e3085fc94373f6d7fa2a032ec20393385e3510ad61",
+      "same_as_v5_review": true
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/converted_left/reference.png",
+      "sha256": "eb6f7628f2a8e741afaf5c68ea15887d0a1f298ae642d34df8e7f4237d0d1de4",
+      "same_as_v5_review": true
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/converted_right/idle.png",
+      "sha256": "c86382aa225d742285d1b4ba3ba46926f27fe65979b97ff487a855d3f5b0d39a",
+      "same_as_v5_review": true
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/converted_right/S01.png",
+      "sha256": "fbc8a89b0ea411580f9eac75307f70ada988d438644197da34887f07599f570f",
+      "same_as_v5_review": true
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/converted_right/S02.png",
+      "sha256": "8b6d0616ddf15a456757cb0e14ce7b43156c45176024259cba710ee034c9b48b",
+      "same_as_v5_review": true
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/converted_right/S03.png",
+      "sha256": "580ef96865306397090a4a2d0bcdb5819781add1dca6bad8154ade2cb356f4f5",
+      "same_as_v5_review": true
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/converted_right/S04.png",
+      "sha256": "bf48620b7d7fdff6b6bd4e4147dcb244c49baf4ba74a2333060e4043f403777b",
+      "same_as_v5_review": true
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/converted_right/S05.png",
+      "sha256": "46f99aa4cc16e2ee9f9bfecc0423ac4dded4cb17be2ef5bfa712a8d0010f2155",
+      "same_as_v5_review": true
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/converted_right/reference.png",
+      "sha256": "bc006a2d1ac6ab4482388d07d79faceca6780068b19cde30512dc477a8e2c888",
+      "same_as_v5_review": true
+    }
+  ],
+  "header_and_config_binding": [
+    {
+      "side": "left",
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/converted_left/sample_data.h",
+      "sha256": "68f9dee62318e3c02383a5291b44b2685ae2db618cb206eecbbfaeac57abe1df",
+      "current_config": {
+        "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/.mddev/jj_zillion_single_shot_v6_left.json",
+        "sha256": "45cbef08398f18ba8b079da781e69e83043a17c639797f58afe4a232ed33f11c"
+      },
+      "official_transformed_idle_indices_exact_v5_independently_checked": true,
+      "configuration_changes": "Only first source path and its SHA change; all other settings and five actor/reference source paths and SHAs are identical."
+    },
+    {
+      "side": "right",
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v5/converted_right/sample_data.h",
+      "sha256": "5ef3b093f5a92814e37d825853794f74a86a603fbb25f4a306ae9200c6a9d27f",
+      "current_config": {
+        "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/.mddev/jj_zillion_single_shot_v6_right.json",
+        "sha256": "e42eaddd7893eb78757d05912a51a7ece2dc70f9ba99ec1ac2a91fa8adda69c3"
+      },
+      "official_transformed_idle_indices_exact_v5_independently_checked": true,
+      "configuration_changes": "Only first source path and its SHA change; all other settings and five actor/reference source paths and SHAs are identical."
+    }
+  ],
+  "scene_manifest_scope": {
+    "coordinator_receipt": {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/jj_zillion_single_shot_v6/identity_to_v5.json",
+      "sha256": "64212a29d6239d1605edabab7acd2bcb10c6cd0f1226f9e3a6956d238840381b"
+    },
+    "reported_reused_manifests": 12,
+    "reviewer_generated_or_changed_manifests": 0,
+    "note": "No new converted pixels/configgeometry; existing scene paths are retained. This addendum does not rerun or independently approve SAT/scanline budgets."
+  },
+  "findings": [
+    {
+      "id": "N01",
+      "priority": 2,
+      "domain": "art",
+      "kind": "opportunity",
+      "scope": "NativeSMSgun/handdetail and continuous reading",
+      "summary": "The v5 disclosed target-size simplification and motion-perception limits remain.",
+      "required_delta": "Present the exact source/concept and normal/slow real-ROM media for owner judgment. No automatic enlargement, pose removal, extraFX or equivalent repeated review."
+    }
+  ],
+  "limits": [
+    "Only sourceorphanB01isclosed. Other static passes are reused for exact unchanged content.",
+    "No continuous playback, intention/force/recovery or targetgun-detail acceptance inferred from index equality.",
+    "No source pose/timing/weapon-proportion/material/FX/renderer change in this addendum.",
+    "No emulator/build/ROM/FPS/VBlank/audio/PAL/hardware/owner/production/release approval.",
+    "Only this report written; no crops/assets/config/GDD/memory/ROM/Git edits."
+  ],
+  "next_checkpoint": "Continue the existing runtime-v5 technical evidence and exact media checkpoint; owner temporal/native-size decision remains separate. Do not regenerate or recapture unchanged content to close a source-only transparency delta."
+}

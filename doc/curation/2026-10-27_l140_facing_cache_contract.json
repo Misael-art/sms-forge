@@ -1,0 +1,28 @@
+{
+  "curation_id": "2026-10-27_l140_facing_cache_contract",
+  "date": "2026-10-27",
+  "title": "Face e convenção dos offsets fazem parte da identidade de uma pose residente",
+  "kind": "curation",
+  "scope": "Perfil versus-cut adjacente do consumidor luta_mugem_rev2; não é garantia de todas as composições ou equivalência MUGEN.",
+  "authorization": "O pedido humano autorizou corrigir runtime, conversor, contratos, testes, documentação e memória dentro da evolução da engine.",
+  "lessons": [
+    {
+      "id": "L140",
+      "status": "fechada_com_ferramenta_e_correcao",
+      "lesson": "Patterns, metadados, origem e cache precisam identificar a mesma pose e face; uma face lógica nova não autoriza desenhar a imagem anterior com a geometria da nova.",
+      "root_cause": "O runtime chaveava somente pelo ID de pose. O header antigo de 49 bancos apontava P2 para a primeira face e o corte de 24 bancos apontava para a segunda, sem marca de ABI; a mesma interpretação silenciosa montava peças incorretas.",
+      "evidence": {
+        "rom_sha256": "ad0e148c3b1f12a2981f17b02a8d9fa9f42642137e734d9bb9bcc0422e6a3eea",
+        "emulicious_session": "2356fa5f361a40e5a6c4cd767d839a4e",
+        "blastem_session": "blastem-sms-c646913e95f84f7194ad9c57bee59b45",
+        "observation": "Input real cruzou os atores; nos snapshots posteriores, orientações desejada, residente e submetida convergiram para P1-esquerda/P2-direita. Os 14 spans residentes observados no diagnóstico de mapper coincidiram com a ROM.",
+        "negative": "O header nominal antigo foi recusado no pré-processamento de candidato isolado, sem recibo; teste C cobre metadados/origem por lado e face, cancelamento e descritor fora da página."
+      },
+      "rule_section": "SMS_GLOBAL §132",
+      "tool_that_measures": "mugen2sms/generators/versus_scene_cut.py; build_inner.py; blastem_sms.py; audit_blastem_sms.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/workflows/blastem-sms-diagnostics.md",
+      "measurement_limits": "O contrato gerado confere a estrutura das expressões; a validação do span é por banco e a amostra de runtime é limitada. Não aprova SAT completa, arte, hit visível, fluxo completo, prazo ou hardware."
+    }
+  ],
+  "dedup_key": "l140_versus_adjacent_facing_identity_20261027"
+}

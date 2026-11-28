@@ -1,0 +1,391 @@
+{
+  "schema": "smsforge_game_design_curation_candidate_v1",
+  "id": "mof_auditoria_impacto_sistemas_pipeline_2026-11-21",
+  "dedup_key": "mof-contrato-de-feedback-input-estado-e-producao",
+  "status": "documented_pending_homologation",
+  "owner_project": "SMS_projects/master_of_fighters",
+  "review_path": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-11-21_auditoria_impacto_sistemas_pipeline.md",
+  "scope": {
+    "review_attachments_sha256": [
+      "c438895226ef5f67e6191f6aa322e94e6749765ffb3bded91cf0032ea47c5abd",
+      "40a105f37f7c67ca0e315a176e0794226c490e9858dde71fafc74e44bbfe37b9"
+    ],
+    "pillars": [
+      "V",
+      "VI",
+      "VII",
+      "VIII"
+    ],
+    "reference_build": "Cena 02, b11-r2 de seis leituras",
+    "rom_sha256": "f76fe86f5b3d874a7317c7727f350aa8e750af7a1dba9d85b8d71722c3a126b7",
+    "limits": "Auditoria documental e de código com evidências arquivadas. O anexo orienta perguntas e experimentos. Faixas de tempo, regras competitivas de outros jogos, Training completo e rede dependem de decisão de escopo. Aceites anteriores preservam o recorte próprio."
+  },
+  "findings": [
+    {
+      "id": "contact-hitstop-and-clocks",
+      "pillars": [
+        "V",
+        "VIII"
+      ],
+      "priority": "P0",
+      "owner": "Direção de combate + engenharia + QA",
+      "evidence_ids": [
+        "gdd",
+        "rules",
+        "scene",
+        "stepped",
+        "continuous",
+        "pose_review"
+      ],
+      "gap": "Há contato, atordoamento do defensor, recuo e áudio de diagnóstico. A pausa intencional de impacto, os relógios afetados e a reação publicada não estão provados no duelo.",
+      "disposition": "Fechar em GD02 o evento e a matriz acerto/defesa/erro, relógio lógico, VDP, pose e áudio. Definir o que congela, o que continua e quando o input volta a produzir ação. Usar contraste visual nas posturas e testar atraso de publicação em separado.",
+      "exercise_pass": "Em hit e block, dano/estado, pausa declarada quando autorizada, pose ativa, reação e primeira ação livre correspondem ao evento observado.",
+      "exercise_fail": "Atordoamento de 8/3 ticks, ruído de 6/3 ticks ou congelamento causado por atraso P0/SAT é contado como hitstop."
+    },
+    {
+      "id": "readable-feedback-and-falls",
+      "pillars": [
+        "V"
+      ],
+      "priority": "P1 por família autorizada",
+      "owner": "Direção + animação + QA",
+      "evidence_ids": [
+        "gdd",
+        "repertorio",
+        "motion",
+        "rules",
+        "hayato_timing",
+        "design_review"
+      ],
+      "gap": "Tremor local, faísca por resultado, counter, rastros, lançamento, impacto no solo/parede, bounce, ukemi e wake-up carecem de regra por estado ou prova. O salto de bancada tem física própria e não qualifica reação de dano no ar.",
+      "disposition": "Usar os controles de ataque aceitos. Selar quando há hit, guarda, counter, queda e recuperações autorizadas. Ancorar efeito e som no evento sem comunicar dano, invulnerabilidade ou força não existentes na regra.",
+      "exercise_pass": "A leitura muda conforme evento e preserva pivô e caixas. Caso de queda autorizado prova trajetória, contato com solo e retorno vulnerável no tick definido.",
+      "exercise_fail": "Smear muda a trajetória da katana, tremor arrasta a caixa, faísca aparece no whiff, ou brilho de levantar informa imunidade sem estado correspondente."
+    },
+    {
+      "id": "camera-and-stage-feedback",
+      "pillars": [
+        "V"
+      ],
+      "priority": "P1 após orçamento e função",
+      "owner": "Direção de cena + arte + engenharia VDP",
+      "evidence_ids": [
+        "spec",
+        "tdd",
+        "palette",
+        "scene",
+        "pose_review"
+      ],
+      "gap": "Cenário, contraste e efeitos localizados têm direção. Câmera por distância, impacto, Super e KO, reação ambiental e evolução entre rounds ainda carecem de decisões e provas por recorte.",
+      "disposition": "Escolher a menor resposta visual que comunica o evento. Medir composição, HUD, scroll, P0/P1, SAT, VBlank e restauração com os dois atores. Declarar o que é cenário decorativo e o que interage com o estado.",
+      "exercise_pass": "A câmera ou o cenário reage ao evento que existe, preserva legenda visual e reaparece corretamente em centro, canto e próxima rodada.",
+      "exercise_fail": "Dimming ou shake de P0 apaga partes de atores e HUD, uma pausa por atraso vira slow-motion declarado, ou uma alteração no cenário persiste no round seguinte sem regra."
+    },
+    {
+      "id": "command-grammar-and-resolve",
+      "pillars": [
+        "VI"
+      ],
+      "priority": "P0",
+      "owner": "Proprietário + design de controles + programação + QA",
+      "evidence_ids": [
+        "standing_direction",
+        "repertorio",
+        "commands",
+        "scene",
+        "rules",
+        "motion"
+      ],
+      "gap": "O recorte em pé decide sem buffer/cancel. A precedência com acorde, comandos concorrentes, leniência, SOCD em dois eixos e a resolução simultânea precisam de matriz explícita. O consumidor descarta máscaras com múltiplos normais em sua ramificação padrão.",
+      "disposition": "Separar entrada entregue, sanitização, escolha de comando, consumo e resolvedor de contatos. Registrar regras por modo, postura, face, pressão/soltura e transição de estado. Usar GD01/GD02 para casos pendentes.",
+      "exercise_pass": "Testar n−1/n/n+1, L+R/U+D, soltura escalonada, virada, acorde, recovery, dois candidatos e contato simultâneo, cada qual com estado e decisão observados.",
+      "exercise_fail": "Confundir descarte múltiplo do código com prioridade aprovada, presumir que trade prova clash ou estender uma tolerância de bancada ao perfil em pé."
+    },
+    {
+      "id": "resource-defense-and-anti-abuse",
+      "pillars": [
+        "VI"
+      ],
+      "priority": "P0 para fechar o escopo, P1 para mecânicas autorizadas",
+      "owner": "Proprietário + direção de combate",
+      "evidence_ids": [
+        "gdd",
+        "tdd",
+        "repertorio",
+        "rules"
+      ],
+      "gap": "O medidor comum e um custo de Super têm direção. Ganho, gasto, reset, interação em defesa/canto e regras futuras de escala de combo/juggle não estão fechados no mesmo projeto executável.",
+      "disposition": "Preservar os valores diagnósticos do piloto. Definir o conjunto autorizado e a política por evento. Decidir separadamente se guard cancel, pushblock, guard crush, proration e juggle entram no modo e com que contrajogo.",
+      "exercise_pass": "Recurso saturado e insuficiente, evento repetido, guarda/erro e troca de round produzem uma decisão rastreável. Se houver combo, provar limites e pelo menos uma saída defensiva exercitável.",
+      "exercise_fail": "Um valor de hit/block é herdado de outro jogo, a barra do adversário muda sem evento, ou a presença de chip/pressão em texto é tratada como regra de defesa executada."
+    },
+    {
+      "id": "audio-priority-and-restore",
+      "pillars": [
+        "VII"
+      ],
+      "priority": "P1 com evento-base antes de camada adicional",
+      "owner": "Áudio + engenharia Z80 + QA",
+      "evidence_ids": [
+        "spec",
+        "tdd",
+        "scene",
+        "continuous",
+        "narrative_review"
+      ],
+      "gap": "O PSG da b11-r2 fornece ruído curto para contato. Mix, prioridade/ducking, voz por ação e trilha dinâmica carecem de prova. PCM e cues específicos estão em estudo e parte do escopo depende de FC03/06.",
+      "disposition": "Vincular evento e caráter do som, origem, canal, prioridade, início e encerramento. Definir como som e câmera/HUD comunicam o mesmo resultado. Medir custo e restauração de voz/trilha quando autorizadas.",
+      "exercise_pass": "Hit/guard/whiff distinguíveis com trilha, áudio concorrente e no mudo, sem cortar sinal necessário nem deixar nota presa depois do evento ou da transição.",
+      "exercise_fail": "Pico do gravador é apresentado como mix aprovado ou cue adaptativo muda o ritmo sem condição de saída e verificação de pausa."
+    },
+    {
+      "id": "hud-flow-and-training",
+      "pillars": [
+        "VII",
+        "VIII"
+      ],
+      "priority": "P0 para leitura fiel de estado e retomada",
+      "owner": "Design de interface + programação + QA",
+      "evidence_ids": [
+        "spec",
+        "tdd",
+        "scene",
+        "showcase",
+        "replay"
+      ],
+      "gap": "HUD de diagnóstico mostra duas barras quantizadas. Eventos de callout, perfil de rematch e Training do jogador ainda pedem escopo e prova. Cena 10 tem direção de showcase e a gravação de QA permanece uma prova do host.",
+      "disposition": "Ligar apresentação a valores do estado com precisão compatível com o recorte. Definir timer, resultado, recurso, callout e ação legal. Orçar rematch/seleção com reset de entrada, áudio, objetos e modo. Se Training for autorizado, reaproveitar o reconhecedor e distinguir input gravado, comando e estado observado.",
+      "exercise_pass": "Aferir mudança em dano pequeno, clareza de barras e primeiro comando após rematch. No treinamento aprovado, replay de dummy e boxes observadas usam o mesmo tick e geometria da luta.",
+      "exercise_fail": "Um hit de seis pontos pode passar visualmente despercebido na barra e o piloto é declarado HUD suficiente, ou o replay de QA é vendido como dummy/controlador implementado."
+    },
+    {
+      "id": "cpu-observation-and-reaction",
+      "pillars": [
+        "VII"
+      ],
+      "priority": "P1 após ações e leitura do risco fechadas",
+      "owner": "Direção de jogo + programação + QA",
+      "evidence_ids": [
+        "gdd",
+        "spec",
+        "scene"
+      ],
+      "gap": "A spec pede CPU sem consulta ao input adversário. O duelo b11-r2 usa dois controles. Janela de percepção, reação, decisão, erro e agressividade por dificuldade ainda pedem prova.",
+      "disposition": "Definir observação permitida, cadência e escolha do comando por estado. Separar reação de política de dificuldade, dano e progressão de História. Medir estímulo, intenção, entrada de CPU e resultado.",
+      "exercise_pass": "Com estado observável e semente iguais, entradas ocultas distintas mantêm a mesma decisão da CPU até produzirem diferença perceptível.",
+      "exercise_fail": "A CPU defende antes da primeira pista disponível ou só se diferencia por vida aumentada."
+    },
+    {
+      "id": "deterministic-core-and-optional-state-restore",
+      "pillars": [
+        "VIII"
+      ],
+      "priority": "P0 para teste determinístico local",
+      "owner": "Engenharia de runtime + QA",
+      "evidence_ids": [
+        "scene",
+        "rules",
+        "probe",
+        "replay",
+        "stepped",
+        "continuous"
+      ],
+      "gap": "Há iteração lógica, contador VDP e sonda pós-publicação. O agendamento de apresentação dilata a cadência observada. O replay confere contatos ordenados, sem provar estado idêntico por tick. A sonda é observação e o estado de restauração ainda não está contratado.",
+      "disposition": "Fixar timesteps e relógios por subsistema. Comparar partitura de entrada em ticks lógicos a partir do mesmo estado e localizar a primeira divergência por digest/evento. Tratar serialização, restauração e rollback como decisão separada de escopo e orçamento.",
+      "exercise_pass": "Duas execuções locais com mesma configuração, entrada canônica e semente quando houver têm estado autoritativo igual por tick e evidência própria de render, áudio e cadência funcional.",
+      "exercise_fail": "Igualdade de `same_contacts`, do placar final ou do título do emulador é apresentada como determinismo, snapshot ou cumprimento do piso."
+    },
+    {
+      "id": "sprite-anchor-and-palette-roles",
+      "pillars": [
+        "V",
+        "VIII"
+      ],
+      "priority": "P0 antes de promover arte derivada",
+      "owner": "Arte + engenharia VDP + revisão",
+      "evidence_ids": [
+        "palette",
+        "pose_review",
+        "design_review",
+        "scene",
+        "rules"
+      ],
+      "gap": "Há paleta indexada e referências de pivô. Falta vínculo obrigatório de escala/material/face e âncora física e publicada. As paletas autorais não são tabelas independentes por jogador. Parte dos pixels de ator usa P0 no piloto.",
+      "disposition": "Manter uma âncora do ator em coordenadas do mundo e offsets por pose. Registrar papéis de cor por material, P0/P1 e cenário. Aprovar alternativas viáveis para espelho ou P1/P2 pelo mesmo comparativo e limite do VDP quando entrarem no recorte.",
+      "exercise_pass": "Baixar, atacar, recuperar e virar conservam origem, pés de apoio e equipamento com box na fase certa. Duas faces e o caso de paletas alternativas autorizado passam juntos com HUD/FX.",
+      "exercise_fail": "Redimensionamento por pose troca o pivô, remapeamento apaga a rampa de material, ou a divisão em planos deixa parte do ator em outra cor ao escurecer o fundo."
+    },
+    {
+      "id": "frame-data-and-collision-authority",
+      "pillars": [
+        "VIII",
+        "VI"
+      ],
+      "priority": "P0 antes de depender de editor ou HUD de treino",
+      "owner": "Design de combate + programação + arte + QA",
+      "evidence_ids": [
+        "tdd",
+        "repertorio",
+        "scene",
+        "rules",
+        "pose_review"
+      ],
+      "gap": "A ficha descreve função e janelas, e o C traz retângulos e limites. Falta ligação executável por ID e fase da tabela revisada à regra, arte e overlay; gap mínimo do piloto ainda não é pushbox por postura.",
+      "disposition": "Reusar a fonte de dados aprovada no consumidor e no overlay diagnóstico. Declarar unidades, espelho, intervalos, política de contato, vulnerabilidade, push e cancel pelo resultado. Um editor é opcional após fechar contratos e teste de ida e volta.",
+      "exercise_pass": "Antes/primeiro/último ativo e primeiro livre conferem com a regra no mesmo relógio; espelho e teste de um pixel além dão o mesmo resultado esperado em ambos os lados e no canto.",
+      "exercise_fail": "Uma caixa desenhada no overlay diverge da efetivamente testada, ou uma tabela paralela do viewer vira fonte de frame data e cancel para o combate."
+    }
+  ],
+  "future_curation": {
+    "status": "queued_not_homologated",
+    "workflows": [
+      "playable-fighter.md",
+      "art-review.md",
+      "product-quality-checkpoint.md",
+      "curation-learning.md"
+    ],
+    "agents": [
+      "sms-game-director.md",
+      "sms-pixel-engineer.md",
+      "sms-audio-engineer.md",
+      "sms-hardware-budget-guardian.md",
+      "sms-qa-emulator-tester.md"
+    ],
+    "skills": [
+      "sms-fight-input-proof.md",
+      "sms-recipe-animacao-impacto.md",
+      "sms-sprite-animation.md",
+      "sms-state-transitions.md",
+      "sms-gameplay-experience-review.md",
+      "sms-psg-audio.md",
+      "sms-vram-vblank-budget.md",
+      "sms-observed-case-evidence.md"
+    ],
+    "existing_checks": [
+      "audit_animation_contract.py",
+      "audit_observed_cases.py",
+      "audit_render_glitch.py",
+      "audit_sprite_line_sim.py",
+      "measure_worst_frame.py",
+      "measure_runtime_probe.py",
+      "audit_deterministic_boot.py"
+    ],
+    "promotion_condition": "Ligar decisão, caso de prova e consumidor oficial. Exercitar controles positivos e negativos com o mesmo SHA por eixo. Registrar escopo aprovado, ausências deliberadas e homologação do proprietário antes de tornar as propostas canônicas."
+  },
+  "evidence": [
+    {
+      "id": "gdd",
+      "path": "SMS_projects/master_of_fighters/doc/11-gdd.md",
+      "sha256": "73f5e7a017b9298dcf6797a803350ed4002a114f4e34105b9df7d2c0e7b79035",
+      "role": "Direção, escopo e decisões pendentes GD01–GD07"
+    },
+    {
+      "id": "spec",
+      "path": "SMS_projects/master_of_fighters/doc/13-spec-cenas.md",
+      "sha256": "a68c665bb6eb663c6c585a082b8762e1c555441c33f08aef06685e766f88010e",
+      "role": "Cenas, CPU, interface e critérios de prova"
+    },
+    {
+      "id": "tdd",
+      "path": "SMS_projects/master_of_fighters/doc/15-tdd.md",
+      "sha256": "b966453f4043a403fcbb41138962f21ec89361a2f18f1d33d540b041d5eadb0e",
+      "role": "Contrato de implementação e estados, orçamento e fonte de dados"
+    },
+    {
+      "id": "repertorio",
+      "path": "SMS_projects/master_of_fighters/doc/repertorio_alis_hayato.md",
+      "sha256": "3974a733a29c56978d1d69ca57a7269b39fe46b9a7bd3db9b8e6862daecc3ad0",
+      "role": "Normais, movimentos e proposta de estados do par"
+    },
+    {
+      "id": "standing_direction",
+      "path": "SMS_projects/master_of_fighters/doc/decisions/alis-hayato-standing-normals_owner_20261119.json",
+      "sha256": "a7de1a9b7b77e0e93ece10c05945b6e4b730f916a9b056f2a46d7b14b5554699",
+      "role": "Escopo de quatro normais em pé e regra de buffer e cancel"
+    },
+    {
+      "id": "scene",
+      "path": "SMS_projects/master_of_fighters/src/duel_scene02.c",
+      "sha256": "da9a599a1568c413c3522065d1a8bad5329abce241087b120b1c63039036f4f4",
+      "role": "Consumidor auditado de combate, pose, input, HUD e PSG"
+    },
+    {
+      "id": "rules",
+      "path": "SMS_projects/master_of_fighters/src/duel_rules.c",
+      "sha256": "72b6a3638e19b7c813f11c20bed8a71374e060cb8c1005e4f27d52b8df15d0e6",
+      "role": "Colisão, estados, janelas e recuo do duelo"
+    },
+    {
+      "id": "commands",
+      "path": "SMS_projects/master_of_fighters/src/duel_commands.c",
+      "sha256": "791382c283dcae8d10fc504b96fe7d5334cb559836512ea6af5d5fe445a4e79f",
+      "role": "Reconhecedor e máscara de comando"
+    },
+    {
+      "id": "motion",
+      "path": "SMS_projects/master_of_fighters/src/duel_motion.c",
+      "sha256": "b3f70869995277809291ec41746e186502eb5beaa9681a31fb4d3e5965a7b3f2",
+      "role": "Perfil de movimento, postura e aterrissagem em bancada"
+    },
+    {
+      "id": "probe",
+      "path": "SMS_projects/master_of_fighters/inc/duel_probe.h",
+      "sha256": "e827a1c4c974de0819aa2e82f584f5ee2e2c1e70cbe4f4b6d32965006620ca27",
+      "role": "Formato MFD1 de observação"
+    },
+    {
+      "id": "replay",
+      "path": "SMS_projects/master_of_fighters/tools/replay_duel_round.py",
+      "sha256": "f28b37cce9b8da3ec25c4fcf1da200a80cdc43570835078bf9cd1159d4b5a38c",
+      "role": "Reconstrução de entrada e comparação dos contatos no host"
+    },
+    {
+      "id": "stepped",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/scene02-actions-qa6-b11-r2/6-round/round-completo.json",
+      "sha256": "7ee88c251f966c7163e4bdd5beb947cbe5db487a9998e8271d30ad0e89f93df3",
+      "role": "Ordem por VDP, tempos de contato e pior quadro amostrado"
+    },
+    {
+      "id": "continuous",
+      "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/scene02-actions-continuous6-b11-r2-v2/6-continuous/round-continuo.json",
+      "sha256": "ad343477bc223e8253bbd0c3210694910a9eaa656276b599f089432129faef68",
+      "role": "Contatos, cadência e captação de áudio da execução contínua"
+    },
+    {
+      "id": "palette",
+      "path": "SMS_projects/master_of_fighters/doc/palette_runtime_contract_v1.json",
+      "sha256": "0cc83b7d78afb858cced1b44725241a659809db6ee3955067d97760b226aecfb",
+      "role": "Papéis de paleta e mapeamento do elenco em aberto"
+    },
+    {
+      "id": "hayato_timing",
+      "path": "SMS_projects/master_of_fighters/doc/decisions/hayato-short-cut-timing-only_owner_approval.json",
+      "sha256": "a23cc829d5352dd7f1fcb9c1bfef41a21a343db748ae370e49990bce0afb92d0",
+      "role": "Aceite recortado de desenho e timing do corte sem distorção de arma"
+    },
+    {
+      "id": "showcase",
+      "path": "SMS_projects/master_of_fighters/doc/character_move_showcase_standard_v1.md",
+      "sha256": "60986c049dd953534f7366ded66d2ab9fce37dd5509a033e2a7e5bdeb1a508ce",
+      "role": "Proposta autorizada de demonstração e prática da Cena 10"
+    },
+    {
+      "id": "pose_review",
+      "path": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-11-21_scene02_identidade_por_pose.md",
+      "sha256": "0e26355a884368acb6f3a20caa6c5d65efe7954453855e0e174ef19d6e1a6740",
+      "role": "Divergências de arte, posição e publicação por camada"
+    },
+    {
+      "id": "design_review",
+      "path": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-11-21_auditoria_direcao_personagens.md",
+      "sha256": "5d5cda95513dffa490222543b755194001393cc326b854bb8b5a308154043cef",
+      "role": "Auditoria anterior da direção, frames e estados de reação"
+    },
+    {
+      "id": "narrative_review",
+      "path": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-11-21_auditoria_narrativa_e_cenas.md",
+      "sha256": "d52ffce7f6fdcd40042939eb8253b07284fa6577b85f921cf2d082c7a0de6b8b",
+      "role": "Restauração áudio/visual e diferenças de escopo na transição narrativa"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "scope": "factory maintenance; no new game runtime validation",
+  "initial_run": "validation_initial.json",
+  "reason_for_rerun": "Pillow compatibility fix, missing selftest coverage, clarified historical demand; preserved initial failures",
+  "checks": [
+    {
+      "check": "selftest",
+      "args": [
+        "selftest.py"
+      ],
+      "exit_code": 0,
+      "seconds": 13.82,
+      "log": "doc/curation/evidence/2026-10-27_production_capability/selftest_final.log",
+      "sha256": "f1629565038c6fc035d8755f4413ca11aee8bfaa5d298e870244ab4c75a560ff"
+    },
+    {
+      "check": "measurement_tools",
+      "args": [
+        "validate_measurement_tools.py",
+        "--json",
+        "doc/curation/evidence/2026-10-27_production_capability/measurement_tools_final.json"
+      ],
+      "exit_code": 0,
+      "seconds": 8.36,
+      "log": "doc/curation/evidence/2026-10-27_production_capability/measurement_tools_final.log",
+      "sha256": "7a9f2dbce024c61e0affb73d51d8f0c14a2fad448b3d8e52e7931226f44ce4ae"
+    },
+    {
+      "check": "mastery_registry",
+      "args": [
+        "audit_mastery_registry.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.05,
+      "log": "doc/curation/evidence/2026-10-27_production_capability/mastery_registry_final.log",
+      "sha256": "7edd93b72b91ad89d1ca2010d6f4d41445e8d1b92ad3c62a894cb7cce76b92be"
+    },
+    {
+      "check": "doc_sync",
+      "args": [
+        "audit_doc_sync.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1,
+      "log": "doc/curation/evidence/2026-10-27_production_capability/doc_sync_final.log",
+      "sha256": "6867943f29076df5b887dd0df23bd041ce83a8c9eef59b6748019c36309e49a4"
+    },
+    {
+      "check": "learning_capture",
+      "args": [
+        "audit_learning_capture.py",
+        "--root",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.22,
+      "log": "doc/curation/evidence/2026-10-27_production_capability/learning_capture_final.log",
+      "sha256": "9561d5d3e6c2fcfecd7c1b4d11f8b64b4858b2e97a2f990b9441b25ecd6433f3"
+    },
+    {
+      "check": "hardware",
+      "args": [
+        "audit_hardware_constants.py"
+      ],
+      "exit_code": 0,
+      "seconds": 1.58,
+      "log": "doc/curation/evidence/2026-10-27_production_capability/hardware_final.log",
+      "sha256": "ba033a684393ce6caa9f4994e167b9037452d706665eb42895273f2f792492c2"
+    }
+  ],
+  "complete": true,
+  "all_passed": true
+}

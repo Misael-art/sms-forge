@@ -11,20 +11,35 @@ build + evidência de emulador em algum projeto (`doc/curation/` promove).
 > Escada de proficiência: `mapped → incorporada → reproduzível → emulador_provado → default_senior`.
 > O nível real de cada técnica está no registry JSON; aqui ficam o conteúdo e a nota dura.
 
+Reconciliação 2026-10-27: 32 níveis acima de `mapped` tinham somente prosa
+como evidência. Foram preservados em `legacy_claim` e voltaram a `mapped`
+até reindexação. Isso não refuta as provas históricas nas curadorias.
+
+O campo `evidence` de um nível promovido é um objeto com `scope` não vazio
+e `artifacts`: lista de `{path, kind, sha256}`. Paths são relativos à raiz
+do checkout, sem escape, e hashes são SHA-256 completos dos arquivos.
+`incorporada` exige papéis `source` e `build`; `reproduzivel` acrescenta
+`recipe`; `emulador_provado` e `default_senior` acrescentam `rom`, `media`
+e `report`. O relatório é JSON com `rom_sha256` igual à ROM citada e
+`session_id` não vazio. Cada arquivo tem um papel e path únicos. O auditor
+verifica integridade e associação declarada; não autentica execução, não
+julga a mídia e não certifica domínio universal. A promoção continua sujeita
+à revisão do escopo e às regras de emulador; prova histórica não aprova build nova.
+
 ## 1. VDP / tiles BG
 | # | Técnica | Nota dura |
 |---|---------|-----------|
 | V01 | Grid 8×8, pattern table 32 bytes/tile | name table = entrada 16-bit com flags flip/paleta/prioridade (probe `pnt_16bit`, L069) |
 | V02 | Metatile 16×16 via camada de índices | economiza name table e lógica de colisão |
-| V03 | Scroll global X/Y (regs) + trava 1ª coluna | sem scroll fino por linha nativo |
+| V03 | Scroll global X/Y (regs) + trava 1ª coluna | X pode variar por line IRQ; Y é lido por frame (§122) |
 | V04 | Line interrupt para split de scroll/raster | jitter de Z80: medir estabilidade em evidência |
 | V05 | Modos estendidos 224/240 linhas | PAL/alguns SMS2; contrato por projeto |
 | V06 | Backdrop color como "índice 0 global" | fade = recarga de paleta |
 | V07 | Padrão de tilemap comprimido (STM/ZX7) | descompressão custa CPU fora do frame |
 
 ## 2. Sprites
-| S01 | SAT 64 entradas; terminador Y=0xD0 | escrever 0xD0 cedo corta processamento |
-| S02 | Máximo 8 sprites/scanline | excesso descartado; SMS1 corrompe display |
+| S01 | SAT 64 entradas; terminador Y=0xD0 | terminador somente no modo 192 linhas (§118) |
+| S02 | Máximo 8 sprites/scanline | primeiras 8 entradas elegíveis; transparência não libera slot (§119) |
 | S03 | Tamanho global **8×8 ou 8×16** (+ zoom ×2 → 16×16 / 16×32) | misturar tamanhos é impossível. **Correção 2026-08-31 (L006):** esta linha dizia "8×8 ou 16×16" e induziu o erro; `SPRITEMODE_TALL` é **8×16**, e o zoom dobra o PIXEL, não a arte. Arte 16×16 exige metasprite. Gate: `audit_sprite_mode.py` |
 | S04 | Metasprites (SMS_addMetaSprite) | composição de tiles por entidade |
 | S05 | X é armazenado **sem offset**: X=0 desenha na borda esquerda | **Corrigido 2026-09-01 (L003):** dizia "X+32 / X<32 esconde" — herança do Mega Drive, REFUTADA em emulador (probe `_laboratorio/early_clock`) |
@@ -35,7 +50,7 @@ build + evidência de emulador em algum projeto (`doc/curation/` promove).
 | P01 | 2 subpaletas ×16; BG índice 0 visível, sprite índice 0 transparente | até 16 entradas BG + 15 entradas opacas de sprite; cores distintas dependem da paleta da cena |
 | P02 | Cor = código 6-bit (canais 0–3); paleta mestra fixa | sem gradiente suave; fade = troca de paleta |
 | P03 | Contraste medido em degraus (luma derivada dos códigos) | gate audit_luma_floor.py |
-| P04 | Half-brightness / color add/sub do SMSlib | efeitos sem alpha (não existe alpha) |
+| P04 | Half-brightness / color add/sub do SMSlib | transformação de paleta por software; não é blend por pixel do VDP |
 | P05 | Ciclos de paleta sincronizados ao VBlank | senão meia paleta velha numa scanline |
 
 ## 4. VRAM / orçamento de frame (sem DMA!)
@@ -56,7 +71,7 @@ build + evidência de emulador em algum projeto (`doc/curation/` promove).
 
 ## 6. Banking / ROM
 | B01 | 48KB linear máximo sem mapper | primeiro alvo de qualquer jogo |
-| B02 | Mapper Sega: páginas 16KB, slots 0x4000/0x8000 (FFFE/FFFF) | slot 0x0000 fixo pág 0 |
+| B02 | Mapper Sega: slots via FFFD/FFFE/FFFF | apenas 0x0000–0x03FF fixo; política de código em sms-banking-header.md |
 | B03 | Header SEGA em 0x7FF0 ("TMR SEGA"+checksum+região) | makesms calcula checksum |
 | B04 | Código restrito a 32KB; dados bancados desde bank2 | convenção devkitSMS |
 | B05 | SRAM via registro 0xFFFC (frame reg) | saves: provar em cartucho/emulador |

@@ -79,7 +79,7 @@ def audit(project, contract, delivery=False):
     expected = {"console": "SMS", "canvas": [256, 192], "sprite_mode": "8x16",
                 "sat_entries": 64, "sprites_per_line": 8, "ram_bytes": 8192,
                 "vram_bytes": 16384, "bank_bytes": 16384, "mapper": "sega",
-                "fighter_height_ratio": [0.45, 0.55], "rom_capacity_target_bytes": 1048576}
+                "rom_capacity_target_bytes": 1048576}
     for key, value in expected.items():
         if target.get(key) != value:
             problems.append("target divergente/ausente: " + key)
@@ -88,7 +88,42 @@ def audit(project, contract, delivery=False):
         problems.append("combat_height_px deve declarar área útil entre 128 e 192")
         height = None
     else:
-        height = [math.ceil(useful * .45), math.floor(useful * .55)]
+        height = None
+    scale_profile = target.get("fighter_scale_profile", "fighter_scale")
+    if scale_profile == "fighter_scale":
+        if target.get("fighter_height_ratio") != [0.45, 0.55]:
+            problems.append("target divergente/ausente: fighter_height_ratio")
+        if type(useful) is int and 128 <= useful <= 192:
+            height = [math.ceil(useful * .45), math.floor(useful * .55)]
+    elif scale_profile == "pose_budget":
+        policy = target.get("pose_budget")
+        if not isinstance(policy, dict):
+            problems.append("pose_budget exige contrato de escala e GDD")
+        else:
+            for key in ("framebuffer_x", "framebuffer_y", "extra_scale"):
+                ratio = policy.get(key)
+                if (not isinstance(ratio, list) or len(ratio) != 2 or
+                    any(type(v) is not int for v in ratio) or
+                    not 0 < ratio[0] <= ratio[1]):
+                    problems.append("pose_budget exige fracao positiva e limitada: " + key)
+            columns = policy.get("idle_max_columns")
+            if type(columns) is not int or not 1 <= columns <= 8:
+                problems.append("pose_budget exige idle_max_columns entre 1 e 8")
+            gdd = policy.get("gdd")
+            try:
+                if not isinstance(gdd, dict) or gdd.get("path") != "doc/11-gdd.md":
+                    raise ValueError("fonte deve ser doc/11-gdd.md")
+                data = local_file(project, gdd["path"]).read_bytes()
+                if not data.decode("utf-8").strip():
+                    raise ValueError("GDD vazio")
+                if hashlib.sha256(data).hexdigest() != gdd.get("sha256"):
+                    raise ValueError("hash do GDD divergente")
+            except (OSError, ValueError, TypeError) as exc:
+                problems.append("pose_budget sem GDD vinculado: " + str(exc))
+        if target.get("fighter_height_ratio") is not None:
+            problems.append("pose_budget nao deve afirmar faixa fighter_scale")
+    else:
+        problems.append("perfil de escala desconhecido")
     if contract.get("scale_policy") != "uniform_per_character_scene_contract":
         problems.append("escala exige contrato uniforme por personagem/cena")
     if contract.get("legacy_profile_delivery_allowed") is not False:
@@ -154,6 +189,9 @@ def audit(project, contract, delivery=False):
     return {"schema": "sms_mugen_engine_contract_audit_v1",
             "status": "blocked" if problems else "contract_pass",
             "mode": "delivery_contract" if delivery else "planning",
+            "fighter_scale_profile": scale_profile,
+            "fighter_scale_contract": (target.get("pose_budget") if scale_profile == "pose_budget"
+                                       else {"height_ratio": target.get("fighter_height_ratio")}),
             "fighter_idle_opaque_height_target_px": height,
             "makesms_bank_merges": merge_count,
             "makesms_bank_merge_limit": MAKESMS_MAX_MERGES,
@@ -173,6 +211,22 @@ def self_check():
         assert audit(root, m)["problems"]
         m = copy.deepcopy(c); m["legacy_profile_delivery_allowed"] = True
         assert audit(root, m)["problems"]
+        (root / "doc").mkdir()
+        gdd = root / "doc/11-gdd.md"
+        gdd.write_text("GDD: pose_budget e escala uniforme", encoding="utf-8")
+        pose = copy.deepcopy(c)
+        pose["target"].update(fighter_scale_profile="pose_budget", fighter_height_ratio=None,
+                              pose_budget={"framebuffer_x": [2, 3], "framebuffer_y": [6, 7],
+                                           "extra_scale": [2, 3], "idle_max_columns": 4,
+                                           "gdd": {"path": "doc/11-gdd.md", "sha256": sha(gdd)}})
+        pose_report = audit(root, pose)
+        assert not pose_report["problems"] and pose_report["fighter_idle_opaque_height_target_px"] is None
+        bad = copy.deepcopy(pose); bad["target"]["pose_budget"]["extra_scale"] = [2, 0]
+        assert audit(root, bad)["problems"]
+        bad = copy.deepcopy(pose); bad["target"]["fighter_height_ratio"] = [0.45, 0.55]
+        assert audit(root, bad)["problems"]
+        gdd.write_text("GDD alterado", encoding="utf-8")
+        assert any("hash do GDD" in p for p in audit(root, pose)["problems"])
         (root / ".mddev").mkdir()
         project_manifest = root / ".mddev/project.json"
         project_manifest.write_text(json.dumps({"toolchain": {

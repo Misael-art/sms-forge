@@ -51,3 +51,14 @@ significa aprovação artística ou prova de gameplay.
 `session_bridge/acceptance.py` é a prova de integração com duas ROMs. O
 selftest cobre vínculos válidos, ROM trocada e captura preta. Fixtures offline
 não substituem a prova em emulador nem sustentam gameplay/AAA.
+
+## Conciliação explícita da build e da sessão
+
+Use o recibo correspondente à ROM, inclusive candidata. Depois da captura
+publicada pela sessão, `reconcile_claims.py --project PROJETO --build-record
+RECIBO --current-rom ROM --session ID` consome esse bundle e os sidecars de
+áudio na raiz privada. Para FPS, selecione `--evidence-dir DIRETORIO` contendo
+`fps.json` emitido pelo medidor (usar `--out fps`); o session ID precisa conferir.
+Isso reporta suporte, não promove eixos nem sobrescreve a nominal. Sem mídia
+correspondente, o eixo continua sem suporte. Projeções OpenBOR usam seu
+consumidor selado, não booleanos históricos ou WAVs soltos.

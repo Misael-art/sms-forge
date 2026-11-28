@@ -12,8 +12,8 @@
 | RAM | 8 KB |
 | Sprites por scanline | 8 |
 | Sprites na SAT | 64 |
-| Subpaletas | 2 × 16 (índice 0 transparente nas duas) |
-| Cores úteis simultâneas | 30 |
+| Subpaletas | 2 × 16 entradas. No BG, o índice 0 é visível. Nos sprites, o índice 0 de P1 é transparente. |
+| Cores da cena | Registrar a ocupação de P0/P1 por cenário, atores, HUD e efeitos na composição real. |
 | Janela VBlank | ~4.5 ms (NTSC) — **não existe DMA** |
 | ROM sem mapper | 48 KB |
 
@@ -47,4 +47,6 @@ cross-check de reg5/reg6 citados aqui (L133, §124).
 _(rodar `audit_sprite_line_sim.py` sobre o manifesto da cena e citar o pico real)_
 
 ### fps observado
-_(rodar `measure_fps.py`; ≥5 amostras, todas 50–60. Citar o JSON.)_
+_(rodar `measure_runtime_probe.py --session ID`; ≥2 janelas, objetivo60/piso58,
+dispersão≤2, sem arredondar para atingir o piso, conforme SMS_GLOBAL §133.
+Título do emulador não fecha o eixo. Citar JSON/SHA e casos funcionais.)_

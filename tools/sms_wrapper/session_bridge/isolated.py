@@ -31,6 +31,9 @@ SUPPORTED_JAR = "db185a1ed0af3bdab5ebdeb254612d02d3848bac155dbc89333d1b04e21c371
 DEFAULT_ROOT = Path(f"/tmp/smsforge-{os.getuid()}")
 BUTTONS = {"up": 1, "down": 2, "left": 4, "right": 8, "1": 16, "2": 32}
 
+# Child handles belong only to this Python process, never to discovered sessions.
+_OWNED_SUPERVISORS = {}
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
@@ -75,7 +78,7 @@ def build_bridge(ecj=None):
         if classes.exists(): shutil.rmtree(classes)
         classes.mkdir()
         compiler = shutil.which("javac")
-        if compiler:
+        if compiler and not ecj:
             command = [compiler, "--release", "17"]
         elif ecj:
             # Some distro runtimes omit release metadata. The private view
@@ -115,14 +118,17 @@ def load(session):
         raise RuntimeError("session path identity mismatch")
     return root, meta
 
-def start(rom, xvfb=None, ecj=None, ttl=1800, enable_audio=True):
+def start(rom, xvfb=None, ecj=None, ttl=1800, enable_audio=True, *, sms_fm=None):
+    if sms_fm is not None and type(sms_fm) is not bool:
+        raise ValueError("sms_fm must be a boolean or None")
     rom = Path(rom).resolve()
     if not rom.is_file() or rom.suffix.lower() != ".sms": raise ValueError("existing .sms ROM required")
     for binary in ("java", "bwrap"):
         if not shutil.which(binary): raise RuntimeError(f"{binary} required; no desktop fallback")
     runtime = WORKSPACE / "out/session_bridge/runtime"
     xvfb = xvfb or shutil.which("Xvfb") or (str(runtime / "xvfb/usr/bin/Xvfb") if (runtime / "xvfb/usr/bin/Xvfb").is_file() else None)
-    ecj = ecj or (str(runtime / "ecj.jar") if (runtime / "ecj.jar").is_file() else None)
+    if ecj is None and not shutil.which("javac") and (runtime / "ecj.jar").is_file():
+        ecj = runtime / "ecj.jar"
     if not xvfb or not Path(xvfb).is_file(): raise RuntimeError("Xvfb required; no desktop fallback")
     bridge = build_bridge(ecj)
     if ttl < 10 or ttl > 7200: raise ValueError("session TTL must be 10..7200 seconds")
@@ -136,18 +142,25 @@ def start(rom, xvfb=None, ecj=None, ttl=1800, enable_audio=True):
         shutil.copy2(EMULATOR / name, root / "emulator" / name)
     shutil.copy2(bridge, root / "emulator/bridge.jar")
     shutil.copy2(HERE / "ForgeSMS.java",root / "emulator/ForgeSMS.java")
+    source_sha = sha(rom)
     shutil.copy2(rom, root / "emulator/rom.sms")
+    if source_sha != sha(rom) or source_sha != sha(root / "emulator/rom.sms"):
+        atomic(root / "session.json", {"schema": 1, "session_id": sid, "root": str(root),
+               "state": "failed", "error": "ROM changed during session preparation",
+               "created_at": time.time(), "source_rom": str(rom), "rom_sha256": source_sha})
+        raise RuntimeError("ROM changed during session preparation; no emulator launched")
     # Empty, intentional configuration: never inherit shared mappings,
     # recent ROMs, cheats, SRAM or debugger settings from another agent.
     config = root / "emulator/Emulicious.ini"
     config.write_text("Update=0\nAudioSync=false\nScale=1\nFrameskip=0\nDisableFrameBlending=true\n"
                       "DisableHardwareAcceleration=true\nOpenMostRecentOnStartup=false\n"
                       "SMSInputDeviceA=1\nSMSInputDeviceB=1\nScreenshotCropBorders=true\n"
-                      "SMSGamepadAKeyboard=false\nSMSGamepadBKeyboard=false\nKeyboardRequireWindowFocus=true\n")
+                      "SMSGamepadAKeyboard=false\nSMSGamepadBKeyboard=false\nKeyboardRequireWindowFocus=true\n"
+                      + ("" if sms_fm is None else f"SMSFM={str(sms_fm).lower()}\n"))
     (root / "token").write_text(secrets.token_hex(32) + "\n"); (root / "token").chmod(0o600)
     auth_file(root / "Xauthority")
     meta = {"schema": 1, "session_id": sid, "root": str(root), "state": "created",
-            "created_at": time.time(), "source_rom": str(rom), "rom_sha256": sha(rom),
+            "created_at": time.time(), "source_rom": str(rom), "rom_sha256": source_sha,
             "emulator_sha256": sha(root / "emulator/Emulicious.jar"),
             "bridge_sha256": sha(root / "emulator/bridge.jar"), "bridge_source_sha256": sha(HERE / "ForgeSMS.java"),
             "config_initial_sha256": sha(config), "xvfb": str(Path(xvfb).resolve()),
@@ -157,9 +170,13 @@ def start(rom, xvfb=None, ecj=None, ttl=1800, enable_audio=True):
             "enable_audio_requested": bool(enable_audio), "input": "process_local_SMSJoypad"}
     atomic(root / "session.json", meta)
     with open(root / "supervisor.log", "w") as log:
-        subprocess.Popen([sys.executable, str(HERE / "isolated.py"), "_supervise", str(root)],
+        supervisor = subprocess.Popen([sys.executable, str(HERE / "isolated.py"), "_supervise", str(root)],
                          stdout=log, stderr=log, start_new_session=True, close_fds=True)
-    deadline = time.monotonic() + 45
+    _OWNED_SUPERVISORS[sid] = supervisor
+    # The supervisor can spend 10s on Xvfb, 50s on Java readiness and
+    # 8s on verified audio routing, in sequence. Leave time for main
+    # process scheduling and receipt publication after those phases.
+    deadline = time.monotonic() + 80
     while time.monotonic() < deadline:
         current = json.loads((root / "session.json").read_text())
         if current["state"] == "input_verified":
@@ -167,7 +184,12 @@ def start(rom, xvfb=None, ecj=None, ttl=1800, enable_audio=True):
         if current["state"] in ("failed", "closed"):
             raise RuntimeError(f"isolated boot failed; see {root}/supervisor.log and emulator.log")
         time.sleep(0.05)
-    raise RuntimeError(f"isolated boot timeout; see {root}; supervisor TTL will clean up owned processes")
+    supervisor.terminate()
+    try:
+        supervisor.wait(timeout=10)
+    except subprocess.TimeoutExpired:
+        raise RuntimeError(f"isolated boot and cleanup timed out; see {root}") from None
+    raise RuntimeError(f"isolated boot timeout; owned supervisor exited; see {root}")
 
 def route_audio(meta, timeout=8.0):
     """Move ONLY the sink-input owned by this session's exact PID into its private sink.
@@ -208,6 +230,16 @@ def close_session(session):
     while time.monotonic() < end:
         current = load(root)[1]
         if current["state"] == "closed" and not alive(meta["emulator_process"]):
+            owned = _OWNED_SUPERVISORS.get(meta["session_id"])
+            if owned is not None:
+                try:
+                    owned.wait(timeout=max(.1, end - time.monotonic()))
+                except subprocess.TimeoutExpired:
+                    raise RuntimeError("owned supervisor did not exit after session cleanup")
+                _OWNED_SUPERVISORS.pop(meta["session_id"], None)
+            if any(alive(current[role]) for role in ("supervisor", "xvfb_process")):
+                time.sleep(.1)
+                continue
             sinks = json.loads(checked(["pactl", "--format=json", "list", "sinks"]).stdout)
             if any(s["name"] == meta.get("audio_sink") for s in sinks):
                 raise RuntimeError("owned audio sink survived shutdown")
@@ -219,6 +251,9 @@ def supervise(root):
     root, meta = load(root)
     children = []
     meta["supervisor"] = process_record(os.getpid()); atomic(root / "session.json", meta)
+    def terminate(_signum, _frame):
+        raise RuntimeError("owner stopped the private supervisor")
+    signal.signal(signal.SIGTERM, terminate)
     try:
         readfd, writefd = os.pipe()
         with open(root / "xvfb.log", "w") as log:
@@ -256,24 +291,31 @@ def supervise(root):
         env = os.environ.copy()
         for key in ("DISPLAY", "WAYLAND_DISPLAY", "XAUTHORITY", "DBUS_SESSION_BUS_ADDRESS", "JAVA_TOOL_OPTIONS", "JDK_JAVA_OPTIONS", "_JAVA_OPTIONS"):
             env.pop(key, None)
-        env.update(DISPLAY=display, XAUTHORITY=str(root / "Xauthority"),
+        env.update(DISPLAY=display, XAUTHORITY=str(root / "Xauthority"), NO_AT_BRIDGE="1",
                    XDG_CONFIG_HOME=str(root / "config"), XDG_DATA_HOME=str(root / "data"),
                    XDG_CACHE_HOME=str(root / "cache"))
         if sink_module: env.update(PULSE_SINK=sink)  # advisory only: this host's audio policy reroutes explicit sinks
         # Private /dev hides /dev/input, /dev/uinput and /dev/snd. Private /tmp
         # exposes only this X socket. The workspace and user's home are read-only.
+        heap_mib = os.environ.get("SMSFORGE_EMULICIOUS_HEAP_MIB")
+        java_args = []
+        if heap_mib is not None:
+            if not heap_mib.isdecimal() or not 128 <= int(heap_mib) <= 1024:
+                raise ValueError("private emulator heap must be 128..1024 MiB")
+            java_args.append(f"-Xmx{int(heap_mib)}m")
+            meta["emulator_heap_mib"] = int(heap_mib)
         command = ["bwrap", "--die-with-parent", "--ro-bind", "/", "/", "--dev", "/dev", "--proc", "/proc",
                    "--tmpfs", "/tmp", "--dir", "/tmp/.X11-unix",
                    "--ro-bind", f"/tmp/.X11-unix/X{number}", f"/tmp/.X11-unix/X{number}",
                    "--bind", str(root), str(root), "--chdir", str(root / "emulator"),
-                   "java", "-Duser.home=" + str(root), "-Dsmsforge.root=" + str(root),
+                   "java", *java_args, "-Duser.home=" + str(root), "-Dsmsforge.root=" + str(root),
                    "-Dsmsforge.session=" + meta["session_id"], "-cp", "bridge.jar:Emulicious.jar",
                    "smsforge.ForgeSMS", "-nojoy", "-muted", "-scale", "1", "rom.sms"]
         with open(root / "emulator.log", "w") as log:
             emulator = subprocess.Popen(command, stdout=log, stderr=log, env=env)
         children.append(emulator)
         meta["sandbox"] = process_record(emulator.pid); atomic(root / "session.json", meta)
-        deadline = time.monotonic() + 35
+        deadline = time.monotonic() + 50
         while not (root / "ready.json").exists():
             if emulator.poll() is not None: raise RuntimeError("emulator exited before virtual input ready")
             if time.monotonic() > deadline: raise RuntimeError("bridge readiness timeout")
@@ -321,7 +363,7 @@ def request(session, operation, *args):
             raise RuntimeError("private ROM changed")
         if operation == "audio-enable" and (not meta.get("audio_route") or not verify_audio_route(meta)):
             raise RuntimeError("audio activation requires verified private PID route")
-        if operation in ("run", "step", "sequence", "video") and meta.get("audio_route") and not verify_audio_route(meta):
+        if operation in ("run", "step", "sample-commit", "sequence", "video", "record-start", "record-steps-start") and meta.get("audio_route") and not verify_audio_route(meta):
             raise RuntimeError("private audio route changed; refusing emulator advancement")
         sequence_file = root / "sequence"
         seq = (int(sequence_file.read_text()) if sequence_file.exists() else 0) + 1
@@ -337,12 +379,13 @@ def request(session, operation, *args):
                 response += chunk
         result = json.loads(response)
         if not result.get("ok") or result.get("session_id") != meta["session_id"] or result.get("seq") != seq:
-            raise RuntimeError("bridge rejected command or identity mismatch")
+            raise RuntimeError(f"bridge rejected {operation} or identity mismatch")
         if result["pid"] != meta["emulator_process"]["pid"]: raise RuntimeError("wrong emulator PID")
         with open(root / "commands.jsonl", "a") as journal:
             journal.write(json.dumps({"operation": operation, "args": args, "ack": result, "at": time.time()}) + "\n")
-        if operation in ("run", "capture"):
-            meta["state"] = "running" if operation == "run" else "captured"
+        if operation in ("run", "capture", "record-start", "record-stop"):
+            meta["state"] = ("running" if operation in ("run", "record-start") else
+                             "recorded" if operation == "record-stop" else "captured")
             atomic(root / "session.json", meta)
         return result
 
@@ -386,6 +429,51 @@ def video(session,count=120,name="video"):
             "performance":"not_measured","audio":"not_recorded"}
     if len(hashes)!=count:raise RuntimeError("missing video frames")
     atomic(target.with_suffix(".json"),record);return record
+
+
+def realtime_video(session, seconds=8, name="realtime_video"):
+    """Native cropped RGB24 callback during free run, never frame stepping.
+
+    This records presentation; capture overhead and nominal playback timebase
+    must not be promoted to a ROM throughput or perceived-fluidity verdict.
+    """
+    import re
+    if (isinstance(seconds, bool) or not isinstance(seconds, (int, float)) or
+            not 1 <= seconds <= 30 or not isinstance(name, str) or
+            not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", name)):
+        raise ValueError("realtime capture needs 1..30 seconds and a safe artifact name")
+    root, meta = load(session)
+    raw = root / "evidence" / (name + ".rgb")
+    target = root / "evidence" / (name + ".mp4")
+    if raw.exists() or target.exists():
+        raise FileExistsError("preserving existing realtime capture")
+    estimate = int(seconds * 61 * 256 * 192 * 3)
+    if shutil.disk_usage(root).free < estimate * 2 + 64 * 1024 * 1024:
+        raise RuntimeError("insufficient space for native RGB capture and retained evidence")
+    load_before = os.getloadavg()
+    request(root, "record-start", name)
+    try:
+        time.sleep(seconds)
+    finally:
+        stopped = request(root, "record-stop")
+    count = stopped["recorded_frames"]
+    if count < 60 or raw.stat().st_size != count * 256 * 192 * 3:
+        raise RuntimeError("native realtime RGB length/count mismatch; capture is not approved")
+    hz = stopped["nominal_hz"]
+    checked(["ffmpeg", "-nostdin", "-v", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
+             "-video_size", "256x192", "-framerate", str(hz), "-i", raw,
+             "-an", "-c:v", "libx264rgb", "-crf", "0", "-threads", "1", target], timeout=60)
+    record = {"schema": 1, "session_id": meta["session_id"], "rom_sha256": meta["rom_sha256"],
+              "first_frame": stopped["first_frame"], "last_frame": stopped["frame"],
+              "frames": count, "capture_elapsed_ns": stopped["capture_elapsed_ns"],
+              "canvas": [256, 192], "playback_hz": hz, "path": str(target),
+              "sha256": sha(target), "raw_rgb24": str(raw), "raw_sha256": sha(raw),
+              "raw_bytes": raw.stat().st_size, "method": "native DisplayWindow RGB24 callback; unpaused realtime runner",
+              "performance": "not_measured_by_capture; use separate ROM probe windows",
+              "perceived_fluidity": "not_approved", "audio": "not_recorded",
+              "host_load_before": load_before, "host_load_after": os.getloadavg()}
+    atomic(target.with_suffix(".json"), record)
+    return record
 
 @contextlib.contextmanager
 def project_reservation(project):
@@ -498,6 +586,12 @@ def self_check():
     assert 'mutedArgs[0] = "-muted"' in source
     assert 'if (m.getName().equals("write") && !audioEnabled)' in source
     assert 'm.getName().equals("flush")' in source
+    assert 'display.setScreenRecorderStream(stream,true)' in source
+    assert 'StandardOpenOption.CREATE_NEW' in source
+    for seconds, name in ((0, 'clip'), (31, 'clip'), (True, 'clip'), (2, '../escape')):
+        try: realtime_video('unused', seconds, name)
+        except ValueError: pass
+        else: raise AssertionError('invalid realtime capture request accepted')
     try: sequence("unused",[{"p1":64,"frames":1}])
     except ValueError:pass
     else:raise AssertionError("invalid SMS mask accepted")

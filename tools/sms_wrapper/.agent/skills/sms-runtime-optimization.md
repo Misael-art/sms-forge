@@ -5,6 +5,22 @@ Aplica L013/L037/L061/L082/L089/L097/L131/L134/L135 e SMS_GLOBAL
 §§97–100/103/122/125–126. Qualquer técnica permanece candidata até custo e
 comportamento pagos na ROM alvo.
 
+## Alterar uma mecânica sem desalinhar a apresentação
+
+No TDD, identifique quem reconhece a entrada, quem aplica a consequência e
+quem publica o quadro. No duelo de Alis, contato físico e projétil passam pelo
+mesmo resolvedor de dano. A ficha do defensor fornece a reação e a ficha do
+atacante fornece o efeito sobreposto. Essa separação permite trocar um
+lutador sem redesenhar a vítima dentro de cada ataque. Exercite também erro,
+defesa e simultaneidade. Em outros gêneros, escolha o evento equivalente do
+loop e confira se uma única ação produz exatamente a consequência prevista.
+
+Antes de mover trabalho para outra etapa, identifique no mesmo roteiro o
+tick lógico, a pose publicada e o primeiro controle livre. Compare cache
+frio e residente, quadro misto e pior efeito simultâneo. Prepare dados
+reutilizáveis fora do VBlank e meça a publicação no cartucho com HUD e áudio.
+Zero estouros na janela selada e cadência funcional são resultados distintos.
+
 ## Scroll: assimetria dos eixos (SMS_GLOBAL §122, L131)
 
 - Reg9 (scroll Y) é lido **uma vez por frame**: não existe raster vertical por
@@ -110,3 +126,25 @@ QA privada nativa por delta/regressão, worst-frame, FPS contínuo e áudio/visu
 afetados. Sessão não iniciada por EIO é blocked/not_run, nunca teste simulado.
 Memória guarda decisões rejeitadas e próximos experimentos com identidade exata;
 não copiar hipótese do diagnóstico como solução resolvida ou taxa segura SMS.
+
+## Diagnósticos de composição e residência (L006/L061/L086/L088/L090/L091)
+
+Curadoria: `doc/curation/2026-10-24_mugenesis_rev2.md`.
+`audit_composition_gate.py` e `audit_sole_alignment.py` continuam diagnósticos
+limitados, fora dos gates globais. Self-check precede leitura. O primeiro
+mede intervalos verticais 8×16 do META selecionado, com dy assinado; agrupar
+só dy iguais perde sobreposições. Seu default 4 é política por ator, não regra
+universal nem implementação de 5+3. O segundo mede última linha opaca + AXIS
+contra CLSN2; última linha pode ser equipamento ou pose aérea. Diferença
+geométrica não julga anatomia. PNG/frames.json/header têm hashes.
+
+Num sprite fragmentado, cotejar pose desejada/residente/submetida/apresentada,
+SAT e framebuffer do mesmo frame antes de atribuir ordem de tiles. Um quadro
+residente completo elimina a hipótese somente naquele caso. O simulador mede
+a composição fornecida; opt-in de nomes distintos não comprova identidade dos
+bytes e não deve reprovar duelos espelhados legítimos.
+
+Bloquear papéis largos protege um diagnóstico, mas deixa movimentos sem
+execução: manter a dívida no contrato de combate. VBlank usa o campo selado
+`vline_min`, não `vline` do snapshot (`measure_worst_frame.py`, v2).
+`done=0` permanece sem_lastro; menos bancos ou SAT legal não pagam throughput.

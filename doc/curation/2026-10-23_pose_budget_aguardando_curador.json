@@ -1,0 +1,276 @@
+{
+  "schema": "smsforge.curation_candidate_packet/v1",
+  "status": "awaiting_curator",
+  "issues_lesson_id": false,
+  "date": "2026-10-23",
+  "project": "SMS_projects/luta_mugem_rev2",
+  "narrative": "doc/curation/2026-10-23_pose_budget_aguardando_curador.md",
+  "id_registry_issued_through_when_written": "L138",
+  "do_not_reuse": [
+    "L012",
+    "L020-L034"
+  ],
+  "dedup_read_first": [
+    "L001",
+    "L083",
+    "L086",
+    "L088",
+    "L090",
+    "L091"
+  ],
+  "human_decision": "Estudo aceito. O motor usa pose_budget como default, converte os sprites com a referência da pose mais larga quando cerca de 70% do corpo já cabe em 8 sprites, e deixa o restante para estudo caso a caso.",
+  "human_approval_2026_10_23": "O dono aprovou pose_budget como padrão do motor. A classe de glitch de imagem ficou aberta: a guarda de paleta e a transparência do índice 0 entraram no código. A ROM com a paleta reservada é palette_reserve_20261023.sms, sha256 f9ef0e27eef5e29d530b0fa4e5c8325bd8df84a1ab6e7d93e77873f40a2b76cb, sem framebuffer aceito.",
+  "glitch_diagnosis": {
+    "tile_identity_mismatches": {
+      "ken_role_sprites": 0,
+      "ryu_role_sprites": 0
+    },
+    "opaque_black_frequency_rank": 8,
+    "opaque_black_pixels": {
+      "ken": 2400,
+      "ryu": 2320
+    },
+    "role_frames_losing_8pct_edges_before": {
+      "ken": "34/39",
+      "ryu": "13/40"
+    },
+    "lost_edge_pixels_before": {
+      "ken": 2889,
+      "ryu": 1624,
+      "edges": {
+        "ken": 19479,
+        "ryu": 22694
+      }
+    },
+    "lost_edge_pixels_after_dark_and_light_reserve": {
+      "ken": 2140,
+      "ryu": 1585
+    },
+    "sheet_index0": {
+      "ken": [
+        0,
+        0,
+        0
+      ],
+      "ryu": [
+        255,
+        0,
+        255
+      ],
+      "transparency_before": null
+    },
+    "sampling_new_transparent_pixels": {
+      "ken": 26,
+      "ryu": 44
+    },
+    "sampling_fill": "rejected",
+    "previous_pilot_rom": "9008505cb82232e42d1b57d3ecb852af70f566625995cfd3cb5b526b277b1eba",
+    "palette_reserve_rom": "f9ef0e27eef5e29d530b0fa4e5c8325bd8df84a1ab6e7d93e77873f40a2b76cb",
+    "palette_luma_rom": "6fb424a3ddf32002d5de9c27685c1387fa89d4205365b344ba64fe8c866cd873",
+    "mean_luma_ken_ryu_reserve_index": [
+      110.2,
+      137.5
+    ],
+    "mean_luma_ken_ryu_frequency": [
+      115.93,
+      142.28
+    ],
+    "ken_cream_pixels_mapped_to_pink_by_reserve": 4840
+  },
+  "palette_acuity_2026_10_23": "O dono reportou perda de acuidade e escurecimento na ROM palette_reserve. A sucessora palette_luma_20261023.sms devolve as sete cores frequentes de ken1 e ryu02. Sem framebuffer aceito. Sem ID de lição.",
+  "purposes": [
+    "preservar framebuffer, fighter_scale 72-88 e legacy_quarter 1:4 como opções",
+    "exigir o framebuffer de origem na definição do projeto",
+    "manter Game Gear 160x144 como alvo nomeado",
+    "encaixar CPS2 384x224 em SMS 256x192 com largura 2/3 e altura 6/7",
+    "usar a pose de corpo mais larga como referência uniforme até 64 px quando a porta de cerca de 70% abre",
+    "aplicar a mesma fração a todos os sprites, inclusive FX",
+    "listar o excedente para revisão caso a caso sem reautoria neste piloto",
+    "comparar a ROM nova com a ROM 40/49 sem substituí-la"
+  ],
+  "claim_ceiling": "testado_em_emulador",
+  "not_claimed": [
+    "validado_budget",
+    "fps",
+    "audio",
+    "gameplay",
+    "entrega_visual",
+    "scale_pilot",
+    "ken_idle_legivel",
+    "promocao_sms_global"
+  ],
+  "review_2026_10_23": {
+    "status": "registrado",
+    "issues_lesson_id": false,
+    "memory_bank": "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md",
+    "section": "parecer da captura do par",
+    "framebuffer_status": "testado_em_emulador",
+    "visual_delivery": false,
+    "pair_rom_sha256": "6fb424a3ddf32002d5de9c27685c1387fa89d4205365b344ba64fe8c866cd873",
+    "pair_equals_palette_luma": true,
+    "capture_diff_pixels": 14,
+    "ken_idle_readable": false,
+    "production_rom_sha256": "087df67677626bfcd61188cb5ff0a5c054eb4feb24c420434fcfbeebf5fa7a65",
+    "production_rom_replaced": false
+  },
+  "points": [
+    {
+      "id": "PB-01",
+      "title": "default pose_budget",
+      "purpose": "o encaixe coerente com o Master System vira o caminho de conversão",
+      "evidence": [
+        "tools/sms_wrapper/mugen2sms/converters/display_fit.py"
+      ]
+    },
+    {
+      "id": "PB-02",
+      "title": "origem obrigatoria e alvos",
+      "purpose": "CPS2, SMS e Game Gear têm razão declarada; origem desconhecida é recusada",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/doc/display_profile.json"
+      ]
+    },
+    {
+      "id": "PB-03",
+      "title": "amostragem e padding",
+      "purpose": "a coluna conta a célula padded de 8 px",
+      "evidence": [
+        "tools/sms_wrapper/mugen2sms/converters/display_fit.py"
+      ]
+    },
+    {
+      "id": "PB-04",
+      "title": "corpo fx e retrato",
+      "purpose": "FX e grupo 9000 não escolhem a referência; FX ainda recebem a mesma escala",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/doc/display_profile.json"
+      ]
+    },
+    {
+      "id": "PB-05",
+      "title": "porta cerca de 70 por cento",
+      "purpose": "open em 0.70, near em 0.69, sem ajustar a contagem do Ryu",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/out/display_fit/pose_budget_8/summary.json"
+      ]
+    },
+    {
+      "id": "PB-06",
+      "title": "duas passadas",
+      "purpose": "o padding entra na conta da coluna",
+      "evidence": [
+        "tools/sms_wrapper/mugen2sms/converters/display_fit.py"
+      ]
+    },
+    {
+      "id": "PB-07",
+      "title": "caso a caso",
+      "purpose": "29 ações do Ken e 47 do Ryu ficam listadas e não reautoradas",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/out/display_fit/pose_budget_8/summary.json"
+      ]
+    },
+    {
+      "id": "PB-08",
+      "title": "corte e rotulo downscale",
+      "purpose": "pre_scaled impede o 1:4 real; o motivo da fidelidade não descreve esta ROM",
+      "evidence": [
+        "tools/sms_wrapper/mugen2sms/generators/scene_cut.py"
+      ]
+    },
+    {
+      "id": "PB-09",
+      "title": "oito colunas de um lutador",
+      "purpose": "o alvo é o limite de um corpo, não a scanline com os dois em cena",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/out/logs/pose_budget_20261023_compare.json"
+      ]
+    },
+    {
+      "id": "PB-10",
+      "title": "bytes de bank nao sao fps",
+      "purpose": "49 banks para 24 é tamanho medido da imagem de tiles",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/out/rom/pose_budget_20261023.sms"
+      ]
+    },
+    {
+      "id": "PB-11",
+      "title": "boot nao aceito",
+      "purpose": "captura preta do Emulicious não mostra os lutadores",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/out/logs/pose_budget_20261023_compare.json"
+      ]
+    },
+    {
+      "id": "PB-12",
+      "title": "tetos que permanecem",
+      "purpose": "não substituir a ROM 087df676, não fechar conversão de luta, não importar número de outro console",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md"
+      ]
+    },
+    {
+      "id": "PB-13",
+      "title": "as duas capturas sao o mesmo desenho",
+      "purpose": "tinta dos dois lados nao e lutador desenhado; o Ken continua em listras",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/out/evidence/pose_budget_pair_20261023_idle_256x192.png",
+        "SMS_projects/luta_mugem_rev2/out/evidence/pose_budget_20261023_idle_256x192.png"
+      ]
+    },
+    {
+      "id": "PB-14",
+      "title": "zero do simulador nao e a luta",
+      "purpose": "os pares incluidos nao sao golpe contra o outro lutador",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/out/logs/pose_budget_pair_20261023/line_summary.json"
+      ]
+    },
+    {
+      "id": "PB-15",
+      "title": "golpe largo permanece acima de 4 colunas",
+      "purpose": "case_by_case nao tira o papel da ROM; 5+3 ainda nao e celula emitida",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md"
+      ]
+    },
+    {
+      "id": "PB-16",
+      "title": "hurtbox do idle do Ryu",
+      "purpose": "a linha de baixo nao amostrada deixa a hurt 2 px alem da sola",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md"
+      ]
+    },
+    {
+      "id": "PB-17",
+      "title": "orcamento de VBlank sem numero",
+      "purpose": "24 banks medem tamanho; a sonda 0xC800 devolveu sem_lastro",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/doc/10-memory-bank.md"
+      ]
+    },
+    {
+      "id": "PB-18",
+      "title": "o parecer nao promove",
+      "purpose": "sem ID de licao, sem SMS_GLOBAL e sem substituir 087df676",
+      "evidence": [
+        "doc/curation/2026-10-23_pose_budget_aguardando_curador.md"
+      ]
+    }
+  ],
+  "closure_packet": {
+    "narrative": "doc/curation/2026-10-23_pose_budget_fechamento_pb13_pb18.md",
+    "json": "doc/curation/2026-10-23_pose_budget_fechamento_pb13_pb18.json",
+    "status": "awaiting_curator",
+    "note": "Leia o pacote de fechamento antes de emitir licao. Ele fecha PB-13 a PB-18 como medicao e corrige a medida da sola do Ryu de 2 px para 1 px.",
+    "supersedes": [
+      "PB-13 causa aberta -> pose nao residente/upload incompleto",
+      "PB-14 pares incluidos -> dez pares reais golpe x idle",
+      "PB-15 rotulo caso a caso -> gate derivado do META",
+      "PB-16 2 px -> 1 px medido com AXIS emitido",
+      "PB-17 sem_lastro -> derramou, vline_min=4, vovf_delta=1740"
+    ]
+  }
+}

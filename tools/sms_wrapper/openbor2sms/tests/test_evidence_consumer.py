@@ -405,6 +405,29 @@ class EvidenceConsumerTests(unittest.TestCase):
         self.f.update_artifact("fps", obj=self.f.metrics, meta=self.f.windows)
         self.rejected("three regional")
 
+    def test_raw_runtime_below_58_rejected_even_with_positive_boolean(self):
+        self.f.metrics["fps_constante"] = True
+        self.f.metrics["fps_janelas"] = [57.999999] * 3
+        for row in self.f.windows["windows"]:
+            row["elapsed_seconds"] = 60 / 57.999999
+        self.f.update_artifact("fps", obj=self.f.metrics, meta=self.f.windows)
+        self.rejected("floor58")
+
+    def test_raw_runtime_at_58_allowed_by_owner(self):
+        self.f.metrics["fps_janelas"] = [58.0] * 3
+        self.f.metrics["frames_delta_total"] = 174
+        for row in self.f.windows["windows"]:
+            # Exact 58 frames / 1 second; avoid making the synthetic boundary
+            # slightly sub-58 through the float expression 60 / (60 / 58).
+            before = self.f.journal[row["before_seq"] - 1]["ack"]["ram"]
+            start = int.from_bytes(bytes(before), "little")
+            self.f.journal[row["after_seq"] - 1]["ack"]["ram"] = list(
+                ((start + 58) % 65536).to_bytes(2, "little"))
+        self.f.refresh_journal()
+        self.f.update_artifact("fps", obj=self.f.metrics, meta=self.f.windows)
+        result = self.f.consume()
+        self.assertTrue(result["eligible"], result["problems"])
+
     def test_hash_tampering(self):
         (self.f.root / "input.json").write_text("{}")
         self.rejected("SHA mismatch")

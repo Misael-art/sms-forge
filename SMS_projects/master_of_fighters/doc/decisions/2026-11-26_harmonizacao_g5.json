@@ -1,0 +1,162 @@
+{
+  "candidata": "G5",
+  "data": "2026-11-26",
+  "commit_runtime": "92793812b1acf130af29d908d70d83f257090aa1",
+  "rom_sha256": "c202314a04a192936206453359150d416c9f85f80be707851da1906d05e1ca96",
+  "rom": "out/candidates/alis_guardioes_g5/Alis_Guardioes_de_Algol.sms",
+  "bancos": {
+    "regras": 37,
+    "magia": 38
+  },
+  "sondas": 103,
+  "sessoes": {
+    "trade": {
+      "session_id": "7090b28cd80b4502ac71638a541b50dc",
+      "observacoes": "out/qa/alis_guardioes_g5/trade/observations.json"
+    },
+    "impact": {
+      "session_id": "79a3838b25cd456eb1e7016308a01d0e",
+      "observacoes": "out/qa/alis_guardioes_g5/impact/observations.json"
+    },
+    "versus": {
+      "session_id": "ca57c8622fc74aa6b8568d4f2353dcb4",
+      "observacoes": "out/qa/alis_guardioes_g5/versus/observations.json"
+    },
+    "budget": {
+      "session_id": "a08c9fa34b5048d38e8d22c16503fa48",
+      "observacoes": "out/qa/alis_guardioes_g5/budget/observations.json"
+    },
+    "worst": {
+      "session_id": "4032fdfe9d2b4f3b9bd9acd65bedac6f",
+      "observacoes": "out/qa/alis_guardioes_g5/worst/observations.json"
+    },
+    "historia": {
+      "session_id": "51e7f5058497472395c1a220ed3536ac",
+      "observacoes": "out/qa/alis_guardioes_g5/historia/observations.json"
+    },
+    "magias": {
+      "session_id": "7c26c518091942349897486bea5a959c",
+      "observacoes": "out/qa/alis_guardioes_g5/magias/observations.json"
+    },
+    "p2-final": {
+      "session_id": "71557126fd254d9db722443e3cc9c444",
+      "observacoes": "out/qa/alis_guardioes_g5/p2-final/observations.json"
+    },
+    "spell-budget": {
+      "session_id": "c2aa522db373480385d89f28d23855ae",
+      "observacoes": "out/qa/alis_guardioes_g5/spell-budget/observations.json"
+    },
+    "sound": {
+      "session_id": "8d61b1cf82594a0fa44bceb430bdeef1",
+      "observacoes": "out/qa/alis_guardioes_g5/sound/observations.json"
+    }
+  },
+  "impacto": {
+    "leve_acerto": {
+      "damage": 6,
+      "frozen_publications": 4,
+      "stun_ticks": 10,
+      "repeated_contact": 0
+    },
+    "forte_acerto": {
+      "damage": 10,
+      "frozen_publications": 11,
+      "stun_ticks": 20,
+      "repeated_contact": 0
+    },
+    "forte_defendido": {
+      "damage": 0,
+      "frozen_publications": 11,
+      "stun_ticks": 3,
+      "repeated_contact": 0
+    }
+  },
+  "troca": {
+    "rom_sha256": "c202314a04a192936206453359150d416c9f85f80be707851da1906d05e1ca96",
+    "sessao": "7090b28cd80b4502ac71638a541b50dc",
+    "observacoes_sha256": "119ab5ccada9d48e41a3f40e9ebb5a0c739cd676b636073ddf53366854a05143",
+    "acerto": 80,
+    "retomada": 92,
+    "passos_congelados": 11,
+    "publicacoes_internas_lidas": 10,
+    "pv": [
+      90,
+      90
+    ],
+    "reiki": [
+      2,
+      2
+    ]
+  },
+  "planos": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "janelas_mistas": [
+    39.94849560287487,
+    39.94849560287487,
+    37.951070822731126
+  ],
+  "janelas_guarda": [
+    36.62171653063541,
+    39.84600889922576,
+    37.358602587260876
+  ],
+  "janelas_magia": [
+    21.47231638654524,
+    48.437550918485776,
+    38.45042701776706,
+    38.949783212803,
+    37.951070822731126,
+    37.45171462769519,
+    39.449139407838935,
+    38.45042701776706,
+    38.45042701776706,
+    39.449139407838935,
+    21.47231638654524,
+    44.94205755323423,
+    39.449139407838935,
+    38.45042701776706,
+    37.951070822731126,
+    39.449139407838935,
+    38.45042701776706,
+    37.951070822731126,
+    39.449139407838935,
+    21.47231638654524,
+    47.93819472344985,
+    38.949783212803,
+    37.951070822731126,
+    37.951070822731126,
+    39.449139407838935,
+    38.45042701776706,
+    37.951070822731126,
+    39.449139407838935,
+    21.47231638654524,
+    48.437550918485776,
+    39.449139407838935,
+    38.45042701776706,
+    38.45042701776706,
+    39.449139407838935,
+    38.45042701776706
+  ],
+  "estouros_em_3000": {
+    "mistos": 27,
+    "magia": 74
+  },
+  "audio": {
+    "rom_sha256": "c202314a04a192936206453359150d416c9f85f80be707851da1906d05e1ca96",
+    "session_id": "8d61b1cf82594a0fa44bceb430bdeef1",
+    "frames": 441,
+    "seconds": 7.369321721,
+    "peak_pcm": 5983,
+    "sha256": "2429afd91b260498a7b4f61a574c5c220b50d3b426b74284427dac3173450096",
+    "private_sink": "smsforge_8d61b1cf82594a0f"
+  },
+  "piso": 58,
+  "aceite": "reprovado por FPS e VBlank"
+}

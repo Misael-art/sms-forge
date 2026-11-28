@@ -1,0 +1,27 @@
+{
+  "curation_id": "2026-11-27_l141_ficha_ilustrada",
+  "date": "2026-11-27",
+  "dedup_key": "ficha_edicao_exportada_e_imagem_ativa",
+  "kind": "curation",
+  "scope": "Ficha ilustrada de personagem. A cobertura de combate depende do GDD.",
+  "source": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-11-27_alis_ficha_comando_cor_e_combo.md",
+  "lessons": [
+    {
+      "id": "L141",
+      "status": "fechada_com_ferramenta",
+      "lesson": "A edição publicada de uma ficha tem que reproduzir as ações e ilustrações do Word editável. Uma figura do Word pode manter duas representações ativas.",
+      "root_cause": "O nome canônico do PDF foi preservado entre edições. Uma troca só do raster deixa a relação para a ilustração vetorial anterior ativa em leitores compatíveis.",
+      "rule_section": "SMS_GLOBAL §136",
+      "tool_that_measures": "audit_character_sheet.py",
+      "skill_or_workflow": "tools/sms_wrapper/.agent/workflows/playable-fighter.md",
+      "evidence": {
+        "contract": "doc/curation/evidence/2026-11-27_ficha/alis-r8.json",
+        "positive": "R8 de Alis. As 23 páginas apresentaram o mesmo texto e os mesmos pixels a 100 dpi de uma exportação independente. Sete ocorrências editadas e uma figura de controle com PNG e SVG conferiram.",
+        "stale_pdf": "PDF arquivado R6b, SHA-256 852598f37f352b5a572fd96fcbbf58d46967b7b37275a5e3a0b5edbb606ee5f6. A comparação com R8 encontrou texto divergente na página 1.",
+        "stale_svg": "Em cópia descartável, recolocar a:extLst de wp:docPr 26 da R6b na mesma figura da R8 mantém o PNG R8, mas ativa o SVG antigo 6fc858b437990993dc95b2fccca2ea7cdf2f02c05fdf4ac0175d15d2d6931720. A ferramenta recusou a figura 26.",
+        "same_text": "Controle sintético com o mesmo texto e edição nas duas vias mudou somente a cor de uma forma. Reprovou na comparação de pixels da página 1."
+      },
+      "measurement_limits": "Compara o texto e os pixels renderizados com o exportador, fontes e resolução usados. Confere as imagens declaradas por ocorrência no corpo principal do Word. A escolha da arte aprovada, a cobertura das ocorrências editadas, a legibilidade e o valor artístico exigem revisão. Resultado documental da R8 não valida a jogabilidade ou a cadência da R9d."
+    }
+  ]
+}

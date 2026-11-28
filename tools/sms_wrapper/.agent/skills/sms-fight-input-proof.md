@@ -47,6 +47,18 @@ leitura de código da caixa de colisão NÃO é resposta.
 - **B1 só na borda** (L067): `qcf==1` com especial ainda idle — o botão
   chegou em HOLD. Aceitar hold na janela de 8; não crescer o hist.
 
+## Conflitos no controle de dois botões
+
+No controle de dois botões, preencha uma linha por gesto com modo, postura,
+face, entrada bruta, entrada após resolver direções opostas, comandos
+candidatos, comando consumido e estado resultante. Teste o limiar de hold
+um tick antes, no limite e um depois, inclusive ao soltar um botão de um
+acorde e ao virar durante a sequência. Use a política decidida para aquele
+modo. Se o reconhecedor devolver dois candidatos e o consumidor descartar a
+máscara, registre esse descarte e leve o conflito à direção. No contato
+simultâneo, verifique a consequência nos dois atores depois da resolução.
+Para o caso no emulador, siga o [ensaio de uma troca completa](../workflows/playable-fighter.md#ensaio-de-uma-troca-completa).
+
 ## Molde histórico e prova nova
 
 `SMS_projects/MSSF2T/tools/prove_input_memory.py` — `punch_window`,

@@ -1,0 +1,50 @@
+{
+  "scene": "Cena 02 — Alis × Alis",
+  "status": "candidato_a_curadoria",
+  "baseline": {
+    "candidate": "b39",
+    "rom_sha256": "f978da58124869d303b384c6cb711fad552335e73d86c2a740205d4a421bb325"
+  },
+  "revision": {
+    "candidate": "b47",
+    "rom_sha256": "baca9cde8fa4edf93cd823a6c649c39c16234379af71823fdc5217817179d45a"
+  },
+  "entries": [
+    {
+      "topic": "Comando aéreo e escala do corpo",
+      "diagnosis": "A b39 esperava soltar o botão ou completar o limiar, depois executava seis a nove ticks de preparação. A conversão reduzia até a anatomia para encaixar o chute curto. Uma entrada simultânea de salto e ataque era consumida pela compressão.",
+      "action": "Expor a preparação no primeiro toque em voo. Reter a combinação durante a compressão, escolher a intensidade após quatro leituras no ar e convergir as duas variantes para o mesmo início visual por botão. Projetar a lâmina em direção à parte alta do alvo na descida e impedir contato aéreo depois de aterrissar. Preservar as proporções no empacotamento.",
+      "verification": "O roteiro retouch registra a borda consumida, a pose publicada, o primeiro tick ativo, o pivô e as caixas em ambos os controles. A espadada acertou com os pés 21 px acima do solo, cinco ticks após o primeiro toque. A caixa de ataque ocupou Y=95–106 contra alvo em pé."
+    },
+    {
+      "topic": "Queda completa e retomada da cabeça",
+      "diagnosis": "Na b39 o sprite deitado já levantava a cabeça e os ombros.",
+      "action": "Criar um quadro de corpo apoiado no chão, preservar lado da cabeça e linha de repouso e reutilizar o desenho com cabeça erguida no primeiro trecho da levantada.",
+      "verification": "Após rasteira, o framebuffer dos dois controles mostrou queda, repouso, elevação da cabeça e apoio com joelho. O repouso durou 18 ticks e o primeiro trecho da levantada ocupou três ticks."
+    },
+    {
+      "topic": "Fase ativa sob carga simultânea de voo",
+      "diagnosis": "Na b43, o carregamento concorrente deixava a preparação visível em quatro dos cinco contatos contra a outra Alis no ar. As primeiras tentativas de alterar o lote de vídeo ou a prioridade excederam o banco fixo.",
+      "action": "Compartilhar os descritores de geometria entre os dois trajes e validar o mesmo arranjo de pacotes nos bancos. Antecipar a fase ativa durante a preparação aérea dentro do limite de oito padrões com SAT.",
+      "verification": "A b47 apresentou a fase ativa em cinco contatos, incluindo um bloqueio. A reação da vítima atrasou em quatro. O pior intervalo medido foi de três quadros VDP e as janelas nominais deram 38,311262176527535 e 33,73801519402458 FPS."
+    },
+    {
+      "topic": "Cadeia efetiva do botão 2",
+      "diagnosis": "Os testes da b39 injetavam bits direto nas portas e deixavam o lançador fora do percurso. No controle virtual isolado, o Linux registrava os botões direito e inferior em EV_KEY, mas o JInput distribuído não os entregava ao SMSJoypad.",
+      "action": "Transportar os dois ataques por estados digitais em eixos livres do controle virtual do lançador e declarar o vínculo explícito do Emulicious. Testar as entradas isoladas e os acordes 2 + Baixo e 2 + Cima.",
+      "verification": "O teste do JInput e da porta A mediu as máscaras 16, 32, 34 e 33. A ROM consumiu B2 nos dois controles e executou chute curto e forte em pé, baixo e rasteira, e chutes curto e forte no ar."
+    },
+    {
+      "topic": "Abertura da b49 e foco do controle no Emulicious",
+      "diagnosis": "O teste anterior isolava o JInput e a ROM. Na sessão do Emulicious de jogo, a configuração de foco padrão descartou o botão 2 com um componente interno focado. O atalho local não declarava o tipo da ROM e o run.sh documentado não estava executável.",
+      "action": "Configurar o foco na sessão do lançador com o dispositivo virtual dedicado. Registrar o Emulicious do SMSForge para arquivos .sms e tornar o run.sh executável. Documentar S para o chute e a ordem de soltura no chute baixo.",
+      "verification": "A b49 de SHA-256 2458fdecfccce8a33f29b7843860886893b6c205d8f2eda4bb6028a8c556e9da consumiu pressão e soltura e executou os seis chutes, o escudo e o chute via S no Emulicious de jogo. O botão 2 e a tecla S também iniciaram o chute com o foco em um componente interno. Os recibos baseline.json e launcher.json estão em out/diagnostics/alis_mirror_20261121/deck-launch-b49. A pressão física fica pendente."
+    }
+  ],
+  "pending": [
+    "Repetir o acionamento com o controle físico durante a validação humana.",
+    "Cumprir o piso de 58 FPS funcionais em cada janela NTSC.",
+    "Sincronizar a reação da vítima quando o carregamento prioriza a fase aérea da atacante.",
+    "Manter a direção de timbre da espada de Phantasy Star registrada para curadoria."
+  ]
+}

@@ -14,7 +14,7 @@ _(preencher: AAAA-MM-DD — o que mudou e com que prova)_
 | validation_report | não iniciado | — |
 | boot no emulador | não iniciado | — |
 | gameplay | não iniciado | — |
-| 60/50 fps | não iniciado | — |
+| FPS funcional NTSC (alvo 60, piso 58 em cada janela válida, §133) | não iniciado | — |
 | áudio | não iniciado | — |
 | memory bank atualizado | não iniciado | — |
 

@@ -22,7 +22,8 @@ corte. CompareBG/híbrido/pool/layout e reautoria autorizada. BG não érecurso
 gratuito: medir flip/facing/scroll/overlap/prioridade/HUD/palette eVRAMuploads.
 Não mascarar falha com P2imóvel, removerFX/IA/áudio ou reduzir poses sem decisão.
 
-FPS:probeprivado2janelas completas NTSC60/PAL50 com tolerância explícita,
+FPS: probe privado com ≥2 janelas completas, objetivo60/piso58 em todas sem
+arredondar, dispersão≤2 e teto61; PAL50 somente diagnóstico regional (§133).
 pacingdeadline da lógica e input→ação→pose→dano separados. Probesvoláteis
 com endereços pós-link/canário, audit_probe_corridor e stacksafemargin.
 

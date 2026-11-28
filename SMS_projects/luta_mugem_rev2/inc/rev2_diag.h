@@ -18,7 +18,10 @@
 /* Um pose/facing no banco de tiles: pagina do slot 2, offset e tamanho. */
 typedef struct { unsigned char bank;
                  unsigned int off;
-                 unsigned int size; } PoseRef;
+                 unsigned int size;
+                 const unsigned char *right_pair_hashes;
+                 const unsigned char *left_pair_hashes;
+               } PoseRef;
 
 /* Frame/Anim espelham exatamente o initializer emitido em
  * versus_scene_runtime.h: dur, pose, meta, metal, clsn, axis, width, height,
@@ -51,7 +54,12 @@ typedef struct { const unsigned char *pattern; unsigned char command; } CommandD
 typedef struct { unsigned short id;
                  unsigned char anim, flags;
                  signed int vel;
-                 unsigned char dmg; } StateDef;
+                 unsigned char dmg;
+                 /* Schema 7: pausetime e tempos de controle do primeiro HitDef.
+                  * Schema 5 deixa estes bytes em zero; o hitstop segue o
+                  * valor único do personagem. */
+                 unsigned char stop_a, stop_d, hittime, guardtime, airtime;
+               } StateDef;
 
 /* Ordem = REQUIRED_ROLES + close + far (fight_runtime_data.py STATE_ROLE_ORDER). */
 enum { ST_IDLE, ST_WALK_F, ST_WALK_B, ST_JUMP, ST_CROUCH, ST_GUARD,

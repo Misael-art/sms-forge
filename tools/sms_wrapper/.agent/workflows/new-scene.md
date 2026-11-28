@@ -11,6 +11,19 @@ roteiro → storyboard (grid 8×8) → coreografia → **simulador de sprites** 
 orçamento (`scene_budget_v1`) → contrato de asset → model sheet → assets
 (gates de recursos/luma/procedência) → runtime (build gate) → evidência.
 
+Identifique no storyboard o beat e o caso do roteiro que esta cena realiza.
+Para uma nova família de ações ou transição, use os [ensaios por família](first-playable-slice.md#do-beat-ao-caso-observável)
+ao planejar a coreografia e repita esses casos na ROM. Uma família adiada no
+primeiro trecho volta ao planejamento quando chegar a sua cena.
+
+Com a [direção visual](../skills/sms-visual-excellence.md) e a bíblia do projeto,
+esboce a cena à resolução de jogo no momento em que o jogador precisa decidir.
+Posicione o foco, a ação concorrente e um sinal que identifica o lugar.
+Reserve no mapa de tiles os contornos que precisam sobreviver à conversão.
+Se houver movimento de câmera ou luz, marque uma região ativa e outra estável.
+No retorno do jogador, confira as emendas e o HUD durante a ação mais custosa.
+Em tela fixa, use a mudança que de fato existe, como seleção e confirmação.
+
 No simulador e no pior quadro, somar todos os atores, HUD, projéteis e efeitos
 que aparecem juntos, incluindo a pose de maior largura e os pontos de contato;
 um idle isolado não representa a cena completa. Se a tela não usa sprites,

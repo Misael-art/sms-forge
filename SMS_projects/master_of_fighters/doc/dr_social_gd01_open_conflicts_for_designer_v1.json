@@ -1,0 +1,59 @@
+{
+  "id": "dr_social_gd01_open_conflicts_for_designer_v1",
+  "date": "2026-11-01",
+  "status": "handoff_not_a_decision",
+  "from": "artista do Dr. Ferdinand Social",
+  "to": "designer e proprietário",
+  "proposal_not_approved": "doc/dr_social_two_button_proposal_v2.json",
+  "do_not_treat_silence_as_approval": true,
+  "scene_10_until_decision": "comando em definição. Não ensinar quarto de lua, frente-frente, carga nem 1+2.",
+  "conflicts": [
+    {
+      "id": "down_back",
+      "open": "Baixo-trás não está definido: se mantém a guarda baixa e qual ataque resulta.",
+      "design_note_not_approved": "A revisão de 07e4bce recomenda avaliar a checagem a partir das três direções baixas, com prioridade explícita dos comandos completos.",
+      "experiment": "Tabela única jogável, com as três diagonais baixas e um ataque durante cada uma.",
+      "responsible": "designer propõe, proprietário registra"
+    },
+    {
+      "id": "temporal_guard",
+      "open": "Separar caminhada e guarda pelo tempo segurando trás não tem justificativa de experiência.",
+      "design_note_not_approved": "Estudar recuo com trás e defesa contextual diante de ameaça elegível, inclusive guarda baixa, sem esperar N frames.",
+      "experiment": "Comparar recuo imediato com guarda contextual contra a espera de N frames.",
+      "responsible": "designer propõe, proprietário registra"
+    },
+    {
+      "id": "super_one_poll",
+      "open": "Super que exige as duas bordas na mesma leitura privilegia precisão de um frame. Ambos apertados não equivale a ambos começados nesta leitura.",
+      "needs": "Bordas de pressão, botões já mantidos, lockout e reentrada. Tolerância curta que não atrase os normais, ou um comando direcional com um botão. Nenhuma quantidade de frames fica aprovada.",
+      "experiment": "Reconhecedor na ROM com controle real, não com script que só completa a receita.",
+      "responsible": "designer e engenharia; proprietário registra"
+    },
+    {
+      "id": "no_meter_versus_special",
+      "open": "Há conflito entre sem barra 1+2 sai jab e especial completo vence normal.",
+      "cases": [
+        "quarto de lua+1+2 sem barra",
+        "duas bordas desencontradas",
+        "direções baixas",
+        "ataque durante dash",
+        "estados em que não se pode agir"
+      ],
+      "experiment": "Um caso observável para cada item, na mesma ROM.",
+      "responsible": "designer propõe a precedência, proprietário registra"
+    },
+    {
+      "id": "dash_cancel",
+      "open": "Encerrar a corrida com um normal é proposta de cancelamento, não detalhe gráfico.",
+      "experiment": "Dash em curso e normal no frame seguinte, com e sem a regra de cancelamento.",
+      "responsible": "designer e engenharia"
+    },
+    {
+      "id": "forward_forward",
+      "open": "dash_run existe no contrato. Frente, frente não está aprovado como comando dele nestes documentos. Tratar como hipótese de conflito.",
+      "experiment": "Não mostrar esse comando na cena 10 antes da decisão.",
+      "responsible": "proprietário"
+    }
+  ],
+  "windows_10_15_20": "Hipóteses do produtor para comparar. Sem reconhecedor, ROM e teste de resposta, não aprovam facilidade nem entram na cena 10."
+}

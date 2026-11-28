@@ -1,0 +1,329 @@
+"""Contract/regression tests for the thin authored-PNG conversion adapter."""
+import hashlib
+import json
+from pathlib import Path
+import sys
+
+from PIL import Image
+import pytest
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from prepare_authored_sprite_sample import (load_pose, convert_poses, prepare,
+                                           extract_native, phase_self_check, map_source_indices,
+                                           eight_self_check, pack_registered_eight)
+
+
+def fixture(tmp_path, opaque=1):
+    # Deliberately asymmetric technical fixture; never a game-art asset.
+    im = Image.new('P', (128, 128))
+    im.putpalette([0, 0, 0, 0, 170, 255, 255, 255, 85] + [0] * (768 - 9))
+    for y in range(16, 96):
+        for x in range(48, 72):
+            im.putpixel((x, y), opaque)
+    im.putpixel((49, 20), 2)
+    path = tmp_path / 'source.png'
+    im.save(path, transparency=0)
+    return {'path': path.name, 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+            'pivot': [60, 96]}
+
+
+def test_hash_and_crop_preserve_indices_and_pivot(tmp_path):
+    spec = fixture(tmp_path)
+    sp = load_pose(tmp_path, spec)
+    assert (sp.width, sp.height, sp.axis_x, sp.axis_y) == (24, 80, 12, 80)
+    assert sp.pixels[4 * 24 + 1] == 2
+    spec['sha256'] = '0' * 64
+    with pytest.raises(ValueError, match='SHA mismatch'):
+        load_pose(tmp_path, spec)
+
+
+def test_explicit_sampling_rect_preserves_body_when_prop_extreme_disappears(tmp_path):
+    spec = fixture(tmp_path)
+    image = Image.open(tmp_path / 'source.png')
+    for y in range(7, 11):
+        for x in range(48, 52):
+            image.putpixel((x, y), 2)  # Prop survives both nearest passes.
+    image.save(tmp_path / 'source.png', transparency=0)
+    spec.update(sha256=hashlib.sha256((tmp_path / 'source.png').read_bytes()).hexdigest(),
+                sample_rect_px=[48, 7, 72, 96])
+    before = load_pose(tmp_path, spec)
+    for y in range(7, 11):
+        for x in range(48, 52):
+            image.putpixel((x, y), 0)
+    image.save(tmp_path / 'source.png', transparency=0)
+    spec['sha256'] = hashlib.sha256((tmp_path / 'source.png').read_bytes()).hexdigest()
+    after = load_pose(tmp_path, spec)
+    assert (before.width, before.height, before.axis_x, before.axis_y) == (
+        after.width, after.height, after.axis_x, after.axis_y)
+    scaled, _ = convert_poses([before, after], (2, 3))
+    a, b = scaled
+    assert (a.width, a.height, a.axis_x, a.axis_y) == (b.width, b.height, b.axis_x, b.axis_y)
+    assert a.pixels[12 * a.width:] == b.pixels[12 * b.width:]
+    assert a.pixels != b.pixels
+
+
+@pytest.mark.parametrize('rect', [[48, 17, 72, 96], [-1, 0, 128, 128],
+                                  [48, 16, 129, 96], [True, 0, 128, 128], [0, 0]])
+def test_sampling_rect_rejects_crop_out_of_canvas_and_ambiguous_coordinates(tmp_path, rect):
+    spec = fixture(tmp_path)
+    spec['sample_rect_px'] = rect
+    with pytest.raises(ValueError, match='sample_rect_px'):
+        load_pose(tmp_path, spec)
+
+
+def test_reject_truecolor_and_external_path(tmp_path):
+    spec = fixture(tmp_path)
+    Image.new('RGBA', (8, 8)).save(tmp_path / 'source.png')
+    spec['sha256'] = hashlib.sha256((tmp_path / 'source.png').read_bytes()).hexdigest()
+    with pytest.raises(ValueError, match='indexed'):
+        load_pose(tmp_path, spec)
+    spec['path'] = '../outside.png'
+    with pytest.raises(ValueError, match='within'):
+        load_pose(tmp_path, spec)
+
+
+def test_attack_does_not_change_neutral_scale(tmp_path):
+    sp = load_pose(tmp_path, fixture(tmp_path))
+    from dataclasses import replace
+    wide = replace(sp, width=96, pixels=bytes([1]) * (96 * sp.height))
+    single, scale1 = convert_poses([sp])
+    pair, scale2 = convert_poses([sp, wide])
+    assert scale1 == scale2
+    assert single[0].pixels == pair[0].pixels
+
+
+def test_shared_palette_does_not_turn_opaque_color_transparent(tmp_path):
+    spec = fixture(tmp_path)
+    ids = ['idle', 'J01', 'J02', 'J03', 'J04', 'J05', 'J06']
+    cfg = {'schema': 'sms_authored_sprite_sample_v1',
+           'poses': [dict(spec, id=name) for name in ids],
+           'durations': [2, 1, 1, 1, 1, 3],
+           'reference': dict(spec, extra_scale=[2, 3])}
+    config = tmp_path / 'config.json'
+    config.write_text(json.dumps(cfg))
+    out = tmp_path / 'converted'
+    report = prepare(config, out)
+    with Image.open(out / 'idle.png') as im:
+        # The dominant codebook entry has zero-based position 0, but must
+        # occupy visible PNG index 1. This protects the source silhouette.
+        assert sum(v != 0 for v in im.tobytes()) > 100
+        assert im.info['transparency'] == 0
+    assert all(c['legal'] for c in report['compositions'])
+    assert report['patterns'] <= 256
+    with pytest.raises(FileExistsError, match='sealed'):
+        prepare(config, out)
+    cfg['durations'][0] = 1
+    config.write_text(json.dumps(cfg))
+    with pytest.raises(ValueError, match='timing'):
+        prepare(config, tmp_path / 'bad')
+
+
+def test_native_registration_keeps_black_opaque_and_uses_source_palette(tmp_path):
+    im = Image.new('RGBA', (8, 8))
+    for x in range(2, 6):
+        for y in range(1, 7):
+            im.putpixel((x, y), (0, 0, 0, 253))
+    raw = tmp_path / 'raw.png'
+    im.save(raw)
+    recipe = {'source': raw.name, 'source_sha256': hashlib.sha256(raw.read_bytes()).hexdigest(),
+              'raw_size': [8, 8], 'scale': [1, 1], 'canvas': [8, 8], 'pivot': [4, 8],
+              'alpha_threshold': 128, 'source_palette_rgb': [[0, 0, 0], [111, 111, 111]],
+              'frames': [{'id': 'J01', 'rect': [0, 0, 8, 8],
+                          'cell_origin': [0, 0], 'raw_pivot': [4, 8]}]}
+    path = tmp_path / 'recipe.json'
+    path.write_text(json.dumps(recipe))
+    report = extract_native(path, tmp_path / 'native')
+    with Image.open(tmp_path / 'native/J01.png') as indexed:
+        assert indexed.getpixel((2, 1)) == 1
+        assert indexed.convert('RGBA').getpixel((2, 1)) == (0, 0, 0, 255)
+        assert indexed.convert('RGBA').getpixel((0, 0))[3] == 0
+    assert report['source_colors'] == 2
+
+
+def test_wide_pair_is_rejected_without_omitting_cells(tmp_path):
+    spec = fixture(tmp_path)
+    im = Image.new('P', (128, 128))
+    im.putpalette(Image.open(tmp_path / 'source.png').getpalette())
+    for y in range(32, 96):
+        for x in range(32, 112):
+            im.putpixel((x, y), 1)
+    im.save(tmp_path / 'wide.png', transparency=0)
+    wide = {'path': 'wide.png', 'sha256': hashlib.sha256((tmp_path / 'wide.png').read_bytes()).hexdigest(),
+            'pivot': [64, 96]}
+    cfg = {'schema': 'sms_authored_sprite_sample_v1',
+           'poses': [dict(wide if name == 'J04' else spec, id=name)
+                     for name in ['idle', 'J01', 'J02', 'J03', 'J04', 'J05', 'J06']],
+           'durations': [2, 1, 1, 1, 1, 3], 'reference': dict(spec, extra_scale=[2, 3])}
+    path = tmp_path / 'config.json'
+    path.write_text(json.dumps(cfg))
+    with pytest.raises(ValueError, match='composition'):
+        prepare(path, tmp_path / 'converted')
+    report = json.loads((tmp_path / 'converted/conversion.json').read_text())
+    assert next(c for c in report['compositions'] if c['id'] == 'J04')['peak'] > 8
+    assert not (tmp_path / 'converted/sample_data.h').read_text().endswith('sample_durations[7] = {0,2,1,1,1,1,3};\n')
+    # Grid phase does not grant an exemption for genuinely wide opaque rows.
+    cfg['poses'][4]['packing_phase_px'] = [0, 8]
+    path.write_text(json.dumps(cfg))
+    with pytest.raises(ValueError, match='composition'):
+        prepare(path, tmp_path / 'wide_phased')
+
+
+def test_all_grid_phases_preserve_pixels_and_opaque_black():
+    phase_self_check()
+
+
+def test_eight_pixel_grids_reconstruct_every_index_and_enforce_capacity():
+    eight_self_check()
+
+
+def test_v2_normal_mode_changes_packing_not_source_conversion(tmp_path):
+    spec = fixture(tmp_path)
+    cfg = {'schema': 'sms_authored_sprite_sample_v2',
+           'poses': [dict(spec, id=name, packing_phase_px=[3, 5])
+                     for name in ['idle', 'cut']],
+           'durations': [2], 'extra_scale': [2, 3],
+           'reference': dict(spec, extra_scale=[2, 3], packing_phase_px=[2, 4])}
+    path = tmp_path / 'config.json'
+    path.write_text(json.dumps(cfg))
+    tall = prepare(path, tmp_path / 'tall')
+    cfg['sprite_size'] = '8x8'
+    path.write_text(json.dumps(cfg))
+    normal = prepare(path, tmp_path / 'normal')
+    assert normal['sprite_size'] == '8x8'
+    assert normal['scale'] == tall['scale']
+    assert normal['palette_codes'] == tall['palette_codes']
+    for name in ['idle', 'cut', 'reference']:
+        assert (tmp_path / 'normal' / f'{name}.png').read_bytes() == (tmp_path / 'tall' / f'{name}.png').read_bytes()
+    assert all(scene['legal'] for scene in normal['compositions'])
+    assert json.loads((tmp_path / 'normal/scene_cut.json').read_text())['sprite_size'] == '8x8'
+    assert '#define SAMPLE_SPRITE_HEIGHT 8u' in (tmp_path / 'normal/sample_data.h').read_text()
+    # A normal-mode phase must never silently accept the tall mode's y=8..15.
+    cfg['poses'][1]['packing_phase_px'] = [0, 8]
+    path.write_text(json.dumps(cfg))
+    with pytest.raises(ValueError, match='x/y=0..7'):
+        prepare(path, tmp_path / 'bad_phase')
+    assert not (tmp_path / 'bad_phase/sample_data.h').exists()
+
+
+def test_normal_mode_is_explicit_v2_opt_in_and_requires_matching_phases(tmp_path):
+    path = tmp_path / 'config.json'
+    path.write_text(json.dumps({'schema': 'sms_authored_sprite_sample_v1', 'sprite_size': '8x8'}))
+    with pytest.raises(ValueError, match='explicit v2 opt-in'):
+        prepare(path, tmp_path / 'invalid')
+    with pytest.raises(ValueError, match='one phase per pose'):
+        pack_registered_eight([('missing', tmp_path / 'absent.png')], [], tmp_path, 256)
+
+
+def test_declared_opaque_ground_boundary_blocks_stale_registration(tmp_path):
+    spec = fixture(tmp_path)
+    cfg = {'schema': 'sms_authored_sprite_sample_v2', 'sprite_size': '8x8',
+           'poses': [dict(spec, id=name, expected_opaque_bottom_px=72)
+                     for name in ['idle', 'cut']],
+           'durations': [2], 'extra_scale': [2, 3],
+           'reference': dict(spec, extra_scale=[2, 3], expected_opaque_bottom_px=72)}
+    path = tmp_path / 'config.json'
+    path.write_text(json.dumps(cfg))
+    prepare(path, tmp_path / 'registered')
+    # A changed source/pivot must fail before it can publish a renderable header.
+    cfg['poses'][1]['pivot'] = [spec['pivot'][0], spec['pivot'][1] - 4]
+    path.write_text(json.dumps(cfg))
+    with pytest.raises(ValueError, match='cut: opaque bottom .* recheck source registration'):
+        prepare(path, tmp_path / 'stale')
+    assert not (tmp_path / 'stale/sample_data.h').exists()
+
+
+def test_default_and_explicit_zero_phase_have_identical_runtime_data(tmp_path):
+    spec = fixture(tmp_path)
+    cfg = {'schema': 'sms_authored_sprite_sample_v1',
+           'poses': [dict(spec, id=name) for name in
+                     ['idle', 'J01', 'J02', 'J03', 'J04', 'J05', 'J06']],
+           'durations': [2, 1, 1, 1, 1, 3],
+           'reference': dict(spec, extra_scale=[2, 3])}
+    path = tmp_path / 'config.json'
+    path.write_text(json.dumps(cfg))
+    prepare(path, tmp_path / 'implicit')
+    for p in cfg['poses'] + [cfg['reference']]:
+        p['packing_phase_px'] = [0, 0]
+    path.write_text(json.dumps(cfg))
+    prepare(path, tmp_path / 'explicit')
+    for name in ['sample_data.h', 'idle.png', 'J04.png', 'reference.png']:
+        assert (tmp_path / 'implicit' / name).read_bytes() == (tmp_path / 'explicit' / name).read_bytes()
+
+
+def test_reject_phase_requiring_unsigned_y_wrap(tmp_path):
+    spec = fixture(tmp_path)
+    cfg = {'schema': 'sms_authored_sprite_sample_v1',
+           'poses': [dict(spec, id=name, packing_phase_px=[0, 8]) for name in
+                     ['idle', 'J01', 'J02', 'J03', 'J04', 'J05', 'J06']],
+           'durations': [2, 1, 1, 1, 1, 3],
+           'reference': dict(spec, extra_scale=[2, 3])}
+    path = tmp_path / 'config.json'
+    path.write_text(json.dumps(cfg))
+    with pytest.raises(ValueError, match='signed offsets'):
+        prepare(path, tmp_path / 'invalid_for_emitter')
+    assert not (tmp_path / 'invalid_for_emitter/sample_data.h').exists()
+
+
+def test_v2_character_timing_and_both_sides_keep_common_scale(tmp_path):
+    spec = fixture(tmp_path)
+    cfg = {'schema': 'sms_authored_sprite_sample_v2',
+           'poses': [dict(spec, id=name) for name in ['idle', 'prepare', 'cut', 'recover']],
+           'durations': [3, 2, 5], 'extra_scale': [2, 3],
+           'reference': dict(spec, extra_scale=[2, 3]),
+           'positions': [[144, 72], [32, 72]],
+           'flip_actor': True, 'flip_reference': False}
+    path = tmp_path / 'config.json'
+    path.write_text(json.dumps(cfg))
+    report = prepare(path, tmp_path / 'v2')
+    assert report['scale']['extra'] == report['reference_scale']['extra'] == [2, 3]
+    header = (tmp_path / 'v2/sample_data.h').read_text()
+    assert 'sample_durations[4] = {0,3,2,5};' in header
+    assert '#define SAMPLE_ACTOR_X 144u' in header
+    assert '#define SAMPLE_REFERENCE_X 32u' in header
+    assert all(c['legal'] for c in report['compositions'])
+    with Image.open(tmp_path / 'v2/idle.png') as actor, Image.open(tmp_path / 'v2/reference.png') as ref:
+        # Both are converted directly from the asymmetric indexed source.
+        # Compare around their shared pivot, including its mirrored offset.
+        a, b = actor.convert('RGBA'), ref.convert('RGBA')
+        points_a = {(x - 24, y - 72): a.getpixel((x, y)) for y in range(80)
+                    for x in range(64) if a.getpixel((x, y))[3]}
+        points_b = {(-(x - 24), y - 72): b.getpixel((x, y)) for y in range(80)
+                    for x in range(64) if b.getpixel((x, y))[3]}
+        assert points_a == points_b
+
+
+@pytest.mark.parametrize('change', [
+    {'durations': [3, 0, 5]}, {'durations': [3, True, 5]},
+    {'durations': [3, 2]}, {'extra_scale': None},
+    {'poses': [{'id': 'idle'}, {'id': '../cut'}]},
+])
+def test_v2_rejects_ambiguous_or_invalid_action_contract(tmp_path, change):
+    spec = fixture(tmp_path)
+    cfg = {'schema': 'sms_authored_sprite_sample_v2',
+           'poses': [dict(spec, id=name) for name in ['idle', 'prepare', 'cut', 'recover']],
+           'durations': [3, 2, 5], 'extra_scale': [2, 3],
+           'reference': dict(spec, extra_scale=[2, 3])}
+    cfg.update(change)
+    if cfg.get('extra_scale') is None:
+        cfg.pop('extra_scale')
+    path = tmp_path / 'config.json'
+    path.write_text(json.dumps(cfg))
+    with pytest.raises(ValueError, match='v2 requires'):
+        prepare(path, tmp_path / 'invalid')
+
+
+def test_explicit_source_material_codes_preserve_alpha_and_other_indices(tmp_path):
+    from dataclasses import replace
+    sp = load_pose(tmp_path, fixture(tmp_path))
+    sp = replace(sp, pixels=bytes([0, 1, 2]), width=3, height=1,
+                 palette=[(0, 0, 0), (223, 216, 212), (43, 25, 33)] + [(0, 0, 0)] * 253)
+    codebook = [0, 21, 42, 47, 1]
+    default = map_source_indices(sp, codebook)
+    fixed = map_source_indices(sp, codebook, {'1': 42, '2': 0})
+    assert default == bytes([0, 4, 5])  # actual neutral rounding drift
+    assert fixed == bytes([0, 3, 1])  # opaque black remains visible index1
+    assert sp.pixels == bytes([0, 1, 2])  # original indices never mutated
+    assert map_source_indices(sp, codebook, {'1': 42})[2] == default[2]
+    for bad in ({'0': 0}, {'01': 42}, {'256': 42}, {'1': True}, {'1': 63}, []):
+        with pytest.raises(ValueError, match='palette_index_codes'):
+            map_source_indices(sp, codebook, bad)

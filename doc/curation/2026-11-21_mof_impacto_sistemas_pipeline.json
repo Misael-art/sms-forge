@@ -1,0 +1,116 @@
+{
+  "curation_id": "mof_impacto_sistemas_pipeline_20261121",
+  "date": "2026-11-21",
+  "kind": "application_of_existing_lessons",
+  "dedup_key": "mof-contrato-de-feedback-input-estado-e-producao",
+  "lesson_ids_applied": [
+    "L060",
+    "L075",
+    "L098",
+    "L138"
+  ],
+  "new_lesson_ids": [],
+  "rule_section": "SMS_GLOBAL §§60/133",
+  "candidate": {
+    "path": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-11-21_auditoria_impacto_sistemas_pipeline.json",
+    "sha256": "6aa9e4eed021cbeb1dbce56a68a28346862199bab3cd02d176a3a09ba47b58d8"
+  },
+  "review": {
+    "path": "SMS_projects/master_of_fighters/doc/curation_candidates/2026-11-21_auditoria_impacto_sistemas_pipeline.md",
+    "sha256": "2f0fb504155ad78367a49ad7765b0b015c751f23d3a07c032a7fdc9f42ddc866"
+  },
+  "aspects_by_pillar": {
+    "V": 15,
+    "VI": 8,
+    "VII": 7,
+    "VIII": 5
+  },
+  "evidence_verified": 19,
+  "scope": "Método de produção de lutadores e diagnóstico dos recibos MFD1. Decisões GD01/GD02 e homologação de produto pertencem ao projeto.",
+  "workflow": "tools/sms_wrapper/.agent/workflows/playable-fighter.md#ensaio-de-uma-troca-completa",
+  "findings": {
+    "contact-hitstop-and-clocks": "Contato e relógios",
+    "readable-feedback-and-falls": "Reação, queda e retomada",
+    "camera-and-stage-feedback": "Câmera e cenário",
+    "command-grammar-and-resolve": "Comando e conflitos",
+    "resource-defense-and-anti-abuse": "Recurso, defesa e abuso",
+    "audio-priority-and-restore": "Áudio",
+    "hud-flow-and-training": "HUD, rematch e treino",
+    "cpu-observation-and-reaction": "CPU",
+    "deterministic-core-and-optional-state-restore": "Repetição e restauração",
+    "sprite-anchor-and-palette-roles": "Âncora e materiais",
+    "frame-data-and-collision-authority": "Fases e caixas"
+  },
+  "calibration": {
+    "tool": "tools/sms_wrapper/audit_duel_contacts.py",
+    "rom_sha256": "f76fe86f5b3d874a7317c7727f350aa8e750af7a1dba9d85b8d71722c3a126b7",
+    "step_receipt_id": "stepped",
+    "continuous_receipt_id": "continuous",
+    "expected_exit": 1,
+    "contacts_in_each_receipt": 14,
+    "ordered_contacts_match": true,
+    "positive_control": {
+      "ordinal": 1,
+      "requested": 8,
+      "presented_in_both": 8,
+      "opponent_life_before": 100,
+      "opponent_life_after": 94
+    },
+    "negative_control": {
+      "ordinal": 9,
+      "step_vdp": 674,
+      "step_tick": 480,
+      "requested": 46,
+      "presented": 45,
+      "replay_video_frame": 552,
+      "replay_tick": 472,
+      "replay_presented": 46
+    }
+  },
+  "limits": "IDs registrados pela sonda. Composição de pixels, determinismo por tick, guarda, erro, hitstop e cadência exigem provas independentes. A b11-r2 segue abaixo de 58.",
+  "additional_observations": [
+    {
+      "finding": "No MFD1 de repertório, a pose usada na colisão é um índice local ao golpe. Comparar com o ID de repertório requer a base por ator e ação.",
+      "trace": {
+        "path": "SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119/scene02-actions-qa6-b11-r2/6-round/round-trace.json",
+        "sha256": "a3ec97efd0eb0e833e48bd4f7388e85f25cdefab83ed3b936a0b670145f1afc0"
+      },
+      "step_vdp": 674,
+      "first_pose": 45,
+      "tested_pose_local": 2,
+      "requested": 46,
+      "resident": 46,
+      "presented": 45,
+      "producer_evidence_ids": [
+        "rules",
+        "scene"
+      ]
+    },
+    {
+      "finding": "No ramo sem MOF_DUEL_REPERTOIRE, publish_probe copia poses[i] para os três campos. A igualdade desses valores não observa residência ou submissão independente.",
+      "evidence_ids": [
+        "scene"
+      ],
+      "check": "Conferir o perfil da build e cotejar o framebuffer com SAT/PNT."
+    }
+  ],
+  "implementation_commit": "db574e69b9f5bf5b23ca6cc906da4c2fad5f4aa2",
+  "validation": {
+    "host": "Linux",
+    "selftest": "143/143 de base. Probe de projeto opcional não executado.",
+    "measurement_tools": "76/76",
+    "doc_sync": "pass",
+    "learning_capture": "pass",
+    "runtime": "Reanálise dos dois recibos arquivados e do trace MFD1, sem nova execução de ROM.",
+    "host_budget": {
+      "jobs": 1,
+      "estimated_peak_mib": 400,
+      "estimated_output_mib": 32,
+      "estimated_staging_mib": 128,
+      "observed_min_available_mib": 6283,
+      "observed_max_acpi_c": 67.0,
+      "passive_trip_c": 100,
+      "observed_min_free_gib": 18.96
+    }
+  }
+}

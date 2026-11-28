@@ -1,0 +1,245 @@
+{
+  "id": "cps2_keys_v1",
+  "character": "dr_ferdinand_social",
+  "date": "2026-11-01",
+  "not_an_approval": true,
+  "anchor": {
+    "role": "controle de identidade e grade",
+    "file": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/native/J01.png",
+    "sheet_sha256": "877f6e5b232b542f29b0d5794026fe3894d469beee6c47c02e9520d5c976ae41",
+    "extraction": "Célula nativa ampliada 4× por nearest em ref/J01_4x.png, sha256 4084295606bb4f4082718fe1282dc59efb7df6bba14b175043b7787149af6a3b. A estocada partiu de ref/lunge_canvas.png, a mesma célula à esquerda de um quadro preto 1024×512."
+  },
+  "identity_reference_not_fed_whole": {
+    "file": "data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+    "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+    "fed_instead": "ref/model_bust_crop_tight_v1.png",
+    "fed_sha256": "8d243e4838ebb803638e2ab72809cfd94332287a6b123dfdccadd3041ff0a2bd",
+    "why": "A folha inteira inclui o inventário que não entra no kit. O recorte apertado é cabeça e plastrão."
+  },
+  "palette_snap": "Cada chave de luta foi reduzida à paleta de 30 cores da célula J01 e reassentada na grade de 4 px lógicos. Isso organiza o original; não é o conversor SMS e não prova acabamento. Os bustos não passaram por esse snap.",
+  "rejected": [
+    {
+      "id": "BC04_attempt1",
+      "reason": "Bengala horizontal com o cabo na ponta da direita e a mão no meio da haste.",
+      "logical": "logical/BC04_attempt1_rejected_pose.png",
+      "sha256": "2cb455f10f4e436432b6fd6783e9ce483335394f77869d3f429329aa84a35998",
+      "original": "originals/BC04_attempt1.jpg",
+      "prompt": "prompts/BC04_attempt1.txt"
+    },
+    {
+      "id": "BC04_attempt2",
+      "reason": "A ponta ficou romba, mas a mão continuou no meio da haste e a bengala atravessava o corpo para trás.",
+      "original": "originals/BC04_attempt2.jpg",
+      "prompt": null,
+      "prompt_note": "Não há arquivo de prompt desta tentativa. Não inventar o texto."
+    },
+    {
+      "id": "BC_hightip_attempt1",
+      "reason": "O corpo inclina e o calcanhar de trás sobe, mas a arma é um bastão dourado seguro com as duas mãos, sem cabo.",
+      "original": "originals/BC_hightip_attempt1_gold_staff.jpg",
+      "sha256": "07471ee65bff8b14fb47f9e4ef270c9eed995f56759e61fb68de48ab25a94c0c",
+      "prompt": "prompts/BC_hightip_attempt1.txt",
+      "do_not_measure_reach": true
+    },
+    {
+      "id": "BC_hightip_attempt2",
+      "reason": "A inclinação permanece. O cabo ficou na ponta e as duas luvas continuam na haste.",
+      "original": "originals/BC_hightip_attempt2_crook_at_tip.jpg",
+      "sha256": "c993c5a8d9b269ea58da765cc2692aa46ad7161369a5e934bee6168668795db3",
+      "prompt": "prompts/BC_hightip_attempt2.txt",
+      "do_not_measure_reach": true,
+      "experiment_closed": "Duas falhas de identidade da arma. Não repetir este prompt de ponta alta."
+    },
+    {
+      "id": "bust_neutral_attempt1",
+      "reason": "Fantasia certa e fundo liso, mas o rosto saiu mais jovem e redondo que o model sheet.",
+      "original": "originals/bust_neutral_attempt1_younger.jpg",
+      "sha256": "c397e8afc9ca442f9b4054608190341a244be407787f0e4d17f0ee6c40479b16",
+      "prompt": "prompts/bust_neutral_attempt1.txt"
+    },
+    {
+      "id": "GQ01_attempt1",
+      "reason": "O torso vira e o punho fecha, mas a cauda do casaco fica atrás da bota e a mão segura abaixo do cabo.",
+      "original": "originals/GQ01_three_quarter_guard.jpg",
+      "sha256": "95648b1bf5894d734e842467c52f77f83a73c72a9c7ebeda7589fd2b63542f88",
+      "prompt": "prompts/GQ01_three_quarter_guard.txt",
+      "do_not_measure_reach": true
+    },
+    {
+      "id": "GQ01_attempt2",
+      "reason": "A mão chega ao cabo curvo e a haste segue vertical, mas a cauda continua aberta. Duas tentativas encerram esta hipótese. Não medir.",
+      "original": "originals/GQ01_attempt2.jpg",
+      "sha256": "69bedbff99dee51bf6645cda9f3452634017f9207fda9a7fd7753fd9ce430871",
+      "prompt": "prompts/GQ01_attempt2.txt",
+      "do_not_measure_reach": true
+    },
+    {
+      "id": "GQ03_attempt1_crossed",
+      "reason": "Perna cruzada e bengala que não planta. Descartada antes do assento.",
+      "original": "originals/GQ03_attempt1_crossed.jpg",
+      "prompt": "prompts/GQ03_authored_guard.txt"
+    },
+    {
+      "id": "GQ03_attempt2_wide",
+      "reason": "Apoio legível, mas a sola ficou tão larga quanto a de J01. Não foi a candidata medida.",
+      "original": "originals/GQ03_attempt2_wide.jpg",
+      "prompt": "prompts/GQ03_authored_guard.txt"
+    },
+    {
+      "id": "GQ03_tap_attempt1",
+      "reason": "A haste atravessa o corpo e a base abre de novo. Não assentada e não medida.",
+      "original": "originals/GQ03_tap_attempt1_rejected.jpg",
+      "prompt": "prompts/GQ03_tap_attempt1.txt"
+    },
+    {
+      "id": "GQ03_r2_identity",
+      "reason": "Óculos mais grossos e vão entre as solas, mas a faixa da sola ficou em cinco colunas. O par oficial recusou. Não é a guarda.",
+      "original": "originals/GQ03_r2_identity.jpg",
+      "sha256": "c28be7d759d4f4215a5dd32081d39836eda1c2b9d3ec49a2c98c18a5c6015aae",
+      "logical": "logical/GQ03_r2_identity.png",
+      "logical_sha256": "45e8abc59d514ff5ffe4985413f0eeff966a35dadb9e5209e48a9d1e7970aec4",
+      "prompt": "prompts/GQ03_r2_identity.txt"
+    },
+    {
+      "id": "GQ03_tuck_study",
+      "reason": "O pé da frente continuou fora da barra. Pico local 5. Não assentado como célula lógica e não medido no par.",
+      "original": "originals/GQ03_tuck_study.jpg",
+      "sha256": "c9bd497f7fcf7b27ca98b58ed7c90e7ee47e93792923b06ce0c6011cba377a56",
+      "prompt": "prompts/GQ03_tuck_study.txt"
+    }
+  ],
+  "kept": [
+    {
+      "id": "GQ03_authored_guard",
+      "role": "candidata autoral de guarda. Medida no par a 69 px e pico 8. Não é desenho aprovado, não substitui J01 e não abre o toque.",
+      "logical": "logical/GQ03_authored_guard.png",
+      "sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
+      "original": "originals/GQ03_authored_guard.jpg",
+      "original_sha256": "e168fc42d821f2918b814bd3b91a8c032efc5b0f9e5de5703ff7f3ef039cc2ed",
+      "prompt": "prompts/GQ03_authored_guard.txt",
+      "recipe": "register_gq03_authored_guard.py",
+      "pair": "proposals/GQ03_pair_result.json"
+    },
+    {
+      "id": "taunt_01_glasses_keys",
+      "role": "chaves da provocação 1 sobre a GQ03. Par legal a pico 8. Não é arte aprovada, não liga ao jab. O olhar TA05_look foi substituído no ciclo v2 e o arquivo permanece.",
+      "logical_guard_sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
+      "cycle": "proposals/TA01_cycle_v1.json",
+      "board": "preview/TA01_cycle_logical_2x.png"
+    },
+    {
+      "id": "taunt_01_cycle_v2",
+      "role": "ciclo diagnóstico da provocação: exame, atraso curto do casaco e assentamento. Par das poses novas a pico 8. Não é arte aprovada, não liga ao jab e não decide o comando.",
+      "logical_guard_sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
+      "cycle": "proposals/TA01_cycle_v2.json",
+      "recipe": "register_taunt_cycle_v2.py",
+      "board": "preview/TA01_cycle_v2_logical_4x.png"
+    },
+    {
+      "id": "taunt_01_cycle_v3",
+      "role": "assentamento com olhar para o rival e ciano de volta, mais a subida da mão. O terminal TA08→guarda foi medido no framebuffer e não ganhou pose nova. O assentamento v1 permanece no disco e saiu do ciclo. Não é arte aprovada, não liga ao jab e não decide o comando.",
+      "logical_guard_sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
+      "cycle": "proposals/TA01_cycle_v3.json",
+      "terminal": "proposals/TA01_cycle_v3_terminal.json",
+      "recipe": "register_taunt_cycle_v3.py",
+      "board": "preview/TA01_cycle_v3_terminal_sms_8x.png"
+    },
+    {
+      "id": "GQ02_stacked_guard",
+      "role": "diagnóstico de shear por linha. O par passou e a escada não é arte final. Não usar este script para produzir anatomia.",
+      "logical": "logical/GQ02_stacked_guard.png",
+      "sha256": "499a39323279b0efef90341b746fd4a7ac6d58a0aa01f6cbdb731d710aad57a1",
+      "derived_from": "cps2_sample_v1/jab_revision_v8/native/J01.png",
+      "recipe": "author_gq02_stacked_guard.py",
+      "pair": "proposals/GQ02_pair_result.json"
+    },
+    {
+      "id": "BC04",
+      "role": "candidata de contato, não sequência e não desenho aprovado",
+      "logical": "logical/BC04_cane_tap_contact.png",
+      "sha256": "ee6d32596240ebae73bec446ceff6f1df43f56ae26c6d7d907749bb0fce12b3b",
+      "original": "originals/BC04_attempt3.jpg",
+      "prompt": "prompts/BC04_attempt3.txt",
+      "acting_limit": "O prompt pedia mover só a bengala. A diferença de pixels contra J01 não demonstra transferência de peso."
+    },
+    {
+      "id": "K04",
+      "role": "candidata de contato, sequência ausente",
+      "logical": "logical/K04_boot_check_contact.png",
+      "sha256": "98d72ee59779ba860aef8a7809fc74fc20adfcac9d3c001d10bd25998cd3dfcf",
+      "original": "originals/K04_attempt1.jpg",
+      "prompt": "prompts/K04_attempt1.txt"
+    },
+    {
+      "id": "RL05",
+      "role": "chave de extensão, não comanda doze intervalos",
+      "logical": "logical/RL05_lunge_key.png",
+      "sha256": "14944cc00fd18bfdc4d38ebe4b23b4b778452187776146d9f17384e1bc4b8652",
+      "original": "originals/RL05_attempt1.jpg",
+      "prompt": "prompts/RL05_attempt1.txt",
+      "canvas": [
+        256,
+        128
+      ],
+      "why_wider_than_128": "A lâmina inteira não cabe na célula de 128 sem corte. O quadro largo é a fonte; o padding não esconde overflow. Não foi submetida ao adaptador."
+    },
+    {
+      "id": "bust_neutral_attempt2",
+      "role": "candidato de atenção e de versus neutro; não aprovado",
+      "original": "originals/bust_neutral_attempt2.jpg",
+      "sha256": "60a3c94afd2d590475e314c666a162b57da0880b4b0340b0bec82f93e5ad5a55",
+      "prompt": "prompts/bust_neutral_attempt2.txt",
+      "layout": "preview/conversa07_layout_candidate_256.png",
+      "layout_sha256": "85f4a9048157f72bd53d04c4bc445430510aba35857ee24ae17cce5fd56846f5"
+    },
+    {
+      "id": "bust_speech_attempt1",
+      "role": "candidato de fala; não aprovado",
+      "original": "originals/bust_speech_attempt1.jpg",
+      "sha256": "86aa181bd11bfab4c40d657e9cc18f0daecd5521a630459df43099d01ddda1e1",
+      "prompt": "prompts/bust_speech_attempt1.txt",
+      "layout": "preview/conversa07_layout_speech_candidate_256.png",
+      "layout_sha256": "26d3d26e81c05661a70c5dc3b15d5a4785e54ee5519715e912ab3b591791c797",
+      "read_at_crop": "No retângulo 88×112 a boca aberta ainda se separa da atenção. A abertura fica pequena."
+    },
+    {
+      "id": "bust_versus_win_attempt1",
+      "role": "candidato de versus_win; não aprovado e não é ciclo",
+      "original": "originals/bust_versus_win_attempt1.jpg",
+      "sha256": "fe9d1afa993292480da022a691440cd161ac6cf7bc0975ab0ed4ad962860997d",
+      "prompt": "prompts/bust_versus_win_attempt1.txt",
+      "fed": "originals/bust_neutral_attempt2.jpg",
+      "fed_sha256": "60a3c94afd2d590475e314c666a162b57da0880b4b0340b0bec82f93e5ad5a55"
+    },
+    {
+      "id": "bust_versus_loss_attempt1",
+      "role": "candidato de versus_loss; leitura no 4× ainda próxima do neutro",
+      "original": "originals/bust_versus_loss_attempt1.jpg",
+      "sha256": "983280d4bd857a5f2bdae618381cc1e28be049843c2f06a971e1d2d98cc41af0",
+      "prompt": "prompts/bust_versus_loss_attempt1.txt",
+      "fed": "originals/bust_neutral_attempt2.jpg",
+      "fed_sha256": "60a3c94afd2d590475e314c666a162b57da0880b4b0340b0bec82f93e5ad5a55"
+    }
+  ],
+  "not_an_original": {
+    "file": "logical/bust_neutral_candidate.jpg",
+    "sha256": "ba7cf0d95de1f370d31b74ec991f3fa8a83b05ee5ffc895e7a87b82f7a380374",
+    "reason": "Recorte JPEG recomprimido pela tentativa que quebrou na fonte DejaVu, antes da placa. O original é bust_neutral_attempt2.jpg. O recorte sem perdas usado na placa é logical/bust_neutral_crop_v1.png, sha256 3a1dd847c2da867144930d015f206c0c65b99332c1e79945603c473bba960b28."
+  },
+  "layout_recipe": "compose_conversa07_layout_v1.py. Fonte Liberation Sans em /usr/share/fonts/liberation/. Retângulos, cores e texto estão no JSON ao lado de cada placa. O busto não foi quantizado.",
+  "sms_dialogue_plates": {
+    "recipe": "compose_conversa07_sms_v1.py",
+    "attention_sha256": "62a084cd70bd720c19f201dd1d892f349b6ac9acaa38d43b77ae4750cbf7fa50",
+    "speech_sha256": "7b6e1d80b1a5433d25d2b7eb6cbec0014204d5035a056b81646cc59b438c2aea",
+    "note": "16 cores de 6 bits, maioria por bloco, glifos 8×8. Não é ROM e não prova texto de runtime."
+  },
+  "sms_versus_plates": {
+    "recipe": "compose_versus_sms_v1.py",
+    "neutral_sha256": "48c1ff4f121b8101b8a788155e480763833d573d2cad3ab9a21aa0c4e45fe604",
+    "win_sha256": "d089c0873a816d45985bc14578e811e69623f1586b74fcc1aa995296db7a6b06",
+    "loss_sha256": "357f1c39cff12761a434df33ee05c5eb99939d8164846211fc2fcd43da9b488f",
+    "note": "Mesma redução e os mesmos glifos. O vão direito não contém outro lutador. Não é ROM."
+  },
+  "pair_conflict": "proposals/pair_conflict_comparative_v1.json",
+  "official_measure": "Casos 1/1 e 4/6 em out/diagnostics/dr_social_cps2_keys_v1/. A faixa 69/71 px está em out/diagnostics/social_scale_review_20261101/, medida pelo coordenador e não repetida aqui. O adaptador aceita outras razões extra ≤ 1. Detalhe na matriz."
+}

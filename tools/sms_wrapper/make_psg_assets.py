@@ -477,6 +477,11 @@ def main():
     ap.add_argument("--self-check", action="store_true")
     ap.add_argument("--wav", metavar="DIR",
                     help="alem dos assets, renderiza pre-escuta numpy em DIR")
+    ap.add_argument("--only", nargs="+", choices=("sfx_shot", "sfx_hit",
+                    "sfx_hurt", "sfx_down", "music_title", "music_battle"),
+                    help="gere somente os simbolos indicados")
+    ap.add_argument("--role", action="append", default=[], metavar="SIMBOLO=TEXTO",
+                    help="papel do asset selecionado no manifesto (repetivel)")
     args = ap.parse_args()
     data = assets(args.project or '')
     assert all(blob[-1] == END and WAIT in blob for blob in data.values())
@@ -543,6 +548,16 @@ def main():
 
     if not args.project:
         ap.error("--project e obrigatorio para gerar os assets")
+    selected = set(args.only) if args.only else set(data)
+    role_overrides = {}
+    for specification in args.role:
+        symbol, separator, role = specification.partition("=")
+        if not separator or symbol not in selected or not role.strip() or symbol in role_overrides:
+            ap.error("--role exige SIMBOLO=TEXTO unico para um asset selecionado")
+        role_overrides[symbol] = role.strip()
+    if args.wav and not selected.intersection(("music_title", "music_battle")):
+        ap.error("--wav exige ao menos uma musica selecionada")
+    data = {symbol: blob for symbol, blob in data.items() if symbol in selected}
     project = os.path.abspath(args.project)
     inc = os.path.join(project, "inc")
     audio = os.path.join(project, "res", "audio")
@@ -576,6 +591,7 @@ def main():
             f.write(blob)
         write_header(os.path.join(inc, symbol + ".h"), symbol, blob)
         role, channels, frames = roles[symbol]
+        role = role_overrides.get(symbol, role)
         if frames is None:
             frames = aq.decode(blob)[1]   # duracao real medida no stream
         entrada = {"file": os.path.relpath(psg, project),
@@ -597,6 +613,8 @@ def main():
     if args.wav:
         os.makedirs(args.wav, exist_ok=True)
         for symbol in ("music_title", "music_battle"):
+            if symbol not in data:
+                continue
             out = os.path.join(args.wav, symbol + ".wav")
             dur = render_wav(out, data[symbol])
             print(f"[WAV] {out} ({dur:.1f}s)")

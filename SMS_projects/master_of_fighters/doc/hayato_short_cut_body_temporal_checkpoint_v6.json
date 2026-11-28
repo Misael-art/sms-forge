@@ -1,0 +1,182 @@
+{
+  "schema": "sms_art_temporal_review_v1",
+  "producer": "/root",
+  "subjects": {
+    "source": {
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/cut_source.png",
+      "sha256": "8666bad0795fe5b1a3272189d5be9c4cae7d946d4f8f3bd21719a17150ba7191"
+    },
+    "sms": {
+      "path": "out/diagnostics/hayato_short_cut_v2/sword_stretch_v6/SMS_both_facings.png",
+      "sha256": "af91e232b01b257d76f2f33960bd4e32103c86c7dbfd1d800be0d37aec7367c0"
+    },
+    "rom": {
+      "path": "out/candidates/hayato_short_cut_body_v6_right/rom/master_of_fighters.sms",
+      "sha256": "c9f38130654cdac79738985b566bf8a68b01bcf4b30a40c6ef0f07f6e36a124e"
+    }
+  },
+  "sequence": {
+    "expected_ids": [
+      "R01",
+      "R02",
+      "R03",
+      "R04",
+      "R05",
+      "R06"
+    ],
+    "actual_ids": [
+      "R01",
+      "R02",
+      "R03",
+      "R04",
+      "R05",
+      "R06"
+    ],
+    "duration_ticks": [
+      8,
+      1,
+      2,
+      7,
+      2,
+      5
+    ],
+    "tick_definition": "One NTSC VDP presentation; nominal60Hz, this recorded stream59.9227434Hz",
+    "expected_terminal": "original_guard",
+    "terminal": "original_guard"
+  },
+  "observations": [
+    {
+      "id": "source_static",
+      "target": "source",
+      "subject_sha256": "8666bad0795fe5b1a3272189d5be9c4cae7d946d4f8f3bd21719a17150ba7191",
+      "method": "framewise",
+      "reviewer": "/root/hayato_cut_art_review",
+      "report": {
+        "path": "doc/hayato_short_cut_body_blade_SMS_independent_review_v6.json",
+        "sha256": "516d2421dab71a1a4de6794266fab3ee6409d6a43c6de54a2cfb19fe8f8b4405"
+      },
+      "media": {
+        "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/cut_source.png",
+        "sha256": "8666bad0795fe5b1a3272189d5be9c4cae7d946d4f8f3bd21719a17150ba7191"
+      }
+    },
+    {
+      "id": "SMS_static",
+      "target": "sms",
+      "subject_sha256": "af91e232b01b257d76f2f33960bd4e32103c86c7dbfd1d800be0d37aec7367c0",
+      "method": "framewise",
+      "reviewer": "/root/hayato_cut_art_review",
+      "report": {
+        "path": "doc/hayato_short_cut_body_blade_SMS_independent_review_v6.json",
+        "sha256": "516d2421dab71a1a4de6794266fab3ee6409d6a43c6de54a2cfb19fe8f8b4405"
+      },
+      "media": {
+        "path": "out/diagnostics/hayato_short_cut_v2/converted_v6_right/R02.png",
+        "sha256": "7f5add662ad2ac59e994ce332e6e75bb5cd44c1b0af873f8a99ffb42ed754a9c"
+      }
+    },
+    {
+      "id": "actual_exposures",
+      "target": "rom",
+      "subject_sha256": "c9f38130654cdac79738985b566bf8a68b01bcf4b30a40c6ef0f07f6e36a124e",
+      "method": "timeline",
+      "reviewer": "/root",
+      "report": {
+        "path": "out/diagnostics/hayato_short_cut_v2/sword_stretch_v6/performance_v6/99efc557f6c3483ba5bfb8b74d048f4d/pixel_timeline_analysis.json",
+        "sha256": "4d30aef736e385e739a0283815d49071728ebd8cbf0d90738e6e51643acbc1ff"
+      },
+      "media": {
+        "path": "out/diagnostics/hayato_short_cut_v2/sword_stretch_v6/performance_v6/99efc557f6c3483ba5bfb8b74d048f4d/hayato_cut_realtime.mp4",
+        "sha256": "cb28cbc4a32822773c7eb4474aafe9399b62e166c9fa765895df2f1a88294742"
+      },
+      "rom_sha256": "c9f38130654cdac79738985b566bf8a68b01bcf4b30a40c6ef0f07f6e36a124e",
+      "session_id": "99efc557f6c3483ba5bfb8b74d048f4d"
+    },
+    {
+      "id": "actual_ROM_pixels",
+      "target": "rom",
+      "subject_sha256": "c9f38130654cdac79738985b566bf8a68b01bcf4b30a40c6ef0f07f6e36a124e",
+      "method": "rom_framewise",
+      "reviewer": "/root",
+      "report": {
+        "path": "out/diagnostics/hayato_short_cut_v2/sword_stretch_v6/performance_v6/99efc557f6c3483ba5bfb8b74d048f4d/pixel_timeline_analysis.json",
+        "sha256": "4d30aef736e385e739a0283815d49071728ebd8cbf0d90738e6e51643acbc1ff"
+      },
+      "media": {
+        "path": "out/diagnostics/hayato_short_cut_v2/sword_stretch_v6/performance_v6/99efc557f6c3483ba5bfb8b74d048f4d/hayato_cut_realtime.mp4",
+        "sha256": "cb28cbc4a32822773c7eb4474aafe9399b62e166c9fa765895df2f1a88294742"
+      },
+      "rom_sha256": "c9f38130654cdac79738985b566bf8a68b01bcf4b30a40c6ef0f07f6e36a124e",
+      "session_id": "99efc557f6c3483ba5bfb8b74d048f4d"
+    }
+  ],
+  "axes": {
+    "image_inspection": {
+      "status": "pass",
+      "note": "Independent source-local and native SMS review passed; body/grip/five other source poses preserved.",
+      "observation_ids": [
+        "source_static"
+      ]
+    },
+    "frame_analysis": {
+      "status": "pass",
+      "note": "New sword connected in native SMS both facings; canonical normal blade returns in unchanged R03. Framewise construction only.",
+      "observation_ids": [
+        "SMS_static"
+      ]
+    },
+    "order_exposure": {
+      "status": "pass",
+      "note": "Manual both facings and actual native recording present8/1/2/7/2/5, then original guard.",
+      "observation_ids": [
+        "actual_exposures"
+      ]
+    },
+    "continuous_motion": {
+      "status": "needs_evidence",
+      "note": "Owner observed v4 defect and directed this correction. New timing/weapon effect has not been continuously perceived by this agent; owner must judge the new media.",
+      "observation_ids": []
+    },
+    "rom_presentation": {
+      "status": "pass",
+      "note": "Current ROM video480/480exact RGBframes; lossless decode equals native callback. This is framewise presentation, not force/fluency.",
+      "observation_ids": [
+        "actual_ROM_pixels"
+      ]
+    },
+    "owner_acceptance": {
+      "status": "needs_evidence",
+      "note": "Owner accepted the existing art base and requested changes; no acceptance of this new source/timing is inferred.",
+      "observation_ids": []
+    }
+  },
+  "next_decision": "keep_control",
+  "prior_owner_feedback": {
+    "path": "doc/decisions/hayato-short-cut-v4_owner-motion-feedback.json",
+    "sha256": "974573942646347e4804ac8ec0d95d6be0e6f5d296206922eef55f28c8648bff"
+  },
+  "edit_boundary": {
+    "before": {
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v3/R02_delta/native/R02.png",
+      "sha256": "320e2e6e1bad4542433731171add31a84c439b8a24ee0d2e2a14de72af436a2a"
+    },
+    "after": {
+      "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v6/tip_delta/native/R02.png",
+      "sha256": "28ae28678ebf4ceb17cc6212fdd3ee364817c5d1102286a2f6fb99bf615ff8d0"
+    },
+    "rectangles": [
+      [
+        115,
+        35,
+        182,
+        81
+      ],
+      [
+        119,
+        81,
+        182,
+        120
+      ]
+    ]
+  }
+}

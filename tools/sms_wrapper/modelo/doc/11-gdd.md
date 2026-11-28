@@ -6,8 +6,10 @@
 _(o jogo inteiro numa frase. Se não cabe, o escopo ainda não está travado.)_
 
 ## Gênero declarado
-_(ex: action_platformer, puzzle, shmup. Precisa bater com `specialization` em
-`.mddev/project.json` — `audit_specialization.py` compara os dois.)_
+_(Descrever o gênero e a experiência pretendida. Se adotar uma família da
+matriz, registrar seu ID em `.mddev/project.json`, por exemplo `fighting`,
+`platformer` ou `puzzle`. O diagnóstico de especialização procura menções
+aos eixos dessa família neste GDD.)_
 
 ## Loop central
 _(o que o jogador faz nos primeiros 10 segundos, repetidamente:
@@ -15,7 +17,7 @@ ação → resposta do sistema → consequência → nova decisão)_
 
 ## 5 Leis Fundamentais — como este jogo atende
 - **Agência**: _(o input do jogador muda o mundo de forma visível?)_
-- **Feedback**: _(toda ação tem resposta legível em <1 frame de percepção?)_
+- **Feedback**: _(qual sinal permite ao jogador perceber a consequência e em que momento da ação?)_
 - **Fluxo**: _(dificuldade acompanha a competência crescente?)_
 - **Consistência**: _(a mesma entrada produz o mesmo resultado, sempre?)_
 - **Recompensa**: _(o que o jogador ganha por jogar bem?)_

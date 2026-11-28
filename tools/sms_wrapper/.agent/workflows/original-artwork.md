@@ -96,6 +96,27 @@ arte-fonte; texto deve caber em cada cartão sem tocar a borda.
 
 ## 4. Gerar incrementalmente e preservar proveniência
 
+Para fonte de sprite em linguagem CPS2, separar quatro representações:
+concept/model sheet (identidade), fonte autoral (desenho/atuação), saída SMS
+(tradução limitada) e framebuffer (apresentação). CPS2 descreve a direção
+visual escolhida; não certifica anatomia, resolução ou paleta do arquivo.
+Definir simplificações intencionais de olhos/rosto, dedos/pega, dobras e
+equipamento antes da geração. Contorno, clusters e planos sombra/base/luz têm
+papéis por material; preservar o preto opaco quando outra entrada é transparente.
+
+Comparar a amostra com referências aprovadas em escala comum, sem normalizar
+cada personagem pela própria bbox. Medir corpo sem cabelo/arma e equipamento
+separadamente. Registrar escala, canvas, pivôs, paleta e duração como parâmetros
+do personagem/cena; conferir os valores atuais no GDD/decisões, não em receitas
+históricas. Converter uma amostra cedo e revisar quais detalhes sobrevivem.
+Para golpes, seguir `skills/sms-sprite-animation.md` antes do acabamento.
+
+Uma iteração registra causa observada, delta pretendido e invariantes; depois
+confere delta real e reinspeciona a pose inteira. Edição de lâmina pode alterar
+braço/rosto fora do pedido. Se o contrato limita ROI, comparar pixels fora da
+região contra a fonte congelada, além da revisão visual. Não atribuir economia
+ao método sem contagem de tentativas/custo comparável e mais de um caso completo.
+
 1. Gere uma imagem para o estilo escolhido e revise antes de seguir. Para cada
    estilo, use prompt próprio, com a referência aprovada para identidade e as
    características de estilo separadas. Declare qual obra/peça e qual papel do
@@ -140,6 +161,22 @@ arte-fonte; texto deve caber em cada cartão sem tocar a borda.
    ser asset de jogo integrado, não apenas por existir uma imagem-fonte.
 
 ## 5. Revisar e marcar status com precisão
+
+Antes de novo prompt, resolver decisões específicas de equipamento além da
+concept corporal: no caso J.J., referência de arma mais específica corrigiu
+painel/proporção que uma prancha antiga deixava ambíguos. Registrar envelope
+arma/corpo/mão e papel da referência; preservar traje/biotipo/identidade.
+Personagem e projétil/emissão/FX têm contratos próprios: não incorporar efeitos
+à folha corporal para provar ação. Fonte de concept truecolor não recebe o
+teto de cores do recurso SMS por conveniência do editor.
+
+Se a correção precisa preservar corpo/poses, delimitar ROIs de arma/pega e
+conferir foraROI. Pixel perdido na redução ainda pode ser defeito na fonte.
+Recomputar o transform afetado e comparar as saídas; igualdade de PNGs,
+metasprites/headers e configuração de build permite reutilizar a mesma ROM e
+sua evidência **no escopo runtime inalterado**. Revisão do hash-fonte corrigido
+continua própria. Não atualizar vínculo fonte→ROM por inferência: conservar
+linhagem, receita e prova de identidade de todos os insumos consumidos.
 
 Use `workflows/art-review.md` para cada concept/model sheet. Inclua e verifique
 os eixos de escopo/atribuição artística, assinatura visual distinta,

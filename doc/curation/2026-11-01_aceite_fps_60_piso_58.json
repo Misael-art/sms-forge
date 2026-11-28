@@ -1,0 +1,56 @@
+{
+  "schema": "sms_owner_acceptance_policy_v1",
+  "date": "2026-11-01",
+  "policy_id": "owner_target60_floor58_20261101",
+  "status": "implemented_and_validated",
+  "owner_direction": [
+    "Qualquer implementação abaixo de60FPS não é aceita; entregar60FPS funcionais.",
+    "Emenda do dono: aceita até2FPS abaixo do alvo;58FPS é considerável."
+  ],
+  "effective_rule": {
+    "target_fps": 60,
+    "minimum_fps": 58,
+    "minimum_windows": 2,
+    "maximum_spread_fps": 2,
+    "maximum_fps": 61,
+    "round_up_to_floor": false
+  },
+  "scope": "Aceite atual de implementação; taxas da ROM, funcionalidade/carga/pacing e SHA são provas distintas; PAL50 diagnóstico não paga piso58.",
+  "related_lesson_ids": [
+    "L013",
+    "L035",
+    "L138"
+  ],
+  "new_lesson_id": null,
+  "rule_section": "SMS_GLOBAL §133",
+  "tools": [
+    "measure_runtime_probe.py",
+    "measure_frame_advance.py",
+    "reconcile_claims.py",
+    "axis_projection.py",
+    "openbor2sms/openbor2sms/evidence_consumer.py"
+  ],
+  "limits": [
+    "Não modifica ROM, assets ou evidência histórica.",
+    "Janelas de FPS não autenticam funcionalidade/pacing; aplicar demais gates da mesma ROM.",
+    "Título do emulador e booleano constante_50_60 não sustentam aceite.",
+    "Sem nova sessão de emulador nesta alteração de política."
+  ],
+  "validation_directory": "doc/curation/evidence/2026-11-01_fps_floor58",
+  "validation": {
+    "focused_tests_passed": 60,
+    "selftest": "137/137; optional ROM build probe not run",
+    "measurement_tools": "75/75 self-checks",
+    "doc_sync": "pass",
+    "learning_capture": "pass",
+    "calibration": "Preserved Hayato59.78/59.67 passes floor58; rev2 measured16..26 fails. No historical evidence edited.",
+    "new_emulator_run": false
+  },
+  "validation_repairs": [
+    "Focused test runner explicitly includes canonical OpenBOR package path for child CLI checks.",
+    "Synthetic58FPS boundary uses exactly58counterframes/1second, not float-rounded60/(60/58). No comparison epsilon or lower-floor bypass introduced."
+  ],
+  "base_commit": "4b602bcf8a9b9995711203322e0991c7f327fd3d",
+  "publication_branch": "codex/host-bootstrap-continuity-20261024",
+  "existing_pr": "https://github.com/Misael-art/sms-forge/pull/4"
+}

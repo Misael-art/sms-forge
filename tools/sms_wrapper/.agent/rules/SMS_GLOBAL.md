@@ -156,8 +156,12 @@ Mapa conceitual SGDK→SMSlib (NÃO é 1:1):
 | XGM2 | PSGlib (+ PSG samples) |
 Função que não estiver no header não existe.
 
-## 15. Estética doutrinária
-Dark Deco adaptado: contraste alto, luz escassa, silhueta legível a 256×192.
+## 15. Direção artística do projeto
+A fábrica persegue acabamento contemporâneo (direção do dono em 2026).
+O GDD e a bíblia artística escolhem a linguagem de cada jogo. O ano do console
+identifica o hardware. Jogos históricos podem definir a identidade de uma
+adaptação, a escala de uma figura ou uma técnica específica. O briefing
+explicita esse papel e o que o jogador deve reconhecer, ler e sentir hoje.
 Pixel art autoral obrigatória. Proveniência por asset (`audit_provenance.py`);
 pixel nascido de código como personagem/inimigo/boss/cenário final é bloqueado.
 
@@ -211,6 +215,14 @@ honestamente em `mapped` ("provar em emulador"), mas a matriz `.md` afirmava os
 números como NOTA DURA e nenhum gate lia o `.md`. Fato afirmado na leitura
 humana sem entrada no registry é claim invisível.
 Gate: `audit_mastery_registry.cross_check`.
+
+Aplicação 2026-10-27 (L003/L138): a matriz também não pode promover por
+texto livre em `evidence`. `audit_mastery_registry.py` confere arquivos por
+SHA e papel; níveis de emulador exigem ROM, mídia e relatório associado a
+ROM/sessão. Contrato em `doc/05_technical/00_matriz_maestria_sms.md`.
+Custódia consistente não autentica execução nem julga a técnica; o revisor
+confere o conteúdo. Declarações antigas sem custódia ficam em `legacy_claim`,
+com nível `mapped` até reindexação, sem apagar a prova histórica.
 
 ## 24. Deterministic boot
 Boot determinístico obrigatório: mesmo estado inicial toda execução; RNG semeado
@@ -1042,6 +1054,13 @@ self-check cobre limites da espera e janela incompleta. Medir o tempo real da
 ROM antes de aumentar a espera; não extrapolar aprovação de budget de um probe
 parcial.
 
+Aplicação 2026-11-02 (L089): uma declaração `__at` não reconhecida pelo parser
+não pode desaparecer da medição. `measure_worst_frame.declared_probes` recusa
+endereço/dimensão fora do contrato suportado e arrays de tamanho zero; literal,
+espaçamento e sufixo unsigned são calibrados. Para o TRC3, usar2048 literal com
+guarda de tamanho em compilação e fonte pré-processada no mesmo perfil. Um
+PASS antigo que omitiu o array em expressão não é evidência do corredor completo.
+
 ## 75. Plano de slots de animação em loop precisa ser periódico (L090)
 
 Uma passada gulosa de alocação (reusar pares iguais, novos nos slots livres)
@@ -1855,6 +1874,25 @@ propostas de luta têm campos/fonte separados. O guide pesquisado tem divergênc
 de nomes de armas primárias, portanto manual/ROM devem confirmar esses detalhes
 antes de convertê-los em cânone.
 
+Aplicação L113/L123/L127, curadoria Social/Hayato: coreografia/gesto e teste
+temporal precedem acabamento; preservar identidade não congela atuação.
+`audit_art_review_checklist.py` aceita `sms_art_temporal_review_v1` e mede
+custódia/escopo de seis eixos conforme `workflows/art-review.md`: imagens,
+quadros, ordem/exposição, percepção contínua, apresentação ROM e aceite do dono.
+PASS técnico não migra para arte. Sem percepção contínua, `needs_evidence`
+preserva resultados estáticos e controle; não repetir geração/review equivalente.
+O gate rejeita método incompatível, SHA stale, stepping como realtime,
+sequência incompleta e escala declarada divergente; não autentica percepção
+nem julga beleza. Contagens de princípios não classificam qualidade.
+
+Aplicação de 2026-10-30: decisão do dono fecha seu recorte mesmo com percepção
+do agente pendente. O gate artístico confere `actor_role`, decisão e timing
+declarados no arquivo de aceite; `owner_decision_closed` não fecha os demais
+eixos e impede repetir a mesma solicitação. Referência de equipamento, paleta
+compartilhada e identidade de derivados seguem `original-artwork.md` e
+`sms-asset-to-rom.md` (L123/L124/L127). Fonte corrigida exige sua revisão;
+runtime idêntico exige prova dos insumos consumidos para reutilizar evidência.
+
 ## 110. BlastEm avançado: qualificar recurso por CPU, captura e versão (L114–L120)
 
 Aplicar `sms-emulator-diagnostics.md` e a matriz de decisão de
@@ -2260,8 +2298,9 @@ Parecer de agente não é playtest com público nem valida aceitação comercial
 Mais efeitos/tamanho ou nomes AAA não provam qualidade; técnica avançada precisa
 de ganho observável, budget medido e fallback dentro do escopo.
 
-`measure_runtime_probe.py --session` exige NTSC60/PAL50 em pelo menos duas
-janelas completas, tolerância explícita até1FPS e dispersão até1FPS. Janelas
+`measure_runtime_probe.py --session` usa o contrato vigente da §133: alvo60,
+piso58FPS sem arredondamento, pelo menos duas janelas e dispersão até2FPS.
+NTSC60/PAL50 continuam identidades regionais, não exceções de aceite. Janelas
 NTSC55 ouNTSC50 reprovam alvo60. `emulicious_dap.fps_constant` não descarta
 amostra ausente nem aceita janela única. Taxa média regional não prova deadline
 por frame, reação da lógica ou pose apresentada: contador ISR pode avançar sem
@@ -2670,3 +2709,144 @@ projeção é `assigned_checks_only` e nunca promove delivery. O build record do
 cap5 mantém `build`/`validation_report` verdadeiros e os demais eixos falsos até
 nova medição. O binding `doc/rom_asset_binding.json` prova source→res→símbolo→ROM
 por identidade, não por render independente.
+
+Aplicação 2026-11-02 (L138): seleção atual exige ROM exata e SHA calculado
+igual ao recibo. `rom_path` identifica o arquivo; recibos legados nominais usam
+`project.json.name` e candidatos v1 usam o caminho exato em `steps.rom`.
+Nunca escolher `.sms` por mtime nem substituir SHA ausente pelo de uma prova.
+`reconcile_claims.py --build-record ... --current-rom ...` verifica candidata
+sem publicação nominal; `--session ID` consome explicitamente o bundle e os
+sidecars privados produzidos pelas ferramentas oficiais. Projeção OpenBOR
+reconsome o bundle e valida pedidos/pareceres antes de escrever; fontes mudadas
+na preparação são recusadas. Data e pico positivo de WAV não são identidade:
+exigir ROM/sessão, hash do WAV, PCM íntegro, duração e rota do PID; aplicar
+`audit_audio` no escopo declarado (`--active-floor 5` somente SFX).
+`validation_report` significa **pre_gates_only**, com hashes/conjunto das
+entradas realmente auditadas; não aprova gameplay/budget. Memória significa
+somente documento legível/fresco citando o SHA completo, não revisão semântica
+ou entrega. Recibos históricos sem esse lastro permanecem históricos e não
+recebem validade atual. Fixtures temporárias calibram positivos/negativos;
+nenhuma evidência histórica é editada ou rehashada para pagar o gate.
+
+## 131. Tamanho da imagem bancária e alias de mapper (L139)
+
+Uma tabela de offsets correta e bytes presentes no arquivo não garantem que o
+mapper do emulador exponha o banco esperado. No rev2, a ROM de 28 bancos
+`5e79efa…` e a ROM de 32 bancos `ad0e148c…` tinham os primeiros 458752 bytes
+idênticos. No mesmo roteiro BlastEm SMS, 9 de 14 spans residentes da primeira
+coincidiram com dados quatro bancos antes; os 14 spans da imagem preenchida
+coincidiram com suas referências. Emulicious observou a travessia na ROM de
+32 bancos. São observações dessas ROMs e emuladores, não lei de todos os
+mappers nem prova de hardware físico.
+
+Regra: para esse perfil do rev2, o manifesto pede `makesms -pp`; o build
+central rejeita saída que não seja potência de dois quando essa opção é
+declarada e recusa políticas `-pm`/`-pp` concorrentes no mesmo build. Testes
+negativos verificam falha antes do recibo e preservação da ROM nominal. A
+imagem antiga e seu recibo histórico permanecem identificados. Acessos aos
+bancos exigem QA por ROM/SHA, com estados e padrões efetivamente lidos; tamanho
+sozinho não prova mapper, orientação, fidelidade, scanline ou prazo. Ver
+`blastem-sms-diagnostics.md` para o experimento complementar.
+
+## 132. A face é parte da identidade do cache de poses (L140)
+
+No versus-cut, a mesma pose pode ter patterns e metadados diferentes para
+direita e esquerda, e P2 usa a sua faixa da paleta de sprites compartilhada.
+O pacote antigo de 49 bancos apontava o `PoseRef` de P2 para a face direita;
+outro corte apontava para a esquerda. Interpretar ambos com a mesma convenção
+sem contrato pode montar peças válidas com bytes da face errada.
+
+No perfil adjacente atual, o gerador só declara
+`VERSUS_FACE_LAYOUT_ADJACENT_P2_LEFT` após verificar as expressões P1-direita
+e P2-esquerda. O runtime recusa header sem esse contrato, valida os spans no
+banco e usa `(pose, face)` como chave de cache. Enquanto outra face sobe,
+patterns, metadata e origem usam a face residente; um retorno cancela a geração
+abandonada. A travessia do rev2 foi exercitada por input em Emulicious e os
+spans por BlastEm no SHA identificado. Regenerar pelo conversor, sem editar
+headers gerados à mão.
+
+Limite: face residente/submetida não prova SAT completa nem contato visível;
+troca de direção pode esperar upload. Geometria, todas as composições,
+starvation, prazo e sincronização com combate continuam exigindo QA própria.
+
+## 133. Aceite funcional: objetivo 60 FPS, piso 58 autorizado pelo dono
+
+Decisão explícita do proprietário em 2026-11-01: toda implementação precisa
+entregar 60 FPS funcionais como objetivo; admite-se flexibilidade de até2FPS
+abaixo do alvo. **58 FPS é aceito; qualquer janela abaixo58 reprova.** Esta
+decisão substitui, para aceite atual, a faixa histórica50–60 e a tolerância
+inferior de1FPS, inclusive em `.agent` locais antigas. PAL50 pode ser medido
+como diagnóstico regional, mas não serve como exceção para cumprir este piso.
+
+`measure_runtime_probe.py` mede taxas não arredondadas do contador da ROM em
+pelo menos duas janelas completas e exige piso58, dispersão até2 e limite
+superior61. `runtime_fps_verdict` rederiva esse componente de `fps_janelas`,
+avanço real declarado e total de frames; booleano legado `constante_50_60`,
+título do emulador ou uma média que esconda janela lenta não sustentam o eixo.
+`reconcile_claims.py`, `axis_projection.py` e o consumidor de evidência
+OpenBOR aplicam o mesmo contrato antes de aceitar/projetar eixos. Não arredondar
+57,999 para58, acelerar emulação ou trocar o relógio para obter PASS.
+
+Piso numérico não prova sozinho implementação funcional: o mesmo SHA precisa
+mostrar input, lógica, apresentação e consequência coerentes sob a carga real
+do trecho, com pior frame medido. Contador em ISR, boot/probe, fixture reduzida,
+vídeo por stepping ou média de janela não comprovam prazos por frame ou gameplay.
+Não aceitar stalls da ação, ator omitido, atualização parcial ou lógica removida
+porque o relógio do VDP avançou. Aplicar `product-quality-checkpoint.md`.
+
+Se o teste reprovar, investigar causa e continuar a otimização/correção no escopo
+autorizado até pagar o contrato. Proibido tratar relatório ou milestone como
+implementação aceita, baixar piso, descartar amostras válidas lentas, ocultar
+falha, remover conteúdo/qualidade sem decisão ou editar evidência para passar.
+Ambiente/instrumento sem prova deixa aceite pendente; não presume aprovação.
+
+Histórico permanece imutável: PASS antigo não é reescrito nem herdado como
+aceite atual. Self-checks cobrem58,60,57,999, média enganosa, PAL50, booleanos
+sem amostras, contador parado, SHA divergente e projeção recusada sem saída.
+Registro: `doc/curation/2026-11-01_aceite_fps_60_piso_58.json`; aplica L013,
+L035 e L138 sem duplicar IDs. Nenhuma nova ROM/jogo é aprovada por esta curadoria.
+
+Aplicação ao duelo (§133, L060/L098/L138). Para os recibos MFD1 de round
+passo a passo e replay contínuo, `audit_duel_contacts.py` compara a ordem de
+atacante, pose pedida e vida do defensor, e localiza divergência de pose
+publicada no contato de cada gravação. É diagnóstico de consistência dos
+recibos. A revisão de framebuffer, o teste de volta ao controle e a medição
+contínua continuam a cargo do trecho exercitado em `playable-fighter.md`.
+
+## 134. Do roteiro à primeira interação de qualquer gênero
+
+No projeto novo, antes de storyboard e arte, cada beat do primeiro trecho
+jogável tem caso exercitável no próprio roteiro. A direção decide por família
+o que entra agora, fica para depois ou sai do escopo. O ciclo central inclui
+resposta, variação negativa e retomada. `audit_specialization.py --slice-plan`
+confere essa cobertura documental. A leitura dos movimentos e a verdade do
+escopo dependem da revisão do GDD e da execução prevista em
+`first-playable-slice.md` e `product-quality-checkpoint.md`.
+Um duelo acrescenta `playable-fighter.md`; o perfil MFD1 é próprio dos
+consumidores compatíveis. Aplicação de §§8/16/42/133 aos projetos nascentes.
+
+## 135. Da intenção visual à cena jogada
+
+No storyboard, fixe o foco da ação, os sinais de identidade e o momento mais
+difícil de ler. Escolha como traduzi-los para a escala nativa. Reserve padrões,
+cores e tempo de publicação para esses sinais antes de distribuir o restante.
+Compare fonte, conversão e framebuffer do mesmo trecho, incluindo os quadros
+intermediários. Use `audit_validate_resources.py --kind bg` para os índices
+visíveis do fundo e `--kind sprite` ou `--kind sheet` para a transparência
+exclusiva no índice zero dos sprites. Em regiões com desenho já definido, `audit_sprite_cutout.py`
+confere cores e amostras por posição e quadro (§89). A direção julga se o
+jogador reconhece a ação em movimento e se o cenário ajuda a lê-la.
+O checkpoint de produto reúne essa revisão e o orçamento medido (§133).
+
+## 136. Ficha ilustrada do personagem e sua edição publicada (L141)
+
+Cada personagem em produção tem uma ficha Word editável e seu PDF exportado.
+Ao mudar o contrato de arte ou de jogo, atualize a mesma edição nas duas vias.
+No corpo do Word, confira cada figura editada e suas representações ativas
+contra a arte revisada. Uma substituição do PNG pode deixar o leitor mostrando
+o SVG anterior. `audit_character_sheet.py` confere os vínculos nomeados e
+compara texto e páginas rasterizadas do PDF publicado com uma exportação nova
+do Word identificado por SHA. Abra as duas vias e registre a revisão de
+legendas, poses e paginação. O procedimento e o contrato de exemplo estão em
+`doc/game-design/ficha-tecnica-de-personagem.md`. Resultados de jogo na ficha
+permanecem vinculados à ROM e ao caso exercitado (§133).

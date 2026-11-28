@@ -1,0 +1,95 @@
+{
+  "schema": "sms_bounded_concept_patch_v1",
+  "base": "../../jj_concept_sheet_v4.png",
+  "base_sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a",
+  "generated": "raw_refinement.png",
+  "generated_sha256": "036b257c078a01fa47f26fa5bac414eec6eeba978a75ff68ce7620ff11193cf6",
+  "size": [
+    1536,
+    1024
+  ],
+  "alpha_threshold": 128,
+  "polygons": [
+    {
+      "id": "left_weapon_grip",
+      "points": [
+        [
+          90,
+          438
+        ],
+        [
+          207,
+          434
+        ],
+        [
+          250,
+          476
+        ],
+        [
+          242,
+          551
+        ],
+        [
+          151,
+          562
+        ],
+        [
+          65,
+          620
+        ],
+        [
+          25,
+          601
+        ],
+        [
+          85,
+          503
+        ]
+      ]
+    },
+    {
+      "id": "right_weapon_grip",
+      "points": [
+        [
+          1218,
+          205
+        ],
+        [
+          1467,
+          205
+        ],
+        [
+          1467,
+          252
+        ],
+        [
+          1320,
+          254
+        ],
+        [
+          1311,
+          311
+        ],
+        [
+          1244,
+          331
+        ],
+        [
+          1220,
+          290
+        ],
+        [
+          1220,
+          247
+        ]
+      ]
+    }
+  ],
+  "palette": "Concept-only RGBA: copy original body RGBA exactly outside masks, copy generated gun/grip RGB with binaryalpha inside masks. No premature SMS quantization or runtimepaletteclaim.",
+  "scope": "Onlyweapon/grip masks replaced fromImageGen. Every index/RGB/alpha outside masks stays exactlythe oldapprovedconcept. No torso,face,hair,limb orpose re-render outside declaredmasks.",
+  "indexed_trial_not_selected": {
+    "path": "indexed_intermediate.png",
+    "sha256": "1ce301e3a03fd5bbc2140d6993bea305a3a586f2f658774c30822774d620b611",
+    "reason": "Early14colorpalette turned darknavy/bluegrayweapon details into saturatedblue; semanticcolorfidelity requires keeping concepttruecolor before separateSMSconversion."
+  }
+}

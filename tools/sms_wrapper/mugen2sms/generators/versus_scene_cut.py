@@ -35,9 +35,10 @@ _BYTE_VALUE = re.compile(r"0x[0-9A-Fa-f]+|\b\d+\b")
 
 
 def _deduplicate_metasprite_arrays(header: str) -> tuple[str, dict]:
-    """Alias exact metadata and command arrays while retaining public symbols."""
+    """Alias exact metadata, command and pair-filter arrays."""
     canonical_by_bytes: dict[tuple[str, bytes], str] = {}
     aliases: dict[str, str] = {}
+    pair_hash_sizes: dict[str, int] = {}
 
     def replace(match: re.Match[str]) -> str:
         symbol = match.group("symbol")
@@ -45,6 +46,8 @@ def _deduplicate_metasprite_arrays(header: str) -> tuple[str, dict]:
             array_kind = "metadata"
         elif "_CUT_CMD_" in symbol:
             array_kind = "command"
+        elif symbol.endswith("_PAIR_HASHES"):
+            array_kind = "pair_hash"
         else:
             return match.group("decl")
         body = match.group("body")
@@ -59,6 +62,8 @@ def _deduplicate_metasprite_arrays(header: str) -> tuple[str, dict]:
         if any(value > 0xFF for value in numbers):
             raise ValueError(f"{symbol} contains a value outside unsigned char")
         payload = bytes(numbers)
+        if array_kind == "pair_hash":
+            pair_hash_sizes[symbol] = size
         dedup_key = (array_kind, payload)
         canonical = canonical_by_bytes.get(dedup_key)
         if canonical is None:
@@ -72,8 +77,8 @@ def _deduplicate_metasprite_arrays(header: str) -> tuple[str, dict]:
         r"^#define\s+(\w+_SIZE)\s+(\d+)\s*$", output, re.M)}
     bytes_saved = 0
     for symbol, canonical in aliases.items():
-        size = size_macros.get(symbol + "_SIZE")
-        canonical_size = size_macros.get(canonical + "_SIZE")
+        size = pair_hash_sizes.get(symbol, size_macros.get(symbol + "_SIZE"))
+        canonical_size = pair_hash_sizes.get(canonical, size_macros.get(canonical + "_SIZE"))
         if size is None or size != canonical_size:
             raise ValueError(f"alias size mismatch: {symbol} -> {canonical}")
         bytes_saved += size
@@ -91,6 +96,12 @@ def _metadata_dedup_summary(header: str) -> dict:
     command_aliases = {name: target for name, target in re.findall(
         r"^#define\s+([A-Za-z_]\w*_CUT_CMD_[A-Za-z0-9_]+)\s+"
         r"([A-Za-z_]\w*_CUT_CMD_[A-Za-z0-9_]+)\s*$", header, re.M)}
+    pair_hash_aliases = dict(re.findall(
+        r"^#define\s+([A-Za-z_]\w*_PAIR_HASHES)\s+"
+        r"([A-Za-z_]\w*_PAIR_HASHES)\s*$", header, re.M))
+    pair_hash_sizes = {match.group("symbol"): int(match.group("size"))
+                       for match in _BYTE_ARRAY.finditer(header)
+                       if match.group("symbol").endswith("_PAIR_HASHES")}
     return {"alias_count": len(aliases),
             "bytes_saved": sum(sizes[name + "_SIZE"] for name in aliases),
             "aliases": aliases,
@@ -98,7 +109,11 @@ def _metadata_dedup_summary(header: str) -> dict:
             "command_pattern_alias_count": len(command_aliases),
             "command_pattern_bytes_saved": sum(
                 sizes[name + "_SIZE"] for name in command_aliases),
-            "command_pattern_aliases": command_aliases}
+            "command_pattern_aliases": command_aliases,
+            "pair_hash_alias_count": len(pair_hash_aliases),
+            "pair_hash_bytes_saved": sum(pair_hash_sizes[target]
+                                         for target in pair_hash_aliases.values()),
+            "pair_hash_aliases": pair_hash_aliases}
 
 
 def _pose_rows(text: str) -> tuple[list[str], re.Match[str]]:
@@ -150,6 +165,7 @@ def _prefix_header(text: str, prefix: str) -> tuple[str, list[str]]:
     text = text[:match.start()] + text[match.end():]
     role = prefix.upper()
     text = re.sub(r"\bCUT_", role + "_CUT_", text)
+    rows = [re.sub(r"\bCUT_", role + "_CUT_", row) for row in rows]
     text = re.sub(r"\bframes_all\b", prefix + "_frames_all", text)
     text = re.sub(r"\banims\b", prefix + "_anims", text)
     text = re.sub(r"\bcut_sprite_palette\b", prefix + "_cut_sprite_palette", text)
@@ -161,7 +177,9 @@ def _prefix_header(text: str, prefix: str) -> tuple[str, list[str]]:
     # namespaced above and do not use the source action/frame naming scheme.
     declarations = set(re.findall(r"^#define\s+([A-Za-z_]\w*)\b", text, re.M))
     declarations.update(re.findall(
-        r"^\s*const\s+unsigned\s+char\s+([A-Za-z_]\w*)\s*\[", text, re.M))
+        r"^\s*(?:static\s+)?const\s+unsigned\s+(?:char|int)\s+"
+        r"([A-Za-z_]\w*)\s*\[",
+        text, re.M))
     source_symbols = sorted(
         (name for name in declarations if re.search(r"_A\d+F\d+_", name)),
         key=len,
@@ -189,9 +207,40 @@ def _prefix_header(text: str, prefix: str) -> tuple[str, list[str]]:
     return text, rows
 
 
+def _adjacent_facing_rows(p1_rows: list[str], p2_rows: list[str]) -> bool:
+    """Check the generated P1-right/P2-left PoseRef expressions.
+
+    This checks structure, not the bank contents or the rendered image.
+    """
+    symbol = r"(?P<stem>[A-Za-z_]\w*)"
+    pair_hash_fields = (
+        r"(?:\s*,\s*(?:[A-Za-z_]\w*\s*,\s*[A-Za-z_]\w*|"
+        r"[A-Za-z_]\w*\s*\(\s*[A-Za-z_]\w*\s*,\s*"
+        r"[A-Za-z_]\w*\s*\)))?"
+    )
+    right = re.compile(r"\{\s*" + symbol + r"_TILES_BANK\s*,\s*"
+                       r"(?P=stem)_TILES_OFF\s*,\s*(?P=stem)_FACE_SIZE"
+                       + pair_hash_fields + r"\s*\}")
+    left = re.compile(r"\{\s*" + symbol + r"_TILES_BANK\s*,\s*"
+                      r"(?P=stem)_TILES_OFF\s*\+\s*(?P=stem)_FACE_SIZE\s*,\s*"
+                      r"(?P=stem)_FACE_SIZE" + pair_hash_fields + r"\s*\}")
+    right_matches = [right.fullmatch(row) for row in p1_rows]
+    left_matches = [left.fullmatch(row) for row in p2_rows]
+    return bool(p1_rows and p2_rows and
+                all(m and not m.group("stem").endswith("_P2") for m in right_matches) and
+                all(m and m.group("stem").endswith("_P2") for m in left_matches))
+
+
 def merge_headers(p1_text: str, p2_text: str,
-                  p1_poses: int, p2_poses: int) -> str:
+                  p1_poses: int, p2_poses: int,
+                  require_facing_contract: bool = False) -> str:
     p1_palette, p2_palette = _palette(p1_text), _palette(p2_text)
+    pair_hashes_contract = all(
+        re.search(r"^#define\s+CUT_PAIR_CONTENT_HASHES_VERSION\s+1\s*$", text, re.M)
+        and re.search(r"^#define\s+CUT_MAX_POSE_PAIRS\s+\d+\s*$", text, re.M)
+        and re.search(r"^\s*static\s+const\s+unsigned\s+char\s+\w+_RIGHT_PAIR_HASHES\s*\[",
+                      text, re.M)
+        for text in (p1_text, p2_text))
     # Stable slot symbols let the C consumer remain unchanged when a .def is
     # replaced. Character/source names stay in provenance manifests only.
     p1_text, p1_rows = _prefix_header(p1_text, "p1")
@@ -203,6 +252,14 @@ def merge_headers(p1_text: str, p2_text: str,
     palette[1:8] = p1_palette[1:8]
     palette[9:16] = p2_palette[9:16]
     all_poses = p1_rows[:p1_poses] + p2_rows[p2_poses:]
+    def max_pose_pairs(text: str) -> int:
+        match = re.search(r"^#define\s+(?:P[12]_)?CUT_MAX_POSE_PAIRS\s+(\d+)\s*$",
+                          text, re.M)
+        return int(match.group(1)) if match else 0
+
+    facing_contract = _adjacent_facing_rows(p1_rows[:p1_poses], p2_rows[p2_poses:])
+    if require_facing_contract and not facing_contract:
+        raise ValueError("facing layout differs from adjacent P1-right/P2-left contract")
     lines = [
         "#ifndef VERSUS_SCENE_RUNTIME_H",
         "#define VERSUS_SCENE_RUNTIME_H",
@@ -212,6 +269,10 @@ def merge_headers(p1_text: str, p2_text: str,
         f"#define VERSUS_POSE_COUNT {p1_poses + p2_poses}",
         "#define P1_POSE_BASE 0",
         f"#define P2_POSE_BASE {p1_poses}",
+        *( ["#define VERSUS_PAIR_CONTENT_HASHES_VERSION 1",
+            f"#define VERSUS_MAX_POSE_PAIRS {max(max_pose_pairs(p1_text), max_pose_pairs(p2_text))}"]
+           if pair_hashes_contract else []),
+        *(["#define VERSUS_FACE_LAYOUT_ADJACENT_P2_LEFT 1"] if facing_contract else []),
         "static const PoseRef versus_poses[VERSUS_POSE_COUNT] = {",
         *["    " + row + "," for row in all_poses],
         "};",
@@ -380,7 +441,8 @@ def generate(p1_source: Path, p1_config: Path, p2_source: Path,
     p2_header = _remap_bank_macros(p2_header, bank_maps["p2_ryu"], "P2")
     merged = merge_headers(p1_header, p2_header,
                            int(p1["pose_count_per_fighter"]),
-                           int(p2["pose_count_per_fighter"]))
+                           int(p2["pose_count_per_fighter"]),
+                           require_facing_contract=True)
     out_dir.mkdir(parents=True, exist_ok=True)
     header_path = out_dir / "versus_scene_runtime.h"
     header_path.write_text(merged, encoding="ascii")
@@ -456,6 +518,10 @@ def _self_check() -> None:
     assert "P1 uses entries 1-7" in PALETTE_POLICY
     assert "P2 uses entries 9-15" in PALETTE_POLICY
     assert "index 0 transparent" in PALETTE_POLICY
+    right = "{ A_TILES_BANK, A_TILES_OFF, A_FACE_SIZE }"
+    left = "{ B_P2_TILES_BANK, B_P2_TILES_OFF + B_P2_FACE_SIZE, B_P2_FACE_SIZE }"
+    assert _adjacent_facing_rows([right], [left])
+    assert not _adjacent_facing_rows([right], [left.replace(" + B_P2_FACE_SIZE", "")])
 
     p1 = """#ifndef ken_scene_runtime_H
 #define ken_scene_runtime_H
@@ -547,6 +613,20 @@ static const unsigned char cut_sprite_palette[16] = {
     command_summary = _metadata_dedup_summary(command_dedup)
     assert command_summary["command_pattern_alias_count"] == 2
     assert command_summary["command_pattern_bytes_saved"] == 6
+
+    pair_fixture = (
+        "static const unsigned char P1_LEFT_PAIR_HASHES[3] = { 1, 2, 3 };\n"
+        "static const unsigned char P2_RIGHT_PAIR_HASHES[3] = { 1, 2, 3 };\n"
+        "static const unsigned char P2_LEFT_PAIR_HASHES[3] = { 1, 2, 4 };\n"
+        + command_fixture)
+    pair_dedup, _ = _deduplicate_metasprite_arrays(pair_fixture)
+    pair_summary = _metadata_dedup_summary(pair_dedup)
+    assert pair_summary["pair_hash_aliases"] == {
+        "P2_RIGHT_PAIR_HASHES": "P1_LEFT_PAIR_HASHES"}
+    assert pair_summary["pair_hash_bytes_saved"] == 3
+    assert "const unsigned char P1_CUT_CMD_LP[3]" in pair_dedup
+    assert "const unsigned char P2_LEFT_PAIR_HASHES[3]" in pair_dedup
+    assert _deduplicate_metasprite_arrays(pair_dedup)[0] == pair_dedup
 
     route_fixture = (
         "#define P1_CUT_CMD_ROUTE_RISING_TACKLE_X_0_SIZE 13\n"

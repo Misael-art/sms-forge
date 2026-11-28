@@ -1,0 +1,190 @@
+{
+  "schema": "sms_authored_sprite_sample_v2",
+  "project_root": "../../../../../../..",
+  "sprite_size": "8x16",
+  "extra_scale": [
+    7,
+    9
+  ],
+  "canvas_px": [
+    128,
+    128
+  ],
+  "pivot_px": [
+    64,
+    112
+  ],
+  "positions": [
+    [
+      16,
+      40
+    ],
+    [
+      136,
+      40
+    ]
+  ],
+  "shared_palette_codes": [
+    0,
+    16,
+    21,
+    42,
+    63,
+    22,
+    27,
+    47,
+    20,
+    56,
+    57,
+    1,
+    11,
+    3,
+    7
+  ],
+  "flip_actor": false,
+  "measurement_note": "Provocação 1, ciclo v3. idle é a GQ03. TA07_settle_v2 substitui o assentamento escuro. TA08_hand_rise é a subida da mão até o peito. Durações 8/8/10/20/10/12/8 são hipótese diagnóstica, não frame-data e não os 22 ticks do contrato. Sem aprovação.",
+  "poses": [
+    {
+      "id": "idle",
+      "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/logical/GQ03_authored_guard.png",
+      "sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
+      "pivot": [
+        64,
+        116
+      ],
+      "sample_rect_px": [
+        0,
+        0,
+        128,
+        128
+      ]
+    },
+    {
+      "id": "TA02_lean",
+      "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/logical/TA02_lean.png",
+      "sha256": "aed82e2f5e020c57220c30d69c6f6891641894dae777138a6d3af61e52859c46",
+      "pivot": [
+        64,
+        116
+      ],
+      "sample_rect_px": [
+        0,
+        0,
+        128,
+        128
+      ]
+    },
+    {
+      "id": "TA03_reach",
+      "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/logical/TA03_reach.png",
+      "sha256": "9a68362c7cd5ab69766bf49a9a82a0a891d8eba0c3b6797871f7cb64b8938fa2",
+      "pivot": [
+        64,
+        116
+      ],
+      "sample_rect_px": [
+        0,
+        0,
+        128,
+        128
+      ]
+    },
+    {
+      "id": "TA04_glasses",
+      "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/logical/TA04_glasses.png",
+      "sha256": "a132079050563765acc5ff3b58655b9035e648aedd106fc82be552e19dcd60a8",
+      "pivot": [
+        64,
+        116
+      ],
+      "sample_rect_px": [
+        0,
+        0,
+        128,
+        128
+      ]
+    },
+    {
+      "id": "TA05_examine",
+      "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/logical/TA05_examine.png",
+      "sha256": "1f2dec453c5146f53a8e7cfd1dadcbe678317bf19eb417fc0ee7ad286baea918",
+      "pivot": [
+        64,
+        116
+      ],
+      "sample_rect_px": [
+        0,
+        0,
+        128,
+        128
+      ]
+    },
+    {
+      "id": "TA06_coat_lag",
+      "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/logical/TA06_coat_lag.png",
+      "sha256": "00c08ac74ececd6d08ec07ba327596c33e50f8c6c17013a5a2bd49fb0d39319c",
+      "pivot": [
+        64,
+        116
+      ],
+      "sample_rect_px": [
+        0,
+        0,
+        128,
+        128
+      ]
+    },
+    {
+      "id": "TA07_settle_v2",
+      "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/logical/TA07_settle_v2.png",
+      "sha256": "97cb4b29acf8c40580546864b17cb37ae0ee7b8efd9d02d7d20e0f7b5b908e51",
+      "pivot": [
+        64,
+        116
+      ],
+      "sample_rect_px": [
+        0,
+        0,
+        128,
+        128
+      ]
+    },
+    {
+      "id": "TA08_hand_rise",
+      "path": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/logical/TA08_hand_rise.png",
+      "sha256": "fada83b24a71f0ee9450ad313acee1a7d53a6f24ca9003ef1fddd96689b7684d",
+      "pivot": [
+        64,
+        116
+      ],
+      "sample_rect_px": [
+        0,
+        0,
+        128,
+        128
+      ]
+    }
+  ],
+  "durations": [
+    8,
+    8,
+    10,
+    20,
+    10,
+    12,
+    8
+  ],
+  "reference": {
+    "path": "out/diagnostics/dr_social_cps2_sample_v1/ken_a0_g0_i0.png",
+    "sha256": "12544d97e09170385fb772154cfc9995ac7895ed30c54167155eecea6488ec91",
+    "pivot": [
+      33,
+      94
+    ],
+    "extra_scale": [
+      2,
+      3
+    ],
+    "role": "authorized Ken idle construction/composition reference only"
+  }
+}

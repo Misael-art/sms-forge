@@ -7,7 +7,7 @@ import pytest
 
 WRAPPER = Path(__file__).resolve().parents[2]
 
-@pytest.mark.parametrize("command", [None, "inventory", "parse-char", "generate", "scene-cut", "versus-cut", "quality-check"])
+@pytest.mark.parametrize("command", [None, "inventory", "parse-char", "generate", "scene-cut", "versus-cut", "quality-check", "display-fit"])
 def test_sms_public_routes_help(command):
     env = dict(os.environ, PYTHONPATH=str(WRAPPER))
     args = [sys.executable, "-m", "mugen2sms"]

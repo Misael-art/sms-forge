@@ -1,0 +1,89 @@
+{
+  "id": "BC04_overflow_materials_v1",
+  "source": "SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/logical/BC04_cane_tap_contact.png",
+  "source_sha256": "ee6d32596240ebae73bec446ceff6f1df43f56ae26c6d7d907749bb0fce12b3b",
+  "question": "Quais materiais ocupam as linhas com 5 ou mais células de 8 px.",
+  "groups": "Índices da paleta de J01. Latão inclui fivela e bengala; a posição do trecho separa os dois.",
+  "bc04_file_mode": "RGBA. A classificação usa o índice mais próximo da paleta de J01 e não grava outro PNG.",
+  "bc04": {
+    "scale": "pose_budget 2/3 x 6/7, depois extra 7/9, célula 128 inteira",
+    "lines_with_5_or_more_cells": [
+      {
+        "y": 40,
+        "cells": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cell_count": 5,
+        "runs": [
+          {
+            "x0": 24,
+            "x1": 62,
+            "material": "contorno",
+            "counts": {
+              "contorno": 24,
+              "gravata": 2,
+              "branco": 4,
+              "latao": 4,
+              "casaco": 3,
+              "bota": 2
+            }
+          }
+        ]
+      },
+      {
+        "y": 41,
+        "cells": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "cell_count": 5,
+        "runs": [
+          {
+            "x0": 25,
+            "x1": 61,
+            "material": "contorno",
+            "counts": {
+              "pele": 1,
+              "latao": 5,
+              "contorno": 28,
+              "branco": 2,
+              "bota": 1
+            }
+          }
+        ]
+      }
+    ],
+    "line_count": 2,
+    "peak_cells": 5,
+    "sat_row_peak": 6
+  },
+  "j01_control": {
+    "line_count": 0,
+    "peak_cells": 0,
+    "sat_row_peak": 5,
+    "lines": []
+  },
+  "not_a_fix": "Medição. Não eleva, encurta, apaga nem separa a bengala.",
+  "bands_5_or_more_columns": [
+    {
+      "y": "32-47",
+      "columns": 6,
+      "left": "casaco",
+      "right": "contorno e latão, com 2 px classificados como bota"
+    },
+    {
+      "y": "64-79",
+      "columns": 5,
+      "left": "bota e casaco",
+      "right": "bota"
+    }
+  ],
+  "reading": "A faixa da haste é o excesso maior: o casaco abre a esquerda e a haste abre a direita. A sola do toque é outro excesso, de bota nas duas pontas. Não são a mesma causa."
+}

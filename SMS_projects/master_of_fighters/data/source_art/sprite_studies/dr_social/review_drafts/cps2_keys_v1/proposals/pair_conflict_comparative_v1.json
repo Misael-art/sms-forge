@@ -1,0 +1,42 @@
+{
+  "schema": "dr_social_pair_conflict_comparative_v1",
+  "date": "2026-11-01",
+  "not_an_approval": true,
+  "owner_decides": ["alvo de altura", "alcance visível", "identidade da arma"],
+  "not_authorized": [
+    "separar a arma em outro objeto como se isso criasse capacidade de VDP",
+    "esconder células",
+    "apertar só a largura de uma pose",
+    "adotar flicker",
+    "baixar o GDD para 60 px",
+    "repetir extra 1/1, 4/6, 7/9, 4/5, modo 8×8 ou fase (3,9) nas mesmas poses"
+  ],
+  "function_preserved": "Guarda em pé e controle frontal de distância com a bengala. Cabo na luva, haste, ponta romba. Corpo 66–72 px, centro 70, coroa a sola.",
+  "proposed_change": "Empilhar a cauda do casaco e as botas com o torso, em três quartos, para cada linha opaca caber em 32 px na escala extra 7/9. Não muda alcance, altura lógica do golpe nem identidade.",
+  "proposal_id": "GQ01_three_quarter_guard",
+  "proposal_result": "closed_hypothesis_not_drawn",
+  "sources": [
+    {
+      "file": "originals/GQ01_three_quarter_guard.jpg",
+      "sha256": "95648b1bf5894d734e842467c52f77f83a73c72a9c7ebeda7589fd2b63542f88",
+      "observed_defect": "O corpo vira e o punho sobe. A cauda do casaco continua atrás da bota. A mão segura a haste abaixo do cabo."
+    },
+    {
+      "file": "originals/GQ01_attempt2.jpg",
+      "sha256": "69bedbff99dee51bf6645cda9f3452634017f9207fda9a7fd7753fd9ce430871",
+      "observed_defect": "A mão passa ao cabo curvo, haste vertical, ponta de latão junto à bota da frente. A cauda segue atrás. A hipótese não foi desenhada."
+    }
+  ],
+  "scale": "Não medida. O teste previsto era extra 7/9 depois do encaixe CPS2→SMS, o mesmo das placas de 69 px. 35/52 direto não é esse passe.",
+  "visible_reach": "Não medido. BC04, na placa extra 7/9 já lida, chega a 39 px na faixa da bengala. Trazer a haste para dentro do corpo encurtaria esse alcance. Isso é decisão do dono, não correção autorizada.",
+  "pair": "Ken de construção, mesmo Y, Social sem espelho e a referência espelhada. Não é o elenco. Cantos e a outra face não foram medidos. Pico de simulador não é sprite visto no emulador.",
+  "peak_sat_of_current_art": {
+    "extra_7_9_8x16_guard": {"peak": 9, "sat": 36, "height_px": 69, "legal": false},
+    "extra_7_9_8x16_bc04": {"peak": 10, "sat": 38, "legal": false},
+    "extra_4_5_8x16_guard": {"peak": 9, "sat": 40, "height_px": 71, "legal": false},
+    "extra_4_5_8x16_bc04": {"peak": 10, "sat": 42, "legal": false}
+  },
+  "why_the_peak_happens": "Na guarda extra 7/9 a sola tem três linhas de 33–34 px, cinco colunas, mais quatro do Ken. Na bengala a faixa do peito chega a 39 px, seis colunas, mais quatro do Ken. Nenhuma fase 0–7 cabe todas as linhas em quatro colunas. 8×8 e a fase (3,9) não tiram o pico.",
+  "aesthetic_impact": "O giro de três quartos e o punho no peito leem como guarda. A cauda aberta mantém a largura que reprova o par. Não houve sequência, então não há transferência de peso demonstrada.",
+  "what_remains_blocked": "Intervalos da bengala. A pose ainda ilegal não fecha orçamento."
+}

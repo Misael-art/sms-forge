@@ -1,0 +1,47 @@
+{
+  "schema": "versus_sms_tile_candidate_v1",
+  "role": "versus_loss",
+  "status": "candidato_de_layout",
+  "not_an_approval": true,
+  "not_scene_07": "Sem caixa de fala e sem palco. O vão direito não é um lutador.",
+  "not_runtime_text": "Glifos desta receita. Nenhuma ROM carrega esta fonte.",
+  "source": "logical/bust_versus_loss_crop_v1.png",
+  "source_sha256": "20552258784cd453bb66ba0939e004296617e70ae5d5cbf0ed01692453150737",
+  "reduction": "quantizar ao índice mais próximo, depois maioria do bloco. Sem Lanczos, sem dither.",
+  "rects_px_half_open": {
+    "social": [
+      8,
+      24,
+      112,
+      168
+    ],
+    "reserved_opponent": [
+      144,
+      24,
+      248,
+      168
+    ]
+  },
+  "text": {
+    "name": "DR. SOCIAL",
+    "slot": "RIVAL",
+    "mark": "VS"
+  },
+  "name_capacity_glyphs": 13,
+  "unique_tiles": 179,
+  "vram_pattern_bytes_if_4bpp": 5728,
+  "portrait_paste": {
+    "origin": [
+      11,
+      24
+    ],
+    "size": [
+      98,
+      144
+    ]
+  },
+  "plates_sha256": {
+    "native": "357f1c39cff12761a434df33ee05c5eb99939d8164846211fc2fcd43da9b488f",
+    "nearest_4x": "83388a2ee9b61dd9d97c3446a3be54efad405c194bc25d639ece9d6d236b05f6"
+  }
+}

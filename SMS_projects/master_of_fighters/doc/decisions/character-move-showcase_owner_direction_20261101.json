@@ -1,0 +1,51 @@
+{
+  "schema": "sms_owner_design_direction_v1",
+  "recorded_date": "2026-11-01",
+  "actor_role": "owner",
+  "decision": "direction_recorded_implementation_pending",
+  "source_note": "Pedido direto nesta conversa: avaliar avanço do Dr. Social e preparar continuidade; propor padrão com nome, controle Master System, botões/forma de executar e velocidade correta; considerar reuso futuro como desbloqueável.",
+  "approved_direction": [
+    "Apresentação gráfica cuidada do nome e execução de cada golpe com controle SMS e indicação de inputs.",
+    "Respeitar velocidade correta das animações e avaliar pacote compilado antes de afirmar conclusão.",
+    "Registrar possibilidade de reuso futuro como desbloqueável."
+  ],
+  "designer_proposals_not_owner_approved": [
+    "Cena 10, navegação de assistir/praticar e layout em faixas.",
+    "Demonstração funcional usando o reconhecedor comum e reset explícito de cada repetição.",
+    "Piloto diagnóstico no jab existente, sem promover cobertura completa."
+  ],
+  "pending": [
+    "GD01: mapeamento e reconhecimento competitivo dos comandos",
+    "GD02: regras/timing/recursos de combate",
+    "Nome exibido final, navegação e layout",
+    "Arte e orçamento integrado da cena",
+    "Acesso de produto, regra e persistência do eventual desbloqueável",
+    "Pacote completo Social, review humana e evidência no emulador"
+  ],
+  "reference_boundary": "Neo Geo como linguagem de apresentação e clareza, não pixels, comandos de quatro botões ou assets. Controle SMS deverá ter modelo de referência identificado.",
+  "current_review": {
+    "baseline_commit": "d7a3a2d",
+    "character_complete": false,
+    "new_full_character_rom_found": false,
+    "new_animation_runtime_review": false,
+    "static_plates_reviewed": [
+      "conversa07_sms_attention_4x.png",
+      "conversa07_sms_speech_4x.png",
+      "versus_neutral_sms_4x.png",
+      "versus_win_sms_4x.png",
+      "versus_loss_sms_4x.png"
+    ],
+    "limits": "Revisão de documentos/imagens estáticas; não revisão temporal, ROM ou qualidade global aprovada."
+  },
+  "documents": [
+    "doc/character_move_showcase_standard_v1.md",
+    "doc/11-gdd.md",
+    "doc/12-roteiro.md",
+    "doc/13-spec-cenas.md",
+    "doc/15-tdd.md",
+    "doc/10-memory-bank.md"
+  ],
+  "implementation_status": "documented_only",
+  "global_curation_approved": false,
+  "production_release_approved": false
+}

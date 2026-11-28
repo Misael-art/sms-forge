@@ -1,0 +1,37 @@
+{
+  "status": "candidate_for_future_curation",
+  "scope": "Master of Fighters / Cena 02 / Alis",
+  "baseline_rom_sha256": "4b6a5b4847397cb7516850452e2fc0e47d67a379107093c14e91d188d64110c6",
+  "entries": [
+    {
+      "topic": "Paleta por material",
+      "lesson": "Túnica, escudo, lâmina, cabelo e pele preservam suas rampas da guarda em cada pose. Verificar os dois lados e comparar o framebuffer com os materiais já convertidos para o SMS.",
+      "evidence": "../scene02_hayato_alis_qa.md#revisão-de-recuo-paleta-e-proporções-de-alis"
+    },
+    {
+      "topic": "Ordem dos eventos e gestão de buffers",
+      "lesson": "Conservar a ordem e a duração das chaves na agenda de publicação. Rastrear entrada consumida, estado, pose solicitada, residente, submetida e visível. Distinguir fila de padrões, estágio do buffer de vídeo e buffer de comandos. Selar o registro de contato antes de processar o PSG no mesmo tick. Conferir posição e pixels, pois o mesmo identificador de pose pode conservar um pivô antigo.",
+      "evidence": "../scene02_hayato_alis_qa.md#b23-r3--prova-no-emulicious"
+    },
+    {
+      "topic": "Proporções e identidade",
+      "lesson": "Usar o rosto e os pontos anatômicos da guarda como régua repetível. Medir altura do corpo apartada de cabelo e equipamento, conservar escala entre poses e revisar recorte e encaixe de mão, escudo e lâmina em 1×.",
+      "evidence": "../scene02_hayato_alis_qa.md#revisão-de-recuo-paleta-e-proporções-de-alis"
+    },
+    {
+      "topic": "Marcha e qualidade de animação",
+      "lesson": "Definir contato, compressão, passagem e novo apoio. Conferir sola no cenário enquanto o centro de massa se move, balanço independente das armas e entrada e saída da ação em jogo. A volta abrupta à guarda e a cadência NTSC permanecem abertas.",
+      "evidence": "../scene02_hayato_alis_qa.md#marcha-com-transferência-de-peso-e-efeitos-dos-golpes"
+    },
+    {
+      "topic": "Som por material e consequência",
+      "lesson": "Separar o ataque curto e grave do escudo do timbre e da cauda da espada. Ligar preparação, acerto, defesa e erro aos eventos respectivos. Conferir no áudio isolado do emulador e durante o round.",
+      "evidence": "../scene02_hayato_alis_qa.md#b23-r3--prova-no-emulicious"
+    },
+    {
+      "topic": "Identidade sonora de Phantasy Star",
+      "status": "future_owner_direction",
+      "lesson": "O dono quer que a espadada, ou a família de golpes de espada de Alis, remeta ao golpe de espada de Phantasy Star do Master System. Na curadoria futura, identificar o evento e a versão de referência, registrar proveniência e comparar ataque, envelope e timbre com uma interpretação PSG própria da Cena 02. Ouvir espada contra escudo em contexto de combate. A b23-r3 continua como controle para a comparação."
+    }
+  ]
+}

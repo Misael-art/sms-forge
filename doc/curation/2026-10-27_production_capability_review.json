@@ -1,0 +1,73 @@
+{
+  "curation_id": "production_capability_review_20261027",
+  "date": "2026-10-27",
+  "kind": "application_of_existing_lessons",
+  "scope": "Fabrica: ferramentas, conhecimento, pipeline e avaliacao; sem runtime/assets de jogos",
+  "lesson_ids_applied": [
+    "L003",
+    "L013",
+    "L050",
+    "L078",
+    "L079",
+    "L080",
+    "L081",
+    "L130",
+    "L131",
+    "L138",
+    "L004",
+    "L109"
+  ],
+  "new_lesson_ids": [],
+  "rule_section": "SMS_GLOBAL §23 (aplicacao); §§120/130 preservadas",
+  "tools": [
+    "audit_mastery_registry.py",
+    "selftest.py",
+    "audit_asset_proof_sheet.py"
+  ],
+  "external_sources": [
+    {
+      "url": "https://github.com/gamedev-skills/awesome-gamedev-agent-skills",
+      "revision": "184b72be02884f782a0058f2eeae2ce4277453e4"
+    },
+    {
+      "url": "https://github.com/sekaikx/ForgeSkills",
+      "revision": "23b054428e1d7df51f8f31798833bbcfc63864e1"
+    },
+    {
+      "url": "https://www.reddit.com/r/aigamedev/comments/1xdnhmv/i_built_20_reusable_skills_to_make_ai_coding/",
+      "role": "discovery_of_ForgeSkills_not_benchmark"
+    }
+  ],
+  "evidence": [
+    "doc/curation/evidence/2026-10-27_production_capability/inventory.json",
+    "doc/curation/evidence/2026-10-27_production_capability/mastery_strict_before.json",
+    "doc/curation/evidence/2026-10-27_production_capability/mastery_reconciliation.json"
+  ],
+  "observations": {
+    "skills": 34,
+    "workflows": 26,
+    "personas": 5,
+    "pipelines": 5,
+    "framework_documents_including_rules_and_architecture": 72,
+    "measurement_tools_discovered": 75,
+    "registry_techniques": 50,
+    "legacy_promotions_without_artifact_custody": 32,
+    "baseline_mastery_exit": 0,
+    "baseline_doc_sync_exit": 0,
+    "baseline_learning_capture_exit": 0,
+    "measurement_tools_first_pass": "74/75; audit_asset_proof_sheet incompatible with pinned Pillow 11.3.0; repaired with getdata and added to selftest",
+    "hardware_first_pass": "preexisting prose false positive on scene demand 9–10; clarified before-cut demand without altering historical value"
+  },
+  "promotion": "none; registry reconciliation is not refutation of historic emulator evidence",
+  "validation": {
+    "status": "passed",
+    "summary": "doc/curation/evidence/2026-10-27_production_capability/validation.json",
+    "selftest": "135/135; optional project build probe not run",
+    "measurement_tools": {
+      "passed": 75,
+      "total": 75
+    },
+    "rom_runtime": "not_run; no runtime/assets changed"
+  },
+  "next_owner": "consumer luta_mugem_rev2: ID01 R01 R02 R03 R05 R06 R09 R10 IN05, existing backlog"
+}

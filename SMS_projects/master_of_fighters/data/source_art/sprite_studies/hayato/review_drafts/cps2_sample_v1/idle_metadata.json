@@ -1,0 +1,50 @@
+{
+  "schema": "sms_authored_source_candidate_v1",
+  "character": "hayato",
+  "status": "candidate",
+  "owner_approval": false,
+  "identity": {
+    "path": "data/source_art/concept_art/hayato/hayato_concept_sheet_v2_harmony_proposal.png",
+    "sha256": "a8dc147836a8c703ecdda0a4bce87d2cd41efa6abaff6f55340a04bb3fccdf95"
+  },
+  "image": {
+    "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/idle_source.png",
+    "sha256": "af65b1f714b7da0ea7ed47eb735169603e81d9eb82f2cb6428a14ad4487d2560"
+  },
+  "native_px": [
+    144,
+    144
+  ],
+  "pivot": [
+    68,
+    129
+  ],
+  "opaque_bbox": [
+    26,
+    26,
+    122,
+    129
+  ],
+  "body_height_including_hair_px": 103,
+  "notes": [
+    "Observed actual sole baseline129 exclusive; registered conversion pivot uses actual sole boundary129, not assumed extraction target128. No source pixels moved.",
+    "Historical Hayato studies not used as new output.",
+    "Source103px inclhair vs Social104; same common transform will be used, no independent height normalization.",
+    "32 source colors from one mechanical nearest extraction; not SMS palette.",
+    "No action or frame-data approval inferred."
+  ],
+  "tool": "built_in_image_gen",
+  "generation_origin": "/home/misael/.codex/generated_images/01a18528-3b66-7113-b667-37c367daaa47/exec-0d4f2605-f78a-4f40-8e8a-dd7a6c13d793.png",
+  "attempts": [
+    {
+      "purpose": "single native-scale guard",
+      "result": "candidate_requires_independent_review",
+      "generation": 1,
+      "measured_raw_px": [
+        1254,
+        1254
+      ],
+      "deviation": "tool did not obey requested1152 canvas/grid; declared single nearest1/10 extraction, actual raster inspected"
+    }
+  ]
+}

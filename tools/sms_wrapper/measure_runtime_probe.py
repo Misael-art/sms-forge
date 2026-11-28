@@ -10,7 +10,8 @@ Emulicious e fecha, por memoria:
     binario (o §26 visto pelo consumidor, nao so pelo selador);
   - frame_advance: probe_frame avanca dentro da janela de EXECUCAO (§36
     sem rasgo de import, sem Nyquist de captura, sem foco de janela);
-  - fps_constante: janelas concordantes na faixa 50..60;
+  - fps_constante: alvo60, piso58 FPS em pelo menos duas janelas da ROM,
+    sem arredondar para atingir o piso (politica do dono de 2026-11-01);
   - input_route: relata a rota de input PAGA (teclado via WM; este build do
     adaptador DAP nao tem escrita — fato 5 de emulicious_dap.py).
 
@@ -75,27 +76,52 @@ def apply_probe_block(block):
 
 
 MIN_OVERSAMPLE = 3.0     # janela >> latencia de pause/continue (§36.1)
-FPS_MIN, FPS_MAX = 50.0, 60.0
+FPS_MIN, FPS_MAX = 58.0, 61.0
+FPS_ACCEPTANCE_POLICY = "owner_target60_floor58_20261101"
 
 
-def target_fps_verdict(samples, region, tolerance=1.0, max_spread=1.0):
+def target_fps_verdict(samples, region, tolerance=2.0, max_spread=2.0):
     """Window-rate target, not a proof of frame pacing or input latency.
 
-    Broad 50..60 legacy acceptance cannot qualify a 60fps NTSC target. Bounds
-    are explicit measurement tolerance (including pause transport), not a
-    license to call an arbitrary stable slow game full speed.
+    The owner's target is 60 with an explicit two-FPS lower allowance.
+    Regional diagnostics cannot admit a result below the absolute floor 58.
+    The upper bound still rejects accelerated runs instead of rewarding them.
     """
     target = {"NTSC": 60.0, "PAL": 50.0}.get(region) if isinstance(region, str) else None
     valid = (target is not None and isinstance(samples, list) and len(samples) >= 2 and
              all(type(x) in (int, float) and math.isfinite(x) and x > 0 for x in samples) and
-             type(tolerance) in (int, float) and math.isfinite(tolerance) and 0 <= tolerance <= 1 and
-             type(max_spread) in (int, float) and math.isfinite(max_spread) and 0 <= max_spread <= 1)
+             type(tolerance) in (int, float) and math.isfinite(tolerance) and 0 <= tolerance <= 2 and
+             type(max_spread) in (int, float) and math.isfinite(max_spread) and 0 <= max_spread <= 2)
     spread = max(samples) - min(samples) if valid else None
+    regional_passed = bool(valid and spread <= max_spread and
+                           all(abs(x - target) <= tolerance for x in samples))
     return {"region": region, "target_fps": target, "tolerance_fps": tolerance,
+            "acceptance_policy": FPS_ACCEPTANCE_POLICY, "minimum_accepted_fps": FPS_MIN,
+            "regional_diagnostic_passed": regional_passed,
             "max_spread_fps": max_spread, "sample_count": len(samples) if isinstance(samples, list) else 0,
-            "spread_fps": spread, "passed": bool(valid and spread <= max_spread and
-                all(abs(x - target) <= tolerance for x in samples)),
+            "spread_fps": spread, "passed": bool(regional_passed and
+                all(FPS_MIN <= x <= FPS_MAX for x in samples)),
             "claim_ceiling": "regional_mean_frame_rate_windows_only_not_per_frame_pacing_or_game_feel"}
+
+
+def runtime_fps_verdict(metrics):
+    """Recompute the FPS axis from ROM windows, never a legacy PASS boolean.
+
+    This is the FPS component only. Functional acceptance still requires the
+    same-ROM gameplay, presentation, worst-frame and other delivery gates.
+    """
+    if not isinstance(metrics, dict):
+        metrics = {}
+    result = target_fps_verdict(metrics.get("fps_janelas"), metrics.get("region"))
+    measured = metrics.get("fps_measured")
+    measured_ok = (measured is None or (type(measured) in (int, float) and
+                   math.isfinite(measured) and measured >= FPS_MIN))
+    advance = metrics.get("frames_delta_total")
+    result["passed"] = bool(result["passed"] and measured_ok and
+                            metrics.get("frame_advance_proved") is True and
+                            type(advance) is int and advance > 0 and
+                            metrics.get("fps_constante") is True)
+    return result
 
 
 def probe_verdict(m):
@@ -103,7 +129,7 @@ def probe_verdict(m):
     axes = {
         "boot": magic_ok((m.get("probe") or {}).get("header")),
         "frame_advance": (m.get("frames_delta_total") or 0) > 0,
-        "fps_constante": bool(m.get("fps_constante")),
+        "fps_constante": runtime_fps_verdict(m)["passed"],
     }
     axes["aprovado"] = all(axes.values())
     return axes
@@ -244,15 +270,15 @@ def _session(dap, rom, out_dir, out_name, seconds, janelas, jar_name, schema, pr
         frame1 = dap.read_word(FRAME_ADDR)
         running = t1 - t0
         delta=((frame1 or 0)-(frame0 or 0))&0xFFFF if private_meta is not None else (frame1 or 0)-(frame0 or 0)
-        f = fps_from_window(delta, running)
+        # Keep the unrounded rate: 57.999 must not turn into an accepted 58.
+        f = delta / running if running > 0 else None
         fps_list.append(f)
         deltas += delta
         print(f"       janela {w + 1}: delta={frame1} - {frame0} frames em "
               f"{running:.2f}s -> fps={f}")
 
     snapshot = {k: dap.read_byte(a) for k, a in SNAP_ADDRS.items()}
-    const, spread = fps_constant(fps_list, FPS_MIN, FPS_MAX)
-    regional = None
+    region = "NTSC"
     if private_meta is not None:
         status = dap.pause()
         nominal = status.get("nominal_hz")
@@ -260,19 +286,20 @@ def _session(dap, rom, out_dir, out_name, seconds, janelas, jar_name, schema, pr
             print("[FAIL] session region/nominal_hz unavailable or unsupported")
             return 1, None
         region = "PAL" if nominal < 55 else "NTSC"
-        regional = target_fps_verdict(fps_list, region)
-        const, spread = regional["passed"], regional["spread_fps"]
+    regional = target_fps_verdict(fps_list, region)
+    const, spread = regional["passed"], regional["spread_fps"]
 
     sha = hashlib.sha256(open(rom, "rb").read()).hexdigest()
     metrics = {
         "schema": "runtime_metrics_v1",
         "rom": rom,
         "rom_sha256": sha,
-        "region": "NTSC",
+        "region": region,
         "fps_measured": fps_list[0] if fps_list else None,
         "fps_janelas": fps_list,
         "fps_spread": spread,
         "fps_constante": const,
+        "regional_frame_rate_check": regional,
         "frame_advance_proved": deltas > 0,
         "frames_delta_total": deltas,
         "audio_active_pct": None,        # produtor proprio: capture_audio.py
@@ -334,14 +361,19 @@ def _session(dap, rom, out_dir, out_name, seconds, janelas, jar_name, schema, pr
 
 
 def self_check():
+    assert target_fps_verdict([60.0, 60.0], "NTSC")["passed"]
     assert target_fps_verdict([59.4, 59.8], "NTSC")["passed"]
-    assert target_fps_verdict([49.5, 50.0], "PAL")["passed"]
+    assert not target_fps_verdict([49.5, 50.0], "PAL")["passed"]
+    assert target_fps_verdict([49.5, 50.0], "PAL")["regional_diagnostic_passed"]
+    assert target_fps_verdict([58.0, 60.0], "NTSC")["passed"]
+    assert not target_fps_verdict([57.999999, 59.0], "NTSC")["passed"]
+    assert not target_fps_verdict([60.0, 62.0], "NTSC")["passed"]
     assert not target_fps_verdict([55.0, 55.0], "NTSC")["passed"]
     assert not target_fps_verdict([50.0, 50.0], "NTSC")["passed"]
     assert not fps_constant([60.0, None])[0]
     assert not fps_constant([60.0])[0]
     assert not fps_constant([True, 60.0])[0]
-    assert not target_fps_verdict([59.0, 60.1], "NTSC")["passed"]
+    assert not target_fps_verdict([58.0, 60.1], "NTSC")["passed"]
     for samples, region in (([True, 60], "NTSC"), ([float('nan'), 60], "NTSC"),
                             ([60], "NTSC"), ([60, 60], "UNKNOWN"), ([60, 60], [])):
         assert not target_fps_verdict(samples, region)["passed"]
@@ -403,7 +435,9 @@ def self_check():
 
     # veredito: fixture boa, frame congelado e magic de outro binario
     good = {"probe": {"header": [0x53, 0x4D, 0x52, 0x54, 1]},
-            "frames_delta_total": 480, "fps_constante": True}
+            "frames_delta_total": 480, "fps_constante": True,
+            "fps_janelas": [60.0, 60.0], "region": "NTSC",
+            "frame_advance_proved": True}
     assert probe_verdict(good)["aprovado"]
     frozen = dict(good, frames_delta_total=0)
     assert not probe_verdict(frozen)["frame_advance"], \

@@ -132,3 +132,27 @@ Depois: build/link pelo wrapper, QA privada nativa com contexto production
 legível (§99), casos por personagem/par/IA, contato e guard/facing móveis,
 vídeo/probe/trace frescos, worst-frame e execução contínua. EIO na documentação
 é bloqueio de preparação; trabalhos offline acessíveis não apagam esse blocker.
+
+## Reuso e geração verificável (aplicação de L083/L093–L099/L138)
+
+Curadoria: `doc/curation/2026-10-24_mugenesis_rev2.md`. O doador Mugenesis
+distingue conversor, runtime e ABI de dados; o método é aplicável ao SMS.
+Sua VM 24.8, limites e APIs SGDK não são implementação Z80.
+
+- Versionar schema/ABI e features exigidas. Testar o C gerado compilando com
+  seu próprio header, inclusive ABI incompatível e feature ausente. Comparar
+  strings do gerador não testa o consumidor.
+- Identificar cada transformação por entrada, parâmetros e SHA de saída.
+  Regenerar da fonte imutável e reaplicar sobre saída ajustada são operações
+  diferentes. Testar on/off/repeat e falha antes de publicação; recusa não
+  pode deixar dados parciais anunciados como preparados.
+- Derivar slots, comandos e nomes de manifestos. Um segundo consumidor limpo
+  exercita instalação/regeneração sem editar o C do núcleo. Fonte autoral
+  pode ter adaptador para o mesmo contrato intermediário; não fabricar SFF/CNS
+  nem dependência de Ken/Ryu para um jogo autoral.
+- Publicar em staging incluindo dados, imagens, proveniência e recibos;
+  injetar falhas e conferir preservação dos bytes anteriores. Lock cooperativo
+  não prova atomicidade para leitores arbitrários nem resistência a queda de energia.
+
+São receitas de implementação/teste. Este texto não afirma que ABI, instalador,
+transação ou adaptador autoral já existem no motor SMS.

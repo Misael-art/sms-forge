@@ -5,8 +5,13 @@ MotorSMS reutilizável MUGEN→dados/config→runtime, com Ken e Ryu dos pacotes
 MUGEN do consumidorSGDK como pilotos. Jogo1v1 em256×192; metaNTSC60/PAL50,
 comandos responsivos e zeroomissões/flicker visível nas composições aprovadas.
 São objetivos de aceitação, não resultados. Fundo sólido em TODAS as telas;
-semcenário/backdrop nesta revisão. Escala candidata72–88px idle uniforme por
-lutador, sujeita a piloto e decisão documentada; não promessa de viabilidade.
+semcenário/backdrop nesta revisão. Escala default desde 2026-10-23:
+encaixe CPS2→SMS (largura 2/3, altura 6/7) e pose neutra de cada lado em no
+máximo 4 colunas de 8 px. Dois idles fecham em 8. Golpe largo contra pose
+neutra fica em 5 e 3. O que passa disso entra em caso a caso, sem reautoria.
+`POSE_NEAR` 0,69 não abre nem fecha a escala. A faixa histórica 72–88 px e o
+quarto 1:4 permanecem opções (`doc/28-pose-budget-8.md`). Não é promessa de
+viabilidade.
 
 ## Combate
 Walk/crouch/jump/landing/guard/hitstun/blockstun/knockdown/getup/KO/win,
@@ -37,6 +42,11 @@ no trecho deabertura; cuePSG ou alternativa previamente declarada se não couber
 Música de fonte/autoria registrada e reviewauditivo; importarSND não criaBGM.
 
 ## Aceitação e exclusões
+Aceite vigente desde 2026-11-01: objetivo60/piso58 em cada janela válida, sem
+arredondar, pelo menos duas janelas, dispersão≤2 e teto61. PAL50 permanece
+diagnóstico regional. Esse contrato supersede a antiga faixa regional de aceite;
+exige também input/lógica/apresentação/consequência e pior frame sob carga real.
+
 MesmoCcore serveKen/Ken,Ryu/Ryu,Ken/Ryu eRyu/Ken, paletaP2 distinguível,
 IAxIA/humanoxIA/humanoxhumano; trocar.def sem editar núcleo. Entrega requer
 fontes→dados→símbolo→ROM/SHA, gameplay/vídeo/inputtrace, alvoFPSregional,

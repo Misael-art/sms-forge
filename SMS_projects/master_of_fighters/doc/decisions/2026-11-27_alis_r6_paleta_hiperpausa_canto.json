@@ -1,0 +1,1024 @@
+{
+  "candidata": "R6b · Espaçoporto de Palma · Versus Alis × Alis",
+  "rom": "out/candidates/alis_ficha_r6b/rom/master_of_fighters.sms",
+  "rom_sha256": "47dc596676c3e862c6abd52649f6cea51d44dd1ca1798176bb0a29ac2588a399",
+  "bytes": 1048576,
+  "paleta": {
+    "ids_editados": [
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      43,
+      46,
+      62,
+      63,
+      64,
+      65,
+      67,
+      68,
+      69,
+      70,
+      76
+    ],
+    "pixels_recoloridos_no_atlas": 1053,
+    "cores_sms": {
+      "P1_tecido": [
+        39,
+        59
+      ],
+      "peitoral": 37,
+      "P2_tecido": [
+        24,
+        44
+      ]
+    },
+    "auditoria": "out/qa/alis_ficha_r6b/materiais/cores.json"
+  },
+  "ficha": {
+    "arquivo": "doc/ficha_tecnica_alis_g6e_v1.docx",
+    "sha256": "f487b7938d750e5e37b26c4f6e081e42f1ed74aa38505aa864fbcd402b4e74ac",
+    "paginas": 23,
+    "ocorrencias_poses": 139,
+    "poses_sem_identificacao": []
+  },
+  "sessoes": {
+    "pause-double": {
+      "rom_sha256": "47dc596676c3e862c6abd52649f6cea51d44dd1ca1798176bb0a29ac2588a399",
+      "session_id": "1efea64ca9ba4222bafae0eec4031c02",
+      "closed": "closed",
+      "pause": {
+        "duration": 8,
+        "sampled_phases": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "frozen_tick": 718,
+        "darker_pixels_in_floor": 4408,
+        "foco": {
+          "pose": 10,
+          "hand": [
+            96,
+            130
+          ],
+          "tile_origin": [
+            96,
+            128
+          ],
+          "native_frames": [
+            19,
+            20
+          ]
+        },
+        "native_tinted_frames": [
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ]
+      },
+      "guard_on_resume": 719,
+      "bundle": "out/qa/alis_ficha_r6b/pause-double/bundles/1efea64ca9ba4222bafae0eec4031c02",
+      "observacoes": "out/qa/alis_ficha_r6b/pause-double/observations.json",
+      "sha256_observacoes": "107403a5a69caf1bd08b1515c20f1907b8555860126ba2d62d9e26bc29dd643f"
+    },
+    "corner-right": {
+      "rom_sha256": "47dc596676c3e862c6abd52649f6cea51d44dd1ca1798176bb0a29ac2588a399",
+      "session_id": "a8c8dbeb8f7945d0941a1c758828892a",
+      "closed": "closed",
+      "corner": {
+        "wall": 212,
+        "attacker": "p1",
+        "hit_ticks": [
+          275,
+          293
+        ],
+        "free": 303,
+        "block_tick": 308,
+        "hp": 84
+      },
+      "bundle": "out/qa/alis_ficha_r6b/corner-right/bundles/a8c8dbeb8f7945d0941a1c758828892a",
+      "observacoes": "out/qa/alis_ficha_r6b/corner-right/observations.json",
+      "sha256_observacoes": "85792a11ad84e6eeb7dc937e96c6ae45fd7e45d967d8d230cae4e8e16c75335a"
+    },
+    "gain-mp": {
+      "rom_sha256": "47dc596676c3e862c6abd52649f6cea51d44dd1ca1798176bb0a29ac2588a399",
+      "session_id": "36aaa1da7a5e4eed836412be93f6eca9",
+      "closed": "closed",
+      "gain": {
+        "amount": 1,
+        "HP_before_after": [
+          100,
+          100
+        ],
+        "MP_before_after": [
+          0,
+          1
+        ]
+      },
+      "isolated_sfx": {
+        "peak": 268,
+        "sha256": "492b815a23114883211bc4b40b5dde3aa3f7065f86efad8ec57bf783d99fa8f4",
+        "private_sink": "smsforge_36aaa1da7a5e4eed"
+      },
+      "numeral_framebuffer": {
+        "linhas": [
+          73,
+          81
+        ],
+        "quadros_completos": 25,
+        "pixels": 33,
+        "amostras": "out/qa/alis_ficha_r6b/gain-mp/leitura-do-numero.json"
+      },
+      "bundle": "out/qa/alis_ficha_r6b/gain-mp/bundles/36aaa1da7a5e4eed836412be93f6eca9",
+      "observacoes": "out/qa/alis_ficha_r6b/gain-mp/observations.json",
+      "sha256_observacoes": "855d6717357cbba0b12ebe8d50a94d47372b3b1cc3841e29b4cf96e9cec499d4"
+    },
+    "gain-hp": {
+      "rom_sha256": "47dc596676c3e862c6abd52649f6cea51d44dd1ca1798176bb0a29ac2588a399",
+      "session_id": "a95fc4efb4e74ba7a5d3cf6d1a38a9b7",
+      "closed": "closed",
+      "gain": {
+        "amount": 6,
+        "HP_before_after": [
+          90,
+          96
+        ],
+        "MP_before_after": [
+          2,
+          0
+        ]
+      },
+      "isolated_sfx": {
+        "peak": 277,
+        "sha256": "31bb75186b0794b2c037fa4086e8431156c66edc59e31872a46e896010485a42",
+        "private_sink": "smsforge_a95fc4efb4e74ba7"
+      },
+      "numeral_framebuffer": {
+        "linhas": [
+          73,
+          81
+        ],
+        "quadros_completos": 25,
+        "pixels": 36,
+        "amostras": "out/qa/alis_ficha_r6b/gain-hp/leitura-do-numero.json"
+      },
+      "bundle": "out/qa/alis_ficha_r6b/gain-hp/bundles/a95fc4efb4e74ba7a5d3cf6d1a38a9b7",
+      "observacoes": "out/qa/alis_ficha_r6b/gain-hp/observations.json",
+      "sha256_observacoes": "ec0709a25f2958635f8a0c2f074c63521d1c2eff0222fa282681ee6979b4befc"
+    },
+    "corner-left": {
+      "rom_sha256": "47dc596676c3e862c6abd52649f6cea51d44dd1ca1798176bb0a29ac2588a399",
+      "session_id": "59c26fff7b174fbd9360bef4c49539ec",
+      "closed": "closed",
+      "corner": {
+        "wall": 43,
+        "attacker": "p2",
+        "hit_ticks": [
+          275,
+          293
+        ],
+        "free": 303,
+        "block_tick": 308,
+        "hp": 84
+      },
+      "bundle": "out/qa/alis_ficha_r6b/corner-left/bundles/59c26fff7b174fbd9360bef4c49539ec",
+      "observacoes": "out/qa/alis_ficha_r6b/corner-left/observations.json",
+      "sha256_observacoes": "419a32f45b24c2883c977574bc6c99ba8b2e2ad848499952e45217e1aedaf793"
+    },
+    "pause-myau": {
+      "rom_sha256": "47dc596676c3e862c6abd52649f6cea51d44dd1ca1798176bb0a29ac2588a399",
+      "session_id": "16d3407ca08b41de825aa2a63d9c1e49",
+      "closed": "closed",
+      "pause": {
+        "duration": 8,
+        "sampled_phases": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "frozen_tick": 718,
+        "darker_pixels_in_floor": 4408,
+        "foco": {
+          "pose": 11,
+          "hand": [
+            96,
+            130
+          ],
+          "tile_origin": [
+            96,
+            128
+          ],
+          "native_frames": [
+            19,
+            20
+          ]
+        },
+        "native_tinted_frames": [
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ]
+      },
+      "bundle": "out/qa/alis_ficha_r6b/pause-myau/bundles/16d3407ca08b41de825aa2a63d9c1e49",
+      "observacoes": "out/qa/alis_ficha_r6b/pause-myau/observations.json",
+      "sha256_observacoes": "e29fe125bf61e3f07246053c6fc4cbb09cc2853ec01f2f9f9c7066d438d3a017"
+    },
+    "pause-palma": {
+      "rom_sha256": "47dc596676c3e862c6abd52649f6cea51d44dd1ca1798176bb0a29ac2588a399",
+      "session_id": "de4be053b045426da50d5426a4afb21f",
+      "closed": "closed",
+      "pause": {
+        "duration": 10,
+        "sampled_phases": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "frozen_tick": 1432,
+        "darker_pixels_in_floor": 4408,
+        "foco": {
+          "pose": 9,
+          "hand": [
+            80,
+            127
+          ],
+          "tile_origin": [
+            80,
+            120
+          ],
+          "native_frames": [
+            25,
+            26
+          ]
+        },
+        "native_tinted_frames": [
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ]
+      },
+      "bundle": "out/qa/alis_ficha_r6b/pause-palma/bundles/de4be053b045426da50d5426a4afb21f",
+      "observacoes": "out/qa/alis_ficha_r6b/pause-palma/observations.json",
+      "sha256_observacoes": "3fc703fbec88e3dbb2e2494f5fb897ea549acf49af08eeac3f8c82962565446c"
+    },
+    "air-guard-art": {
+      "rom_sha256": "47dc596676c3e862c6abd52649f6cea51d44dd1ca1798176bb0a29ac2588a399",
+      "session_id": "a996e0e8ec1e4ee5b9acad2adb7807c8",
+      "closed": "closed",
+      "matches": [
+        {
+          "pose": 42,
+          "player": 1,
+          "frame": 391,
+          "pivot": [
+            83,
+            86
+          ],
+          "pixels": 750,
+          "file": "p1-pose-42.png",
+          "sha256": "638d9dad5e36db2accaceb56ca301f74dca4a3fc44206e9cb1dfa33e2521a536"
+        },
+        {
+          "pose": 43,
+          "player": 1,
+          "frame": 395,
+          "pivot": [
+            83,
+            74
+          ],
+          "pixels": 685,
+          "file": "p1-pose-43.png",
+          "sha256": "23ce42be83df10a956df0178f3d506091527ca8b741b6e8d6f9c3f11d5ca1a4d"
+        },
+        {
+          "pose": 44,
+          "player": 1,
+          "frame": 401,
+          "pivot": [
+            83,
+            66
+          ],
+          "pixels": 743,
+          "file": "p1-pose-44.png",
+          "sha256": "512819c2e0b4993c248287a1ff2477ea9a4386cf3091ff47560b7e69284aad47"
+        },
+        {
+          "pose": 46,
+          "player": 1,
+          "frame": 451,
+          "pivot": [
+            83,
+            69
+          ],
+          "pixels": 563,
+          "file": "p1-pose-46.png",
+          "sha256": "052b7220977becc7b63208ac43c2c8eb7ece80f0208ede64cc5d03301e5b714e"
+        },
+        {
+          "pose": 47,
+          "player": 1,
+          "frame": 457,
+          "pivot": [
+            83,
+            66
+          ],
+          "pixels": 715,
+          "file": "p1-pose-47.png",
+          "sha256": "6eb5a2686f1f1f637f0a0e175eb4f4012267345558674d593e3a9ce14f7eec9b"
+        },
+        {
+          "pose": 42,
+          "player": 2,
+          "frame": 504,
+          "pivot": [
+            172,
+            86
+          ],
+          "pixels": 750,
+          "file": "p2-pose-42.png",
+          "sha256": "4ce4b7a9c528fda0c06e52e1ac99960b279ca9ed43885e2a872bc5b2951e495d"
+        },
+        {
+          "pose": 43,
+          "player": 2,
+          "frame": 508,
+          "pivot": [
+            172,
+            74
+          ],
+          "pixels": 685,
+          "file": "p2-pose-43.png",
+          "sha256": "ce9b3d5abf55ca1a95b40be5c7eecb8c75494dd4481eea5747feb976f12ce94e"
+        },
+        {
+          "pose": 44,
+          "player": 2,
+          "frame": 514,
+          "pivot": [
+            172,
+            66
+          ],
+          "pixels": 743,
+          "file": "p2-pose-44.png",
+          "sha256": "18ab9bb5854a613b20f7a10aa37082f28339d54b12ad0ad19dad2d74c1416d91"
+        },
+        {
+          "pose": 46,
+          "player": 2,
+          "frame": 564,
+          "pivot": [
+            172,
+            69
+          ],
+          "pixels": 563,
+          "file": "p2-pose-46.png",
+          "sha256": "d3c56bba765b60205a7c29da7468fe964701f72adc45f9f975e27d5536927780"
+        },
+        {
+          "pose": 47,
+          "player": 2,
+          "frame": 570,
+          "pivot": [
+            172,
+            66
+          ],
+          "pixels": 715,
+          "file": "p2-pose-47.png",
+          "sha256": "dea29df5ef485f18b395b66d9c6b2febdbe2b401e232e3439d1beb8987392d81"
+        },
+        {
+          "pose": 66,
+          "player": 2,
+          "frame": 700,
+          "pivot": [
+            143,
+            144
+          ],
+          "pixels": 845,
+          "file": "p2-pose-66.png",
+          "sha256": "83ddb2dd730172730c960c8d94991b0cd48ebc982b908e5fdc25d34fa1ea3079"
+        },
+        {
+          "pose": 66,
+          "player": 1,
+          "frame": 806,
+          "pivot": [
+            110,
+            144
+          ],
+          "pixels": 845,
+          "file": "p1-pose-66.png",
+          "sha256": "9bb748454b5f1492465e73731418cbbb9a416a279702ff620a8ca7785bc1de16"
+        }
+      ],
+      "bundle": "out/qa/alis_ficha_r6b/air-guard-art/bundles/a996e0e8ec1e4ee5b9acad2adb7807c8",
+      "observacoes": "out/qa/alis_ficha_r6b/air-guard-art/observations.json",
+      "sha256_observacoes": "299126a36cc39b892fb7724485d127d53144816e9e089fe2f3eed7f1f2fbb222"
+    },
+    "walk-art": {
+      "rom_sha256": "47dc596676c3e862c6abd52649f6cea51d44dd1ca1798176bb0a29ac2588a399",
+      "session_id": "4e15ae84de4044708a98110d658c07fc",
+      "closed": "closed",
+      "matches": [
+        {
+          "pose": 5,
+          "player": 1,
+          "frame": 355,
+          "pivot": [
+            106,
+            144
+          ],
+          "pixels": 785,
+          "file": "p1-pose-05.png",
+          "sha256": "d27bdcfe8113ee178cdcda365ef6c85dfca9e2cc88ae416b891477ffb9cc3191"
+        },
+        {
+          "pose": 5,
+          "player": 2,
+          "frame": 356,
+          "pivot": [
+            150,
+            144
+          ],
+          "pixels": 785,
+          "file": "p2-pose-05.png",
+          "sha256": "f6b8cd99a1f6c4fa88c1ed75745c4e30af0914baabf0a466fcc54035c9a480af"
+        },
+        {
+          "pose": 6,
+          "player": 1,
+          "frame": 359,
+          "pivot": [
+            102,
+            144
+          ],
+          "pixels": 708,
+          "file": "p1-pose-06.png",
+          "sha256": "d473f9d24b9cb4a07948e91f02dfba9025df47e2798a2bba26924a02f19bf6d3"
+        },
+        {
+          "pose": 6,
+          "player": 2,
+          "frame": 360,
+          "pivot": [
+            154,
+            144
+          ],
+          "pixels": 708,
+          "file": "p2-pose-06.png",
+          "sha256": "4f9eec8789eda2aabe4552116b4b01c6d078fbc58092d1409f8c0de1841b9a97"
+        },
+        {
+          "pose": 7,
+          "player": 1,
+          "frame": 363,
+          "pivot": [
+            98,
+            144
+          ],
+          "pixels": 763,
+          "file": "p1-pose-07.png",
+          "sha256": "aa00784d422c57a3044bd771e2c043ccc6569f211ef3242dea90b20e0de5b173"
+        },
+        {
+          "pose": 7,
+          "player": 2,
+          "frame": 366,
+          "pivot": [
+            160,
+            144
+          ],
+          "pixels": 763,
+          "file": "p2-pose-07.png",
+          "sha256": "ea797a6ede392b7c2f254b2e613c5eda0d374faf9edb37ccbef64bdd06661b3d"
+        },
+        {
+          "pose": 8,
+          "player": 1,
+          "frame": 367,
+          "pivot": [
+            94,
+            144
+          ],
+          "pixels": 795,
+          "file": "p1-pose-08.png",
+          "sha256": "4edd35dd3dd1bb0aacb261d3c8e8ef53240262e7596538fc17633291950c40a6"
+        },
+        {
+          "pose": 8,
+          "player": 2,
+          "frame": 372,
+          "pivot": [
+            166,
+            144
+          ],
+          "pixels": 795,
+          "file": "p2-pose-08.png",
+          "sha256": "6d93370657ab300faea1b7adc56f4119754abeb9d02812cb3e9e118f879a60bf"
+        },
+        {
+          "pose": 1,
+          "player": 2,
+          "frame": 386,
+          "pivot": [
+            170,
+            144
+          ],
+          "pixels": 791,
+          "file": "p2-pose-01.png",
+          "sha256": "3ef10875cb219add0ba90f673b8c5e2338aac817b71e657cb185189b72183bb4"
+        },
+        {
+          "pose": 1,
+          "player": 1,
+          "frame": 388,
+          "pivot": [
+            86,
+            144
+          ],
+          "pixels": 791,
+          "file": "p1-pose-01.png",
+          "sha256": "97c8bf3441d7786f05cd5adec255afa3018f908974b8cdbb3d157cdf8a457cc0"
+        },
+        {
+          "pose": 2,
+          "player": 2,
+          "frame": 391,
+          "pivot": [
+            166,
+            144
+          ],
+          "pixels": 753,
+          "file": "p2-pose-02.png",
+          "sha256": "76fbadf4a573e4f722e32628e013519f7fa56ced1da4a9baeba12e17048f988e"
+        },
+        {
+          "pose": 2,
+          "player": 1,
+          "frame": 394,
+          "pivot": [
+            92,
+            144
+          ],
+          "pixels": 753,
+          "file": "p1-pose-02.png",
+          "sha256": "a9f4b86ba22f17a98cb1a3356575548db1ad6971995cd206688aa80a732fdf46"
+        },
+        {
+          "pose": 3,
+          "player": 2,
+          "frame": 395,
+          "pivot": [
+            162,
+            144
+          ],
+          "pixels": 720,
+          "file": "p2-pose-03.png",
+          "sha256": "15127bbf0db3dbdc0aa47ba1f37a103653c33bcc5a95a5af33bde44a9ea458ea"
+        },
+        {
+          "pose": 3,
+          "player": 1,
+          "frame": 398,
+          "pivot": [
+            96,
+            144
+          ],
+          "pixels": 720,
+          "file": "p1-pose-03.png",
+          "sha256": "ce13b4053d0a2ab6b3a62c6be9f2b8fd5d8505a0a09e1c2f210ea779485c7974"
+        },
+        {
+          "pose": 4,
+          "player": 2,
+          "frame": 399,
+          "pivot": [
+            158,
+            144
+          ],
+          "pixels": 759,
+          "file": "p2-pose-04.png",
+          "sha256": "4316b8de3b8576ace5149b9343df918f6af9b974b859ce8c1009cef40ccfc809"
+        },
+        {
+          "pose": 4,
+          "player": 1,
+          "frame": 404,
+          "pivot": [
+            102,
+            144
+          ],
+          "pixels": 759,
+          "file": "p1-pose-04.png",
+          "sha256": "97a488138528e8fb6f089253112c757aa7f10439dc9f01a10c5ed1dc7705425d"
+        }
+      ],
+      "bundle": "out/qa/alis_ficha_r6b/walk-art/bundles/4e15ae84de4044708a98110d658c07fc",
+      "observacoes": "out/qa/alis_ficha_r6b/walk-art/observations.json",
+      "sha256_observacoes": "02ad14f8b8b6d5914963fc98d52d6e2cd83a57b8fd12d87dd4fe4a6eff8fcf60"
+    },
+    "shield-art": {
+      "rom_sha256": "47dc596676c3e862c6abd52649f6cea51d44dd1ca1798176bb0a29ac2588a399",
+      "session_id": "2a03964943c14ec98a93c3ec3e893b81",
+      "closed": "closed",
+      "matches": [
+        {
+          "pose": 54,
+          "player": 1,
+          "frame": 394,
+          "pivot": [
+            87,
+            144
+          ],
+          "pixels": 931,
+          "file": "p1-pose-54.png",
+          "sha256": "20edfc24a42740fd9d2c5467ef8d899e7792fc075620585457df2a42a1c8ddef"
+        },
+        {
+          "pose": 55,
+          "player": 1,
+          "frame": 412,
+          "pivot": [
+            93,
+            144
+          ],
+          "pixels": 1010,
+          "file": "p1-pose-55.png",
+          "sha256": "ddd1b1f9ae10c8cfc951e8d46d698005f0d2d7a4c91c44ccd53e7adde2f57a22"
+        },
+        {
+          "pose": 56,
+          "player": 1,
+          "frame": 420,
+          "pivot": [
+            93,
+            144
+          ],
+          "pixels": 947,
+          "file": "p1-pose-56.png",
+          "sha256": "a2ce1d959e51c20b05f71c71943b39b2b7dfbe38bd0187090f8c737eda3c6038"
+        },
+        {
+          "pose": 54,
+          "player": 2,
+          "frame": 447,
+          "pivot": [
+            168,
+            144
+          ],
+          "pixels": 931,
+          "file": "p2-pose-54.png",
+          "sha256": "d652c1fd07e8bdcfe86f97caa9fb6309b7a5bb941b2394d2ca0b3c9339a9d7a1"
+        },
+        {
+          "pose": 55,
+          "player": 2,
+          "frame": 465,
+          "pivot": [
+            162,
+            144
+          ],
+          "pixels": 1010,
+          "file": "p2-pose-55.png",
+          "sha256": "17addc4249de959eafaa533caa8af271a87095b13b4d9e97bdef7a44325b8831"
+        },
+        {
+          "pose": 56,
+          "player": 2,
+          "frame": 473,
+          "pivot": [
+            162,
+            144
+          ],
+          "pixels": 947,
+          "file": "p2-pose-56.png",
+          "sha256": "b8756c88c7dd66ffb5a9cd8ece6abb453d82163d9e03e4bb4e5fd64032b7064f"
+        }
+      ],
+      "bundle": "out/qa/alis_ficha_r6b/shield-art/bundles/2a03964943c14ec98a93c3ec3e893b81",
+      "observacoes": "out/qa/alis_ficha_r6b/shield-art/observations.json",
+      "sha256_observacoes": "2244928f6b8e98b9d696c815704367227d672491d8c7e4bdf448a9aa324e43ad"
+    },
+    "guardioes": {
+      "rom_sha256": "47dc596676c3e862c6abd52649f6cea51d44dd1ca1798176bb0a29ac2588a399",
+      "session_id": "ffda53942beb48bcb8e1d2a002ccb843",
+      "closed": "closed",
+      "foco": {
+        "pose": 10,
+        "hand": [
+          91,
+          130
+        ],
+        "tile_origin": [
+          88,
+          128
+        ],
+        "native_frames": [
+          33,
+          34,
+          35
+        ]
+      },
+      "seen": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "guardioes_vdp": [
+        {
+          "vdp": 3007,
+          "left": 12,
+          "duration": 12,
+          "owners": 1,
+          "presented": 0,
+          "tick": 1994,
+          "clock": [
+            24,
+            15
+          ]
+        },
+        {
+          "vdp": 3008,
+          "left": 11,
+          "duration": 12,
+          "owners": 1,
+          "presented": 1,
+          "tick": 1994,
+          "clock": [
+            24,
+            15
+          ]
+        },
+        {
+          "vdp": 3009,
+          "left": 10,
+          "duration": 12,
+          "owners": 1,
+          "presented": 2,
+          "tick": 1994,
+          "clock": [
+            24,
+            15
+          ]
+        },
+        {
+          "vdp": 3010,
+          "left": 9,
+          "duration": 12,
+          "owners": 1,
+          "presented": 3,
+          "tick": 1994,
+          "clock": [
+            24,
+            15
+          ]
+        },
+        {
+          "vdp": 3011,
+          "left": 8,
+          "duration": 12,
+          "owners": 1,
+          "presented": 4,
+          "tick": 1994,
+          "clock": [
+            24,
+            15
+          ]
+        },
+        {
+          "vdp": 3012,
+          "left": 7,
+          "duration": 12,
+          "owners": 1,
+          "presented": 5,
+          "tick": 1994,
+          "clock": [
+            24,
+            15
+          ]
+        },
+        {
+          "vdp": 3013,
+          "left": 6,
+          "duration": 12,
+          "owners": 1,
+          "presented": 6,
+          "tick": 1994,
+          "clock": [
+            24,
+            15
+          ]
+        },
+        {
+          "vdp": 3014,
+          "left": 5,
+          "duration": 12,
+          "owners": 1,
+          "presented": 7,
+          "tick": 1994,
+          "clock": [
+            24,
+            15
+          ]
+        },
+        {
+          "vdp": 3015,
+          "left": 4,
+          "duration": 12,
+          "owners": 1,
+          "presented": 8,
+          "tick": 1994,
+          "clock": [
+            24,
+            15
+          ]
+        },
+        {
+          "vdp": 3016,
+          "left": 3,
+          "duration": 12,
+          "owners": 1,
+          "presented": 9,
+          "tick": 1994,
+          "clock": [
+            24,
+            15
+          ]
+        },
+        {
+          "vdp": 3017,
+          "left": 2,
+          "duration": 12,
+          "owners": 1,
+          "presented": 10,
+          "tick": 1994,
+          "clock": [
+            24,
+            15
+          ]
+        },
+        {
+          "vdp": 3018,
+          "left": 1,
+          "duration": 12,
+          "owners": 1,
+          "presented": 11,
+          "tick": 1994,
+          "clock": [
+            24,
+            15
+          ]
+        },
+        {
+          "vdp": 3019,
+          "left": 0,
+          "duration": 0,
+          "owners": 0,
+          "presented": 12,
+          "tick": 1994,
+          "clock": [
+            24,
+            15
+          ]
+        }
+      ],
+      "observacoes": "out/qa/alis_ficha_r6b/guardioes/observations.json",
+      "sha256_observacoes": "455bdd5c4884583c50c5a2ac86dcfa9c7ea383df1e3af9d1fd402d124f98b30b"
+    },
+    "worst": {
+      "rom_sha256": "47dc596676c3e862c6abd52649f6cea51d44dd1ca1798176bb0a29ac2588a399",
+      "session_id": "2f95c21f220a4fc29ea60dbf54240a34",
+      "closed": "closed",
+      "mixed_fps": [
+        {
+          "vdp": 120,
+          "publications": 99,
+          "nominal_hz": 59.92274340431231,
+          "fps": 49.43626330855765,
+          "active": true
+        },
+        {
+          "vdp": 120,
+          "publications": 97,
+          "nominal_hz": 59.92274340431231,
+          "fps": 48.437550918485776,
+          "active": true
+        },
+        {
+          "vdp": 120,
+          "publications": 96,
+          "nominal_hz": 59.92274340431231,
+          "fps": 47.93819472344985,
+          "active": true
+        }
+      ],
+      "worst_window": {
+        "done": 1,
+        "min_vcount": 200,
+        "overruns": 0,
+        "frames": 3026,
+        "session_id": "2f95c21f220a4fc29ea60dbf54240a34",
+        "rom_sha256": "47dc596676c3e862c6abd52649f6cea51d44dd1ca1798176bb0a29ac2588a399",
+        "first_overrun": {
+          "start_upload_bg_sat": [
+            90,
+            114,
+            248,
+            117
+          ],
+          "end_pnt": [
+            153,
+            53
+          ]
+        },
+        "judgment": {
+          "verdicto": "pass",
+          "vline_min": 200,
+          "vovf_delta": 0,
+          "amostras": 1,
+          "vline_kind": "sealed_min",
+          "frames_medidos": 3000,
+          "frames_rom_final": 3026,
+          "janela_s_min": 50.0,
+          "janela_selada": true,
+          "schema": "smsforge.worst_frame/v2",
+          "sealed_field": "vline_min"
+        }
+      },
+      "bundle": "out/qa/alis_ficha_r6b/worst/bundles/2f95c21f220a4fc29ea60dbf54240a34",
+      "observacoes": "out/qa/alis_ficha_r6b/worst/observations.json",
+      "sha256_observacoes": "70ef4ae1d751f47dc5cf4f23be9c75584bef8cdde94cb981b546da3470d611c9"
+    }
+  },
+  "desempenho": {
+    "piso_fps": 58,
+    "alvo_fps": 60,
+    "promovida": false
+  },
+  "host": {
+    "execucao": "Fôlego, um job e uma sessão de emulador por vez",
+    "min_MemAvailable_MiB_build": 7840,
+    "max_Celsius_build": 70.0,
+    "reserva_MiB": 4096
+  },
+  "diagnostico_anterior": {
+    "rom": "out/candidates/alis_ficha_r6/rom/master_of_fighters.sms",
+    "sha256": "5c64ef55e446a2b76cb622f13c484eb60d93e0e220246866c50aaa03bb518064",
+    "achado": "M03 aceito com pose 83 pedida e pose 10 ainda exibida. O foco fixo aparecia na linha 104 acima da mão agachada. A contagem correta dos oito quadros não detectava essa diferença espacial.",
+    "captura": "out/qa/alis_ficha_r6/pause-double/concentracao.png",
+    "correcao": "Ponto da mão escolhido a partir do ID e sentido do quadro que o VDP realmente apresenta."
+  },
+  "fontes_arte": {
+    "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95",
+    "data/source_art/sprite_studies/alis_revisao_ficha/poses.png": "e33594dae646146849800ed8bf86e9fe0cc6127a230989cd648845141c0c1587",
+    "data/source_art/sprite_studies/alis_revisao_ficha/revisao.json": "b1867f6927274eb7d6eb878ec51c9eb6249333d275ad4ac1a610e5b5e5dc6c8c"
+  },
+  "prova_das_camadas": {
+    "arquivo": "out/qa/alis_ficha_r6b/guardioes/prova_camadas.json",
+    "sha256": "9205dec707846420542786dd8d3e09521dbc90b47d4d6aec99f3da1398500e1c"
+  }
+}

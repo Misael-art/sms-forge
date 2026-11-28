@@ -1,0 +1,19 @@
+{
+  "schema": "sms_authored_source_registration_v1",
+  "image": "idle_source.png",
+  "image_sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1",
+  "previous_conversion_pivot": [
+    68,
+    128
+  ],
+  "current_conversion_pivot": [
+    68,
+    127
+  ],
+  "observed_source_sole_boundary_y": 127,
+  "reason": "Extraction nominal anchor128 was not actual source sole127. Existing scale_sprite rounds128 to one SMS pixel above shared sole boundary. Correct source registration to127, not source bitmap/height.",
+  "source_pixel_edits": [],
+  "expected_SMS_sole_boundary_y": 144,
+  "source_pose_count": 1,
+  "action_approval": false
+}

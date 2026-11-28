@@ -1,0 +1,20 @@
+{
+  "schema": "sms_authored_runtime_registration_v1",
+  "source_sole_boundaries": {
+    "idle": 127,
+    "C01": 127,
+    "C02": 127,
+    "C03": 126,
+    "C04": 127
+  },
+  "runtime_conversion_pivot_Y": {
+    "idle": 127,
+    "C01": 126,
+    "C02": 127,
+    "C03": 126,
+    "C04": 126
+  },
+  "reason": "Preview measured BEFORE any ROM: nearest projection drops last sparse sole pixel forC01/C04, boundary71 instead72. Optical input anchor126 translates whole converted pose+1, no source pixel/height/color edits. C03source-boundary126 already correct; originalguard/C02remain127.",
+  "required_SMS_sole_boundary": 144,
+  "no_per_pose_scaling": true
+}

@@ -1,0 +1,156 @@
+{
+  "artifact_kind": "independent_quality_review",
+  "claim_ceiling": "independent_quality_review_only",
+  "stage": "pre_growth",
+  "producer": "/root",
+  "reviewer": "/root/social_art_review",
+  "domains": [
+    "art",
+    "animation"
+  ],
+  "execution_mode": "read_only_source_art_review",
+  "status": "revise_before_growth",
+  "request_id": "dr-social-cps2-v4-face-delta",
+  "artifacts": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v3/jab_source.png",
+      "sha256": "04d210857352d952be51109713cc5eadcd2212e4f38668cfba76a57337744872",
+      "observed_sha256": "04d210857352d952be51109713cc5eadcd2212e4f38668cfba76a57337744872"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v4/jab_source.png",
+      "sha256": "edc9de375cfb12e036c3bb037c9bdefaf2fffabe267df43374c51b69d817bfc5",
+      "observed_sha256": "edc9de375cfb12e036c3bb037c9bdefaf2fffabe267df43374c51b69d817bfc5"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v4/jab_metadata.json",
+      "sha256": "a1101b5b48a4a07042e0bd04f88e959f23a21020dafdc9c2f61841ff46a2d8fd",
+      "observed_sha256": "a1101b5b48a4a07042e0bd04f88e959f23a21020dafdc9c2f61841ff46a2d8fd"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/face_revision_v4/source_delta.json",
+      "sha256": "18853d711d8e51b30525479b6c9597af6855e22c89e12d805507e865ebfc17a0",
+      "observed_sha256": "18853d711d8e51b30525479b6c9597af6855e22c89e12d805507e865ebfc17a0"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/face_revision_v4/source_and_faces_comparison.png",
+      "sha256": "8aa6712c4303b030cd9d12a06a5b0cedd9124d62a3d0855b29d3c8eb1f836835",
+      "observed_sha256": "8aa6712c4303b030cd9d12a06a5b0cedd9124d62a3d0855b29d3c8eb1f836835"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/dr_social_cps2_sample_art_checklist_v4.json",
+      "sha256": "fffe2adde1d33df4639296866bdcba135a09a700128a0139f726e0f57cb3791c",
+      "observed_sha256": "fffe2adde1d33df4639296866bdcba135a09a700128a0139f726e0f57cb3791c"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/dr_social_cps2_sample_independent_review_v2.json",
+      "sha256": "d22d6a53a70b313e3c0e99aa94c595814ea5d15225fcff0971c3e92d3079ba42",
+      "observed_sha256": "d22d6a53a70b313e3c0e99aa94c595814ea5d15225fcff0971c3e92d3079ba42"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+      "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+      "observed_sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644"
+    }
+  ],
+  "review_scope": "Tentativa v4 de corrigir somente óculos/rosto, comparada à fonte nativa v3. V5 não foi inspecionada nem incluída neste parecer.",
+  "findings": [
+    {
+      "priority": 1,
+      "domain": "art",
+      "kind": "defect",
+      "severity": "defect",
+      "scope": "native face construction",
+      "axes": [
+        "face_detail_readability",
+        "native_size_readability",
+        "frame_pose_integrity"
+      ],
+      "note": "A passagem v4 acrescenta pequenos acentos claros à região ocular, mas não fecha de maneira inequívoca a construção dos óculos na matriz nativa. Em J01/J02/J03, a assinatura continua predominantemente uma faixa escura/ocre junto à franja; a leitura de lente/aro varia em relação a J04/J05. A identidade geral permanece reconhecível, porém a correção do defeito facial específico ainda não é consistente nos seis desenhos.",
+      "required_delta": "Trabalhar a construção de aro/ponte/lente no tamanho nativo, preservando uma assinatura estável nas rotações permitidas. Validar primeiro uma chave isolada e comparar os seis rostos em 1× e nearest-neighbor ampliado. Não exigir dois olhos ou duas lentes completos em perfil: a oclusão do lado distante pode ser correta."
+    },
+    {
+      "priority": 2,
+      "domain": "art",
+      "kind": "defect",
+      "severity": "defect",
+      "scope": "repair invariants and source lineage",
+      "axes": [
+        "frame_pose_integrity",
+        "outline_and_cutout",
+        "material_shading",
+        "support_and_pivot"
+      ],
+      "note": "A intervenção solicitada era local ao rosto, mas a comparação visual e o delta preservado mostram alterações em regiões não faciais: mangas/luvas, planos e dobras das calças, acentos das botas e contornos/abas do casaco. A morfologia geral continua esguia e não classifico cada mudança como piora artística; o defeito é que desenhos fora do alvo também foram reautorados, sem delta artístico solicitado para essas regiões. A tela geométrica de cabeça do relatório não é uma máscara semântica e sua contagem, sozinha, não prova esse julgamento; as regiões corporais citadas também foram inspecionadas na comparação.",
+      "required_delta": "Manter v4 como tentativa histórica não selecionada. Na próxima correção, preservar os desenhos corporais da baseline e demonstrar um delta limitado à região facial pretendida; se uma região externa realmente precisar mudar, declarar antes o defeito, o propósito e os eixos que serão reavaliados. Não herdar evidência de ROM ou orçamento da v3 para os pixels novos."
+    }
+  ],
+  "observed_preserved": [
+    "Cabelo cinza, biotipo adulto esguio e identidade geral de investigador vitoriano permanecem reconhecíveis.",
+    "Casaco azul/ciano, colete escuro, cravat bordô, luvas claras, botas e bengala continuam identificáveis nos seis desenhos.",
+    "Não observei remoção ou recorte grosseiro da bengala; a haste clara e a terminação permanecem visíveis.",
+    "J03 continua com cotovelo dobrado e o jab permanece compacto; a chave de contato J04 não foi alvo desta correção e não recebe novo aceite aqui.",
+    "Os seis PNGs nativos v4 coincidem pixel a pixel e em paleta com as respectivas células de 128×128 da folha selada.",
+    "Todos os oito artefatos fornecidos no pedido coincidiram com os respectivos hashes durante esta revisão."
+  ],
+  "resolution_of_previous_priorities": [
+    {
+      "previous": "cabelo marrom/rosado da v1",
+      "status": "preserved_correction",
+      "note": "A correção para cabelo cinza continua visível; não é o bloqueio atual."
+    },
+    {
+      "previous": "óculos instáveis da fonte v3",
+      "status": "not_closed",
+      "note": "Acentos mudaram, mas a assinatura de aro/lente não ficou inequívoca e consistente no tamanho nativo."
+    },
+    {
+      "previous": "J04 pouco distinto de J03",
+      "status": "not_targeted_not_approved",
+      "note": "Risco anterior permanece fora do delta pretendido desta passagem; nenhuma reprodução temporal foi observada."
+    }
+  ],
+  "delta_interpretation": {
+    "provided_method": "Comparação RGBA exata por célula, com uma tela geométrica de cabeça [52,10,78,34].",
+    "provided_outside_screen_counts": [
+      735,
+      718,
+      808,
+      847,
+      935,
+      797
+    ],
+    "provided_alpha_change_counts": [
+      90,
+      89,
+      78,
+      114,
+      108,
+      87
+    ],
+    "independent_limit": "As contagens foram lidas do relatório selado, não reexecutadas como gate. Fora da tela geométrica não significa automaticamente fora da cabeça; a conclusão de alterações corporais também depende da inspeção visual dos membros, roupa, botas e abas."
+  },
+  "axis_observations": {
+    "pixel_clusters": "O corpo conserva a direção de planos maiores da v3, mas o redesenho completo não demonstra melhora local controlada do rosto.",
+    "face_detail_readability": "fail: objetivo específico de óculos estáveis não fechado.",
+    "outline_and_cutout": "Sem corte grosseiro observado; há diferenças de contorno/alpha que impedem afirmar preservação pixel-local.",
+    "material_shading": "Papéis de material gerais reconhecíveis; planos corporais também mudaram fora do alvo solicitado.",
+    "material_shadow_flow_coherence": "Nenhuma inversão grosseira nova foi identificada nesta inspeção; não constitui aprovação integral da v4.",
+    "semantic_palette_role_confinement": "Cabelo visualmente cinza e materiais gerais preservados; contagem de cores não prova confinamento semântico.",
+    "hand_weapon_attachment": "Bengala continua ligada à mão de apoio na leitura dos quadros; luvas também sofreram redesenho fora do alvo facial.",
+    "equipment_geometry": "Haste/curva/terminal visíveis; não foi executado gate técnico específico de geometria.",
+    "frame_pose_integrity": "Seis estados reconhecíveis, porém houve delta corporal não solicitado.",
+    "native_size_readability": "Silhueta geral legível; detalhe dos óculos permanece o defeito dominante.",
+    "morphology_and_biotype": "Morfologia adulta esguia reconhecível; não há motivo observado para exigir ampliação de corpo ou cabeça.",
+    "pose_anatomy_and_joint_continuity": "Não observei membro solto ou inversão anatômica grosseira; a passagem não foi uma revisão do contato J04.",
+    "support_and_pivot": "A receita herdou o registro da v3, mas pixels de botas/contorno mudaram; registro declarado não equivale à preservação do desenho."
+  },
+  "limits": [
+    "Revisão read-only da fonte v4 e comparação à v3, com todos os seis PNGs nativos, ampliação nearest-neighbor existente e delta RGBA fornecido.",
+    "Nenhum PNG, checklist, registro, fonte de runtime ou ROM foi alterado. A única escrita desta tarefa é este parecer autorizado.",
+    "Não houve geração, navegador, reprodução contínua de APNG, sessão de emulador, inspeção de ROM ou medição de FPS/VBlank/áudio.",
+    "A v5 em geração não integra este pedido e não foi inspecionada.",
+    "O fato de a v3 ter evidência de emulador não transfere validade aos pixels da v4.",
+    "Sem aprovação do proprietário, promoção de candidata, certificação AAA ou aceite de método como prova artística."
+  ]
+}

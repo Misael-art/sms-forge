@@ -1,0 +1,411 @@
+{
+  "artifact_kind": "independent_quality_review",
+  "claim_ceiling": "independent_quality_review_only",
+  "stage": "pre_growth",
+  "producer": "/root",
+  "reviewer": "/root/hayato_cut_art_review",
+  "domains": [
+    "art",
+    "animation"
+  ],
+  "execution_mode": "read_only_video_frame_and_source_review",
+  "status": "needs_evidence",
+  "request_id": "hayato-body-cut-final-motion-v4",
+  "request": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_short_cut_body_temporal_review_request_v4.json",
+    "sha256": "25653d6ee2b9104b34fa2e4ac48cad469af38b3a978007662082d2eb45ab4e04"
+  },
+  "reviewed_at_utc": "2026-10-29T22:05:17.573690+00:00",
+  "approval_scope": "Framewise source/video review of the exact final v4 action. Static art and recorded order/exposures are supported; perceived continuous normal/slow motion remains pending. No final temporal, owner or production approval.",
+  "artifacts": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/final_review_v4/before_after_normal.apng",
+      "sha256": "741aa3e360f0ffc7d13dc341a78592e1f1f686fcf65a2b60c19eac3d6041d3dd",
+      "observed_sha256": "741aa3e360f0ffc7d13dc341a78592e1f1f686fcf65a2b60c19eac3d6041d3dd"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/final_review_v4/before_after_slow.apng",
+      "sha256": "eef19e796caf1d2beed8b19920c2b5c37a90899eb858dcacc4a8f3ca72c6f82b",
+      "observed_sha256": "eef19e796caf1d2beed8b19920c2b5c37a90899eb858dcacc4a8f3ca72c6f82b"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/final_review_v4/source_sequence.png",
+      "sha256": "f3dbde5a55c65c3f452dd6a8d5124bdb13d2b88098a8020e54e009c67688a1f8",
+      "observed_sha256": "f3dbde5a55c65c3f452dd6a8d5124bdb13d2b88098a8020e54e009c67688a1f8"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/sms_v4_review.png",
+      "sha256": "5da7224cbe01f332adb6248c76575ae47f18c35731f5c9f70da37987ad9f2f30",
+      "observed_sha256": "5da7224cbe01f332adb6248c76575ae47f18c35731f5c9f70da37987ad9f2f30"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/hayato_cut_realtime.mp4",
+      "sha256": "e64715e8d2a5acff44cd328a9d533098545c003eb5725c01460f01907b26cbc7",
+      "observed_sha256": "e64715e8d2a5acff44cd328a9d533098545c003eb5725c01460f01907b26cbc7"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/hayato_cut_realtime.json",
+      "sha256": "49f70724a05393f2f25c48279fb1293872d66de098e3481d02829f42f424d9a2",
+      "observed_sha256": "49f70724a05393f2f25c48279fb1293872d66de098e3481d02829f42f424d9a2"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/pixel_timeline_analysis.json",
+      "sha256": "e79cf86febe002568fc21f2317ddb2c68a8333986b4236da96cf2815365d0877",
+      "observed_sha256": "e79cf86febe002568fc21f2317ddb2c68a8333986b4236da96cf2815365d0877"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/runtime_probe.json",
+      "sha256": "3c7db76053a92142dd86c8cf2b77e98bed5a878312e4873f0a300ec479e1ddf0",
+      "observed_sha256": "3c7db76053a92142dd86c8cf2b77e98bed5a878312e4873f0a300ec479e1ddf0"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/worst.json",
+      "sha256": "34242568693b595c5f099a7400c08beccb1be73975750fe0c4312b4dcb93bd13",
+      "observed_sha256": "34242568693b595c5f099a7400c08beccb1be73975750fe0c4312b4dcb93bd13"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/performance_v4/1b1f33e71f704e05bd064e688d3378cf/closed_session.json",
+      "sha256": "baeb01b8326201d26aa192a0e14b4fa4e8155db5417c23feb9700578c905dba6",
+      "observed_sha256": "baeb01b8326201d26aa192a0e14b4fa4e8155db5417c23feb9700578c905dba6"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/hayato_short_cut_body_SMS_independent_review_v4.json",
+      "sha256": "cef012df0797095ce503d9b9d6365025f49ecf55555ac013ecab71f6fec0145f",
+      "observed_sha256": "cef012df0797095ce503d9b9d6365025f49ecf55555ac013ecab71f6fec0145f"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/conversion.json",
+      "sha256": "a66e4499141fa74eddb7211451e95f5fd6687bf69f35116f6e4858949a551dca",
+      "observed_sha256": "a66e4499141fa74eddb7211451e95f5fd6687bf69f35116f6e4858949a551dca",
+      "role": "Additional exact expected composition for independent video-frame comparison"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/idle.png",
+      "sha256": "360c7c880128fd54006a8fd2dd510ab173a5b2f1cfa7d698e51c23ad80926647",
+      "observed_sha256": "360c7c880128fd54006a8fd2dd510ab173a5b2f1cfa7d698e51c23ad80926647",
+      "role": "Additional static expected video presentation"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/R01.png",
+      "sha256": "da69dddedd7b0fd590826f328c5c9b17a38f6ac9f752019c89e85df0a9e9a732",
+      "observed_sha256": "da69dddedd7b0fd590826f328c5c9b17a38f6ac9f752019c89e85df0a9e9a732",
+      "role": "Additional static expected video presentation"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/R02.png",
+      "sha256": "968b546748aaf3ab1b77b171d5923e96726141e7024fb633a2c993d151a6e6aa",
+      "observed_sha256": "968b546748aaf3ab1b77b171d5923e96726141e7024fb633a2c993d151a6e6aa",
+      "role": "Additional static expected video presentation"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/R03.png",
+      "sha256": "d9c684f446e97dd781f7bb93fe3fcc061fa9de5e8aa6cd3d5a22963b274fc885",
+      "observed_sha256": "d9c684f446e97dd781f7bb93fe3fcc061fa9de5e8aa6cd3d5a22963b274fc885",
+      "role": "Additional static expected video presentation"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/R04.png",
+      "sha256": "2b30982d972700a43c5113d27ed85c7b657e98a130d794b74fa6f7b179f496b2",
+      "observed_sha256": "2b30982d972700a43c5113d27ed85c7b657e98a130d794b74fa6f7b179f496b2",
+      "role": "Additional static expected video presentation"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/R05.png",
+      "sha256": "7c0e6127bed939673c2d9d2898ae9c5d8e13d6899d817a05deb36d4cea8fa85c",
+      "observed_sha256": "7c0e6127bed939673c2d9d2898ae9c5d8e13d6899d817a05deb36d4cea8fa85c",
+      "role": "Additional static expected video presentation"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/R06.png",
+      "sha256": "9c2682373635b09f6a18b81e2fc9820b4028a4d6ebb68acb84aee3af6e6fcb0d",
+      "observed_sha256": "9c2682373635b09f6a18b81e2fc9820b4028a4d6ebb68acb84aee3af6e6fcb0d",
+      "role": "Additional static expected video presentation"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/reference.png",
+      "sha256": "76c366bf055aa31d8c0fc7211a8e9ee04436da687eacd020b9e7bd982278319b",
+      "observed_sha256": "76c366bf055aa31d8c0fc7211a8e9ee04436da687eacd020b9e7bd982278319b",
+      "role": "Additional static expected video presentation"
+    }
+  ],
+  "conclusion": "The final source and recorded SMS frames show a more articulated body-driven action than the original four-pose attempt. The supplied MP4 independently decodes to 480 exact legal expected compositions, with R01–R06 exposure pattern 4/1/2/3/1/3 and idle21. No new static defect or unexpected recorded frame was identified. This interface provided still images and decoded frames, without continuous visual playback perception; force, fluency, rhythm and normal-speed clarity therefore remain pending. A technically faithful recording does not itself prove convincing animation.",
+  "review_axes": {
+    "static_quality": {
+      "status": "pass_limited",
+      "note": "Final source board, prior exact-hash static review and actual video representatives retain identity, slender body unit, connected arm/grip chains, full canonical-looking katana/scabbard and coherent material planes. Previously corrected source/SMS cutout and optical registration remain visible in recorded frames. No new source-art or pixel defect identified in this assignment."
+    },
+    "choreography": {
+      "status": "pass_ordered_construction_only",
+      "note": "R01 high joined-hand/rear load, R02 raised release, R03 forward/down execution, R04 deeper absorption, R05 crossing return, R06 high recovery and guard are distinct ordered phases. Compared with original upright C01/C02/C03/C04 attempt, preparation and low body mass change are plainly greater. This is a judgement of keys and order, not felt force or continuous action."
+    },
+    "continuity": {
+      "status": "pass_recorded_content_pending_perception",
+      "note": "Every decoded frame matches one complete right-facing-scene expected composition, including full equipment and unchanged Social. R03/R04 body height changes and R05/R06 return are present without missing intermediate named poses or unknown partial renderings in this clip. Common floor terminal is retained by the exact expected composition. Heel/toe pivot, perceived foot sliding and cloth/hair lag remain perceptual checks; shared soleY alone does not certify them."
+    },
+    "timing_spacing": {
+      "status": "pass_actual_exposures_pending_artistic_rhythm",
+      "note": "Repeated complete actions contain R01 4, R02 1, R03 2, R04 3, R05 1, R06 3 decoded frames, then idle21. Action occupies14 presentations, full action/rest loop35. Large raised-to-downward blade change and smaller body absorption step are observable as discrete spacing. Encoded timing and exact presentation counts do not establish a satisfying acceleration, weight or emphasis."
+    },
+    "normal_speed_reading": {
+      "status": "pending",
+      "note": "No continuous visual playback was perceived. Browser discovery returned no available browsers in this reviewer session. MP4 decoding, screenshots, ordered contact sheets, APNG metadata and starting a player are not continuous observation. Cannot pass snap, deliberateness, follow-through feel, recovery clarity or force."
+    },
+    "native_SMS_result": {
+      "status": "pass_framewise_fidelity_only",
+      "note": "256x192 recorded RGB frames exactly match expected current right-scene PNG compositions in all480 presentations. White/skin/orange/dark material grouping and complete blade/scabbard survive in the actual file, with expected loss of facial expression, finger separation and thin highlight detail. This clip proves that one orientation is presented faithfully framewise; it does not approve native continuous readability, left-orientation playback, owner acceptance or gameplay feel."
+    },
+    "source_before_after": {
+      "status": "pass_static_comparison_only",
+      "note": "Compared source preparation and execution keys from the final normal APNG and whole source sequence. New anticipation raises both hands and changes torso/waist/knee relation; execution compresses the full body more than v1. The two APNG tracks share a clock but have different action lengths; compare phase roles carefully rather than treating every simultaneous frame as the same phase."
+    },
+    "performance_audio_gameplay_owner": {
+      "status": "pending_not_measured_by_reviewer",
+      "note": "No emulator or performance probe run by this reviewer. Frozen capture/probe/worst records share ROM f531f706... and session1b1f33e...; these were read as provided context, not independently remeasured FPS/VBlank. Video has no recorded audio or contact/hit reaction, so audio and interactive combat feel are not judged. No PAL, competitive data, AAA, owner or delivery approval."
+    }
+  },
+  "video_frame_evidence": {
+    "decoded_frames": 480,
+    "decoded_rgb_sha256": "2e2e511b1ecb627a28d767a89fe0c88ee3d92ceea076b497b878c824b710b63f",
+    "all_frames_equal_exact_right_conversion_composition": true,
+    "unmatched_frames": [],
+    "complete_R01_to_R06_actions": 13,
+    "complete_35frame_action_plus_fullidle_cycles": 12,
+    "action_start_frames": [
+      33,
+      68,
+      103,
+      138,
+      173,
+      208,
+      243,
+      278,
+      313,
+      348,
+      383,
+      418,
+      453
+    ],
+    "first_run": {
+      "start": 0,
+      "pose": "R01",
+      "ticks": 2
+    },
+    "last_run": {
+      "start": 467,
+      "pose": "idle",
+      "ticks": 13
+    },
+    "first_complete_cycle": [
+      {
+        "start": 33,
+        "pose": "R01",
+        "ticks": 4
+      },
+      {
+        "start": 37,
+        "pose": "R02",
+        "ticks": 1
+      },
+      {
+        "start": 38,
+        "pose": "R03",
+        "ticks": 2
+      },
+      {
+        "start": 40,
+        "pose": "R04",
+        "ticks": 3
+      },
+      {
+        "start": 43,
+        "pose": "R05",
+        "ticks": 1
+      },
+      {
+        "start": 44,
+        "pose": "R06",
+        "ticks": 3
+      },
+      {
+        "start": 47,
+        "pose": "idle",
+        "ticks": 21
+      }
+    ],
+    "expected_scene_orientation": "Hayato at right facing left, Social at left",
+    "expected_composition_binding": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/hayato_short_cut_v2/converted_v4_right/conversion.json",
+    "comparison_method": "Decode MP4 with ffmpeg to in-memory RGB24; independently composite each of seven expected poses from current88px PNGs at frozen positions over recorded gray background; compare every full256x192RGB frame byte-for-byte, then run-length encode actual pose labels.",
+    "recorded_rom_sha256": "f531f7064f5c0293fe39d298e599e3e0a9871bad8865fca07e7f475e76939517",
+    "recorded_session_id": "1b1f33e71f704e05bd064e688d3378cf",
+    "capture_elapsed_s_from_record": 8.01872767,
+    "encoded_mp4_duration_s": 8.010314,
+    "capture_vs_encoded_limit": "Separate capture-clock and encoded stream durations, not independently sampled per-frame wall-clock pacing.",
+    "RGB_binding": "Decoded RGB SHA matches capture record raw_sha256 exactly. This verifies file content/binding, not independent authentication of the live capture procedure or subjective motion.",
+    "continuous_playback_perceived": false
+  },
+  "metadata_clarification": {
+    "frozen_analysis_complete_actions": 12,
+    "independent_complete_R01_through_R06_actions": 13,
+    "independent_cycles_with_full_idle21": 12,
+    "explanation": "The13th complete14-frame action begins at decoded frame453 and reaches idle at467, with13 idle frames before clip end. Twelve complete35-frame action+full-idle cycles are visible. The first action starts mid-R01 with only2 of its4 ticks. The frozen complete_actions12 label is conservative/ambiguous; this report clarifies counting scope and does not modify the input analysis."
+  },
+  "comparison_APNG_evidence": {
+    "normal": {
+      "canvas": [
+        1152,
+        620
+      ],
+      "frames": 9,
+      "duration_ms": [
+        350,
+        50,
+        17,
+        17,
+        33,
+        50,
+        17,
+        17,
+        33
+      ]
+    },
+    "slow": {
+      "canvas": [
+        1152,
+        620
+      ],
+      "frames": 9,
+      "duration_ms": [
+        1400,
+        200,
+        67,
+        67,
+        133,
+        200,
+        67,
+        67,
+        133
+      ]
+    },
+    "slow_multiplier": "Approximately4x exposure, with integer-millisecond rounding; not assumed6x.",
+    "observed": "Decoded timing table, inspected source representatives at preparation and execution plus complete final source sequence. No continuous perception claimed."
+  },
+  "principles_review": [
+    {
+      "id": "squash_and_stretch",
+      "evidence": "Actual R03/R04 presentations show lower bent-knee/waist posture than guard and R01, without a new body-size fit.",
+      "perceptual_status": "Compression cue present; dynamic weight pending."
+    },
+    {
+      "id": "anticipation",
+      "evidence": "Raised R01 load differs strongly from guard and is displayed for4 frames in complete recorded actions.",
+      "perceptual_status": "Key/exposure proved; perceived warning and intention pending."
+    },
+    {
+      "id": "staging",
+      "evidence": "High load/release contrasts with low execution/absorption; full equipment remains present in all recorded frames.",
+      "perceptual_status": "Static phase clarity present; one-tick readability pending."
+    },
+    {
+      "id": "straight_ahead_pose_to_pose",
+      "evidence": "R01–R06 ordered poses actually presented, with no named phase missing in complete actions.",
+      "perceptual_status": "Construction verified; continuity feel pending."
+    },
+    {
+      "id": "follow_through_overlap",
+      "evidence": "R04 lower absorption follows R03 and lasts3 frames; cloth silhouettes differ between keys.",
+      "perceptual_status": "Absorption key present; inertial overlap, lag and settle feel pending."
+    },
+    {
+      "id": "slow_in_slow_out",
+      "evidence": "Unequal actual holds and large cut spacing versus smaller absorption changes are recorded.",
+      "perceptual_status": "Nonuniform construction is not proof of convincing acceleration/deceleration; pending."
+    },
+    {
+      "id": "arcs",
+      "evidence": "High blade through low cut and front/up return is represented by complete rigid-looking equipment in actual ordered frames.",
+      "perceptual_status": "Discrete path supported; continuous arc feel pending."
+    },
+    {
+      "id": "secondary_action",
+      "evidence": "Ribbon/sleeve/hakama shapes change with poses; no extra effect or projectile introduced.",
+      "perceptual_status": "Framewise shapes inspected; intentional temporal lag not perceived."
+    },
+    {
+      "id": "timing",
+      "evidence": "4/1/2/3/1/3 plus idle21 verified from all decoded runs, with boundary-truncated first/last portions identified.",
+      "perceptual_status": "Exposure proved; rhythm, emphasis and force pending."
+    },
+    {
+      "id": "exaggeration",
+      "evidence": "High-load versus deeper-body cut broadens pose separation compared with original source attempt.",
+      "perceptual_status": "Static contrast visible; felt emphasis pending."
+    },
+    {
+      "id": "solid_drawing",
+      "evidence": "Exact expected current PNG compositions throughout clip preserve reviewed source construction and repaired cutout/contacts.",
+      "perceptual_status": "Framewise integrity supported; motion-specific distortion or popping perception pending."
+    },
+    {
+      "id": "appeal",
+      "evidence": "Hayato identity and deliberate two-hand sword silhouette retained in source and native recorded frames.",
+      "perceptual_status": "Static character intent supported; expressivity/conviction in motion and owner judgement pending."
+    }
+  ],
+  "findings": [
+    {
+      "priority": 1,
+      "domain": "animation",
+      "kind": "risk",
+      "severity": "evidence_gap",
+      "scope": "Perceived continuous normal/slow animation",
+      "summary": "Final artistic temporal judgement is still missing continuous visual perception.",
+      "note": "This is not a claim that the action is weak. The reviewer could inspect exact frames and exposures but could not perceive full playback. Positive static and file-fidelity results must not be promoted to force/fluency approval.",
+      "required_delta": "A reviewer with continuous visual access must observe these exact bound native/source normal and slow recordings, judge the six requested axes and record concrete perceived defects or acceptance. Keep pending until such observation exists; do not regenerate assets solely because this interface cannot observe continuous motion."
+    },
+    {
+      "priority": 2,
+      "domain": "animation",
+      "kind": "opportunity",
+      "severity": "opportunity",
+      "scope": "R03→R04 and R05→R06→guard",
+      "summary": "Verify absorption and recovery read as one controlled cut at normal speed.",
+      "note": "R03/R04 differ by modest low-body movement and R05 is one frame. These facts identify intervals to inspect, not a proven temporal defect.",
+      "required_delta": "During real continuous review, assess whether low absorption reads distinctly and front return feels like recovery rather than another swing; revise only if an observed defect warrants it."
+    },
+    {
+      "priority": 2,
+      "domain": "animation",
+      "kind": "opportunity",
+      "severity": "opportunity",
+      "scope": "Planted feet and native face/grip/blade",
+      "summary": "Static contact and recognizable silhouettes leave motion-specific readability questions.",
+      "note": "Heel/toe outlines vary by pose, while native facial/finger/highlight detail is sparse. Exact common floor or full-frame equality cannot certify planted motion or expressivity.",
+      "required_delta": "Inspect feet and thin equipment continuously at native size and slow speed without inventing missing detail or imposing identical silhouette boxes."
+    }
+  ],
+  "inspection_evidence": [
+    "All11frozen request inputs verified at start and before writing; additional exact right-scene conversion and eight expected PNGs also hash-checked.",
+    "Decoded every MP4 frame in memory, independently matched all480fullRGBframes to expected current compositions, and derived actual pose runs/exposures.",
+    "Viewed a native-video representative enlargedNN3 and an ordered contact sheet of all7presentations plus guard return, generated only in memory.",
+    "Viewed whole final source sequence and source before/after preparation/execution representatives; APNG normal/slow duration tables read.",
+    "Read final static v4review and provided capture/probe/worst/session records; no new emulator or timing measurement performed.",
+    "Browser runtime discovery returned an empty browser list. No alternate browser or live-emulator session opened, no continuous visual playback perceived."
+  ],
+  "full_conclusion": {
+    "static_quality": "passed_limited",
+    "choreography_key_progression": "supported",
+    "recorded_pose_order_and_exposure": "independently_verified_in_MP4",
+    "recorded_native_frame_fidelity": "480_of_480_exact_expected_compositions",
+    "new_concrete_static_or_render_defects": [],
+    "perceived_timing_force_fluency_normal_reading": "pending",
+    "final_temporal_approval": false,
+    "owner_approval": false,
+    "production_promoted": false
+  },
+  "next_checkpoint": "Continuous normal/slow perceptual review of the exact source and native ROM recordings, preserving these hashes. Judge weight transfer, cut acceleration, absorption, recovery, feet and native equipment readability; keep technical playback/fidelity evidence separate from artistic acceptance.",
+  "limits": [
+    "Only this report is written; no source, runtime, build, emulator, Git, memory or input artifact edited.",
+    "This reviewer inspected an existing ROM-video artifact framewise, not a live emulator session and not continuously perceived playback.",
+    "No final temporal pass, AAA, owner, competitive gameplay, FPS/PAL/VBlank, audio or delivery approval."
+  ]
+}

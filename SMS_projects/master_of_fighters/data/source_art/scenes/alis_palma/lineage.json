@@ -1,0 +1,57 @@
+[
+  {
+    "file": "portraits.png",
+    "sha256": "2e6f47f25869876eb16c9e9b11ccbf19638251167878b9c7c43c341bd651ed7b",
+    "tool": "ImageGen built-in",
+    "prompt": "Create a single production expression sheet for the opening conversation of a Sega Master System fan fighting game, using the attached approved Alis Landale model sheet as the exact identity reference. Wide 3:1 sheet: three equal square panels, edge to edge. Each panel has an identical solid deep indigo background (#000055). No borders or lettering. Draw a native-looking 64x64 pixel portrait per panel, shown enlarged with hard nearest-neighbor squares, no textures, gradients, or tiny hatching. Match chestnut hair, gold round circlet, blue eyes, cool metal pauldrons with gold borders, pink sleeves, indigo cuirass and light gold collar. Use one shared tight 12-color cel palette suitable for 2-bit per channel. Left panel: Alis looks down and left, lips parted gently, concerned for her companion, generous headroom. Center panel: same Alis raises eyes to the right, resolute and protective, mouth set, same scale and alignment. Right panel: Myau, the small pale cream-furred musk cat with very long upright ears, bright intelligent eyes and a small vial on a cord at his neck, looking up towards Alis. Show his whole face, both ear tips and vial. Each portrait is visually isolated, fully inside its third, with a little dark margin. Real game production pixel illustration with clear expressive clusters and strong silhouettes, no text.",
+    "status": "candidata para revisão na ROM",
+    "reference": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png",
+    "reference_sha256": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95"
+  },
+  {
+    "file": "acting.png",
+    "sha256": "4a350a725d807bf24d5e3ad96a1032e3ebd2f9215742e19081b05aaedbee3305",
+    "tool": "ImageGen built-in",
+    "prompt": "Identity-preserving new Alis Landale action sprite sheet for Master of Fighters, based exactly on supplied Alis model sheet. Landscape 3 columns x 3 rows, NINE SEPARATE whole-body drawings. Each imaginary equal-sized square cell contains one full body, including all equipment, centered and grounded with generous clear air on all sides. Totally transparent background, no shadows, lines of grid, writing, numbers, decoration, text or separators. Retro Sega Master System pixel art, working at approximately 52 pixels of body height with hard clean intentionally clustered pixels, enlarged nearest-neighbor. Same modest proportions and equipment as approved reference: brown flowing shoulder-length hair, gold tiara, pink skirt and sleeves, indigo chest armor, gold trim and bracers, white leggings, gold white boots, shield on left forearm, short cyan sword in right. All nine ALWAYS looking to the right in the same side-on or three-quarter right-facing view. Row one is a tender long idle: (1) lowers shield and peers over her left shoulder, (2) tilts head with warm smile listening to her feline friend offscreen, (3) breathes and brings shield back. Row two is a gentle distinctive victory: (1) plants her sword point down by her right boot with relief, (2) lays her free hand on her heart and gives a respectful bow, shield strapped to forearm, (3) stands tall, modest smile, sword vertical. Row three is her committed finishing thrust: (1) coil behind shield, blade drawn back, (2) full lunge to the right behind round shield, sword extending clearly forward with a single cyan streak joined to blade, (3) heel braces and blade recoils, shield returns. Equipment fully in frame without touching neighbours. Clean native sprite, no palette gradients. Keep chest color, skirt hue and face constant across all nine frames.",
+    "status": "candidata para revisão na ROM",
+    "reference": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png",
+    "reference_sha256": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95"
+  },
+  {
+    "file": "gate.png",
+    "sha256": "88e4adef8d948a6453193a8478d9e566d36b78049a379f1eada23e99c8cd364f",
+    "tool": "ImageGen built-in",
+    "prompt": "Build one complete environment plate for a professional late-1980s Sega Master System fighting game. Landscape 4:3. Japanese mountain shrine at blue hour after summer rain, seen perfectly side-on, empty of people or creatures. Upper half: distant lavender mountain ridge and dusky peach sky, a quiet gold moon left of center; deep indigo silhouettes of cryptomeria, the eaves of a small Japanese pavilion on the far right and one pale distant lantern. Middle: low stone balustrade, dark forest between the pillars, still and roomy in the centre where the two fighters will stand. At 75 percent down the image a single horizontal stone walkway edge, below that 3 courses of mossy dressed stone. A single thin otherworldly cyan slit in the sky behind the gate suggests the story. Restrained authentic pixel art: compose visually on a 256x192 native pixel grid, enlarged with crisp square pixels and connected color clusters, no airbrush, texture noise, outline around image or text, no fighters, weapons or interface. Distinct low-contrast background values, elegant spacious composition. Palette restricted to near-black, midnight blue, indigo, desaturated lavender, warm peach, gold, cream, forest and teal. An authored backdrop a cartridge-era artist could have made, visible brush of pixel clusters in foliage, readable near/far layering. Keep the fighting line horizontal with no perspective run towards camera.",
+    "status": "candidata para revisão na ROM"
+  },
+  {
+    "file": "camineet.png",
+    "sha256": "0ef4104dce76a70799d90aeb3a1853bf823017c786fa000be4b93012e361b721",
+    "tool": "ImageGen built-in",
+    "reference_url": "https://www.smspower.org/uploads/Maps/PhantasyStar-SMS-PalmaCamineet.png",
+    "reference_sha256": "22b26a8bc9d01e8bdcc2a26aeb857ee3978c8490dab9802fae5202b180127635",
+    "reference_role": "Mapa SMS para identificar quiosques, cúpulas e saída. Arte lateral nova para o capítulo.",
+    "brief": "Elevação lateral da rua das três lojas de Camineet, cúpulas ciano e âmbar, quiosques vermelhos, jarra e saída circular gradeada. Sem personagens ou HUD.",
+    "status": "candidata"
+  },
+  {
+    "file": "guard.png",
+    "sha256": "ec4bd3279502aa1b961feded9c21f38534fef51dc3d3281d032eef73aab7e557",
+    "source": "Folha RGBA de oito poses presente na retomada de 25/11. Recortes e pontos de registro em prepare_alis_chapter.py.",
+    "status": "fonte gerada conferida byte a byte; candidata para revisão na ROM",
+    "tool": "ImageGen built-in",
+    "source_output": "exec-4aa542e8-1c78-43ae-9e24-8cbd279edcd8.png"
+  },
+  {
+    "file": "camineet_capsulas.png",
+    "sha256": "405c8bf3507d0d15fdb907ec605a32791b37794c92eea32f92b85b4f178dea16",
+    "tool": "ImageGen built-in",
+    "reference_url": "https://www.smspower.org/uploads/Maps/PhantasyStar-SMS-PalmaCamineet.png",
+    "reference_sha256": "22b26a8bc9d01e8bdcc2a26aeb857ee3978c8490dab9802fae5202b180127635",
+    "reference_role": "Mapa de Camineet para implantação e identidade das três lojas, residências e saída. Dragon Ball como referência solicitada para a linguagem gráfica da arquitetura.",
+    "brief": "Elevação lateral da rua das três lojas de Camineet, cúpulas ciano e âmbar, quiosques vermelhos, jarra e saída circular gradeada. Sem personagens ou HUD.",
+    "status": "candidata",
+    "prompt": "Use case: style-transfer. Redraw the first image as an original production pixel stage for Alis Landale's Camineet street, Phantasy Star on Master System. Second image is the city map, ONLY for architecture and shop arrangement. The user wants the charming Akira Toriyama early Dragon Ball mechanical illustration treatment of Hoi-Poi capsule houses and shops: hand-inked economical curved contour with tapered weight, pleasing squat ovoid modular buildings, each with distinctive proportions, rounded heavy riveted seams, small circular portholes in deep shade, enamel rims, carefully placed hard cel shadows. Give the shops actual 3/4 visible side volumes, cylindrical rather than flat boxes, retro mechanical shutters and rounded projecting canopies. Strong legible art direction unlike the first image's flat rectangles. Panorama exactly 3:1. At left a turquoise domed house and little earthen pot; three adjacent, separately silhouetted little red/orange cylindrical shops centered across 26–68% of image (dark curved red roofs, broad ochre band, dark turquoise inset storefront). A small amber capsule house to right, round thick ochre-rimmed exit with cyan vertical bars exactly at x=91%, y=68%. Thin calm blue sky top 25%, small clusters of clipped garden trees behind buildings. Compelling fine craftsmanship like an 80s manga mechanical cutaway drawn at 256x80 available pixels, purposeful native pixel clusters, distinct three-quarter turned forms with one consistent light from upper left, rich dark navy outlines, subtle C curves, no texture filling, sparse detailing. Bottom 12% fully horizontal two tone ochre-gray stone sidewalk. This image is a 256x80 top background band only, not a full fighting screen. Full-bleed landscape. No human, alien, fighter or HUD. No logos, no typography, no Japanese temples or giant fantasy portal. Preserve palette scarcity, restrained values in lower facades.",
+    "source_plate": "camineet.png"
+  }
+]

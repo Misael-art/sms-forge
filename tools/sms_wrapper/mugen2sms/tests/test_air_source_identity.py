@@ -3,8 +3,9 @@ import json
 import pytest
 
 import audit_import_semantics
-from mugen2sms.analysis.air_source_identity import compile_action_record
+from mugen2sms.analysis.air_source_identity import compile_action_record, load_action
 from mugen2sms.parsers.air import Action, Frame
+from mugen2sms.tests.make_fixtures import build
 
 
 def test_duplicate_sprite_elements_keep_distinct_air_identity():
@@ -26,6 +27,27 @@ def test_rejects_looping_action_and_unbounded_duration():
     action.frames[0].time = -1
     with pytest.raises(ValueError, match="durations"):
         compile_action_record(10, action, **args)
+
+
+@pytest.mark.parametrize("bad_line", ["0,1,0,0,error", "clsn1[0] = 1,2,3", "Interpolate Offset"])
+def test_refuses_identity_for_an_action_with_ignored_content(tmp_path, bad_line):
+    root = build(tmp_path / "fixture")
+    (root / "mini.air").write_text(
+        f"[Begin Action 280]\n0,0,0,0,5\n{bad_line}\n0,2,0,0,7\n"
+        "[Begin Action 281]\n0,0,0,0,6\n", encoding="ascii"
+    )
+    with pytest.raises(ValueError, match=r"AIR action 280 has unparsed content on line\(s\) 3"):
+        load_action(root, 280)
+    assert load_action(root, 281)["durations"] == [6]
+
+
+def test_parser_detects_loopstart_even_on_the_first_element(tmp_path):
+    root = build(tmp_path / "fixture")
+    (root / "mini.air").write_text(
+        "[Begin Action 280] trailing text\nLoopStart\n0,0,0,0,5\n", encoding="ascii"
+    )
+    with pytest.raises(ValueError, match=r"AIR action 280 has loopstart"):
+        load_action(root, 280)
 
 
 def test_manifest_matches_import_semantics_and_rejects_equal_duration_permutation(tmp_path):

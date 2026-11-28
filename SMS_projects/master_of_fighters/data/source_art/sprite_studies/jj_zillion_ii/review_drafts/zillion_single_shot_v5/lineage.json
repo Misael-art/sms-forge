@@ -1,0 +1,289 @@
+{
+  "schema": "sms_authored_animation_lineage_v1",
+  "character": "jj_zillion_ii",
+  "status": "candidate_fidelity_only_six_poses_no_fx",
+  "parent": "jj-zillion-single-shot-source-v03",
+  "model": "jj-zillion-ii-concept-v05",
+  "owner_direction": "doc/decisions/jj-zillion-proportion-and-no-fx_owner-feedback.json",
+  "frame_ids": [
+    "I00",
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S05"
+  ],
+  "body_drawings_including_guard": 6,
+  "action_body_drawings": 5,
+  "timings_proposal": [
+    7,
+    4,
+    2,
+    3,
+    6
+  ],
+  "art_channel": "built_in_image_gen gunproportionedit, boundedweapon/gripROIcopy, unchangedofficialnearestregistration",
+  "prompt": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/prompt.txt",
+    "sha256": "e74510ce8ebe53ef6771c7484045ca1565b2507263569046820e8ca6dcb5d9cb"
+  },
+  "raws": [
+    {
+      "role": "full_generated_edit",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/raw_generated.png",
+      "sha256": "bd751d55b7c633d37ce3ad841e17e3f3b2028a4db17e2b2272ba7a921a30fc51"
+    },
+    {
+      "role": "bounded_registered_source",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/raw_registered.png",
+      "sha256": "ab22e000063a481c17ded8da52e17d69b989c5073e8a09801edb80c6ce1e4f93"
+    }
+  ],
+  "assembly": {
+    "recipe": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/assembly_recipe.json",
+    "recipe_sha256": "3b436ba004796758c6805979517ae8d6de59c98b0c791556a1c1ef513cefa5aa",
+    "script": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/assemble.py",
+    "script_sha256": "c24303fd6bc7fda9bc49a7940efc62ff06d252b2a3617f23d0a2d3cfce3e9c9b",
+    "outside_ROIs_exact": true,
+    "lowerbody_footrows_105_159_exact": true,
+    "preservation_report": "out/diagnostics/jj_zillion_single_shot_v5/pose_preservation.json"
+  },
+  "extraction": {
+    "tool": "tools/sms_wrapper/prepare_authored_sprite_sample.py",
+    "tool_sha256": "f151440cdc32673d9f377c8f6c9ef4de4b0fa2fe67abb7d90cdb27082eb03dab",
+    "recipe": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/extraction_recipe.json",
+    "recipe_sha256": "5a2f7018a3146df996d7d7c7b514521b8f9593d5215692f2acab651a1085a375",
+    "common_scale": [
+      7,
+      30
+    ],
+    "sourcecanvas": [
+      160,
+      160
+    ],
+    "palette": [
+      {
+        "source_index": 1,
+        "role": "deep_contour",
+        "source_rgb": [
+          10,
+          8,
+          24
+        ],
+        "sms_code": 0
+      },
+      {
+        "source_index": 2,
+        "role": "navy_contour_harness",
+        "source_rgb": [
+          0,
+          0,
+          68
+        ],
+        "sms_code": 16
+      },
+      {
+        "source_index": 3,
+        "role": "cloth_dark",
+        "source_rgb": [
+          125,
+          0,
+          45
+        ],
+        "sms_code": 1
+      },
+      {
+        "source_index": 4,
+        "role": "cloth_shadow",
+        "source_rgb": [
+          180,
+          0,
+          65
+        ],
+        "sms_code": 18
+      },
+      {
+        "source_index": 5,
+        "role": "cloth_base",
+        "source_rgb": [
+          245,
+          0,
+          90
+        ],
+        "sms_code": 19
+      },
+      {
+        "source_index": 6,
+        "role": "cloth_light",
+        "source_rgb": [
+          255,
+          75,
+          135
+        ],
+        "sms_code": 19
+      },
+      {
+        "source_index": 7,
+        "role": "hair_dark",
+        "source_rgb": [
+          15,
+          15,
+          125
+        ],
+        "sms_code": 16
+      },
+      {
+        "source_index": 8,
+        "role": "hair_blue",
+        "source_rgb": [
+          20,
+          35,
+          220
+        ],
+        "sms_code": 48
+      },
+      {
+        "source_index": 9,
+        "role": "hair_highlight",
+        "source_rgb": [
+          105,
+          125,
+          250
+        ],
+        "sms_code": 56
+      },
+      {
+        "source_index": 10,
+        "role": "armor_white",
+        "source_rgb": [
+          250,
+          250,
+          255
+        ],
+        "sms_code": 63
+      },
+      {
+        "source_index": 11,
+        "role": "armor_shadow",
+        "source_rgb": [
+          170,
+          175,
+          205
+        ],
+        "sms_code": 42
+      },
+      {
+        "source_index": 12,
+        "role": "armor_deep",
+        "source_rgb": [
+          90,
+          95,
+          150
+        ],
+        "sms_code": 21
+      },
+      {
+        "source_index": 13,
+        "role": "skin_light",
+        "source_rgb": [
+          255,
+          190,
+          150
+        ],
+        "sms_code": 47
+      },
+      {
+        "source_index": 14,
+        "role": "skin_base",
+        "source_rgb": [
+          250,
+          150,
+          100
+        ],
+        "sms_code": 27
+      },
+      {
+        "source_index": 15,
+        "role": "skin_shadow",
+        "source_rgb": [
+          160,
+          80,
+          60
+        ],
+        "sms_code": 22
+      },
+      {
+        "source_index": 16,
+        "role": "pistol_orange_inset",
+        "source_rgb": [
+          255,
+          100,
+          15
+        ],
+        "sms_code": 27
+      },
+      {
+        "source_index": 17,
+        "role": "pistol_dark_orange",
+        "source_rgb": [
+          170,
+          85,
+          0
+        ],
+        "sms_code": 11
+      },
+      {
+        "source_index": 18,
+        "role": "laser_cyan",
+        "source_rgb": [
+          0,
+          220,
+          255
+        ],
+        "sms_code": 56
+      }
+    ]
+  },
+  "source_sheet": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/shot_source.png",
+    "sha256": "e969279a03b18f4adfcf94c104e5b0bd1f6bae7540cfe3900347523533d5a9a7"
+  },
+  "frames": [
+    {
+      "id": "I00",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/native/I00.png",
+      "sha256": "2c7702b67ee116819c58b1bea1223801c26c7d3f0024278bf7e6cfcb6e2c6117"
+    },
+    {
+      "id": "S01",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/native/S01.png",
+      "sha256": "b02cf76f671809bde71e3274fda5f0a41cb1fd6345f686a12601cf6f9a15b56c"
+    },
+    {
+      "id": "S02",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/native/S02.png",
+      "sha256": "81e3802f9492e7d0b0eda49042188c6fd4652aefb3cac7f86dc5ebae414f3c1f"
+    },
+    {
+      "id": "S03",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/native/S03.png",
+      "sha256": "055c78053aaf2d3d25f5947171570ef6d44d676622d2b6b5d65236d4a7275426"
+    },
+    {
+      "id": "S04",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/native/S04.png",
+      "sha256": "68bd4ee3ea1743ab1858ea0cfd6297e087cf0ace4c96ab38d866ebfa26b26654"
+    },
+    {
+      "id": "S05",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v5/native/S05.png",
+      "sha256": "083b8ac6aa11dee39569d729c18ec04735cb32a69b752efa2394dad370f3fded"
+    }
+  ],
+  "effects": {
+    "included": false,
+    "owner_requires_separate_later": true,
+    "no_emission_visual_claim_from_character": true
+  },
+  "approval_scope": "Owner directedcorrection, not approvalofnewpixels. New source/SMS/ROM reviewpending. Earlier3poseexperimentv4notselected."
+}

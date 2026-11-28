@@ -32,7 +32,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from ..converters.sms_tiles import to_sms_pose
-from ..converters.sms_clsn import to_clsn_tables
+from ..converters.sms_clsn import CLSN_SENTINEL, to_clsn_tables
 from ..converters.sms_cmd import serialize_pattern, to_patterns
 from ..converters import sms_scale as SC
 from .runtime_format import build_frames, pack_tiles_tall
@@ -126,9 +126,9 @@ def generate(ch, fidelity, out_dir: Path, banked: bool = False,
                 # hurt (clsn2) depois. Com uma so sentinela o runtime nao
                 # distingue caixa de golpe de hurtbox — colisao exige isso.
                 data = b"".join(struct.pack("<h", v) for v in hit) \
-                    + struct.pack("<h", -32767) \
+                    + struct.pack("<h", CLSN_SENTINEL) \
                     + b"".join(struct.pack("<h", v) for v in hurt) \
-                    + struct.pack("<h", -32767)
+                    + struct.pack("<h", CLSN_SENTINEL)
                 artifacts.append(Artifact(f"{stem}_CLSN", data, "air"))
 
     patterns, skipped = to_patterns(ch.commands, controls)
@@ -177,7 +177,7 @@ def generate(ch, fidelity, out_dir: Path, banked: bool = False,
     return man
 
 
-def _worst_scene(ch, fid, size="8x8"):
+def _worst_scene(ch, fid, size="8x8", pre_scaled: bool = False):
     """Cena pior-frame: maior pose GERADA (pos-escala), ego + oponente colados no mesmo y.
 
     `size="8x8"` e deliberadamente pessimista: conta cada linha de 8 px como linha
@@ -195,7 +195,10 @@ def _worst_scene(ch, fid, size="8x8"):
             if sp is None:
                 continue
             w, h = (sp.width, sp.height)
-            if SC.needs_scale(w, h):
+            # pose_budget already scaled the cell. Dividing by 4 again labels
+            # the historical 1:4 probe as if it had run.
+            already = pre_scaled or (el.motivo or "").startswith("framebuffer ")
+            if not already and SC.needs_scale(w, h):
                 w, h = w // SC.SCALE, h // SC.SCALE
             tw, th = -(-w // 8), -(-h // 8)
             poses.append((tw * th, tw, th, n, i))

@@ -1,0 +1,149 @@
+{
+  "schema": "social_taunt_cycle_v3_registration",
+  "replaces_pose": "logical/TA07_settle.png permanece; o ciclo novo usa a v2",
+  "scale_note": "A v1 media 886 px de corpo contra 836 da guarda, com as mesmas razões de ombro, quadril e sola. Era deriva uniforme, não extensão. Estas duas ficam em 72 px de altura SMS, dentro de 66–72, sola na mesma base. Não foram esmagadas.",
+  "color_note": "O azul escuro da v1 caía no código SMS 20, o verde-azulado. A v2 e a subida da mão voltam ao ciano da família 56/57.",
+  "kept": [
+    {
+      "sat_row_peak": 4,
+      "opaque_height": 72,
+      "opaque_top": 6,
+      "opaque_bottom": 77,
+      "max_span": 25,
+      "sprite_wh": [
+        72,
+        88
+      ],
+      "source": "TA07_settle_v2_keyed.png",
+      "dest": "logical/TA07_settle_v2.png",
+      "sha256": "97cb4b29acf8c40580546864b17cb37ae0ee7b8efd9d02d7d20e0f7b5b908e51",
+      "box": [
+        302,
+        53,
+        738,
+        930
+      ],
+      "body_wh": [
+        436,
+        877
+      ],
+      "cell_wh": [
+        54,
+        109
+      ],
+      "place_xy": [
+        37,
+        7
+      ],
+      "height_ratio_vs_guard": 1.049,
+      "corner_rgb": [
+        166,
+        18,
+        190
+      ],
+      "original": "originals/TA07_settle_v2.jpg",
+      "original_sha256": "3c9ebdc4c47441197c3a4a39b6faabda2ee4cda7ac5aef9961004e718892ef27",
+      "border_specks_set_to_corner": [
+        [
+          0,
+          1021
+        ],
+        [
+          0,
+          1022
+        ],
+        [
+          0,
+          1023
+        ]
+      ],
+      "keyed_png": "originals/TA07_settle_v2_keyed.png"
+    },
+    {
+      "sat_row_peak": 4,
+      "opaque_height": 72,
+      "opaque_top": 6,
+      "opaque_bottom": 77,
+      "max_span": 25,
+      "sprite_wh": [
+        72,
+        88
+      ],
+      "source": "TA08_hand_rise_keyed.png",
+      "dest": "logical/TA08_hand_rise.png",
+      "sha256": "fada83b24a71f0ee9450ad313acee1a7d53a6f24ca9003ef1fddd96689b7684d",
+      "box": [
+        302,
+        53,
+        739,
+        930
+      ],
+      "body_wh": [
+        437,
+        877
+      ],
+      "cell_wh": [
+        54,
+        109
+      ],
+      "place_xy": [
+        37,
+        7
+      ],
+      "height_ratio_vs_guard": 1.049,
+      "corner_rgb": [
+        164,
+        19,
+        186
+      ],
+      "original": "originals/TA08_hand_rise.jpg",
+      "original_sha256": "4709a7b8187f9b1f7f50ef57182e381067502bfb8f21c1d17c0fa22e23665274",
+      "border_specks_set_to_corner": [
+        [
+          0,
+          1020
+        ],
+        [
+          0,
+          1021
+        ],
+        [
+          0,
+          1022
+        ],
+        [
+          0,
+          1023
+        ]
+      ],
+      "keyed_png": "originals/TA08_hand_rise_keyed.png"
+    }
+  ],
+  "studies_not_registered": [
+    {
+      "file": "originals/TA07_attempt_hand_up.jpg",
+      "sha256": "7ed68397e908ec124c886d69d660ec93ae0547d6bd71813fcd37ffb98a2b4351",
+      "session_name": "19.jpg",
+      "registered": false
+    },
+    {
+      "file": "originals/TA07_attempt_waist_dark.jpg",
+      "sha256": "75d38a3cf6115220d7e40c3cf76cab6ff020b5db814786319c871a5102e86037",
+      "session_name": "20.jpg",
+      "registered": false
+    },
+    {
+      "file": "originals/TA07_attempt_from_bright.jpg",
+      "sha256": "53dca72fd87357d896ecdcb8a7afde8562f65b5a793992f48d1db5f349fdbcfa",
+      "session_name": "21.jpg",
+      "registered": false
+    },
+    {
+      "file": "originals/TA07_attempt_halo.jpg",
+      "sha256": "e19be8d6d04898b9152c6109ca3a7fad214352532a9cbb51675215453bb3f8cd",
+      "session_name": "23.jpg",
+      "registered": false
+    }
+  ],
+  "not_an_approval": true
+}

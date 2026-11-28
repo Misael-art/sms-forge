@@ -1,0 +1,155 @@
+{
+  "artifact_kind": "independent_quality_review",
+  "claim_ceiling": "independent_quality_review_only",
+  "stage": "pre_growth",
+  "producer": "/root",
+  "reviewer": "/root/social_art_review",
+  "domains": [
+    "art",
+    "animation"
+  ],
+  "execution_mode": "read_only_source_art_review",
+  "status": "passed",
+  "request_id": "dr-social-cps2-v5-native-face-delta",
+  "approval_scope": "Independent visual source review of the v5 face/spectacle correction and observed whole-body invariants only. Usable source for the next explicitly separate contact-pose correction; no complete animation, SMS conversion, ROM, owner or delivery approval.",
+  "artifacts": [
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v3/jab_source.png",
+      "sha256": "04d210857352d952be51109713cc5eadcd2212e4f38668cfba76a57337744872",
+      "observed_sha256": "04d210857352d952be51109713cc5eadcd2212e4f38668cfba76a57337744872"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v5/jab_source.png",
+      "sha256": "44ae0342e9db909d467907c1c21633165f5ee8dd1034b90d596d38498abd9c05",
+      "observed_sha256": "44ae0342e9db909d467907c1c21633165f5ee8dd1034b90d596d38498abd9c05"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v5/jab_metadata.json",
+      "sha256": "a1b13faaa3f15a6e0bf78126dc1f5e2b5bdf108b4c70f03c2e33eac6f55ab06c",
+      "observed_sha256": "a1b13faaa3f15a6e0bf78126dc1f5e2b5bdf108b4c70f03c2e33eac6f55ab06c"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v5/extraction_recipe.json",
+      "sha256": "a13689f460b12467a4d7b3bfdc7e356b0932123bea6c3951231340fa4631cc9b",
+      "observed_sha256": "a13689f460b12467a4d7b3bfdc7e356b0932123bea6c3951231340fa4631cc9b"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/face_revision_v5/source_delta.json",
+      "sha256": "dbdf3bee281ae6568bab6a57ee87e85b181765ec80fdf0d97e6c0c7e1a0a9e84",
+      "observed_sha256": "dbdf3bee281ae6568bab6a57ee87e85b181765ec80fdf0d97e6c0c7e1a0a9e84"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/face_revision_v5/source_and_faces_comparison.png",
+      "sha256": "f6fda7b182d9727aae55f2f90edde879fdf654c24e510c14cdcd3134c928af75",
+      "observed_sha256": "f6fda7b182d9727aae55f2f90edde879fdf654c24e510c14cdcd3134c928af75"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/out/diagnostics/dr_social_cps2_sample_v1/face_revision_v5/jab_source_v5_60hz.apng",
+      "sha256": "5bc1ed73db77c819439f46eadb726de9ee1f1fa3106aa06fa4568d494efd4e63",
+      "observed_sha256": "5bc1ed73db77c819439f46eadb726de9ee1f1fa3106aa06fa4568d494efd4e63"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/dr_social_cps2_sample_art_checklist_v5.json",
+      "sha256": "3c6b49f48490ef5adb865438af2e154a21cbd28a35a5655fb644b6599f8de8b5",
+      "observed_sha256": "3c6b49f48490ef5adb865438af2e154a21cbd28a35a5655fb644b6599f8de8b5"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/doc/dr_social_cps2_sample_independent_review_v2.json",
+      "sha256": "d22d6a53a70b313e3c0e99aa94c595814ea5d15225fcff0971c3e92d3079ba42",
+      "observed_sha256": "d22d6a53a70b313e3c0e99aa94c595814ea5d15225fcff0971c3e92d3079ba42"
+    },
+    {
+      "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+      "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+      "observed_sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644"
+    }
+  ],
+  "findings": [],
+  "scoped_conclusion": {
+    "face_delta_usable_for_next_contact_correction": true,
+    "whole_source_or_animation_promoted": false,
+    "source_face_observation": "Na v5, aro de latão e área de lente/olho se separam visualmente da franja e da pele no tamanho nativo. Os seis rostos mantêm uma assinatura de óculos reconhecível através das rotações da cabeça. Há pequenas variações de reflexo/oclusão, mas não identifiquei o mesmo desaparecimento da assinatura em uma faixa genérica que bloqueou v3/v4.",
+    "invariant_observation": "O delta não é pixel-local e altera pixels fora da tela geométrica de cabeça. Na comparação visual, porém, não identifiquei regressão material de biotipo esguio, traje, mãos/bengala, apoios ou construção anatômica. Essas diferenças não foram automaticamente classificadas como defeitos artísticos."
+  },
+  "resolution_of_previous_priorities": [
+    {
+      "previous": "óculos/lentes instáveis em v3/v4",
+      "status": "resolved_for_native_source_review",
+      "note": "A assinatura de aro de latão e lente é reconhecível nos seis desenhos v5, em 1× e na ampliação nearest-neighbor."
+    },
+    {
+      "previous": "cabelo marrom da v1",
+      "status": "preserved_correction",
+      "note": "Cabelo continua visualmente cinza, com volume e forma consistentes com a direção aprovada."
+    },
+    {
+      "previous": "pixel-localidade da tentativa face-only",
+      "status": "method_limit_recorded_not_artistic_blocker",
+      "note": "As alterações corporais são admitidas e foram revistas visualmente; não há alegação de preservação byte a byte ou edição limitada a uma máscara semântica."
+    },
+    {
+      "previous": "distinção de contato J04",
+      "status": "outside_scope_still_open",
+      "note": "A presente passagem não pediu redesenho da chave de contato e este parecer não aprova o jab completo nem encerra o risco anterior."
+    }
+  ],
+  "observed_preserved": [
+    "Identidade de adulto humano esguio, cabelo cinza e óculos de latão reconhecíveis nos seis rostos.",
+    "Casaco longo azul/ciano, colete escuro, cravat bordô, luvas claras e botas mantêm os papéis visuais da direção aprovada.",
+    "Bengala completa e conectada à mão de apoio; haste clara, curva de latão e terminal continuam visíveis.",
+    "Não observei membro solto, inversão anatômica grosseira, corte de equipamento ou aumento material do biotipo.",
+    "Posturas e apoios conservam a leitura da baseline. Nenhuma afirmação de COM/física ou estabilidade dinâmica é emitida.",
+    "Os seis PNGs nativos coincidem pixel a pixel e em paleta com as respectivas células da fonte v5 selada.",
+    "Todos os dez artefatos do pedido coincidiram com os hashes informados durante a revisão.",
+    "O APNG inspecionado contém seis entradas com durações registradas de 33/17/17/17/17/50 ms; não foi observado playback contínuo."
+  ],
+  "axis_observations": {
+    "pixel_clusters": "A face tem agora agrupamentos que sustentam a assinatura dos óculos; acabamento do corpo continua coerente com os planos maiores da v3.",
+    "face_detail_readability": "pass within source-face scope: rim/lens signature remains recognizable in all six native heads.",
+    "outline_and_cutout": "Nenhum recorte grosseiro ou contorno quebrado material foi identificado nos quadros inspecionados; ausência de mudanças byte a byte não é alegada.",
+    "material_shading": "Papéis gerais de tecido, pele, cabelo, luvas e latão permanecem distintos.",
+    "material_shadow_flow_coherence": "Não identifiquei nova inversão grosseira de luz ou ruptura material causada por esta revisão facial.",
+    "semantic_palette_role_confinement": "Cabelo cinza e acentos de latão leem nos materiais pretendidos; paleta ou máscara não foram usadas como prova automática de verdade artística.",
+    "hand_weapon_attachment": "Pegada e bengala continuam conectadas visualmente em todos os quadros.",
+    "equipment_geometry": "Curva, haste e terminal da bengala estão completos na inspeção nativa; nenhum gate de hardware foi executado nesta revisão.",
+    "frame_pose_integrity": "Identidade facial consistente através de seis desenhos; a distinção da chave de contato continua fora deste escopo.",
+    "native_size_readability": "A assinatura facial melhorou de modo útil e reconhecível em 1×; o corpo mantém leitura esguia.",
+    "morphology_and_biotype": "Morfologia geral preservada, sem engrossamento relevante ou alteração de idade/identidade.",
+    "pose_anatomy_and_joint_continuity": "Não observei regressão anatômica material em braços, mãos ou encaixe da bengala.",
+    "support_and_pivot": "Apoios conservam a leitura da baseline; isto é observação visual de fontes, não prova dinâmica ou de runtime."
+  },
+  "next_checkpoint_priorities": [
+    "Preservar a fonte v5 e sua construção facial como referência selada na correção específica de leitura do contato J04; não promover automaticamente a animação completa.",
+    "Após qualquer correção de pose, refazer comparação nativa e conversão/QA do novo SHA, sem reutilizar evidências da ROM v3.",
+    "Manter a decisão final do proprietário separada da aprovação independente deste reparo facial."
+  ],
+  "delta_interpretation": {
+    "provided_method": "Exact RGBA per native cell with a geometric head screen, not a semantic mask or quality verdict.",
+    "provided_outside_screen_counts": [
+      532,
+      457,
+      505,
+      563,
+      554,
+      485
+    ],
+    "provided_alpha_change_counts": [
+      61,
+      51,
+      54,
+      63,
+      65,
+      57
+    ],
+    "independent_limit": "Contagens lidas do delta preservado. A revisão aceita os invariantes observados, não afirma que os pixels corporais estejam inalterados nem que a tela geométrica classifique cada mudança semanticamente."
+  },
+  "limits": [
+    "Inspeção read-only das fontes v3/v5, seis PNGs nativos v5, comparação ampliada existente, metadata/receita/delta e model sheet de identidade; nenhuma fonte foi alterada.",
+    "Passou o reparo facial dentro do escopo explícito. J04, arco completo de combate, fluxo temporal, áudio e aceitação do proprietário não recebem aprovação por este parecer.",
+    "Não houve reprodução contínua observada. Ordem de quadros e metadados de duração não comprovam fluidez ou timing apresentado.",
+    "Não houve conversão SMS nova, build, sessão de emulador, framebuffer, medição de FPS, VBlank, áudio ou limpeza de sessão nesta tarefa.",
+    "O SHA da antiga ROM v3 não sustenta claims para os pixels v5. O próximo binário exige orçamento e QA próprios.",
+    "A fonte continua candidata: nenhuma promoção para produção, entrega ou certificação AAA foi emitida.",
+    "A única escrita desta tarefa é o relatório independente autorizado."
+  ]
+}

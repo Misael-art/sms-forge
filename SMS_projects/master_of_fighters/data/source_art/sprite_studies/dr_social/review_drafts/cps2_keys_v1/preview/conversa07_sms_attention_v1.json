@@ -1,0 +1,145 @@
+{
+  "schema": "conversa07_sms_tile_candidate_v1",
+  "status": "candidato_de_tiles",
+  "not_an_approval": true,
+  "not_runtime_text": "Glifos desenhados nesta receita, 1 tile por caractere. Nenhuma ROM carrega esta fonte.",
+  "line_2_role": "Prova de acento e comprimento. Não é fala canônica além do rascunho da primeira linha.",
+  "source": "logical/bust_neutral_crop_v1.png",
+  "source_sha256": "3a1dd847c2da867144930d015f206c0c65b99332c1e79945603c473bba960b28",
+  "reduction": "quantizar ao índice mais próximo, depois maioria do bloco. Sem Lanczos, sem dither.",
+  "palette_rgb": [
+    [
+      0,
+      0,
+      85
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      255,
+      255,
+      255
+    ],
+    [
+      170,
+      170,
+      0
+    ],
+    [
+      0,
+      170,
+      255
+    ],
+    [
+      0,
+      85,
+      170
+    ],
+    [
+      170,
+      170,
+      170
+    ],
+    [
+      85,
+      85,
+      85
+    ],
+    [
+      255,
+      170,
+      85
+    ],
+    [
+      170,
+      85,
+      85
+    ],
+    [
+      170,
+      0,
+      85
+    ],
+    [
+      85,
+      0,
+      0
+    ],
+    [
+      0,
+      85,
+      85
+    ],
+    [
+      85,
+      85,
+      170
+    ],
+    [
+      255,
+      170,
+      0
+    ],
+    [
+      255,
+      255,
+      170
+    ]
+  ],
+  "palette_roles": {
+    "0": "fundo azul",
+    "1": "caixa de fala",
+    "2": "texto e camisa",
+    "3": "nome e latão",
+    "4": "casaco",
+    "12": "coluna do palco-sonda",
+    "13": "chão do palco-sonda",
+    "15": "papel do retrato"
+  },
+  "stage": "Colunas e chão são sonda de contraste, não cenário de Kenseiden.",
+  "rects_px_half_open": {
+    "portrait": [
+      8,
+      8,
+      96,
+      120
+    ],
+    "stage": [
+      104,
+      32,
+      248,
+      120
+    ],
+    "speech": [
+      8,
+      128,
+      248,
+      184
+    ]
+  },
+  "text": {
+    "name": "DR. SOCIAL",
+    "line_1": "Ainda falta uma peça.",
+    "line_2": "Não fecha o indício."
+  },
+  "glyph_count": 28,
+  "unique_tiles": 143,
+  "vram_pattern_bytes_if_4bpp": 4576,
+  "portrait_paste": {
+    "origin": [
+      13,
+      8
+    ],
+    "size": [
+      78,
+      112
+    ]
+  },
+  "plates_sha256": {
+    "native": "62a084cd70bd720c19f201dd1d892f349b6ac9acaa38d43b77ae4750cbf7fa50",
+    "nearest_4x": "f49c7e956057115701addf848002cf2c5f323e9203f317b2cd99a98518fc811e"
+  }
+}

@@ -41,7 +41,7 @@ class FidelityReport:
 _PAD_BUTTONS = {"a", "s", "n"}
 
 
-def classify_character(ch, limits: B.SmsLimits) -> FidelityReport:
+def classify_character(ch, limits: B.SmsLimits, scale_label: str | None = None) -> FidelityReport:
     rep = FidelityReport()
     by_key = {(s.group, s.image): s for s in ch.sprites}
 
@@ -62,6 +62,10 @@ def classify_character(ch, limits: B.SmsLimits) -> FidelityReport:
             entries = B.sat_entries(sp.width, sp.height)
             if entries > limits.sat_max:
                 classe, motivo = "unsupported", f"sat>{limits.sat_max}:{entries}"
+            elif scale_label:
+                # Arte já no tamanho do pose_budget. O motivo nomeia a fração
+                # que rodou. `downscale1:4` fica no caminho histórico.
+                classe, motivo = "approximate", scale_label
             elif SC.exceeds_budget(sp.width, sp.height):
                 # contrato de escala do GDD (2026-09-25): nem 1:4 salva -> reautoria
                 classe, motivo = "manual", "estourou-apos-escala"

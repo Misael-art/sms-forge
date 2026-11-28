@@ -1,0 +1,2512 @@
+{
+  "schema_version": "mugen_engine_closure.v1",
+  "scope": "all 69 M3 IDs; previous states preserved until reverified",
+  "complete": false,
+  "findings": [
+    {
+      "id": "A01",
+      "priority": "P1",
+      "title": "A demonstração e o runtime distribuído oferecem contratos diferentes",
+      "confirmed_initial_state": "partial",
+      "classification": "defect",
+      "problem": "A cópia instalada possui MgEffects e opções ausentes do núcleo comum; reinstalar a fonte comum não reproduz o produto e quebra seus consumidores.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "A04",
+        "A08"
+      ],
+      "implementation": "Reconciliar os deltas semânticos no owner comum, com adaptadores explícitos para políticas do Mugenesis.",
+      "acceptance": "Instalar o runtime comum em consumidor limpo, compilar todas as opções e comparar estados/áudio/render ligado e desligado.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "partial",
+      "result": "Unificada politica default de sparks VM/nativo por hook e adapter; restantes extensoes do consumidor ainda divergem.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Instalar o runtime comum em consumidor limpo, compilar todas as opções e comparar estados/áudio/render ligado e desligado.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "A02",
+      "priority": "P2",
+      "title": "A identidade do conversor contamina a verificação do runtime",
+      "confirmed_initial_state": "unchanged_from_m1:partial",
+      "classification": "defect",
+      "problem": "verify-runtime acusa seis arquivos; três diferem apenas no banner 0.3.3/0.3.5. O teste espera três e está desatualizado. Isso mistura drift semântico e mudança de etiqueta.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Versionar ABI, runtime e conversor separadamente e comparar conteúdo canônico verificável.",
+      "acceptance": "Mudar somente a versão do conversor não acusa alteração do runtime; uma alteração real de função continua detectada.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "implemented_host_verified",
+      "result": "Version identities separated; exact banner normalization excludes real body edits.",
+      "limitations": "Customized consumer differences remain visible.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/install/result.json"
+      ],
+      "closure_status": "host_acceptance_met",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "No remaining work for the quoted host acceptance; broader engine/runtime fidelity is outside this item result and remains in other IDs.",
+      "acceptance_requalified_in_m4": true
+    },
+    {
+      "id": "A03",
+      "priority": "P1",
+      "title": "Não há upgrade/migração seguro do runtime instalado",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "absent",
+      "problem": "O instalador protege alterações locais, mas recusa também uma atualização canônica legítima; outro desenvolvedor precisa reconciliar arquivos manualmente.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Registrar ancestral instalado, hashes e features; oferecer plano de upgrade, staging, conflitos identificados e rollback.",
+      "acceptance": "Atualização intacta funciona; atualização com personalização preserva os bytes e relata conflito antes de qualquer publicação.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "implemented_host_verified",
+      "result": "Ancestor hashes, pristine upgrades, preflight conflicts, rollback and concurrent edit preservation.",
+      "limitations": "Customized runtime merge remains explicit, not automatic.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/install/result.json",
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/install/final_package_r2/review.json"
+      ],
+      "closure_status": "host_acceptance_met",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "No remaining work for the quoted host acceptance; broader engine/runtime fidelity is outside this item result and remains in other IDs.",
+      "acceptance_requalified_in_m4": true
+    },
+    {
+      "id": "A04",
+      "priority": "P1",
+      "title": "ABI dos dados gerados sem guarda executável",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "absent",
+      "problem": "MgSound ganhou grupo/amostra, mas tabelas usam inicializadores posicionais e não exigem versão compatível. Dados antigos podem compilar com interpretação errada.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Emitir ABI/schema/features requeridos em cada personagem e validar no header; migrar dados de forma versionada.",
+      "acceptance": "Tabela antiga incompatível falha com diagnóstico explícito; tabela compatível compila sem depender de instrução em Markdown.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "partial_host_verified",
+      "result": "New generated C includes guarded own header; real preprocess negatives reject incompatible ABI/features.",
+      "limitations": "Legacy Mugenesis data not wholesale regenerated or retroactively ABI-validated.",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/publication_final.log"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Tabela antiga incompatível falha com diagnóstico explícito; tabela compatível compila sem depender de instrução em Markdown.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "A05",
+      "priority": "P1",
+      "title": "A geração publica arquivos antes de concluir a operação",
+      "confirmed_initial_state": "unchanged_from_m1:partial",
+      "classification": "defect",
+      "problem": "PNG/.res/C podem mudar antes de fechar proveniência e recibo. Falha tardia deixa a árvore híbrida; o make pode consumir dados incompletos.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Gerar tudo em staging, validar conjunto e substituir somente os arquivos do owner em publicação transacional.",
+      "acceptance": "Injetar falha em cada etapa preserva integralmente a geração anterior, seus hashes e seu build.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "partial_host_verified",
+      "result": "Character staging publishes resources, provenance and receipts under cooperative journaled lock; failure/rollback/recover negatives pass.",
+      "limitations": "No whole-roster atomicity, arbitrary-reader snapshot or power-loss durability qualification.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/install/publication_review.json",
+        "out/reviews/engine_closure_m4_20261023/publication_final.log"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Injetar falha em cada etapa preserva integralmente a geração anterior, seus hashes e seu build.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "A06",
+      "priority": "P2",
+      "title": "Distribuição Python e ambiente reproduzível não estão empacotados",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "absent",
+      "problem": "Faltam pyproject.toml, contrato de dependências e guia principal do pacote; o uso depende de cwd/PYTHONPATH. Até instalação C importa Pillow.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Publicar artefato local instalável com dados/contratos/runtime, extras de conversão e dependências fixadas; separar imports por comando.",
+      "acceptance": "Ambiente limpo instala o pacote versionado e executa install/verify/audit fora deste workspace.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "implemented_host_verified",
+      "result": "Wheel r2 installs outside checkout;39 probes and standalone sdist rebuild include indexed/local palette portrait branch exposed by real pilot.",
+      "limitations": "Linux/Python3.14 tested; several art/build CLIs remain explicitly wrapper-bound, not universally standalone.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/install/final_package_r2/review.json"
+      ],
+      "closure_status": "host_acceptance_met",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Quoted install/verify/audit outside-workspace acceptance met for tested Linux/Python3.14; other platform and workspace-bound CLI limits remain explicit.",
+      "acceptance_requalified_in_m4": true
+    },
+    {
+      "id": "A07",
+      "priority": "P1",
+      "title": "Roster e integração ainda são editados em C por personagem",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "risk",
+      "problem": "Ken/Ryu aparecem em enum, telas, seleção, inicialização e áudio. Adicionar terceiro projeto ou lutador exige várias edições coordenadas.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "A13",
+        "C19"
+      ],
+      "implementation": "Introduzir manifest de projeto/roster com IDs, nomes, definitions, paletas, retratos e políticas; gerar registro e seleção.",
+      "acceptance": "Adicionar e remover um terceiro lutador por dados regenera todas as referências sem editar o núcleo.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "partial_host_and_emulator_verified",
+      "result": "JSON roster drives runtime installation/conversion/names/registration; add/remove third fighter and repeat tested; independent frontend uses generated records.",
+      "limitations": "Bootstrap/header/build/emulator orchestration external; current game menu remains fighter-specific.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/recipe/result.json",
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/install/final_package_r2/review.json",
+        "independent_consumer:out/recipe_run/reuse_report.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "emulator_scoped",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Adicionar e remover um terceiro lutador por dados regenera todas as referências sem editar o núcleo.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "A08",
+      "priority": "P2",
+      "title": "Core, apresentação, modos e diagnóstico continuam concentrados",
+      "confirmed_initial_state": "partial",
+      "classification": "risk",
+      "problem": "scene_demo tem 2.766 linhas; mg_fight reúne simulação, render, pools, áudio, HUD textual, CPU e DEMO. Os grandes blocos MG_TEST_* dificultam manutenção e portabilidade.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Extrair por ownership: combate determinístico, adaptadores SGDK, render/recursos, áudio, modos do consumidor e probes de teste.",
+      "acceptance": "Host roda o core sem VDP; menu/Treino/ESTRESSE não são dependências do combate comum; digests anteriores permanecem equivalentes.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "partial",
+      "result": "Training presentation extracted; category policy adapted, actor visibility API separated from simulation; shared runtime booted independently.",
+      "limitations": "Core still has VDP/presentation/mode responsibilities; full architectural split not implemented.",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/frontend_tests.log",
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/runtime/audio_ttl/consumer_review.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "documented_or_blocked",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Host roda o core sem VDP; menu/Treino/ESTRESSE não são dependências do combate comum; digests anteriores permanecem equivalentes.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "A09",
+      "priority": "P1",
+      "title": "Testes fundamentais dependem de projeto e evidências privados",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "risk",
+      "problem": "Sem Ken gerado, testes pulam; outros leem caminhos do consumidor durante importação. Um checkout novo não demonstra sozinho a saúde da engine.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Separar testes herméticos com fixtures redistribuíveis, integração com corpus autorizado e regressão de evidência selada.",
+      "acceptance": "Checkout limpo coleta e testa o core sem Mugenesis; ausência de corpus produz skip explícito só no grupo de integração.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "partial_host_verified",
+      "result": "New hermetic install/conversion/admission/recipe fixtures work without private consumer; corpus-dependent integration remains declared.",
+      "limitations": "Many historical host tests still depend on the consumer corpus; no full hermetic migration.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/install/final_package_r2/review.json",
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/runtime/result.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Checkout limpo coleta e testa o core sem Mugenesis; ausência de corpus produz skip explícito só no grupo de integração.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "A10",
+      "priority": "P1",
+      "title": "Segundo consumidor independente ainda não foi demonstrado",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "absent",
+      "problem": "Dois personagens em uma demo não provam reutilização da engine. Referência HAMOOPIG não equivale a consumidor atual instalado e validado.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "A06",
+        "A07"
+      ],
+      "implementation": "Criar exemplo mínimo próprio, com outro roster/layout, instalando o mesmo artefato versionado.",
+      "acceptance": "Novo consumidor instala, converte, compila e roda em BlastEm sem patch por nome de personagem no núcleo.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "partial_scoped_emulator_verified",
+      "result": "Second consumer installs final wheel, converts both authorized real pilots and fresh builds identical SHA ca6fb39e...; independent frontend boot/animation in BlastEm.",
+      "limitations": "Exploratory conversion, manual project bootstrap and header setup remain; no strict fidelity/release acceptance.",
+      "evidence": [
+        "independent_consumer:out/recipe_run/reuse_report.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "emulator_scoped",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Novo consumidor instala, converte, compila e roda em BlastEm sem patch por nome de personagem no núcleo.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "A11",
+      "priority": "P2",
+      "title": "Contrato de apresentação possui coordenadas e paletas fixas",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "risk",
+      "problem": "Chão, centro/câmera H40, PAL1/PAL2/PAL3, WINDOW e áreas de HUD não formam um layout validado por perfil. Outro frontend pode colidir com esses owners.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "A08",
+        "P03",
+        "P10"
+      ],
+      "implementation": "Declarar MgPresentationConfig/capabilities com viewport, chão, VRAM e CRAM; validar exclusividade antes de iniciar.",
+      "acceptance": "Dois layouts de consumidor funcionam com o mesmo core; configuração conflitante é rejeitada com owners identificados.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:not_addressed_in_m1",
+      "result": "Consultar auditoria original. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Dois layouts de consumidor funcionam com o mesmo core; configuração conflitante é rejeitada com owners identificados.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "A12",
+      "priority": "P1",
+      "title": "Os documentos ativos descrevem versões incompatíveis do estado",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "defect",
+      "problem": "Memória aponta v007; specs ainda dizem Options/Treino sem build e ROM 1b66; índices e backlog mandam reimplementar itens já presentes. Roadmap ainda lista Suzaku apesar do corte stage-free.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "Q07"
+      ],
+      "implementation": "Manter índice atual curto derivado de recibos e separar requisitos vigentes, implementação, prova por SHA e histórico.",
+      "acceptance": "Outro desenvolvedor encontra uma única baseline e não precisa inferir precedência entre notas históricas contraditórias.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "documented_current_state",
+      "result": "Principal identity reconciled without changing ROM; active docs point to engine_current_state.json and69-ID matrix.",
+      "limitations": "Historical notes retained; source binding of principal v007 remains unknown, no performance inheritance.",
+      "evidence": [
+        "doc/engine_current_state.json",
+        "out/reviews/engine_closure_m4_20261023/principal_metadata_reconciliation.json"
+      ],
+      "closure_status": "scoped_implementation",
+      "proof_level": "documented_or_blocked",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Outro desenvolvedor encontra uma única baseline e não precisa inferir precedência entre notas históricas contraditórias.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "A13",
+      "priority": "P2",
+      "title": "Registro de definições descarta capacidade sem retorno",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "defect",
+      "problem": "O registro interno aceita quatro definições e ignora a quinta. A engine pode parar de resolver recursos sem diagnóstico ao crescer o roster/fontes compartilhadas.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Tornar capacidade declarada, separar roster de fontes vivas e devolver erro de registro com telemetria.",
+      "acceptance": "Quinto registro é suportado ou rejeitado explicitamente; nunca desaparece silenciosamente.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "implemented_host_verified",
+      "result": "Registry capacity1..255(default4), explicit admission result, rejection counter, count/remove/reset.",
+      "limitations": "Caller retains definition/name lifetime; default4 is declared, not unlimited.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/runtime/result.json"
+      ],
+      "closure_status": "host_acceptance_met",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "No remaining work for the quoted host acceptance; broader engine/runtime fidelity is outside this item result and remains in other IDs.",
+      "acceptance_requalified_in_m4": true
+    },
+    {
+      "id": "C01",
+      "priority": "P1",
+      "title": "Erros de expressão e aproximações passam como direct no strict",
+      "confirmed_initial_state": "unchanged_from_m1:implemented_host_verified",
+      "classification": "defect",
+      "problem": "x=2 + passa com erro na nota; ceil(1.2) vira floor e continua direct. Seis probes iniciais passaram sem blocker. O modo estrito não é uma barreira confiável para esse caminho.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Propagar erro/aproximação em tipos estruturados desde a expressão até controller, audit e decisão; nenhum parâmetro inválido pode sumir.",
+      "acceptance": "Sintaxe inválida bloqueia; ceil equivale à referência ou bloqueia como aproximação; nenhuma geração é publicada.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:implemented_host_verified",
+      "result": "Fidelidade estruturada de expressoes; invalidos/ceil nao passam strict. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Sintaxe inválida bloqueia; ceil equivale à referência ou bloqueia como aproximação; nenhuma geração é publicada.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C02",
+      "priority": "P1",
+      "title": "AssertSpecial e HitFallDamage são aceitos sem efeito correspondente",
+      "confirmed_initial_state": "unchanged_from_m1:implemented_static_rejection",
+      "classification": "defect",
+      "problem": "Os dois probes recebem direct e strict aprovado; não há handler efetivo. Um pacote pode depender de noko ou dano de queda que nunca acontece.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Implementar a semântica do recurso/flag selecionado ou classificá-lo como não suportado antes da conversão.",
+      "acceptance": "Caso noko altera o KO e HitFallDamage aplica o dano previsto, ou ambos são bloqueados com file/line/state.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:implemented_static_rejection",
+      "result": "No-ops explicitamente nao suportados; handlers nao implementados. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Caso noko altera o KO e HitFallDamage aplica o dano previsto, ou ambos são bloqueados com file/line/state.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C03",
+      "priority": "P1",
+      "title": "StateDef e parâmetros não consumidos escapam ao audit",
+      "confirmed_initial_state": "unchanged_from_m1:partial",
+      "classification": "defect",
+      "problem": "velset=sin(1),0 no StateDef passou sem nota. Chaves fora do esquema e parâmetros de Explod podem desaparecer sem degradar fidelidade.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Auditar parâmetros declarados contra parâmetros realmente consumidos, incluindo Statedef, constantes, vel/bindtime/prioridade e flags.",
+      "acceptance": "Cada chave tem implementação, aproximação declarada ou erro; testes demonstram posição, movimento, vínculo e prioridade.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:partial",
+      "result": "StateDef e parametros ignorados auditados; matriz completa por campo ainda aberta. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Cada chave tem implementação, aproximação declarada ou erro; testes demonstram posição, movimento, vínculo e prioridade.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C04",
+      "priority": "P1",
+      "title": "161 comandos são aceitos para arrays de 160 posições",
+      "confirmed_initial_state": "unchanged_from_m1:implemented_host_verified",
+      "classification": "defect",
+      "problem": "O preflight aceita 161 comandos e o gerador não limita ncmds; o runtime indexa cmd_timer/cmd_pos pelo comando. É uma violação de capacidade com risco de escrita fora do array em novo pacote, não crash demonstrado dos pilotos.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Validar capacidade compartilhada antes de gerar e guardar limites também no runtime.",
+      "acceptance": "Casos 159/160 são válidos; 161 falha antes de escrever; sanitizador de host não detecta acesso inválido no limite.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:implemented_host_verified",
+      "result": "Capacidade160/161 rejeitada antes de gerar e no preflight. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Casos 159/160 são válidos; 161 falha antes de escrever; sanitizador de host não detecta acesso inválido no limite.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C05",
+      "priority": "P1",
+      "title": "AIR e passos CMD são truncados silenciosamente em 255",
+      "confirmed_initial_state": "unchanged_from_m1:implemented_host_verified",
+      "classification": "defect",
+      "problem": "Uma ação AIR de 256 frames passa no strict, mas o gerador usa frames[:255]. O conteúdo aceito e o conteúdo publicado divergem.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Rejeitar explicitamente ou ampliar os campos e o contrato; auditar loopstart, referências e todos os campos u8.",
+      "acceptance": "Testes 254/255/256 preservam quadros e loops, ou bloqueiam o excedente com mensagem localizada.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:implemented_host_verified",
+      "result": "AIR/CMD excedentes rejeitados, sem truncamento silencioso. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Testes 254/255/256 preservam quadros e loops, ou bloqueiam o excedente com mensagem localizada.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C06",
+      "priority": "P1",
+      "title": "Alternativas de comando com o mesmo nome perdem-se",
+      "confirmed_initial_state": "unchanged_from_m1:implemented_host_verified",
+      "classification": "defect",
+      "problem": "Dois comandos same para x/y passam; o dicionário conserva apenas o último índice e command=\"same\" consulta somente y.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Representar nome como grupo de alternativas e compilar OR dos comandos reconhecidos, preservando prioridade e buffer.",
+      "acceptance": "x e y liberam o mesmo trigger; combinações que não pertencem ao grupo não o liberam.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:implemented_host_verified",
+      "result": "Alternativas OR e nomes case-sensitive com gates correspondentes. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "x e y liberam o mesmo trigger; combinações que não pertencem ao grupo não o liberam.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C07",
+      "priority": "P1",
+      "title": "AILevel nativo ignora o nível selecionado",
+      "confirmed_initial_state": "unchanged_from_m1:generator_fixed_pending_consumer_regeneration",
+      "classification": "defect",
+      "problem": "O código nativo emite is_cpu ? 4 : 0; a VM consulta MG_fightCpuLevel(). As expressões do personagem divergem quando Options escolhe fácil/2 ou difícil/8.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Usar a mesma fonte de configuração/semântica nos dois backends e regenerar as tabelas.",
+      "acceptance": "VM e nativo retornam 0/2/4/8 nos mesmos casos, inclusive mudança de opção entre lutas.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:generator_fixed_pending_consumer_regeneration",
+      "result": "Novo codigo consulta nivel; consumidor existente preservado. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "VM e nativo retornam 0/2/4/8 nos mesmos casos, inclusive mudança de opção entre lutas.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C08",
+      "priority": "P1",
+      "title": "Escrita de SysFVar usa base incorreta",
+      "confirmed_initial_state": "unchanged_from_m1:implemented_host_verified",
+      "classification": "defect",
+      "problem": "sysfvar(0)=1 vira índice 60, mas sysfvar lê a partir de 40 e o array tem 45 posições. A guarda descarta a escrita aceita como direct.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Unificar bases/intervalos de Var/FVar/SysVar/SysFVar no contrato gerador-runtime.",
+      "acceptance": "Roundtrip de escrita/leitura dos cinco SysFVars funciona na VM e no nativo, sem alterar variáveis comuns.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:implemented_host_verified",
+      "result": "Round-trip C gerado confirma SysFVar40..44 e SysVar60..64. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Roundtrip de escrita/leitura dos cinco SysFVars funciona na VM e no nativo, sem alterar variáveis comuns.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C09",
+      "priority": "P1",
+      "title": "Triggers declarados podem retornar zero constante",
+      "confirmed_initial_state": "unchanged_from_m1:implemented_static_rejection",
+      "classification": "defect",
+      "problem": "NumExplod e GetHitVar hitcount/isbound/recovertime/fall.damage têm declaração sem valor equivalente. Isso desliga condições sem reportar ausência.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Implementar cada campo ou bloquear a expressão; gerar matriz a partir dos handlers reais, incluindo casos parametrizados.",
+      "acceptance": "Explod vivo incrementa contagem; cada GetHitVar responde ao evento correspondente; campo desconhecido nunca recebe verde.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:implemented_static_rejection",
+      "result": "Triggers sem handler deixam de alegar suporte direto. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Explod vivo incrementa contagem; cada GetHitVar responde ao evento correspondente; campo desconhecido nunca recebe verde.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C10",
+      "priority": "P1",
+      "title": "Paletas locais de SFF viram a mesma paleta base",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "defect",
+      "problem": "SFF com vermelho/verde no mesmo índice, em sprites com paletas próprias, passa strict e produz a variante vermelha para ambos.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Converter cada pixel pela paleta efetiva do sprite antes de quantizar/remapear para o contrato comum.",
+      "acceptance": "Fixture com paletas locais e linked/shared palettes preserva a distinção ou bloqueia a concessão cromática explicitamente.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "implemented_host_verified",
+      "result": "Local/shared/linked palette identity preserved; embedded indexed SFF2 palette fallback tested through installed wheel.",
+      "limitations": "Palette fidelity/concessions beyond covered indexed cases remain explicit.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/conversion/integration_review.json",
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/install/final_package_r2/review.json"
+      ],
+      "closure_status": "host_acceptance_met",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "No remaining work for the quoted host acceptance; broader engine/runtime fidelity is outside this item result and remains in other IDs.",
+      "acceptance_requalified_in_m4": true
+    },
+    {
+      "id": "C11",
+      "priority": "P2",
+      "title": "Áudio válido pode falhar somente depois do preflight",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "defect",
+      "problem": "WAV PCM24 dentro de SND com PlaySnd passa strict; conversão devolve converted=[] e erro WAV24. O pacote aprovado perde o som.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Validar codec/bit depth na fase de análise e propagar falha de conversão até publicação; adicionar conversão quando fizer parte do perfil.",
+      "acceptance": "PCM8/16/24/32, canais e rates têm comportamento declarado; som usado nunca é omitido após strict aprovado.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "implemented_host_verified",
+      "result": "PCM8/16/24/32 multichannel handling declared; source audit decodes referenced samples and blocks malformed/truncated used audio.",
+      "limitations": "No universal audio codec/music importer or perceptual quality claim.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/conversion/integration_review.json"
+      ],
+      "closure_status": "host_acceptance_met",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "No remaining work for the quoted host acceptance; broader engine/runtime fidelity is outside this item result and remains in other IDs.",
+      "acceptance_requalified_in_m4": true
+    },
+    {
+      "id": "C12",
+      "priority": "P1",
+      "title": "Display fit limita pivôs que são externos ao sprite",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "defect",
+      "problem": "Eixo SFF negativo/fora da imagem é válido como coordenada de ancoragem; fit_cell o prende ao canvas. Arte, offsets e caixas deixam de compartilhar a transformação.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Preservar coordenadas externas e aplicar uma transformação afim única a pixel, pivot, offset e caixas.",
+      "acceptance": "Pivôs negativos e além da largura, com H/V flip e multipart, continuam alinhados antes/depois da escala.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "implemented_host_verified",
+      "result": "Fit preserves external/negative pivots, multipart offsets and H/V flips; boundary/repeat tests pass.",
+      "limitations": "Visual/semantic compatibility of every source package remains separate.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/conversion/integration_review.json"
+      ],
+      "closure_status": "host_acceptance_met",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "No remaining work for the quoted host acceptance; broader engine/runtime fidelity is outside this item result and remains in other IDs.",
+      "acceptance_requalified_in_m4": true
+    },
+    {
+      "id": "C13",
+      "priority": "P1",
+      "title": "A proteção contra dupla escala não cobre a geração com fit",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "defect",
+      "problem": "apply-display-fit procura marcador em C/.res; o caminho convert-char com fit não persiste esse mesmo marcador. A proteção existente não cobre ambas as entradas.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Registrar transformação e hashes no recibo único; ambos os comandos devem verificar o mesmo estado antes de tocar qualquer arquivo.",
+      "acceptance": "Converter com fit e aplicar novamente é no-op ou recusa, preservando todos os hashes; testar também interrupção parcial.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "implemented_host_verified",
+      "result": "Shared pending/applied receipt binds fit outputs; postfit twice refuses, fresh regeneration repeat is byte-stable; build snapshot binds receipts.",
+      "limitations": "Locks are cooperative; frozen readers required.",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/publication_final.log",
+        "out/reviews/engine_closure_m4_20261023/pipeline_recipe_final.log"
+      ],
+      "closure_status": "host_acceptance_met",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "No remaining work for the quoted host acceptance; broader engine/runtime fidelity is outside this item result and remains in other IDs.",
+      "acceptance_requalified_in_m4": true
+    },
+    {
+      "id": "C14",
+      "priority": "P1",
+      "title": "Offsets e bitmaps internos têm limites não auditados em conjunto",
+      "confirmed_initial_state": "unchanged_from_m1:partial",
+      "classification": "defect",
+      "problem": "Offset 65535 coincide com sentinela de ausência; o bitmap do estado -1 comporta 256 controllers. O pipeline não possui gate geral para cada largura/capacidade.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Formalizar limites u8/u16/s16, sentinelas, command buckets, bytecode e máscaras em um capability manifest consumido pelo audit e gerador.",
+      "acceptance": "Testes nos limites e um acima de cada limite bloqueiam ou preservam o elemento final, inclusive controller 257 do estado -1.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:partial",
+      "result": "Checagens de pools/tipos/bitmaps implementadas; admissao global/ABI seguem abertas. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Testes nos limites e um acima de cada limite bloqueiam ou preservam o elemento final, inclusive controller 257 do estado -1.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C15",
+      "priority": "P2",
+      "title": "SFFv2 e containers adicionais não têm conversão suportada",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "absent",
+      "problem": "O parser implementa SFFv1/PCX e rejeita SFFv2. Os RAR locais ficam inconclusivos; inventariar um container não significa decodificar seu conteúdo.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "C10"
+      ],
+      "implementation": "Declarar matriz container × versão × encoding e implementar por demanda medida do corpus, com codec isolado e limites de recurso.",
+      "acceptance": "Fixtures versionadas demonstram cada formato aceito e erro acionável para os demais; importação não depende de extração manual.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "partial_host_verified",
+      "result": "SFF2 indexed Raw8/RLE8/RLE5, tables/links/local palettes implemented;6 fixtures match independent pinned C++ decoder.",
+      "limitations": "LZ5/PNG/truecolor/partial alpha and additional containers remain unsupported; no whole-revision approval.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/conversion/sff_v2/independent_decoder_comparison.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Fixtures versionadas demonstram cada formato aceito e erro acionável para os demais; importação não depende de extração manual.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C16",
+      "priority": "P1",
+      "title": "Dependências globais MUGEN ainda não formam pacote resolvido",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "absent",
+      "problem": "common1.cns ausente aciona common_forge, sem equivalência demonstrada. FightFX/SND comuns faltam; Ryu possui links AIR→SFF ausentes. Compartilhar 8060 não supre essas dependências.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "C15"
+      ],
+      "implementation": "Resolver dependências por namespace/origem/hash e perfil de adaptação; separar recursos globais, personagem e aliases aprovados.",
+      "acceptance": "Relatório lista todas as referências resolvidas/omitidas com motivo; strict não depende de fallback silencioso nem inventa asset.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:not_addressed_in_m1",
+      "result": "Consultar auditoria original. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Relatório lista todas as referências resolvidas/omitidas com motivo; strict não depende de fallback silencioso nem inventa asset.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C17",
+      "priority": "P1",
+      "title": "Semânticas de combate complexas ainda são aproximações",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "partial",
+      "problem": "Juggle/priority/trade, ChangeAnim2/custom states, Helper atingível e autônomo, redireções, hit/guard/fall/bounce e parâmetros de Explod não têm cobertura completa. Helper reduzido existente não equivale a helper MUGEN completo.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "C03",
+        "C09",
+        "C16"
+      ],
+      "implementation": "Definir perfis suportados e priorizar semânticas que bloqueiam os comandos alcançáveis; implementar ou recusar por caso.",
+      "acceptance": "Oráculos com estado por tick e eventos provam throw/custom-state, prioridades simultâneas, aéreo/deitado, helpers e projéteis nos dois lados.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:not_addressed_in_m1",
+      "result": "Consultar auditoria original. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Oráculos com estado por tick e eventos provam throw/custom-state, prioridades simultâneas, aéreo/deitado, helpers e projéteis nos dois lados.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C18",
+      "priority": "P1",
+      "title": "A receita ativa não fecha regeneração de todos os pós-processamentos",
+      "confirmed_initial_state": "partial",
+      "classification": "risk",
+      "problem": "Há recibos/versionamento e geradores nativos automáticos, mas scripts/pós-processamentos podem mudar compressão, fit ou tabelas sem atualizar a mesma receita e outputs. Reconversão padrão pode recolocar FAST/off.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "A05",
+        "C13",
+        "C19"
+      ],
+      "implementation": "Persistir configuração por projeto/personagem e reconstruir tudo a partir de fonte+receita, sem editar C/.res gerados.",
+      "acceptance": "Apagar somente outputs regeneráveis numa cópia e reconstruir byte a byte, incluindo nomes, compressão, fit, paletas e provenance.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "partial_host_verified",
+      "result": "Conversion/fit/provenance/names and data roster orchestrated; final wheel real recipe rebuild produces same ROM as previous build.",
+      "limitations": "All optional postprocessors, deletion-from-clean-repro and build/evidence orchestration not closed.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/recipe/result.json",
+        "independent_consumer:out/recipe_run/reuse_report.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Apagar somente outputs regeneráveis numa cópia e reconstruir byte a byte, incluindo nomes, compressão, fit, paletas e provenance.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C19",
+      "priority": "P2",
+      "title": "Nomes de comando úteis à UI dependem de etapa separada",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "defect",
+      "problem": "O gerador preserva nomes em comentários; emit_cmd_names cria tabela posteriormente. Novo personagem pode ter movimentos sem rótulo no DEMO/Treino.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Emitir nomes, alternativas e metadados do comando como parte de convert-char e incluí-los no recibo.",
+      "acceptance": "Um comando renomeado na fonte muda automaticamente a UI e seus hashes na mesma conversão.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "partial_host_verified",
+      "result": "Recipe automatically retains exact113/76 source command names and binds current active pair by data.",
+      "limitations": "Legacy consumer friendly UI names still separate; training displays numeric index and exact tokens.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/recipe/result.json",
+        "independent_consumer:out/recipe_run/final_wheel_r2_prepare_report.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Um comando renomeado na fonte muda automaticamente a UI e seus hashes na mesma conversão.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C20",
+      "priority": "P2",
+      "title": "Conversão de stage e screenpack não está fechada como produto genérico",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "partial",
+      "problem": "Existem ferramentas ricas de medição/composição estática e HUD, mas HUD exige ZIP/fight.def e grupos específicos. BGCtrl/anim/parallax e screenpack genérico não formam pipeline de runtime aceito.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "C16",
+        "A11",
+        "P03"
+      ],
+      "implementation": "Manter backlog da capacidade da engine separado do Mugenesis stage-free; criar adaptadores declarativos somente na fase autorizada.",
+      "acceptance": "Quando houver escopo, dois screenpacks/stages distintos importam por referências da fonte e passam em ROM; ausência atual não deve reabrir palco no consumidor.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:not_addressed_in_m1",
+      "result": "Consultar auditoria original. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Quando houver escopo, dois screenpacks/stages distintos importam por referências da fonte e passam em ROM; ausência atual não deve reabrir palco no consumidor.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C21",
+      "priority": "P2",
+      "title": "Classificação de voz/SFX do consumidor foi fixada no core",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "risk",
+      "problem": "MG_playMugenSound trata grupo 0 como voz para todos os pacotes. A convenção documentada é do Mugenesis, não do formato de qualquer personagem.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Gerar categoria por política de pacote ou callback do consumidor; persistir a classificação no recibo.",
+      "acceptance": "Dois personagens com convenções diferentes mantêm mute/audition corretos sem editar o runtime.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "implemented_host_verified",
+      "result": "Generic EFFECT weak hook; actual Mugenesis group0 VOICE strong adapter; mute/expiry semantics regression tested.",
+      "limitations": "Other game conventions must supply their own adapter; perceptual audit pending.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/runtime/audio_ttl/consumer_review.json"
+      ],
+      "closure_status": "scoped_implementation",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Dois personagens com convenções diferentes mantêm mute/audition corretos sem editar o runtime.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C22",
+      "priority": "P2",
+      "title": "Falta matriz executável de revisões MUGEN e semânticas aceitas",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "absent",
+      "problem": "Datas literais do DEF e versões SFF são observações, não suporte a executáveis MUGEN específicos. Contagens de opcode/handler não são porcentagem de compatibilidade.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Publicar capabilities por recurso, parâmetro, revisão, backend e prova; gerar documentação a partir do registro testado.",
+      "acceptance": "Cada alegação aponta para fixture/oráculo/runtime; nenhuma versão inteira recebe verde por um pacote piloto.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "partial_traceability_only",
+      "result": "30 capability rows,92 AST-checked test references and63 current source SHA bindings connect source→IR→generated→runtime; unresolved oracles remain explicit.",
+      "limitations": "Whole MUGEN revision and complex combat oracle coverage remain unapproved.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "documented_or_blocked",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Cada alegação aponta para fixture/oráculo/runtime; nenhuma versão inteira recebe verde por um pacote piloto.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C23",
+      "priority": "P1",
+      "title": "Não foi demonstrado um pacote real sem intervenção até ROM aceita",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "absent",
+      "problem": "No corpus autorizado, nenhum dos seis personagens recebeu strict aprovado nesta varredura. Ken tem 170 blockers e Ryu 154; os demais quatro ficaram inconclusivos sem DEF selecionado.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "A10",
+        "C18"
+      ],
+      "implementation": "Escolher perfil real elegível, resolver dependências/adaptações permitidas e fechar pacote→dados→build→ROM→evidência pelo mesmo comando/receita.",
+      "acceptance": "Ao menos um pacote real reconverte sem intervenção e o consumidor independente executa a ROM exata; manter negativo dos demais.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "partial_real_recipe_build_emulator",
+      "result": "Final wheel real pilots converted without per-fighter patches; fresh canonical r5 build exactly reproduces already-emulated ROM ca6fb39e... .",
+      "limitations": "Profile exploratory, not strict accepted; manual generic project/header/bootstrap and orchestration remain.",
+      "evidence": [
+        "independent_consumer:out/recipe_run/reuse_report.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "emulator_scoped",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Ao menos um pacote real reconverte sem intervenção e o consumidor independente executa a ROM exata; manter negativo dos demais.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "P01",
+      "priority": "P1",
+      "title": "Luta medida permanece abaixo da cadência-alvo",
+      "confirmed_initial_state": "open_measured",
+      "classification": "observed_diagnostic_defect",
+      "problem": "Depois do fit: 40,828603859 updates/s, 534/1199 intervalos com perda, gap máximo 4 VInts; 529/1200 acima do budget e CPU média 105,7917%. São ROMs diagnósticas, não uma medição da v007 de produto.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "P02",
+        "P11",
+        "P12",
+        "P14"
+      ],
+      "implementation": "Reperfilar hotspots atuais com cenário/áudio controlados e oráculos; manter rota mínima de medição com custo do observador conhecido.",
+      "acceptance": "3×1200 e luta inteira no mesmo SHA de produto, áudio real, todos intervalos de 1 VInt em NTSC e zero overflow.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "open_measured",
+      "result": "FCAD1200 com audio em tres repeticoes confirma controle39.812 updates/s; trace28.401. Nao fecha60.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "3×1200 e luta inteira no mesmo SHA de produto, áudio real, todos intervalos de 1 VInt em NTSC e zero overflow.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "P02",
+      "priority": "P1",
+      "title": "O limite de pixels por scanline continua estourando",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "observed_diagnostic_defect",
+      "problem": "No diagnóstico pós-fit: máximo de 16 sprites por linha, mas 400 pixels e 22 frames acima de 320. Medir só contagem daria falso verde. O FX80 antigo registrou até 608 pixels em checkpoints e estudo de pisca 600 pixels.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "P03",
+        "P10",
+        "P14"
+      ],
+      "implementation": "Resolver composição/partição/residência conjunta e medir SAT do efeito atual. Piscar ou expor toggle não corrige o quadro ligado.",
+      "acceptance": "A coreografia pesada respeita ao mesmo tempo 20 sprites e 320 pixels em cada linha H40, sem esconder overflow com flicker.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "unchanged_from_m1:not_addressed_in_m1",
+      "result": "Consultar auditoria original. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "A coreografia pesada respeita ao mesmo tempo 20 sprites e 320 pixels em cada linha H40, sem esconder overflow com flicker.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "P03",
+      "priority": "P1",
+      "title": "Não há admissão global de recursos antes de instanciar a cena",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "absent",
+      "problem": "Dois lutadores, helpers, projéteis, sparks, Explods, mensagens e sombras competem por SAT/VRAM/DMA sem plano conjunto de pior quadro.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "P04",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "P14"
+      ],
+      "implementation": "Emitir capability/budget da cena e plano de residentes/uploads; reservar gameplay crítico e declarar política de degradação de apresentação.",
+      "acceptance": "Teste de próxima carga mede o primeiro estouro; falha identifica recurso, owner e fallback, sem modificar colisão/comando para caber.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "unchanged_from_m1:not_addressed_in_m1",
+      "result": "Consultar auditoria original. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Teste de próxima carga mede o primeiro estouro; falha identifica recurso, owner e fallback, sem modificar colisão/comando para caber.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "P04",
+      "priority": "P1",
+      "title": "Fallback de VRAM dos corpos não protege o próximo carregamento",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "risk",
+      "problem": "O fallback conserva next=USER+need0+need1; HUD/retratos usam o endereço sem uma verificação final de sobreposição. Um novo personagem maior pode invadir pool/tabelas.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Centralizar mapa de VRAM e retornar resultado explícito de alocação, com ranges validados também no fallback.",
+      "acceptance": "Fixtures de corpo grande e pool fragmentado falham antes de upload e preservam todos os ranges reservados.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "partial_host_and_build_verified",
+      "result": "Static reserves widen additions, reject before upload and recheck pool; fallback cursor reset; actual HUD mandatory range admitted before upload;32 repeat cycles tested.",
+      "limitations": "Global scene resource admission and fragmentation/transient/worst-profile runtime qualification remain.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/runtime/result.json",
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/runtime/audio_ttl/reentry/investigation.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Fixtures de corpo grande e pool fragmentado falham antes de upload e preservam todos os ranges reservados.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "P05",
+      "priority": "P2",
+      "title": "Mensagem do HUD pode ficar incompleta após uma falha transitória",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "defect",
+      "problem": "sMsg recebe a mensagem antes de SPR_addSpriteEx completar; se faltar VRAM/sprite para uma metade, a mesma mensagem não tenta completá-la novamente.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "F02"
+      ],
+      "implementation": "Separar mensagem desejada e alocação efetiva; repetir somente partes ausentes ou publicar atomicamente.",
+      "acceptance": "Simular falha de uma metade, liberar recursos e mostrar a mensagem inteira sem trocar o evento.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "unchanged_from_m1:not_addressed_in_m1",
+      "result": "Consultar auditoria original. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Simular falha de uma metade, liberar recursos e mostrar a mensagem inteira sem trocar o evento.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "P06",
+      "priority": "P2",
+      "title": "Leitor WALC fixa capacidade de pool em 640",
+      "confirmed_initial_state": "implemented_host_verified",
+      "classification": "defect",
+      "problem": "O layout usa TILE_FONT_INDEX-423. Uma falha SAT/fragmentação com muitos tiles livres pode ser rejeitada pelo leitor como medida inválida.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Serializar capacidade e validar ranges contra o layout do mesmo build, com self-check atualizado.",
+      "acceptance": "Fixture com min_free acima de 640 e dentro da capacidade real é interpretada corretamente; valores impossíveis continuam bloqueados.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "implemented_host_verified",
+      "result": "Capacidade WALC passa a ser contexto explicito validado; desconhecida usa apenas teto fisico.19testes e self-check/gate passaram.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [],
+      "closure_status": "scoped_implementation",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Fixture com min_free acima de 640 e dentro da capacidade real é interpretada corretamente; valores impossíveis continuam bloqueados.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "P07",
+      "priority": "P2",
+      "title": "FIFO de áudio não possui prazo para eventos antigos",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "risk",
+      "problem": "A fila de 64 pode acumular sons durante ocupação dos canais e tocá-los atrasados, depois rejeitar eventos novos. Capacidade maior não garante sincronismo.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Registrar owner, categoria, prioridade, frame e deadline; descartar/aglomerar por política e medir enqueue/aceite/latência.",
+      "acceptance": "Supers e hits simultâneos têm latência máxima declarada, zero overflow no perfil aceito e sincronismo conferido em captura audível.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "partial_host_and_build_verified",
+      "result": "6VInt age limit, explicit disabled policy, expiry/rebase/wrap/pause tests; actual custom voice adapter preserved.",
+      "limitations": "Audible synchronization, accepted-profile zero overflow and worst latency remain unmeasured.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/runtime/audio_ttl/consumer_review.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Supers e hits simultâneos têm latência máxima declarada, zero overflow no perfil aceito e sincronismo conferido em captura audível.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "P08",
+      "priority": "P2",
+      "title": "Overflow de Explods substitui sempre o slot zero",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "defect",
+      "problem": "Com seis slots ocupados, o fallback não escolhe o mais antigo conforme a intenção do comentário. Pode apagar um efeito importante repetidamente.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Definir política por idade/prioridade/owner e contar substituições; impedir que apresentação altere eventos de combate.",
+      "acceptance": "Sete efeitos com idades distintas substituem o candidato previsto e geram diagnóstico rastreável.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "partial_host_and_build_verified",
+      "result": "Explicit reject-new full-pool policy with overflow diagnostic preserves all existing slots/ages; no slot0 overwrite.",
+      "limitations": "Heavy simultaneous effects in emulator not comprehensively qualified.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/runtime/result.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Sete efeitos com idades distintas substituem o candidato previsto e geram diagnóstico rastreável.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "P09",
+      "priority": "P1",
+      "title": "RAM e margem de stack não estão qualificadas para novos perfis",
+      "confirmed_initial_state": "partial_measured_static",
+      "classification": "evidence_missing",
+      "problem": "Helpers completos duplicam MgPlayer; arrays de comandos, projéteis, Explods e flags alteram .bss. Falta mapa atual com watermark de stack nas configurações aceitas.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Emitir sizeof/pools/map por build e medir stack sob carga, incluindo áudio/interrupts e variações de flags.",
+      "acceptance": "Pior perfil cabe nos 64 KiB de work RAM com margem medida; aumentar pools só após medir o degrau seguinte.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "partial_measured_static",
+      "result": "RAM .data+BSS e buffers medidos no ELF; stack high-water e alocacoes SGDK ao vivo ainda nao qualificados.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Pior perfil cabe nos 64 KiB de work RAM com margem medida; aumentar pools só após medir o degrau seguinte.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "P10",
+      "priority": "P1",
+      "title": "Uma única PAL3 não resolve automaticamente FX dos dois personagens",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "risk",
+      "problem": "Uma fxpal é escolhida para efeitos compartilhados; outro pacote pode usar índices incompatíveis. Flash de corpo também afeta projéteis/retrato da linha compartilhada, efeito colateral já documentado.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Gerar plano CRAM por recursos simultâneos e registrar remaps/swaps/owners/restauração; separar adaptação visual de fidelidade de combate.",
+      "acceptance": "Supers dos dois lados, retratos, sparks e flash coexistem com cores corretas e restauração na pausa/KO/troca de cena.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "unchanged_from_m1:not_addressed_in_m1",
+      "result": "Consultar auditoria original. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Supers dos dois lados, retratos, sparks e flash coexistem com cores corretas e restauração na pausa/KO/troca de cena.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "P11",
+      "priority": "P2",
+      "title": "O observador tem custo material no produto",
+      "confirmed_initial_state": "partial_measured",
+      "classification": "opportunity",
+      "problem": "Experimento anterior registrou 40,644→45,503 updates/s ao desligar telemetria, cerca de 12%. Ela continua ligada por padrão por causa da evidência VLAB.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "Q03"
+      ],
+      "implementation": "Criar telemetria mínima/sob demanda com heartbeat e contadores leves; medir o custo separadamente da otimização do jogo.",
+      "acceptance": "A/B preserva gameplay e comprova custo do observador; a ROM de produto continua gerando prova suficiente sem coletor pesado permanente.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "partial_measured",
+      "result": "Instrumentacao incluida no clock TELEMETRY, painel limitado/formatacao reduzida, A/B final repetido. Custo continua material; nao e corrigido por ocultar custo.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "A/B preserva gameplay e comprova custo do observador; a ROM de produto continua gerando prova suficiente sem coletor pesado permanente.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "P12",
+      "priority": "P3",
+      "title": "Priorizar otimizações pelos hotspots atuais e equivalência",
+      "confirmed_initial_state": "partial_measured",
+      "classification": "opportunity",
+      "problem": "Controllers nativos já deram 29,363→39,376 updates/s; dirty HUD não trouxe ganho no HUD atual. Divisão/mod32, caixas repetidas e despacho são candidatos, não melhorias demonstradas.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Reperfilar antes de mudar; experimentar caches por tick, caminhos aritméticos com guardas e pré-cálculo de colisão em A/B isolado.",
+      "acceptance": "Resultados, RNG, primeiro contato e eventos permanecem equivalentes; ganho repetido supera ruído sem piorar ROM/RAM/VDP.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "partial_measured",
+      "result": "Formatter melhorou trace26.944 para28.401(+5.4%). Cache pausas regrediu. Braco com flag HitDef gerou ROM byte-identica ao controle, portanto nao prova ganho nem custo do mecanismo; investigar selecao de backend.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Resultados, RNG, primeiro contato e eventos permanecem equivalentes; ganho repetido supera ruído sem piorar ROM/RAM/VDP.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "P13",
+      "priority": "P2",
+      "title": "Compressão precisa política por janela de animação",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "risk",
+      "problem": "Medição histórica isolada de FAST indicou mediana 30.588 ciclos contra 1.755 em NONE em 32 chamadas comprimidas; não generaliza para todos os assets. Reconverter não pode perder a escolha ativa.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Escolher compressão por tamanho, frequência de troca e budget de upload; persistir decisão na receita e medir ROM final.",
+      "acceptance": "Política reduz custo total dentro de ROM/VRAM/DMA e preserva a mesma escolha em regeneração, com benchmark do conjunto real.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "unchanged_from_m1:not_addressed_in_m1",
+      "result": "Consultar auditoria original. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Política reduz custo total dentro de ROM/VRAM/DMA e preserva a mesma escolha em regeneração, com benchmark do conjunto real.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "P14",
+      "priority": "P2",
+      "title": "DMA/decompressão não têm fechamento integrado por pior frame atual",
+      "confirmed_initial_state": "partial",
+      "classification": "evidence_missing",
+      "problem": "Há instrumentação DMAP e otimizações de HUD, porém falta aceitação na v007 para upload dos dois corpos+FX+HUD, fila cheia, frames atrasados e buffers até VBlank.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Medir bytes/entradas/pendências por frame, lifetime das fontes e sprites efetivamente apresentados, com o mesmo SHA da carga pesada.",
+      "acceptance": "Zero rejeição não planejada de DMA, sem frame visual obsoleto ou ponteiro expirado; máximo simultâneo documentado.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "partial",
+      "result": "Fotografia inclui bytes/budget DMA e contexto; nao fecha decompressao+DMA fisico em pior frame global.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Zero rejeição não planejada de DMA, sem frame visual obsoleto ou ponteiro expirado; máximo simultâneo documentado.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "F01",
+      "priority": "P1",
+      "title": "Rotas existem na fonte, mas falta matriz atual de ponta a ponta",
+      "confirmed_initial_state": "partial_emulator_smoke",
+      "classification": "evidence_missing",
+      "problem": "Title, seleção, Arcade, Versus, Treino, Time Attack, Bonus, DEMO e Options não devem ser tratados como ausentes. O build_meta v007 diz menu do produto não lido e áudio não medido nesta passagem.",
+      "owner": "consumer",
+      "dependencies": [
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F09"
+      ],
+      "implementation": "Gerar roteiros pelo grafo de navegação e provar origem→ação→destino→efeito→retorno na mesma ROM, incluindo opções não padrão.",
+      "acceptance": "Matriz por modo/controle/retorno registra input consumido, imagem, SRAM e resultado no SHA de produto.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "partial_scoped_emulator_verified",
+      "result": "Current candidate observed Options/player/catalog, Versus mirror/pause/reentry, Training settings/commands, Bonus timeout-failure/restart/return, DEMO menu/return; RAM-calibrated device mapping distinguishes controls.",
+      "limitations": "Arcade/TimeAttack complete results, Bonus success and full DEMO execution/stress, every mode revanche/return and all advertised options remain incompletely qualified.",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/r4_evidence_index.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "emulator_scoped",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Matriz por modo/controle/retorno registra input consumido, imagem, SRAM e resultado no SHA de produto.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "F02",
+      "priority": "P2",
+      "title": "Pausa e opções são cobertas por sprites de prioridade alta",
+      "confirmed_initial_state": "partial_host_verified",
+      "classification": "observed_historical_defect",
+      "problem": "A captura v006 inspecionada mostra corpos sobre labels/instruções da pausa e da página FX. Prioridade alta do plano não vence sprite de prioridade alta.",
+      "owner": "consumer",
+      "dependencies": [],
+      "implementation": "Dar ownership completo à pausa: ocultar/rebaixar corpos e FX ou compor overlay compatível, restaurando estado ao sair.",
+      "acceptance": "Todas as linhas permanecem legíveis no centro/cantos, com super ativo; retomar restaura exatamente a composição anterior.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "partial_scoped_emulator_verified",
+      "result": "Actor-only hide/restore, cache invalidation and below-WINDOW rows; r4 shows full pause title/labels/footer and training UI without actor clutter.",
+      "limitations": "ROUND/KO/HUD banners, super-active and corner combinations still need exhaustive visual proof.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/runtime/audio_ttl/consumer_review.json",
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/runtime/audio_ttl/pytest_pause_layout.log",
+        "out/reviews/engine_closure_m4_20261023/r4_evidence_index.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "emulator_scoped",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Todas as linhas permanecem legíveis no centro/cantos, com super ativo; retomar restaura exatamente a composição anterior.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "F03",
+      "priority": "P2",
+      "title": "Ownership do pad na pausa difere do ownership do modo",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "risk",
+      "problem": "A pausa combina raw pressed de P1/P2 mesmo em modos com P2 CPU; close suprime held apenas de P1. Pode permitir controle indevido ou ação residual de P2 ao retomar.",
+      "owner": "consumer",
+      "dependencies": [],
+      "implementation": "Passar máscara de pads autorizados e suprimir held de todos os participantes da ação de fechamento.",
+      "acceptance": "P2 não opera Treino/Arcade quando não autorizado; retomar pelo P2 no Versus não injeta ataque preso.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "partial_scoped_emulator_verified",
+      "result": "RAM-calibrated P2 opens/resumes Versus pause; P2 START/B ignored by Training; identical panel game pixels before/after P2 B. Both pads suppressed on resume.",
+      "limitations": "All mode/held-input/result transitions not yet exhaustive; uncalibrated prior pad labels are not ownership proof.",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/native_input/readings.json",
+        "out/reviews/engine_closure_m4_20261023/native_input/device2_reading.json",
+        "out/reviews/engine_closure_m4_20261023/r4_p2_ignored_pixel_comparison.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "emulator_scoped",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "P2 não opera Treino/Arcade quando não autorizado; retomar pelo P2 no Versus não injeta ataque preso.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "F04",
+      "priority": "P2",
+      "title": "Classificação de Time Attack arredonda antes de decidir o rank",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "risk",
+      "problem": "O código divide frames por rate e compara segundos inteiros: 20 segundos mais 59 ticks NTSC ainda entra no limite S=20. A regra precisa dizer se esse arredondamento é desejado.",
+      "owner": "consumer",
+      "dependencies": [],
+      "implementation": "Comparar frames com threshold*rate ou explicitar a regra truncada; manter apresentação de tempo separada da classificação.",
+      "acceptance": "Testes em threshold-1, threshold e threshold+1 tick, em NTSC/PAL, correspondem à regra aprovada.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "implemented_host_and_build_verified",
+      "result": "Rank compares frame thresholds before display rounding; NTSC/PAL threshold-1/= /+1 tests.",
+      "limitations": "TimeAttack full live result sequence remains part of F01.",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/frontend_tests.log"
+      ],
+      "closure_status": "host_acceptance_met",
+      "proof_level": "host",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Exact-frame PAL/NTSC rank host acceptance met; end-to-end mode qualification remains F01.",
+      "acceptance_requalified_in_m4": true
+    },
+    {
+      "id": "F05",
+      "priority": "P2",
+      "title": "Controles de Treino não têm alternativa completa em pad de três botões",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "opportunity",
+      "problem": "Timer, CPU e histórico usam X/Y/Z e ficam indisponíveis no pad de três botões, conforme declarado. Isso é limitação de usabilidade, não recurso secretamente implementado.",
+      "owner": "consumer",
+      "dependencies": [],
+      "implementation": "Oferecer seleção por linhas no painel, usando navegação/A/B, se suporte completo ao pad de três botões for requisito do produto.",
+      "acceptance": "As mesmas opções são alcançáveis com pad 3 e 6 sem acordes ambíguos nem interferir em ataques.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "partial_scoped_emulator_verified",
+      "result": "All training settings/navigation/actions accessible with A/B/C/dpad; host3/6 mappings and r4 changed settings observed.",
+      "limitations": "Actual session uses virtual six-button devices with three-button input sequence; physical3-button hardware not tested.",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/frontend_tests.log",
+        "out/reviews/engine_closure_m4_20261023/r4_evidence_index.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "emulator_scoped",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "As mesmas opções são alcançáveis com pad 3 e 6 sem acordes ambíguos nem interferir em ataques.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "F06",
+      "priority": "P3",
+      "title": "Progressão Arcade, save e conteúdo extra precisam escopo explícito",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "future_product_decision",
+      "problem": "Arcade usa o outro membro do roster e resultado/revanche; não há campanha genérica/ladder, unlocks ou save de opções. Persistência session_only e alvo existente no Bonus são escolhas declaradas.",
+      "owner": "consumer",
+      "dependencies": [],
+      "implementation": "Separar essas extensões do fechamento do protótipo; configurar progressão/save somente quando requeridos por um consumidor.",
+      "acceptance": "O pacote documenta limites e hooks; futuro ladder/save entra por dados e migração sem tornar-se dependência obrigatória do core.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "unchanged_from_m1:not_addressed_in_m1",
+      "result": "Consultar auditoria original. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "O pacote documenta limites e hooks; futuro ladder/save entra por dados e migração sem tornar-se dependência obrigatória do core.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "F07",
+      "priority": "P2",
+      "title": "Áudio tem owners simultâneos de PSG e reinício de BGM",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "risk",
+      "problem": "Cues mexem diretamente em PSG enquanto XGM2 também controla a trilha; BGM reinicia ao detectar término. Há risco de masking, loop com lacuna e cancelamento amplo de PCM entre categorias.",
+      "owner": "consumer",
+      "dependencies": [],
+      "implementation": "Definir ownership/canais para cues, música, voz e SFX; usar assets/política autorizados e roteiros audíveis de mix/teardown.",
+      "acceptance": "Menu→luta→pausa→Options não duplica trilha nem deixa voz presa; loop e cues mantêm identidade sob supers simultâneos.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "unchanged_from_m1:not_addressed_in_m1",
+      "result": "Consultar auditoria original. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Menu→luta→pausa→Options não duplica trilha nem deixa voz presa; loop e cues mantêm identidade sob supers simultâneos.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "Q01",
+      "priority": "P1",
+      "title": "Gate metodológico reprova o claim de movimento crítico",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "observed_check_failure",
+      "problem": "Execução desta auditoria retornou perceptual_motion_unvalidated: faltam sinais perceptivos e conjunto screenshot/SRAM/VDP exigido pelo claim atual.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Reconciliar claim e evidência do asset correto; não remover requisito só para tornar report verde.",
+      "acceptance": "O validator passa com provas frescas ligadas ao mesmo ativo/ROM e aprovação requerida, ou claim é reclassificado por decisão válida.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:not_addressed_in_m1",
+      "result": "Consultar auditoria original. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "O validator passa com provas frescas ligadas ao mesmo ativo/ROM e aprovação requerida, ou claim é reclassificado por decisão válida.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "Q02",
+      "priority": "P2",
+      "title": "Higiene da raiz acusa árvore recuperada sem owner",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "observed_check_failure",
+      "problem": "workflow_layout inspecionou 14 projetos e bloqueou out.broken_20261022 no Mugenesis. O histórico de recuperação e EIO não pode ser confundido com conteúdo descartável.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Identificar consumidores, inventariar hashes e preparar realocação reversível com mapa, preservando evidência selada.",
+      "acceptance": "Auditoria de raiz passa sem apagar evidência e sem quebrar links ativos; rollback é verificável.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "blocked_filesystem_io",
+      "result": "Existing recovered output tree cannot be inventoried because of errno5(EIO); preserved untouched; independent consumer hygiene passes.",
+      "limitations": "Safe relocation/rollback cannot be proven for unreadable tree; two preexisting uppercase document names also remain.",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/hygiene_io_blocker.json",
+        "independent_consumer:out/recipe_run/hygiene_final.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "documented_or_blocked",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Auditoria de raiz passa sem apagar evidência e sem quebrar links ativos; rollback é verificável.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "Q03",
+      "priority": "P1",
+      "title": "Suíte atual não está verde",
+      "confirmed_initial_state": "implemented_host_verified",
+      "classification": "observed_check_failure",
+      "problem": "Há falhas de fixtures, drift e comparação. O mesmo binário state_digest executado duas vezes divergiu no tick 118: seu oráculo não é estável sem mudança de otimização. Ele normaliza handles, mas deixa Explod.anim_def no hash bruto. A fixture nativa também tenta extrair code[] de mg_cmd_names.c, que não possui essa tabela.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Corrigir o oráculo e a seleção de fixtures antes de atribuir todo digest diferente a uma regressão de gameplay; separar também mismatch real de fonte e drift de runtime. Não enfraquecer asserts.",
+      "acceptance": "Mesmo binário gera digest estável; normalização preserva identidade semântica de definições; mutante de gameplay continua reprovado; suíte hermética e integração ficam qualificadas.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "partial_regression_retested",
+      "result": "Complete950-case run:947pass/1failure/2skip; stale synchronization expectation corrected without removing semantic comparisons;22 targeted install/upgrade/sync cases pass, including the sole failed case.",
+      "limitations": "Long suite crossed later tooling/frontend test corrections; no invented single frozen950-case green run. Final package/oracle and pause changes separately requalified. Corpus sparks source and stage-free integration skips remain explicit.",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/test_reconciliation.json",
+        "out/reviews/engine_closure_m4_20261023/runtime_sync_final.log",
+        "tools/mugen2sgdk_forge/out/reviews/closure_m4_20261023/install/final_package_r2/review.json"
+      ],
+      "closure_status": "scoped_implementation",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Mesmo binário gera digest estável; normalização preserva identidade semântica de definições; mutante de gameplay continua reprovado; suíte hermética e integração ficam qualificadas.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "Q04",
+      "priority": "P2",
+      "title": "Validadores amplos excederam a janela operacional",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "evidence_missing",
+      "problem": "Higiene foi interrompida após 180 s e validate_resources após 240 s; não há relatório completo novo desses checks. Não é prova de erro do runtime nem aprovação dos assets.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Perfilar enumeração/escopo dos validadores e distinguir arquivos ativos de acervo de evidência; preservar a falha e oferecer execução incremental/cancelável.",
+      "acceptance": "O owner ativo recebe relatório concluído em prazo declarado; cancelamento encerra filhos e retorna status inconclusivo, sem falso verde.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:not_addressed_in_m1",
+      "result": "Consultar auditoria original. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "O owner ativo recebe relatório concluído em prazo declarado; cancelamento encerra filhos e retorna status inconclusivo, sem falso verde.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "Q05",
+      "priority": "P2",
+      "title": "Build v007 registra 169 warnings sem fechamento desta auditoria",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "risk",
+      "problem": "A ROM existe e possui build versionado, mas a contagem não distingue avisos benignos de ABI, narrowing e inicializadores. Não houve novo build neste review.",
+      "owner": "engine_and_consumer",
+      "dependencies": [],
+      "implementation": "Catalogar warnings por causa e tipo, bloquear novos de contrato/memória e fechar os relevantes ao runtime gerado.",
+      "acceptance": "Build limpo proporcional ao perfil, ou inventário de warnings justificados com fonte e teste; contagem sozinha não valida nem invalida a ROM.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "partial_warning_inventory",
+      "result": "Current candidate172 warnings inventoried:169 generated unused scratch variables and3 signed boundary comparisons.",
+      "limitations": "No broad suppression or equivalence field removal; individual justification/cleanup incomplete.",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/warnings_r4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "documented_or_blocked",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Build limpo proporcional ao perfil, ou inventário de warnings justificados com fonte e teste; contagem sozinha não valida nem invalida a ROM.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "Q06",
+      "priority": "P1",
+      "title": "Sete eixos de entrega ainda não convergem na ROM de produto",
+      "confirmed_initial_state": "partial",
+      "classification": "evidence_missing",
+      "problem": "Build, validação, boot oficial, gameplay, performance, áudio e memória não possuem fechamento conjunto por SHA; provas diagnósticas parciais não promovem o produto.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "Q01",
+        "Q02",
+        "Q03",
+        "Q05",
+        "F01",
+        "P01",
+        "P02",
+        "P03",
+        "F07"
+      ],
+      "implementation": "Consolidar acceptance manifest por build com links/hashes, regiões/configuração, inputs, áudio e limitações reais.",
+      "acceptance": "Todos os eixos são reportados na mesma baseline, com BlastEm obrigatório e observação humana onde aplicável; nenhum eixo ausente vira zero/sucesso.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "partial_seven_axes_reported",
+      "result": "All seven axes explicitly reported for r4; boot/scoped runtime evidence and fresh source binding present.",
+      "limitations": "Performance/budget, broad gameplay/audio perception and whole closeout not accepted; mastering cannot promote stale default QA to candidate.",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/qa_emulator_report.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Todos os eixos são reportados na mesma baseline, com BlastEm obrigatório e observação humana onde aplicável; nenhum eixo ausente vira zero/sucesso.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "Q07",
+      "priority": "P2",
+      "title": "Falta pacote de handoff reproduzível para novo desenvolvedor",
+      "confirmed_initial_state": "partial",
+      "classification": "absent",
+      "problem": "Há boa memória e mapa parcial de módulos, porém baseline suja, receitas distribuídas e evidências históricas tornam a transferência dependente de interpretação.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "A01",
+        "A06",
+        "A07",
+        "A10",
+        "A11",
+        "A12",
+        "C18",
+        "C22",
+        "C23",
+        "C24",
+        "Q06"
+      ],
+      "implementation": "Entregar snapshot de fontes/configuração/dependências, contrato ABI, comandos, arquitetura, corpus autorizado, backlog classificado e evidência por SHA.",
+      "acceptance": "Desenvolvedor novo produz o mesmo artefato em ambiente limpo e executa um roteiro de integração sem instruções privadas nem patches manuais.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "partial_documented_and_packaged",
+      "result": "Concrete API/ownership/install/upgrade/recovery/recipe/bootstrap/build/evidence handoff, versioned wheel and independent real consumer.",
+      "limitations": "Remaining manual orchestration and open engine semantics/budgets prevent a complete developer-product handoff.",
+      "evidence": [
+        "tools/mugen2sgdk_forge/doc/engine_handoff_m4.md",
+        "independent_consumer:out/recipe_run/reuse_report.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "documented_or_blocked",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Desenvolvedor novo produz o mesmo artefato em ambiente limpo e executa um roteiro de integração sem instruções privadas nem patches manuais.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "C24",
+      "priority": "P2",
+      "title": "Falta orquestração incremental de toda a receita",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "opportunity",
+      "problem": "Há subcomandos e hashes úteis, mas não um único grafo por projeto que retome falhas, pule etapas intactas e produza um diagnóstico consolidado de intervenção necessária.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "C18",
+        "A05"
+      ],
+      "implementation": "Modelar DAG source→audit→IR→assets→código→build→provas, com cache por conteúdo/versão/opções e invalidação de descendentes.",
+      "acceptance": "Segunda execução intacta não reconverte; alterar AIR invalida só dependentes; retomada conserva recibos e nunca reutiliza prova de ROM diferente.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:not_addressed_in_m1",
+      "result": "Consultar auditoria original. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Segunda execução intacta não reconverte; alterar AIR invalida só dependentes; retomada conserva recibos e nunca reutiliza prova de ROM diferente.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "Q08",
+      "priority": "P2",
+      "title": "Proveniência tem cobertura, porém carrega símbolos históricos soltos",
+      "confirmed_initial_state": "unchanged_from_m1:not_addressed_in_m1",
+      "classification": "risk",
+      "problem": "Auditor com self-check aprovado achou 200 símbolos visuais ativos, zero blockers e 242 avisos de símbolos declarados fora dos .res. O manifesto não demonstra sozinho aprovação visual dos ativos.",
+      "owner": "engine_and_consumer",
+      "dependencies": [
+        "C18"
+      ],
+      "implementation": "Separar entradas históricas das ativas, com mapa de migração preservando hashes e aprovações; manter o audit sem dispensar warnings genericamente.",
+      "acceptance": "Cada símbolo ativo tem origem e status corretos; histórico permanece rastreável; ausência de blocker não é convertida em claim de arte final.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report"
+      ],
+      "state": "unchanged_from_m1:not_addressed_in_m1",
+      "result": "Consultar auditoria original. M4: original finding/acceptance retained; current requalification remains explicit.",
+      "limitations": "Not requalified by M4 until evidence linked",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/initial_sources.json",
+        "tools/mugen2sgdk_forge/doc/mugen_revision_matrix_m4.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "not_requalified_in_m4",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Cada símbolo ativo tem origem e status corretos; histórico permanece rastreável; ausência de blocker não é convertida em claim de arte final.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "F08",
+      "priority": "P2",
+      "title": "Lista do Treino perde modificadores e ambiguiza botao/direcao",
+      "confirmed_initial_state": "partial_source_confirmed",
+      "classification": "implementation_gap",
+      "problem": "scene_demo.c:1729-1772 ignora mods/reltime/strict; B serve para tras e botao B.",
+      "owner": "consumer",
+      "dependencies": [],
+      "implementation": "scene_demo.c:1729-1772 ignora mods/reltime/strict; B serve para tras e botao B.",
+      "acceptance": "Exibir hold/release/4way/strict/tempos e diferenciar direcao/botao, com exemplos de Ken/Ryu e prova em ROM.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "partial_scoped_emulator_verified",
+      "result": "Commands read same runtime rows, preserving hold/release duration/order/combinations/strict/4way, timing/buffer; uppercase directions/lowercase buttons.",
+      "limitations": "Strict/4way/long paging guarded in host; not every pilot command executed in ROM. Current font renders ASCII tilde as arrow, with SOLTAR legend; typography refinement remains.",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/frontend_tests.log",
+        "out/reviews/engine_closure_m4_20261023/r4_evidence_index.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "emulator_scoped",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Exibir hold/release/4way/strict/tempos e diferenciar direcao/botao, com exemplos de Ken/Ryu e prova em ROM.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "F09",
+      "priority": "P2",
+      "title": "Paletas alternativas sem selecao ou diferenciacao automatica no espelho",
+      "confirmed_initial_state": "absent_frontend_capability",
+      "classification": "implementation_gap",
+      "problem": "scene_demo.c:2269-2279 passa default_pal aos dois lados; Ryu possui12paletas.",
+      "owner": "consumer",
+      "dependencies": [],
+      "implementation": "scene_demo.c:2269-2279 passa default_pal aos dois lados; Ryu possui12paletas.",
+      "acceptance": "Selecionar/alternar paleta P2 com npals>1; fallback declarado para personagem sem alternativa; provar espelho/revanche/retorno.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "partial_scoped_emulator_verified",
+      "result": "Ryu mirror uses distinct imported grey/purple pals; preserved after pause/resume and menu reentry; source default fallback if no distinct alternative.",
+      "limitations": "Results revanche and side-swap matrix not fully proven.",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/r4_evidence_index.json"
+      ],
+      "closure_status": "open_acceptance",
+      "proof_level": "emulator_scoped",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Selecionar/alternar paleta P2 com npals>1; fallback declarado para personagem sem alternativa; provar espelho/revanche/retorno.",
+      "acceptance_requalified_in_m4": false
+    },
+    {
+      "id": "F10",
+      "priority": "P2",
+      "title": "Options so executava primeira amostra e faixa fixa, sem player/catalogo",
+      "confirmed_initial_state": "implemented_host_and_scoped_emulator_verified",
+      "classification": "existing_with_emulator_evidence",
+      "problem": "Buildr4 e fluxo real Options observados em sess-20261023T232226-637c6518; audio_signal e qualidade sao eixos separados.",
+      "owner": "consumer",
+      "dependencies": [],
+      "implementation": "Buildr4 e fluxo real Options observados em sess-20261023T232226-637c6518; audio_signal e qualidade sao eixos separados.",
+      "acceptance": "Play/pause/resume/stop/volume; percorrer21Ken/27Ryu/cues; vazio/mute/exit; provar na ROM integrada.",
+      "required_tests": [
+        "positive",
+        "negative",
+        "regression"
+      ],
+      "required_evidence": [
+        "source_sha256",
+        "test_report",
+        "candidate_rom_sha256",
+        "BlastEm",
+        "SRAM",
+        "VDP"
+      ],
+      "state": "existing_preserved_scoped_emulator_verified",
+      "result": "All20 audio/peak source files byte-identical to start; r4 player play/pause/resume/stop/volume80, Ken21/Ryu27/sample4/group10/empty-stage/5cues observed.",
+      "limitations": "Human listening remains pending; full busy/mute/PCM1/2 requalification relies on host + historical M3 evidence, not new complete emulator matrix.",
+      "evidence": [
+        "out/reviews/engine_closure_m4_20261023/audio_peak_preservation.json",
+        "out/reviews/engine_closure_m4_20261023/r4_evidence_index.json"
+      ],
+      "closure_status": "scoped_implementation",
+      "proof_level": "emulator_scoped",
+      "applicable": true,
+      "not_applicable_reason": null,
+      "remaining_work": "Play/pause/resume/stop/volume; percorrer21Ken/27Ryu/cues; vazio/mute/exit; provar na ROM integrada.",
+      "acceptance_requalified_in_m4": false
+    }
+  ],
+  "engine_complete": false,
+  "claim_ceiling": "technical_demo_partial",
+  "current_candidate": "out/profiling/engine_closure_m4_r4/rom.bin",
+  "current_candidate_sha256": "ddb75ae42f22171ab7667d7769ad75ff098a79ab4256d628aa232c994ce969e1",
+  "path_resolution": {
+    "default": "relative to Mugenesis project",
+    "tools/": "relative to workspace",
+    "independent_consumer:": "relative to MUGEN_REUSE_PROBE project"
+  },
+  "matrix_policy": "All69 entries retained; no item marked not-applicable to reduce scope; host acceptance and emulator/budget proof kept separate."
+}

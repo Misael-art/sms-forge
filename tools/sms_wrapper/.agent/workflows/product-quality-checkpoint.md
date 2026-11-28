@@ -16,6 +16,13 @@ evidência de diversão ou aceitação de mercado.
 
 ## Casos que coexistem na cena real
 
+Antes de ampliar o trecho, confronte o roteiro com os resultados dos casos:
+para cada beat e família marcada `agora`, identifique a ROM, a sessão, a
+variação negativa, a consequência visível e a retomada. Um mesmo vídeo pode
+conter vários beats; indique o intervalo próprio de cada um. Se faltar prova,
+mantenha esse caso pendente na memória. Na inclusão de uma família adiada,
+planeje e exercite a cena correspondente antes de promovê-la.
+
 | Eixo | Caso e evidência | Gate e limite |
 |---|---|---|
 | Controle | Entrada aceita → ação → feedback → consequência; neutralização/reentrada e bordas relevantes | `sms-gameplay-experience-review.md`, `audit_subagent_session.py`; ACK não prova ação |
@@ -35,9 +42,12 @@ do host. Relate carga e incerteza de transporte ao interpretar FPS.
 
 `measure_fps.py` relata velocidade do emulador; `measure_frame_advance.py` e
 `measure_runtime_probe.py` usam o contador da ROM. Sessão privada do probe exige
-alvo regional: NTSC60 ou PAL50, pelo menos duas janelas, tolerância explícita
-de até 1FPS e dispersão de até 1FPS. 55FPS constantes em NTSC reprovam esse alvo.
-O resultado é taxa média regional das janelas, não promessa de zero quedas.
+objetivo60FPS com piso58 autorizado pelo dono em2026-11-01 (SMS_GLOBAL §133).
+Exigir pelo menos duas janelas completas, todas >=58 sem arredondar para atingir
+o piso, dispersão <=2FPS e limite superior61 contra aceleração indevida.
+PAL50 permanece diagnóstico regional e não fecha este aceite. `reconcile_claims.py`
+rederiva o resultado dos números da ROM atual; `constante_50_60` sozinho reprova.
+O resultado é taxa das janelas, não promessa de ausência de stalls por frame.
 
 Para pacing, instrumente o deadline por frame na ROM e meça o worst-frame com
 as fontes reais; um contador em ISR pode avançar mesmo quando o gameplay não
@@ -45,6 +55,12 @@ completou. Para resposta, registre frames de entrada aceita, primeira reação,
 pose/evento e consequência; relate atraso sem escolher um número universal de
 "controle bom". Hitstop intencional do GDD não se confunde com stall de upload.
 Vídeo/probe/trilha precisam identificar a mesma ROM, janela e ação.
+
+O checkpoint temporal de `art-review.md` mantém seis eixos separados e é
+validado por `audit_art_review_checklist.py`. FPS/framebuffer corretos não
+aprovam força, ritmo ou continuidade percebida. Sem playback percebido,
+preservar candidata e `needs_evidence`; apresentar os intervalos ao dono sem
+regeneração ou revisão equivalente. O produto continua sem aceite nesse eixo.
 
 Ao interpretar um caso, usar `skills/sms-observed-case-evidence.md` e
 `audit_observed_cases.py` quando houver journal compatível. O assert deve
@@ -60,6 +76,29 @@ ampliar o elenco, o slice de produção fecha essa relação com um ciclo comple
 
 ## Revisão e decisão de crescimento
 
+Volte à cena e à ação escolhidas na bíblia. Registre a entrada, o intervalo
+no vídeo nativo e a menor janela funcional da mesma ROM. Em Palma V3, os
+40 px de deriva das nuvens em 320 quadros e as margens estáveis durante o
+dano responderam a duas perguntas visuais. No mesmo cartucho, os especiais
+ficaram abaixo do piso funcional. Vincule cada conclusão à sua medida.
+Quando uma ação falha, anote onde a divergência aparece primeiro (fonte,
+conversão, pose publicada ou composição), quem responde por essa etapa e
+qual repetição do mesmo caso distinguirá a correção. Preserve a candidata
+anterior, a receita, o hash e o parecer no registro existente.
+
+Se houver apresentação antes da partida, entre pelo título e percorra as
+escolhas pelos controles. Confira a função do retrato, a legibilidade do nome
+e a continuidade de traje, pista e música ao entrar no jogo. Na ficha e no
+cartucho, confira a mesma versão do comando, o momento de resposta e o
+retorno ao controle. Registre quais modos e lados foram exercitados.
+
+Em um duelo, use o [ensaio de uma troca completa](playable-fighter.md#ensaio-de-uma-troca-completa)
+para escolher o primeiro elo que precisa de correção. Exemplo de HUD:
+compare a vida antes/depois do dano mínimo e o que o jogador vê a 1×.
+Se 100 e 94 ocupam o mesmo número de segmentos, verifique se existe outra
+resposta visível à perda no prazo de leitura decidido para a cena. Preserve
+o quadro do contato e o de retorno ao controle, com áudio e pose identificados.
+
 Revisor independente inspeciona os casos e relata defeito, risco, oportunidade
 ou gosto, com cena/frame/input, impacto e reteste. Use
 `quality_review_router.py` e os gates específicos; produtor não se autoaprova.
@@ -73,3 +112,8 @@ integrais no fechamento. Uma técnica avançada entra se melhorar a experiência
 com budget medido e fallback; tamanho maior, mais cores/efeitos ou PCM não são
 ganho automático. Atualize memory bank com ROM/SHA, casos, métricas, pareceres,
 limites e próxima ação. Release segue `release-rom.md` e todos os eixos atuais.
+
+Resultado abaixo58FPS bloqueia aceite da implementação: identificar causa e
+continuar a correção/otimização no escopo autorizado. Não chamar diagnóstico,
+build ou avanço parcial de entrega aceita. Não compensar um trecho lento pela
+média de outro rápido nem mascarar o problema removendo lógica, arte ou casos.

@@ -1,0 +1,61 @@
+{
+  "curation_id": "2026-11-21_roteiro_primeiro_trecho",
+  "date": "2026-11-21",
+  "kind": "application_of_existing_lessons",
+  "dedup_key": "bootstrap_primeiro_trecho_cobertura_multigenero_20261121",
+  "rule_section": "SMS_GLOBAL §134; aplicações de §§8/16/42/133",
+  "lesson_ids_applied": [
+    "L001",
+    "L037",
+    "L098"
+  ],
+  "new_lesson_ids": [],
+  "implementation_commit": "5de51e8f9cd40950c89797434dfa8ef5036a8f5f",
+  "sources_sha256": {
+    "doc/curation/2026-10-03_workflow_first_playable_slice.json": "063c601d9579d3f1961072c788c097d7728d539b2f40c6ec13283388d11ddf6a",
+    "doc/curation/2026-11-21_mof_impacto_sistemas_pipeline.json": "82d8d51f6275c589789477c4472c8b13fb5ada8d5e7681a86b6bfd080b427960",
+    "SMS_projects/kage_matsuri/doc/11-gdd.md": "18cc267c57c8f77d27fe9c419068b8b30e0e7c8d86eff1a9a954688d8d4a4d6d",
+    "SMS_projects/kage_matsuri/doc/12-roteiro.md": "93573c9b1016f703ce6e5d15ea51679f4ad224c3ce1d62edb0c32d36c869ad6e",
+    "SMS_projects/kage_matsuri/doc/15-tdd.md": "b2e25d64d6154036d0798373ed35ed46f77968e3839d9b5619a0344cc3f659a1",
+    "SMS_projects/master_of_fighters/doc/curation_candidates/2026-11-21_auditoria_narrativa_e_cenas.md": "d52ffce7f6fdcd40042939eb8253b07284fa6577b85f921cf2d082c7a0de6b8b"
+  },
+  "observed": [
+    "O bootstrap encaminhava diretamente para o GDD e o build. O roteiro materializado pedia beats e diálogo, sem correspondência verificável com casos do primeiro trecho.",
+    "O diagnóstico opcional de especialização procurava palavras no GDD e emitia PASS inclusive para dados ausentes. Não verificava os casos do roteiro.",
+    "O modelo materializava uma linha de FPS regional ambígua e premissas incorretas de paleta. O auditor de hardware já conhecia o erro mas o modelo estava fora da varredura."
+  ],
+  "implementation": [
+    "Rota de criação e etapa P0_roteiro fazem a chamada explícita ao modo --slice-plan. A compilação técnica segue disponível.",
+    "O roteiro registra os beats do primeiro trecho e famílias escolhidas pelo GDD. Para cada caso atual, o gate verifica referência, resposta, negativo e retomada. Ciclo central obrigatório. Famílias específicas adicionais são aceitas.",
+    "O checkpoint de crescimento vincula os casos a evidências por ROM/sessão e mantém lacunas pendentes. Em duelo a rota encaminha à produção de lutador; demais gêneros usam o ciclo comum."
+  ],
+  "validation": {
+    "bootstrap_real": "Projeto descartável criado pelo wrapper. Reprovou o roteiro pendente; passou o recorte de parada/repouso/retomada; reprovou ao retirar o caso negativo. Projeto removido ao terminar. Repetição focada incluiu a linha de FPS do memory bank.",
+    "design_profiles": [
+      "Duelo inspirado no soco de Hayato e resposta de Alis",
+      "Plataforma baseada em movimento/corte/torii de Kage Matsuri",
+      "Plataforma hipotética com tiro e vinheta, sem atribuí-los a Kage Matsuri",
+      "Puzzle sem ator no self-check"
+    ],
+    "negatives": "Beat inexistente nos três primeiros perfis. Em fixture: beat órfão, duplicado, família omitida, ausência de retomada, exclusão sem motivo, exemplo em bloco de código e manifesto ilegível.",
+    "selftest_base": "143/143; probe de projeto opcional sem execução",
+    "measurement_tools": "76/76",
+    "hardware_constants": "PASS com o modelo incluído",
+    "doc_sync": "PASS",
+    "learning_capture": "PASS",
+    "host": {
+      "jobs": 1,
+      "peak_mib_budget": 400,
+      "output_and_staging_mib_budget": 160,
+      "lowest_sampled_available_mib": 6314,
+      "max_sampled_acpi_c": 60.0,
+      "passive_trip_c": 100,
+      "lowest_sampled_free_gib": 18.96
+    }
+  },
+  "limits": [
+    "O gate mede a estrutura preenchida do roteiro. A direção revisa se o recorte corresponde ao GDD e se cada caso distinguiria o comportamento certo do errado.",
+    "O pipeline é declarativo. PASS do plano, bootstrap ou build de fumaça não promove qualidade artística, gameplay ou desempenho.",
+    "Teste da metodologia e de documentos do acervo, sem nova ROM ou sessão de emulador. O duelo permanece o consumidor em desenvolvimento."
+  ]
+}

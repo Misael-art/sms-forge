@@ -1,0 +1,16 @@
+{
+  "status": "diagnostic_candidate_art_review_pending",
+  "source_sha256": "fb1ddcaf94154bcd9a01a1807d6b07c21ae989187ab37e3ad6979162277cf28b",
+  "output_sha256": "2d358b12a0956f5b4f7e05ede25c9babe1a1a6116ccc1798b2f915d1404d0ef4",
+  "mask_sha256": "4570273c1a4bfc9ea5f1dfd840b0492792333b7a6bb0baa940aa48f7dd80ea1b",
+  "bbox_exclusive": [
+    455,
+    190,
+    515,
+    290
+  ],
+  "rule": "alpha 1..24 to zero only within rectangle; RGB preserved",
+  "changed_pixels": 2224,
+  "changed_outside_mask": 0,
+  "limits": "Does not fix opaque contamination or establish scale, pivots, animation, SMS palette or provenance approval."
+}

@@ -21,6 +21,8 @@ def verdict(samples):
     """Deriva o veredito a partir das amostras. Funcao PURA — testavel."""
     fps_vals = [s["fps"] for s in samples if s.get("fps") is not None]
     return {"fps_min": min(fps_vals) if fps_vals else None,
+            "evidence_scope": "emulator_title_only_not_ROM_functional_FPS",
+            "implementation_accepted": False,
             "fps_max": max(fps_vals) if fps_vals else None,
             "fps_media": round(sum(fps_vals) / len(fps_vals), 1) if fps_vals else None,
             "amostras_validas": len(fps_vals),

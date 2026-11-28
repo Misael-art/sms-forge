@@ -1,0 +1,313 @@
+{
+  "schema": "sms_authored_animation_lineage_v1",
+  "character": "jj_zillion_ii",
+  "status": "candidate_diagnostic_not_owner_approved",
+  "input_concept": {
+    "path": "data/source_art/concept_art/jj_zillion_ii/jj_concept_sheet_v4.png",
+    "sha256": "58250d6af27a6bbaafe17e1118bcc678ae27182406dbc27059d0ef33891ead3a",
+    "role": "Approved identity/costume; game remains lore authority"
+  },
+  "input_style": {
+    "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png",
+    "sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d",
+    "role": "Source scale and pixel finishing reference only, no identity/pose/timing copied"
+  },
+  "prompt": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/prompt.txt",
+    "sha256": "3913c893ac7f5300da2f6d95172875e78af95f234dfc08595082a9bcb3a30d15"
+  },
+  "raw": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/raw.png",
+    "sha256": "d981445915513bf78b214415c148d116dab52143ed2e23e960d4a80339ea2fd5",
+    "channel": "built_in_image_gen",
+    "transparent_request": true,
+    "observed": "RGBA partial alpha plus 6 bodies and 2 pulse components at alpha>=128; free raster, not compliant native export"
+  },
+  "extraction": {
+    "tool": "tools/sms_wrapper/prepare_authored_sprite_sample.py",
+    "tool_sha256": "f151440cdc32673d9f377c8f6c9ef4de4b0fa2fe67abb7d90cdb27082eb03dab",
+    "recipe": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/extraction_recipe.json",
+    "recipe_sha256": "7f698bdfff10f8917ad0ad8ae48b9639dd761677e8adf43f5e305559dfb39970",
+    "scope": "Mechanical nearest sampling2/9, alpha128, explicit18materialcolors; no character drawing or artistic geometry edit by code"
+  },
+  "frames": [
+    {
+      "id": "I00",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/native/I00.png",
+      "sha256": "1486de25d28b3201d7c0e5f2136e99844c6d4aec0dca51347197306fed3a967d",
+      "bbox": [
+        20,
+        12,
+        101,
+        116
+      ],
+      "pivot": [
+        60,
+        116
+      ]
+    },
+    {
+      "id": "S01",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/native/S01.png",
+      "sha256": "c74b47e2adeafb39aa8188be326d853db2f467d44c56525fe27f1bc1edbe1476",
+      "bbox": [
+        18,
+        12,
+        99,
+        116
+      ],
+      "pivot": [
+        60,
+        116
+      ]
+    },
+    {
+      "id": "S02",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/native/S02.png",
+      "sha256": "c0d348f9fcf635e4198a02ef7e3987bc9ef46e4c1d1b969179bd51c4c10e9b63",
+      "bbox": [
+        16,
+        14,
+        106,
+        116
+      ],
+      "pivot": [
+        60,
+        116
+      ]
+    },
+    {
+      "id": "S03",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/native/S03.png",
+      "sha256": "3add2aa73b606ff7b8a9ba297d0b9708448ddaf0961c8473253c25939dda7e37",
+      "bbox": [
+        21,
+        17,
+        123,
+        116
+      ],
+      "pivot": [
+        60,
+        116
+      ]
+    },
+    {
+      "id": "S04",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/native/S04.png",
+      "sha256": "54aad21e90c7d7ca4f18370902973b28703e8f1a50b6f6bc35ab439c8f9cc0f9",
+      "bbox": [
+        17,
+        17,
+        125,
+        116
+      ],
+      "pivot": [
+        60,
+        116
+      ]
+    },
+    {
+      "id": "S05",
+      "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/native/S05.png",
+      "sha256": "bbf1f1d70f31f5bf095c5dddafa76313bf033f0e866a51db64b5c9aac7d265f7",
+      "bbox": [
+        13,
+        17,
+        98,
+        116
+      ],
+      "pivot": [
+        60,
+        116
+      ]
+    }
+  ],
+  "source_sheet": {
+    "path": "data/source_art/sprite_studies/jj_zillion_ii/review_drafts/zillion_single_shot_v1/shot_source.png",
+    "sha256": "1210b32e811a0b9b3d905ac05d01b4e941b2ab186bb69b515d536994581e3fb8"
+  },
+  "material_palette": [
+    {
+      "source_index": 1,
+      "role": "deep_contour",
+      "source_rgb": [
+        10,
+        8,
+        24
+      ],
+      "sms_code": 0
+    },
+    {
+      "source_index": 2,
+      "role": "navy_contour_harness",
+      "source_rgb": [
+        0,
+        0,
+        68
+      ],
+      "sms_code": 16
+    },
+    {
+      "source_index": 3,
+      "role": "cloth_dark",
+      "source_rgb": [
+        125,
+        0,
+        45
+      ],
+      "sms_code": 1
+    },
+    {
+      "source_index": 4,
+      "role": "cloth_shadow",
+      "source_rgb": [
+        180,
+        0,
+        65
+      ],
+      "sms_code": 18
+    },
+    {
+      "source_index": 5,
+      "role": "cloth_base",
+      "source_rgb": [
+        245,
+        0,
+        90
+      ],
+      "sms_code": 19
+    },
+    {
+      "source_index": 6,
+      "role": "cloth_light",
+      "source_rgb": [
+        255,
+        75,
+        135
+      ],
+      "sms_code": 19
+    },
+    {
+      "source_index": 7,
+      "role": "hair_dark",
+      "source_rgb": [
+        15,
+        15,
+        125
+      ],
+      "sms_code": 16
+    },
+    {
+      "source_index": 8,
+      "role": "hair_blue",
+      "source_rgb": [
+        20,
+        35,
+        220
+      ],
+      "sms_code": 48
+    },
+    {
+      "source_index": 9,
+      "role": "hair_highlight",
+      "source_rgb": [
+        105,
+        125,
+        250
+      ],
+      "sms_code": 56
+    },
+    {
+      "source_index": 10,
+      "role": "armor_white",
+      "source_rgb": [
+        250,
+        250,
+        255
+      ],
+      "sms_code": 63
+    },
+    {
+      "source_index": 11,
+      "role": "armor_shadow",
+      "source_rgb": [
+        170,
+        175,
+        205
+      ],
+      "sms_code": 42
+    },
+    {
+      "source_index": 12,
+      "role": "armor_deep",
+      "source_rgb": [
+        90,
+        95,
+        150
+      ],
+      "sms_code": 21
+    },
+    {
+      "source_index": 13,
+      "role": "skin_light",
+      "source_rgb": [
+        255,
+        190,
+        150
+      ],
+      "sms_code": 47
+    },
+    {
+      "source_index": 14,
+      "role": "skin_base",
+      "source_rgb": [
+        250,
+        150,
+        100
+      ],
+      "sms_code": 27
+    },
+    {
+      "source_index": 15,
+      "role": "skin_shadow",
+      "source_rgb": [
+        160,
+        80,
+        60
+      ],
+      "sms_code": 22
+    },
+    {
+      "source_index": 16,
+      "role": "pistol_orange_inset",
+      "source_rgb": [
+        255,
+        100,
+        15
+      ],
+      "sms_code": 27
+    },
+    {
+      "source_index": 17,
+      "role": "pistol_dark_orange",
+      "source_rgb": [
+        170,
+        85,
+        0
+      ],
+      "sms_code": 11
+    },
+    {
+      "source_index": 18,
+      "role": "laser_cyan",
+      "source_rgb": [
+        0,
+        220,
+        255
+      ],
+      "sms_code": 56
+    }
+  ],
+  "equipment_track": "A single pulse in S03/S04 is an intentional detached component; no other detached opaque parts allowed.",
+  "approval_scope": "None; owner requested producing experiment, not advance approval of these pixels or new timing."
+}

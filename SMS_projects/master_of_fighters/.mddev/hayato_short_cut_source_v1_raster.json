@@ -1,0 +1,65 @@
+{
+  "schema": "sms_source_raster_contract_v1",
+  "image_sha256": "8c2d5032066cae86ae5a4cc2a32108e43606b05848a74f3ba56b31080077c6dc",
+  "dimensions_px": [
+    288,
+    288
+  ],
+  "frame_count": 4,
+  "expected_frame_ids": [
+    "C01",
+    "C02",
+    "C03",
+    "C04"
+  ],
+  "frames": [
+    {
+      "id": "C01",
+      "rect_px": [
+        0,
+        0,
+        144,
+        144
+      ]
+    },
+    {
+      "id": "C02",
+      "rect_px": [
+        144,
+        0,
+        144,
+        144
+      ]
+    },
+    {
+      "id": "C03",
+      "rect_px": [
+        0,
+        144,
+        144,
+        144
+      ]
+    },
+    {
+      "id": "C04",
+      "rect_px": [
+        144,
+        144,
+        144,
+        144
+      ]
+    }
+  ],
+  "grid": {
+    "columns": 2,
+    "rows": 2,
+    "cell_px": [
+      144,
+      144
+    ]
+  },
+  "transparency": {
+    "mode": "binary_alpha"
+  },
+  "max_unique_rgb": 33
+}

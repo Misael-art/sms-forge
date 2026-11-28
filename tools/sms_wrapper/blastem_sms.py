@@ -3,6 +3,8 @@
 
 Uses the upstream native Z80 debugger, not the SGDK SDL presentation counter.
 Install is explicit and workspace local. Each run owns a new Xvfb and sandbox.
+SMSFORGE_BLASTEM_RUNTIME optionally selects the host's explicit runtime path;
+the default remains compatible with existing qualified installations.
 """
 from __future__ import annotations
 import argparse
@@ -28,7 +30,11 @@ import uuid
 
 HERE = Path(__file__).resolve().parent
 WORKSPACE = HERE.parents[1]
-RUNTIME = WORKSPACE / 'out/host_tools/blastem/1.0.0'
+
+def runtime_path(override):
+    return Path(override or WORKSPACE / 'out/host_tools/blastem/1.0.0').expanduser().resolve()
+
+RUNTIME = runtime_path(os.environ.get('SMSFORGE_BLASTEM_RUNTIME'))
 URL = 'https://www.retrodev.com/blastem/blastem64-1.0.0.tar.gz'
 ARCHIVE_SHA = '9e47b68a555e24db5ef5bd77e67967124ac3e28ae04ae32e9f3af3eaecf31860'
 BINARY_SHA = '1bd0f40ddcc6d769f6cc2aea59bb2973601b6db30bdd849b68315b9d83ad06ec'
@@ -476,6 +482,9 @@ def run(rom, doc, output, timeout=90):
     return root
 
 def self_check():
+    assert runtime_path(None) == (WORKSPACE / 'out/host_tools/blastem/1.0.0').resolve()
+    assert runtime_path(str(WORKSPACE / '.runtime/host_tools/blastem/1.0.0')) == (
+        WORKSPACE / '.runtime/host_tools/blastem/1.0.0').resolve()
     assert BINDINGS == ('up', 'down', 'left', 'right', 'b', 'c')
     valid = {'schema': 'sms_blastem_sequence_v1', 'steps': [{'frames': 7, 'p1': 8}],
              'preconditions': [{'address': 0xC700, 'equals_hex': '534d493101'}]}

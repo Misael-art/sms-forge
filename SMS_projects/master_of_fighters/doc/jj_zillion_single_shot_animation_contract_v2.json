@@ -1,0 +1,356 @@
+{
+  "schema": "sms_animation_contract_v1",
+  "project": "master_of_fighters",
+  "character_id": "jj_zillion_ii",
+  "document_version": 2,
+  "status": "diagnostic_proposal_owner_requested_experiment",
+  "design_authority": {
+    "GDD": "doc/11-gdd.md",
+    "concept": "jj-zillion-ii-concept-v04",
+    "owner_direction": "doc/jj_zillion_single_shot_route_v2.json",
+    "competitive_moveset_approved": false,
+    "weapon": "doc/jj_zillion_weapon_identity_contract_v1.json"
+  },
+  "principles_catalog": [
+    {
+      "id": "squash_and_stretch",
+      "name": "Esmagamento e Estiramento"
+    },
+    {
+      "id": "anticipation",
+      "name": "Antecipação"
+    },
+    {
+      "id": "staging",
+      "name": "Encenação"
+    },
+    {
+      "id": "straight_ahead_pose_to_pose",
+      "name": "Ação Direta e Pose a Pose"
+    },
+    {
+      "id": "follow_through_overlap",
+      "name": "Acompanhamento e Ação Sobreposta"
+    },
+    {
+      "id": "slow_in_slow_out",
+      "name": "Entrada e Saída Lenta"
+    },
+    {
+      "id": "arcs",
+      "name": "Arcos"
+    },
+    {
+      "id": "secondary_action",
+      "name": "Ação Secundária"
+    },
+    {
+      "id": "timing",
+      "name": "Temporização"
+    },
+    {
+      "id": "exaggeration",
+      "name": "Exagero"
+    },
+    {
+      "id": "solid_drawing",
+      "name": "Desenho Sólido"
+    },
+    {
+      "id": "appeal",
+      "name": "Atração"
+    }
+  ],
+  "required_sequence_ids": [
+    "jj_zillion_single_shot"
+  ],
+  "sequences": [
+    {
+      "id": "jj_zillion_single_shot",
+      "title": "Disparo único de Zillion — amostra curta",
+      "category": "diagnostic_art_action",
+      "status": "proposal",
+      "trigger": "Button 1 requests diagnostic one-shot; not competitive input mapping",
+      "purpose": "Test repeatability with technological outfit and finite straight pulse rather than melee weapon arc.",
+      "motion_contract": "Compact grounded guard; rear-weight raise with long Zillion near torso; fold elbows to aim horizontal; single short emission; shoulder settles with pulse absent; lower to guard. No root travel or barrel shortening.",
+      "frame_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05"
+      ],
+      "source_pose_count": 5,
+      "source_pose_count_status": "proposal",
+      "timing_status": "proposal_unmeasured",
+      "duration_ticks": [
+        7,
+        4,
+        2,
+        3,
+        6
+      ],
+      "initial_state": "I00_guard",
+      "final_state": "I00_guard",
+      "loop": false,
+      "entities": [
+        {
+          "id": "jj_zillion_ii",
+          "kind": "character",
+          "source_pose_count": 5,
+          "initial_state": "rear_weight_prepare",
+          "final_state": "lower_pistol_recover",
+          "track": [
+            "rear_weight_prepare",
+            "two_hand_horizontal_aim",
+            "single_pulse_emission",
+            "shoulder_settle",
+            "lower_pistol_recover"
+          ],
+          "time_contract": {
+            "mode": "sequence_frames",
+            "duration_ticks": 22
+          },
+          "hardware_sprite_objects": {
+            "status": "pending",
+            "count": null
+          }
+        },
+        {
+          "id": "pistol",
+          "kind": "object",
+          "source_pose_count": 5,
+          "initial_state": "raise_near_chest",
+          "final_state": "lower_to_guard",
+          "track": [
+            "raise_near_chest",
+            "horizontal_aim",
+            "horizontal_emission",
+            "horizontal_settle",
+            "lower_to_guard"
+          ],
+          "time_contract": {
+            "mode": "sequence_frames",
+            "duration_ticks": 22
+          },
+          "hardware_sprite_objects": {
+            "status": "pending",
+            "count": null
+          }
+        },
+        {
+          "id": "laser_pulse",
+          "kind": "effect",
+          "source_pose_count": 1,
+          "initial_state": "absent",
+          "final_state": "absent",
+          "track": [
+            "absent",
+            "absent",
+            "at_muzzle_single_emission",
+            "absent",
+            "absent"
+          ],
+          "time_contract": {
+            "mode": "sequence_frames",
+            "duration_ticks": 22
+          },
+          "hardware_sprite_objects": {
+            "status": "pending",
+            "count": null
+          },
+          "lifetime": {
+            "launch_frame": "S03",
+            "remove_frame": "S04",
+            "duration_ticks": 2,
+            "trajectory": "single short emission sample; light leaves sampled view before S04, not a slow flying bullet",
+            "independent_runtime_object": false,
+            "collision": "not_implemented; no hit/damage claim"
+          }
+        },
+        {
+          "id": "scarf",
+          "kind": "object",
+          "source_pose_count": 5,
+          "initial_state": "lag_coil",
+          "final_state": "settle_to_guard",
+          "track": [
+            "lag_coil",
+            "follow_uncoil",
+            "lag_emission",
+            "follow_settle",
+            "settle_to_guard"
+          ],
+          "time_contract": {
+            "mode": "sequence_frames",
+            "duration_ticks": 22
+          },
+          "hardware_sprite_objects": {
+            "status": "pending",
+            "count": null
+          }
+        }
+      ],
+      "principles_applied": [
+        {
+          "id": "squash_and_stretch",
+          "frame_ids": [
+            "S01",
+            "S02"
+          ],
+          "planned_visual_cue": "Small knee compression and torso extension while body proportions and rigid pistol remain intact; no weapon smear.",
+          "observed_result": "pending source, converted and continuous review"
+        },
+        {
+          "id": "anticipation",
+          "frame_ids": [
+            "S01"
+          ],
+          "planned_visual_cue": "Visible rear-leg load and pistol raise; seven-tick proposed preparation.",
+          "observed_result": "pending source, converted and continuous review"
+        },
+        {
+          "id": "staging",
+          "frame_ids": [
+            "S02",
+            "S03"
+          ],
+          "planned_visual_cue": "Clear horizontal muzzle axis and tiny separate pulse beyond hands, away from face.",
+          "observed_result": "pending source, converted and continuous review"
+        },
+        {
+          "id": "straight_ahead_pose_to_pose",
+          "frame_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S04",
+            "S05"
+          ],
+          "planned_visual_cue": "Guard, preparation, aim, emission, settle, recovery planned before generation; inspect gesture before accepting polish.",
+          "observed_result": "pending source, converted and continuous review"
+        },
+        {
+          "id": "follow_through_overlap",
+          "frame_ids": [
+            "S03",
+            "S04",
+            "S05"
+          ],
+          "planned_visual_cue": "Shoulder and elbows settle after emission; scarf follows torso with delay.",
+          "observed_result": "pending source, converted and continuous review"
+        },
+        {
+          "id": "slow_in_slow_out",
+          "frame_ids": [
+            "S01",
+            "S02",
+            "S05"
+          ],
+          "planned_visual_cue": "Longer preparation/recovery, one-tick emission; holds remain a timing hypothesis, not proof of perception.",
+          "observed_result": "pending source, converted and continuous review"
+        },
+        {
+          "id": "arcs",
+          "frame_ids": [
+            "S01",
+            "S02",
+            "S05"
+          ],
+          "planned_visual_cue": "Pistol follows connected shoulder/elbow wrist arc up to aim and down to guard; laser itself is straight.",
+          "observed_result": "pending source, converted and continuous review"
+        },
+        {
+          "id": "secondary_action",
+          "frame_ids": [
+            "S04",
+            "S05"
+          ],
+          "planned_visual_cue": "Short scarf follows primary shoulder action; no unrelated flourish.",
+          "observed_result": "pending source, converted and continuous review"
+        },
+        {
+          "id": "timing",
+          "frame_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S04",
+            "S05"
+          ],
+          "planned_visual_cue": "7/4/1/3/6 proposed, then original guard; single short flash, no automatic reuse of Hayato durations.",
+          "observed_result": "pending source, converted and continuous review"
+        },
+        {
+          "id": "exaggeration",
+          "frame_ids": [
+            "S01",
+            "S02"
+          ],
+          "planned_visual_cue": "Emphasize clear ready/aim silhouette in small screen without ballistic recoil or distorted barrel.",
+          "observed_result": "pending source, converted and continuous review"
+        },
+        {
+          "id": "solid_drawing",
+          "frame_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S04",
+            "S05"
+          ],
+          "planned_visual_cue": "Connected arm chains, coherent two-hand grip, same armor/holster/weapon dimensions, planted soles.",
+          "observed_result": "pending source, converted and continuous review"
+        },
+        {
+          "id": "appeal",
+          "frame_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S04",
+            "S05"
+          ],
+          "planned_visual_cue": "Alert agile sci-fi marksman, compact confident return; retain exact approved J.J. identity.",
+          "observed_result": "pending source, converted and continuous review"
+        }
+      ],
+      "principles_not_applied": [],
+      "competitive_frame_data": {
+        "approved": false,
+        "damage": null,
+        "hitboxes": null,
+        "cancel_windows": null
+      },
+      "equipment_invariants": [
+        "Long low angular navy/cyan Zillion, full barrel silhouette as owner reference",
+        "Grip near torso, elbow folded to preserve long equipment within budget",
+        "Same barrel/grip attachment and proportions across all poses",
+        "One short pulse only S03; no pulse in S04 or other poses",
+        "No vehicle, transformation or new competitive moveset"
+      ],
+      "root_motion_px": [
+        0,
+        0
+      ],
+      "hardware_sprite_objects": {
+        "status": "pending",
+        "count": null
+      },
+      "unique_tile_count": {
+        "status": "pending",
+        "count": null
+      },
+      "palette_and_vblank_status": "pending"
+    }
+  ],
+  "timing_and_hardware": {
+    "tick_definition": "One NTSC VDP presentation nominally 1/60s; PAL not qualified",
+    "max_frames_status": "proposal",
+    "max_frames_per_sheet": 6,
+    "resident_patterns": null,
+    "sprites_per_line": null,
+    "worst_vblank": null
+  },
+  "production_approval": false
+}

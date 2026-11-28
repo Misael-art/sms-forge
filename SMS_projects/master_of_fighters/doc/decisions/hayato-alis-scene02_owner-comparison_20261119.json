@@ -1,0 +1,28 @@
+{
+  "schema": "mof_scene02_owner_pilot_direction_v1",
+  "date": "2026-11-19",
+  "scene": "02",
+  "pair": ["hayato", "alis_landale"],
+  "decision": "compare_both_before_selection",
+  "owner_reply": "Faça as duas versões para decidirmos qual fica melhor, mais adequado para a proposta deste golpe em si.",
+  "variants": [{"hold_ticks": 6}, {"hold_ticks": 8}],
+  "shared_controls": {
+    "movement": "direcional horizontal",
+    "guard": "trás relativo ao adversário quando livre",
+    "attack": "segurar o botão 1; uma execução até a soltura, sem buffer durante reação",
+    "button_2": "reservado aos outros golpes do GDD"
+  },
+  "shared_comparison_conditions": {
+    "tick_basis": "Relógio lógico do duelo em NTSC; atividade usa intervalos semiabertos",
+    "initial_life": 100,
+    "block_chip": 0,
+    "block_ticks": 3,
+    "hit_ticks": 8,
+    "block_push_px": 3,
+    "hit_push_px": 4,
+    "hayato": {"damage": 12, "active": [9, 11], "first_free_after_uninterrupted_action": 25},
+    "alis": {"damage": 10, "active": [5, 7], "first_free_after_uninterrupted_action": 18}
+  },
+  "remaining_calibration": "Posições e caixas a partir do sprite; alcance, contato e punição devem ser medidos em ambas as variantes.",
+  "promotion": "Comparar 6 e 8 no piloto; a escolha final e o aceite de produção permanecem abertos."
+}

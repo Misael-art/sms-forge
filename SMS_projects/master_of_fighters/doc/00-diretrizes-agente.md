@@ -1,5 +1,13 @@
 # 00-diretrizes-agente — master_of_fighters
 
+> **DECISÃO VIGENTE DO PROPRIETÁRIO — 04/11/2026: SOCIAL IN-GAME CONGELADO.**
+> Os sprites e animações atuais do Dr. Social não devem ser continuados,
+> retocados, convertidos, integrados ou promovidos. Retomada futura: novo desenho
+> do zero, a partir do concept/model sheet e das referências de tamanho mantidos.
+> A cena D01 fica experimental. J.J. e Hayato/Kenseiden permanecem validados no
+> recorte realizado. [Registro do congelamento](dr_social_ingame_freeze_20261104.md).
+> As orientações anteriores para produzir o Social ficam históricas/suspensas.
+
 > Regras de processo deste projeto. Autoridade #4.
 > Não duplica a lei global: `tools/sms_wrapper/.agent/rules/SMS_GLOBAL.md` continua
 > sempre ativa. Aqui ficam só os desvios e decisões LOCAIS deste projeto.

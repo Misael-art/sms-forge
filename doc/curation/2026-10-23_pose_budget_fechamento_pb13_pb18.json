@@ -1,0 +1,763 @@
+{
+  "schema": "smsforge.curation_closure_packet/v1",
+  "status": "awaiting_curator",
+  "issues_lesson_id": false,
+  "date": "2026-10-23",
+  "project": "SMS_projects/luta_mugem_rev2",
+  "narrative": "doc/curation/2026-10-23_pose_budget_fechamento_pb13_pb18.md",
+  "prior_packet": {
+    "narrative": "doc/curation/2026-10-23_pose_budget_aguardando_curador.md",
+    "json": "doc/curation/2026-10-23_pose_budget_aguardando_curador.json",
+    "points": "PB-01 a PB-18",
+    "note": "PB-05, PB-08 e PB-09 foram substituídos pelo critério de composição; PB-13 a PB-18 fecham neste pacote."
+  },
+  "id_registry_issued_through_when_written": "L138",
+  "do_not_reuse": [
+    "L012",
+    "L020-L034"
+  ],
+  "claim_ceiling": "testado_emulador",
+  "result": "PB-13 a PB-18 fechados como lote de medição: pose residente provada no frame 500, composição legal aplicada por gate derivado do META, sola do Ryu corrigida de 2 px para 1 px e pior quadro selado depois do fechamento do Ken. O orçamento continua reprovado.",
+  "proof_rom": {
+    "path": "SMS_projects/luta_mugem_rev2/out/rom/pose_budget_settled_20261023.sms",
+    "sha256": "698e58ed5a0e9256cf2497783b5b0a4343464c15138ce5783c5b9fd98879b13a",
+    "bytes": 458752,
+    "banks": 24,
+    "profile": "LUTA_PROFILE 1 (resident-pose branch)"
+  },
+  "protected_roms": [
+    {
+      "role": "production",
+      "path": "SMS_projects/luta_mugem_rev2/out/rom/luta_mugem_rev2.sms",
+      "sha256": "087df67677626bfcd61188cb5ff0a5c054eb4feb24c420434fcfbeebf5fa7a65",
+      "changed": false
+    },
+    {
+      "role": "morning_pilot",
+      "path": "SMS_projects/luta_mugem_rev2/out/rom/pose_budget_20261023.sms",
+      "sha256": "9008505cb82232e42d1b57d3ecb852af70f566625995cfd3cb5b526b277b1eba",
+      "changed": false
+    },
+    {
+      "role": "reserved_palette",
+      "path": "SMS_projects/luta_mugem_rev2/out/rom/palette_reserve_20261023.sms",
+      "sha256": "f9ef0e27eef5e29d530b0fa4e5c8325bd8df84a1ab6e7d93e77873f40a2b76cb",
+      "changed": false
+    },
+    {
+      "role": "pair_luma",
+      "path": "SMS_projects/luta_mugem_rev2/out/rom/pose_budget_pair_20261023.sms",
+      "sha256": "6fb424a3ddf32002d5de9c27685c1387fa89d4205365b344ba64fe8c866cd873",
+      "changed": false
+    }
+  ],
+  "resident_frame": {
+    "frame": 500,
+    "p1": {
+      "desired": 5,
+      "resident": 5,
+      "submit": 5,
+      "present": 5,
+      "sat_entries": 16,
+      "x_range": [
+        69,
+        100
+      ]
+    },
+    "p2": {
+      "desired": 49,
+      "resident": 49,
+      "submit": 49,
+      "present": 49,
+      "sat_entries": 16,
+      "x_range": [
+        142,
+        173
+      ]
+    },
+    "sprite_next_free": 32,
+    "ys": [
+      105,
+      121,
+      137,
+      153
+    ],
+    "png": "SMS_projects/luta_mugem_rev2/out/evidence/sessions/a40818afa1a5468da0ccbcf4735fede7/resident_gate_frame500.png",
+    "png_sha256": "7281231d65b1c13494bfa541b5ac792c268471669f73981ac1a9569a1ab4392c",
+    "png_reopened": true,
+    "note": "Os dois corpos aparecem completos; o Ken fecha o corpo neste quadro. A listra anterior era pose nao residente/upload incompleto, nao ordem de tile."
+  },
+  "composition_gate": {
+    "rule": "pose legal <=> max cells on any 8x16 row <= 4; idle = 4 columns",
+    "source_header": "SMS_projects/luta_mugem_rev2/out/generated/pose_budget_pair_20261023/versus_scene_runtime.h",
+    "source_header_sha256": "1013b5b4d3160461725d1a4a377871bd19d9c6f57c255192b9933578ccdbbe8b",
+    "gate_header": "SMS_projects/luta_mugem_rev2/out/logs/pose_budget_settled_20261023/composition_gate/versus_composition_gate.h",
+    "gate_header_sha256": "1da1e952eee6ee556abe24e1f3434a0d14bf65e283363de3e3f423f5e9e0f187",
+    "patch": "SMS_projects/luta_mugem_rev2/out/logs/pose_budget_settled_20261023/composition_gate/main_c_composition_gate.patch",
+    "patch_sha256": "07bf6771678f5ee463b4ccc4290b8ab66c97557093b5132042c8bbbdd3d6991b",
+    "poses_total": 93,
+    "poses_over_4_cells": 25,
+    "dropped_by_anim_p1": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "dropped_by_anim_p2": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "proof_frame": 500,
+    "dropped_from_composition": 2,
+    "block_p1": {
+      "roles": 1,
+      "role": 7,
+      "cells": 6
+    },
+    "block_p2": {
+      "roles": 1,
+      "role": 7,
+      "cells": 7
+    },
+    "idle_columns": 4,
+    "idle_shrunk": false,
+    "columns_omitted": false,
+    "report": "SMS_projects/luta_mugem_rev2/out/logs/pose_budget_settled_20261023/composition_gate/dropped_from_composition.json",
+    "report_sha256": "e2d047c17fa22eb242eff5d6946bd0c81540003db2077ae6cf98a4ace52d5ee6"
+  },
+  "ten_pairs": [
+    {
+      "tag": "idle_idle",
+      "attacker": null,
+      "action": null,
+      "frame": null,
+      "peak_per_line": 8,
+      "violations": 0,
+      "verdict": "legal",
+      "sprites": 32
+    },
+    {
+      "tag": "ken_punch_250",
+      "attacker": "Ken",
+      "action": 250,
+      "frame": 2,
+      "peak_per_line": 10,
+      "violations": 5,
+      "verdict": "dropped",
+      "max_cells_per_row": 6,
+      "width_columns": 6
+    },
+    {
+      "tag": "ken_hp_450",
+      "attacker": "Ken",
+      "action": 450,
+      "frame": 1,
+      "peak_per_line": 11,
+      "violations": 5,
+      "verdict": "dropped",
+      "max_cells_per_row": 7,
+      "width_columns": 7
+    },
+    {
+      "tag": "ken_kick_200",
+      "attacker": "Ken",
+      "action": 200,
+      "frame": 1,
+      "peak_per_line": 10,
+      "violations": 5,
+      "verdict": "dropped",
+      "max_cells_per_row": 6,
+      "width_columns": 6
+    },
+    {
+      "tag": "ken_hk_220",
+      "attacker": "Ken",
+      "action": 220,
+      "frame": 1,
+      "peak_per_line": 10,
+      "violations": 5,
+      "verdict": "dropped",
+      "max_cells_per_row": 6,
+      "width_columns": 7
+    },
+    {
+      "tag": "ken_special_1000",
+      "attacker": "Ken",
+      "action": 1000,
+      "frame": 3,
+      "peak_per_line": 10,
+      "violations": 5,
+      "verdict": "dropped",
+      "max_cells_per_row": 6,
+      "width_columns": 7
+    },
+    {
+      "tag": "ken_ko_5080",
+      "attacker": "Ken",
+      "action": 5080,
+      "frame": 0,
+      "peak_per_line": 12,
+      "violations": 5,
+      "verdict": "dropped",
+      "max_cells_per_row": 8,
+      "width_columns": 8
+    },
+    {
+      "tag": "ryu_punch_260",
+      "attacker": "Ryu",
+      "action": 260,
+      "frame": 2,
+      "peak_per_line": 9,
+      "violations": 5,
+      "verdict": "dropped",
+      "max_cells_per_row": 5,
+      "width_columns": 6
+    },
+    {
+      "tag": "ryu_hp_280",
+      "attacker": "Ryu",
+      "action": 280,
+      "frame": 2,
+      "peak_per_line": 10,
+      "violations": 5,
+      "verdict": "dropped",
+      "max_cells_per_row": 6,
+      "width_columns": 6
+    },
+    {
+      "tag": "ryu_kick_200",
+      "attacker": "Ryu",
+      "action": 200,
+      "frame": 1,
+      "peak_per_line": 10,
+      "violations": 5,
+      "verdict": "dropped",
+      "max_cells_per_row": 6,
+      "width_columns": 6
+    },
+    {
+      "tag": "ryu_hk_240",
+      "attacker": "Ryu",
+      "action": 240,
+      "frame": 1,
+      "peak_per_line": 10,
+      "violations": 5,
+      "verdict": "dropped",
+      "max_cells_per_row": 6,
+      "width_columns": 6
+    }
+  ],
+  "dropped_roles": [
+    {
+      "role": "P1_PUNCH",
+      "side": "p1",
+      "anim": 6,
+      "action": 260,
+      "frame": 2,
+      "peak_per_line": 9,
+      "max_cells_per_row": 5,
+      "width_columns": 6,
+      "attacker_cells": 17,
+      "gate_max_cells_per_row": 5
+    },
+    {
+      "role": "P1_HP",
+      "side": "p1",
+      "anim": 7,
+      "action": 280,
+      "frame": 2,
+      "peak_per_line": 10,
+      "max_cells_per_row": 6,
+      "width_columns": 6,
+      "attacker_cells": 17,
+      "gate_max_cells_per_row": 6
+    },
+    {
+      "role": "P1_KICK",
+      "side": "p1",
+      "anim": 8,
+      "action": 200,
+      "frame": 1,
+      "peak_per_line": 10,
+      "max_cells_per_row": 6,
+      "width_columns": 6,
+      "attacker_cells": 20,
+      "gate_max_cells_per_row": 6
+    },
+    {
+      "role": "P1_HK",
+      "side": "p1",
+      "anim": 9,
+      "action": 240,
+      "frame": 1,
+      "peak_per_line": 10,
+      "max_cells_per_row": 6,
+      "width_columns": 6,
+      "attacker_cells": 18,
+      "gate_max_cells_per_row": 6
+    },
+    {
+      "role": "P2_PUNCH",
+      "side": "p2",
+      "anim": 6,
+      "action": 250,
+      "frame": 2,
+      "peak_per_line": 10,
+      "max_cells_per_row": 6,
+      "width_columns": 6,
+      "attacker_cells": 17,
+      "gate_max_cells_per_row": 6
+    },
+    {
+      "role": "P2_HP",
+      "side": "p2",
+      "anim": 7,
+      "action": 450,
+      "frame": 1,
+      "peak_per_line": 11,
+      "max_cells_per_row": 7,
+      "width_columns": 7,
+      "attacker_cells": 16,
+      "gate_max_cells_per_row": 7
+    },
+    {
+      "role": "P2_KICK",
+      "side": "p2",
+      "anim": 8,
+      "action": 200,
+      "frame": 1,
+      "peak_per_line": 10,
+      "max_cells_per_row": 6,
+      "width_columns": 6,
+      "attacker_cells": 20,
+      "gate_max_cells_per_row": 6
+    },
+    {
+      "role": "P2_HK",
+      "side": "p2",
+      "anim": 9,
+      "action": 220,
+      "frame": 1,
+      "peak_per_line": 10,
+      "max_cells_per_row": 6,
+      "width_columns": 7,
+      "attacker_cells": 18,
+      "gate_max_cells_per_row": 6
+    },
+    {
+      "role": "P2_SPECIAL",
+      "side": "p2",
+      "anim": 10,
+      "action": 1000,
+      "frame": 3,
+      "peak_per_line": 10,
+      "max_cells_per_row": 6,
+      "width_columns": 7,
+      "attacker_cells": 18,
+      "gate_max_cells_per_row": 6
+    },
+    {
+      "role": "P2_KO",
+      "side": "p2",
+      "anim": 11,
+      "action": 5080,
+      "frame": 0,
+      "peak_per_line": 12,
+      "max_cells_per_row": 8,
+      "width_columns": 8,
+      "attacker_cells": 15,
+      "gate_max_cells_per_row": 8
+    }
+  ],
+  "legal_roles_not_in_wide_set": [
+    {
+      "role": "P1_SPECIAL",
+      "action": 1000,
+      "max_cells_per_row": 4,
+      "dropped": false
+    },
+    {
+      "role": "P1_KO",
+      "action": 170,
+      "max_cells_per_row": 4,
+      "dropped": false
+    }
+  ],
+  "sole_and_hurt": {
+    "method": "AXIS_y + sole_row; hurt scaled through the same two fits; AXIS includes frame.y, so frame.y is not added twice",
+    "sampler_changed": false,
+    "frames": [
+      {
+        "frame": "Ryu idle F0",
+        "axis_y": -53,
+        "sole_row": 53,
+        "sole_offset": 0,
+        "hurt_bottom": 1,
+        "hurt_minus_sole": 1
+      },
+      {
+        "frame": "Ryu punch F0",
+        "axis_y": -56,
+        "sole_row": 59,
+        "sole_offset": 3,
+        "hurt_bottom": 0,
+        "hurt_minus_sole": -3
+      },
+      {
+        "frame": "Ken idle F0",
+        "axis_y": -53,
+        "sole_row": 53,
+        "sole_offset": 0,
+        "hurt_bottom": -1,
+        "hurt_minus_sole": -1
+      },
+      {
+        "frame": "Ken punch F0",
+        "axis_y": -57,
+        "sole_row": 60,
+        "sole_offset": 3,
+        "hurt_bottom": 1,
+        "hurt_minus_sole": -2
+      }
+    ],
+    "corrected_ryu_idle_delta": 1,
+    "previous_premise": 2,
+    "samplers_tested": [
+      "current",
+      "ceil",
+      "full",
+      "src_len"
+    ],
+    "ryu_moved_by_sampler": false,
+    "ken_moved_by_sampler": "full moves Ken by 1 px; does not close Ryu",
+    "note": "A premissa de 2 px era erro de medida. O delta de +1 px permanece; sampler, eixo e hurtbox nao foram alterados."
+  },
+  "worst_frame": {
+    "final_gate": {
+      "path": "SMS_projects/luta_mugem_rev2/out/evidence/sessions/a40818afa1a5468da0ccbcf4735fede7/worst_frame/worst_frame_gate_final.json",
+      "sha256": "135d665fec4ab7af98addcfae3cc77f84b5506761eca40975bc092a32352fc46",
+      "verdict": "derramou",
+      "vline_min": 4,
+      "vline_snapshot": 144,
+      "vovf_delta": 1740,
+      "snapshot_done": 1,
+      "frames_rom_final": 4079,
+      "rom_sha256": "698e58ed5a0e9256cf2497783b5b0a4343464c15138ce5783c5b9fd98879b13a"
+    },
+    "pre_gate": {
+      "rom_sha256": "c45dbd4a4708d18488d9545a31fd5551cdd1f520061a43099c57146787bb56fa",
+      "verdict": "derramou",
+      "vline_min": 2,
+      "vline_snapshot": 144,
+      "vovf_delta": 1770,
+      "snapshot_done": 1,
+      "frames_rom_final": 3946
+    },
+    "sealed_field": "vline_min",
+    "note": "O 144 do resumo anterior era o vline do snapshot, nao o vline_min. As duas ROMs derramam; o gate nao comprou orcamento."
+  },
+  "points": [
+    {
+      "id": "PB-13",
+      "title": "captura igual nao e desenho completo",
+      "status": "closed_measured",
+      "fact": "No frame 500, desired/resident/submit/present 5/5/5/5 no P1 e 49/49/49/49 no P2; _SpriteNextFree=32; 16 celulas SAT por lado; PNG com os dois corpos completos.",
+      "learning": "Sprite fragmentado pode ser pose nao residente/upload incompleto. Provar residencia antes de concluir ordem de tile.",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/out/evidence/sessions/a40818afa1a5468da0ccbcf4735fede7/resident_gate_frame500.png",
+        "SMS_projects/luta_mugem_rev2/out/evidence/sessions/a40818afa1a5468da0ccbcf4735fede7/sat_frame500.json"
+      ],
+      "limit": "Um frame, uma sessao. Nao prova todas as poses nem promove entrega visual."
+    },
+    {
+      "id": "PB-14",
+      "title": "zero do simulador nao e a luta",
+      "status": "closed_measured",
+      "fact": "Idle/idle pico 8, zero violacoes. Dez pares golpe x idle com pico 9-12 e cinco violacoes cada.",
+      "learning": "A composicao precisa ser nomeada; par do lutador contra ele mesmo nao autoriza golpe largo.",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/out/logs/pose_budget_settled_20261023/ten_pairs/line_summary.json"
+      ],
+      "limit": "Simulador mede META emitido, nao SAT viva; cada par nao foi capturado individualmente em emulador."
+    },
+    {
+      "id": "PB-15",
+      "title": "caso a caso nao tira o pixel da ROM",
+      "status": "closed_measured",
+      "fact": "Gate derivado do META: 25/93 poses acima de 4 celulas/linha. Prova no frame 500: dropped_from_composition=2, block_p1=1 (role 7, 6 celulas), block_p2=1 (role 7, 7 celulas).",
+      "learning": "Enforcement age no dado emitido; rotulo de divida nao e gate. Idle permanece em 4 colunas.",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/out/logs/pose_budget_settled_20261023/composition_gate/versus_composition_gate.h",
+        "SMS_projects/luta_mugem_rev2/out/logs/pose_budget_settled_20261023/composition_gate/dropped_from_composition.json"
+      ],
+      "limit": "Gate derruba o papel da composicao, nao redesenha o golpe."
+    },
+    {
+      "id": "PB-16",
+      "title": "hurtbox do idle do Ryu",
+      "status": "closed_measured",
+      "fact": "AXIS emitido ja inclui frame.y. Ryu idle F0: -53+53=0, hurt bottom 1, delta +1 (nao 2). Quatro amostradores nao movem a sola do Ryu.",
+      "learning": "Erro de medida pode parecer bug de motor. Usar AXIS_y + sole_row uma vez e escalar a hurt pelos mesmos passes.",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/doc/28-pose-budget-8.md"
+      ],
+      "limit": "+1 px permanece; sampler, eixo e hurtbox inalterados."
+    },
+    {
+      "id": "PB-17",
+      "title": "orcamento de VBlank sem numero",
+      "status": "closed_measured",
+      "fact": "ROM final com gate: derramou, vline_min=4, vovf_delta=1740, done=1, frame 4079. Pre-gate c45dbd4a: derramou, vline_min=2, vovf_delta=1770, frame 3946.",
+      "learning": "O campo selado e vline_min; vline de snapshot nao e minimo. Composicao legal nao compra orcamento de VBlank.",
+      "evidence": [
+        "SMS_projects/luta_mugem_rev2/out/evidence/sessions/a40818afa1a5468da0ccbcf4735fede7/worst_frame/worst_frame_gate_final.json"
+      ],
+      "limit": "Uma leitura selada, host load alto, sem FPS; validado_budget proibido."
+    },
+    {
+      "id": "PB-18",
+      "title": "o parecer nao promove",
+      "status": "maintained",
+      "fact": "Producao 087df676 intacta; src/main.c e .mddev/project.json vivos em ryu_ken_cross; sem commit nem push.",
+      "learning": "Fechamento de medicao nao e promocao de lei.",
+      "evidence": [
+        "doc/curation/2026-10-23_pose_budget_fechamento_pb13_pb18.md"
+      ],
+      "limit": "Este pacote tambem nao emite ID, nao edita SMS_GLOBAL nem o ledger."
+    }
+  ],
+  "candidate_learnings": [
+    {
+      "id": "C1",
+      "title": "residencia antes de ordem de tile",
+      "observation": "No frame 500, com as duas poses residentes, o Ken fechou o corpo sem reordenar tile.",
+      "root_cause": "A fragmentacao anterior foi tratada como possivel problema de ordenacao; a prova de residencia veio antes.",
+      "guard_today": "Sondas desired/resident/submit/present, _SpriteNextFree, SAT e PNG no mesmo frame.",
+      "proposed_action": "Exigir prova de residencia (contadores + SAT + PNG) antes de concluir ordem de tile.",
+      "promotion_status": "awaiting_curator",
+      "risk_if_promoted_blindly": "Uma prova de um frame pode virar regra universal de upload; poses diferentes podem ter caminhos diferentes."
+    },
+    {
+      "id": "C2",
+      "title": "zero do simulador nao e composicao legal",
+      "observation": "Idle/idle, Ken idle + Ryu special e Ryu special + Ryu ko davam pico 8, mas nao eram golpe largo contra o outro lutador. Os dez pares reais dao 9-12.",
+      "root_cause": "Composicao nao nomeada; o simulador mede o que recebe, nao a cena que a ROM pode mostrar.",
+      "guard_today": "audit_sprite_line_sim.py com composicao explicita e self-check; line_summary.json nomeia atacante e idle.",
+      "proposed_action": "Relatorio de linha deve nomear a composicao; par do lutador contra ele mesmo nao conta como prova de golpe largo.",
+      "promotion_status": "awaiting_curator",
+      "risk_if_promoted_blindly": "Pode bloquear pares legitimos de treino/espelho se a regra for ampla demais."
+    },
+    {
+      "id": "C3",
+      "title": "rotulo caso a caso nao remove pixel da ROM",
+      "observation": "Os dez golpes largos continuavam no binario; o gate derivado do META derrubou os dez da composicao.",
+      "root_cause": "Intencao de reautorar nao e enforcement; o caminho quente precisa consultar o dado emitido.",
+      "guard_today": "Gate em set_role(), header versus_composition_gate.h, dropped_from_composition.json.",
+      "proposed_action": "Toda composicao que mistura pose larga com idle de 4 colunas passa por gate derivado do META; papel derrubado e contado.",
+      "promotion_status": "awaiting_curator",
+      "risk_if_promoted_blindly": "O gate pode esconder arte que o autor queria mostrar; contador e relatorio precisam ser lidos, nao so o exit."
+    },
+    {
+      "id": "C4",
+      "title": "AXIS emitido ja inclui frame.y",
+      "observation": "A medida anterior somou frame.y de novo e produziu 2 px; a correta e 1 px. Quatro amostradores nao moveram a sola do Ryu.",
+      "root_cause": "Dupla contagem de deslocamento e uso de sprite.axis_y em vez do AXIS emitido.",
+      "guard_today": "Tabela de sola no doc/28-pose-budget-8.md com AXIS_y + sole_row e hurt escalada pelos dois passes.",
+      "proposed_action": "Medir sola com AXIS_y + sole_row uma vez; documentar a origem do AXIS; nao trocar sampler sem movimento medido.",
+      "promotion_status": "awaiting_curator",
+      "risk_if_promoted_blindly": "Tolerar +1 px como aceitavel sem decisao explicita; tolerancia e politica, nao medicao."
+    },
+    {
+      "id": "C5",
+      "title": "vline_min e o campo selado; vline e snapshot",
+      "observation": "O resumo anterior citou 144 como pior quadro; 144 era o vline do snapshot. O vline_min selado e 4.",
+      "root_cause": "Nomes de campo parecidos e relatorio que nao distingue snapshot de minimo.",
+      "guard_today": "measure_worst_frame.py grava vline_min; o JSON final traz os dois.",
+      "proposed_action": "Todo resumo de pior quadro cita vline_min e marca vline como leitura de snapshot; gate de documento pode reprovar citacao de vline como minimo.",
+      "promotion_status": "awaiting_curator",
+      "risk_if_promoted_blindly": "vline_min e extremal e sensivel a fase; nao promove-lo a FPS nem a qualidade media."
+    },
+    {
+      "id": "C6",
+      "title": "gate de composicao nao compra orcamento de VBlank",
+      "observation": "ROM final com gate continua derramou (vline_min=4, vovf_delta=1740). Pre-gate tambem (vline_min=2, 1770).",
+      "root_cause": "Composicao legal reduz pico de sprites por linha, mas o custo de emissao/VBlank e outro eixo.",
+      "guard_today": "measure_worst_frame.py na sonda 0xC800, leitura unica pos-selo, validado_budget separado.",
+      "proposed_action": "Nenhum claim de orcamento sem measure_worst_frame.py; composicao legal e orcamento de VBlank sao gates distintos.",
+      "promotion_status": "awaiting_curator",
+      "risk_if_promoted_blindly": "Usar a melhora de pico como se fosse melhora de frame; os dois numeros nao sao conversiveis sem medicao."
+    },
+    {
+      "id": "C7",
+      "title": "evidencia de emulador precisa de sessao, SHA e PNG legivel",
+      "observation": "A prova do frame 500 tem sessao privada, ROM SHA, SAT, PNG 256x192 e state=closed. O PNG foi reaberto e mostra os dois corpos.",
+      "root_cause": "Captura sem sessao/SHA nao distingue binario nem instancia.",
+      "guard_today": "emulator_session.py, capture_evidence.py, manifesto de evidencia, audit_subagent_session.py quando aplicavel.",
+      "proposed_action": "Manter o pacote minimo (sessao + SHA da ROM + SAT/JSON + PNG legivel) para qualquer claim de tela.",
+      "promotion_status": "awaiting_curator",
+      "risk_if_promoted_blindly": "Burocracia sem ganho se aplicada a sondas internas; o pacote e para claim de imagem, nao para todo log."
+    }
+  ],
+  "tool_proposals": [
+    {
+      "name": "audit_composition_gate.py",
+      "input": "header de cena emitido",
+      "measures": "maximo de celulas 8x16 por linha e lista de papeis derrubados",
+      "self_check": "reproduzir 25/93 e os dez papeis",
+      "status": "implemented_not_promoted",
+      "promotion": "pending_human_curator"
+    },
+    {
+      "name": "audit_sole_alignment.py",
+      "input": "AXIS, sole_row e hurt escalada",
+      "measures": "AXIS_y + sole_row vs hurt bottom",
+      "self_check": "quatro quadros Ryu/Ken idle/punch",
+      "status": "implemented_not_promoted",
+      "promotion": "pending_human_curator"
+    },
+    {
+      "name": "measure_worst_frame.py schema/docs",
+      "input": "JSON selado",
+      "measures": "exigir vline_min e marcar vline como snapshot",
+      "self_check": "caso 144 vs 4",
+      "status": "implemented_not_promoted",
+      "promotion": "pending_human_curator"
+    },
+    {
+      "name": "audit_sprite_line_sim.py option",
+      "input": "composicao nomeada",
+      "measures": "rejeitar par do lutador contra ele mesmo em claim de duelo",
+      "self_check": "idle/idle vs Ken punch",
+      "status": "implemented_not_promoted",
+      "promotion": "pending_human_curator"
+    }
+  ],
+  "open_questions": [
+    "Quais de C1-C7 viram lei da fabrica e quais ficam como regra de projeto. Recomendacao conservadora: promover C4, C5 e C6 como metodo de medicao; manter C1-C3 como gates de projeto ate haver segundo caso.",
+    "O gate de composicao vive no motor (scene_cut.py) ou e gerado por projeto? Hoje e derivado e compilado em copia temporaria.",
+    "O criterio idle de 4 colunas + pose <= 4 celulas/linha e regra global ou especifica deste par?",
+    "O que fazer com os dez golpes largos: reautorar, manter derrubados na composicao de duelo, ou separar em modo proprio?",
+    "O delta de +1 px da sola do Ryu e tolerancia aceita ou defeito a corrigir em outro lote? Nenhum sampler foi trocado.",
+    "vline_min deve ser o unico campo selado do pior quadro, com vline explicitamente marcado como snapshot?",
+    "A varredura de 93 quadros do audit_sole_alignment vira escopo oficial ou fica limitada aos quatro quadros de referencia?",
+    "Os dez manifestos antigos devem ser migrados para composition estruturada antes de usar --require-distinct-fighters?",
+    "Corrigir o bug preexistente de caminho relativo em validate_measurement_tools.py (--dir relativo duplica o prefixo com cwd=wrapper_dir) ou apenas documentar o uso com caminho absoluto?",
+    "O curador deve decidir se homologa audit_composition_gate.py e audit_sole_alignment.py como gates globais, como regras de projeto, ou se os rejeita; a secao de visibilidade em AGENTS.md nao antecipa essa decisao."
+  ],
+  "not_promoted": [
+    "lesson_id",
+    "SMS_GLOBAL.md",
+    "learning_ledger.json",
+    "lesson_routes.json",
+    "validado_budget",
+    "60_fps",
+    "audio",
+    "gameplay",
+    "visual_delivery",
+    "third_palette",
+    "production_rom_replacement",
+    "commit",
+    "push"
+  ],
+  "verification": {
+    "rom_sha256_recomputed": true,
+    "png_reopened": true,
+    "json_parsed": true,
+    "session_state": "closed",
+    "live_emulicious": false,
+    "protected_roms_unchanged": true,
+    "git_commit": false,
+    "git_push": false,
+    "lesson_id_emitted": false,
+    "id_registry_sha256": "ec0ada7dbc9adc7b33b4119eb0fa0eb2935baa5894c5f5b6faf699460cac1030",
+    "learning_ledger_sha256": "aab7ddaf2e82954e3bb774dc830bd5c70079ca3453706e40bedb42c98ff7c685",
+    "sms_global_sha256": "80d921f1012599cfca2a82331cf09d6b34ad5809a8a66809ecbc7960b3e14166",
+    "lesson_routes_sha256": "fa919d7ff210c00e343a65177a9513d570a6fc636e6958424ff0019766158eb7",
+    "tool_self_checks": {
+      "audit_composition_gate.py": "PASS",
+      "audit_sole_alignment.py": "PASS",
+      "audit_sprite_line_sim.py": "PASS",
+      "measure_worst_frame.py": "PASS"
+    },
+    "tool_tests": "8 passed (test_measurement_gates_pose_budget.py)",
+    "ten_pairs_regression": "PASS (pico e violacoes inalterados nos dez manifestos sem opt-in)",
+    "emulator_reopened": false,
+    "budget_claim_changed": false,
+    "wrapper_measurement_tools": "PASS 75/75 com o diretorio default (absoluto) ou --dir absoluto; a forma relativa --dir tools/sms_wrapper falha em cascata por bug preexistente de caminho (cwd=wrapper_dir + path relativo). Bug registrado, nao corrigido.",
+    "doc_sync_global": "10 derivas preexistentes de luta_mugen (EIO/ENOENT); as 2 derivas novas de visibilidade foram resolvidas pela secao autorizada 'FERRAMENTAS EM CURADORIA (NAO PROMOVIDAS)' em AGENTS.md; nenhuma promocao de gate",
+    "doctrine_visibility": {
+      "file": "AGENTS.md",
+      "section": "FERRAMENTAS EM CURADORIA (NÃO PROMOVIDAS)",
+      "sha256": "945ecc932614b8b89adc12aaa38f64bceb70052b74150d379a1ffb2f846667e9",
+      "authorized_by_owner": true,
+      "gate_table_changed": false,
+      "sms_global_changed": false,
+      "promotion": "none"
+    },
+    "learning_capture": "PASS (audit_learning_capture.py --root .)"
+  },
+  "implementation_status": "implemented_and_tested_not_promoted",
+  "tools_implemented": [
+    {
+      "name": "audit_composition_gate.py",
+      "path": "tools/sms_wrapper/audit_composition_gate.py",
+      "sha256": "bf1a4813f43f7e3b285fa31f67774cae178584c1f80ec6a0784cb4f154c87c64",
+      "input": "header de cena emitido (Frame/Anim/META)",
+      "self_check": "PASS",
+      "test": "reproduz 25/93; P1 [6,7,8,9], P2 [6,7,8,9,10,11]",
+      "evidence": "header gerado identico ao de prova exceto comentarios de origem",
+      "promotion": "pending_human_curator"
+    },
+    {
+      "name": "audit_sole_alignment.py",
+      "path": "tools/sms_wrapper/audit_sole_alignment.py",
+      "sha256": "175d928bcee2d8e5bbf3060bdd2f71426551e90180d9fd6cc669ef4d9d5316b3",
+      "input": "AXIS emitido, PNG indexado do display_fit, CLSN2",
+      "self_check": "PASS",
+      "test": "Ryu idle +1; Ryu punch -3; Ken idle -1; Ken punch -2",
+      "evidence": "quatro quadros de referencia com max_abs_delta=3",
+      "promotion": "pending_human_curator"
+    },
+    {
+      "name": "measure_worst_frame.py schema/docs",
+      "path": "tools/sms_wrapper/measure_worst_frame.py",
+      "sha256": "968bb70a6bf54ec09bdda5b0132974274dd674df25cf026b4baf5ea06fac5be4",
+      "input": "snapshot selado da ROM",
+      "self_check": "PASS",
+      "test": "schema v2; vline_min=4, vline=144 snapshot, vovf=1740, frame=4079, derramou",
+      "evidence": "JSON selado existente reavaliado pela mesma logica",
+      "promotion": "pending_human_curator"
+    },
+    {
+      "name": "audit_sprite_line_sim.py option",
+      "path": "tools/sms_wrapper/audit_sprite_line_sim.py",
+      "sha256": "7996f10115b62ef25d0dc6e60b4797131c946b6e47e61ad307a15fbfa2ece5d7",
+      "input": "manifest com composition estruturada p1/p2",
+      "self_check": "PASS",
+      "test": "mesmo lutador reprova com opt-in; distintos passam; sem opt-in espelho continua valido",
+      "evidence": "dez pares antigos mantem pico 9-12 e 5 violacoes",
+      "promotion": "pending_human_curator"
+    },
+    {
+      "name": "test_measurement_gates_pose_budget.py",
+      "path": "tools/sms_wrapper/mugen2sms/tests/test_measurement_gates_pose_budget.py",
+      "sha256": "0a29269ceaf8b4886c8a10f03a5e66b49a113d38184f056cee4bda4f253b03b0",
+      "input": "self-checks + fixture historica pose_budget_pair",
+      "self_check": "n/a (test runner)",
+      "test": "8 passed",
+      "evidence": "inclui as quatro ferramentas e as regressões de projeto",
+      "promotion": "n/a"
+    }
+  ],
+  "implementation_observations": [
+    "audit_sole_alignment.py no modo default mede 93 quadros: 92 com hurtbox e 1 sem (P1_RYU_A170F0, CLSN=0); maior |hurt - sola| = 14 em P1_RYU_A41F4. A ferramenta mede, nao classifica; o lote PB-13-PB-18 continua julgado pelos quatro quadros de referencia.",
+    "audit_sprite_line_sim.py exige composition estruturada no opt-in; os dez manifestos antigos nao carregam o campo e nao foram reescritos. O gate e fail-closed quando o opt-in e usado sem composicao.",
+    "As ferramentas sao medidas estaticas de metadados/PNG; nao reabriram emulador, nao geraram novo testado_emulador e nao autorizam validado_budget.",
+    "Em 2026-10-23 o dono autorizou a secao 'FERRAMENTAS EM CURADORIA (NAO PROMOVIDAS)' em AGENTS.md apenas para visibilidade. A secao nao altera a tabela de gates, nao promove as ferramentas e nao edita SMS_GLOBAL.md nem o ledger; com isso, audit_doc_sync.py --root . deixou de acusar as duas ferramentas novas e mantem 10 derivas preexistentes de luta_mugen (EIO/ENOENT).",
+    "validate_measurement_tools.py passa 75/75 com o diretorio default (absoluto); a forma relativa --dir tools/sms_wrapper falha em cascata porque subprocess.run usa path relativo com cwd=wrapper_dir e duplica o prefixo. Bug preexistente do validador, nao corrigido neste lote por exigir curadoria/aprovacao humana."
+  ]
+}

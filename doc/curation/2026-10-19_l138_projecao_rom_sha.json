@@ -7,7 +7,11 @@
   "scope": "Projeção canônica de evidence.json/fps.json a partir do bundle consumidor, MRP3 e QA do M8. Mede a identidade da ROM nas fontes (rom_sha256) e a aceitação booleana em reconcile_claims.py; não é nova medição de gameplay, FPS, áudio, PAL ou arte. A projeção do cap5 só será válida quando houver fontes com o SHA do cap5.",
   "authorization": "O dono pediu em 2026-10-19 endurecer a projeção para verificar o SHA da ROM atual e fechar a aceitação booleana em reconcile_claims.py:104. Não há promoção de delivery, arte ou eixos não medidos.",
   "relation": {
-    "applies": ["L018", "L035", "L036"],
+    "applies": [
+      "L018",
+      "L035",
+      "L036"
+    ],
     "note": "L018 separa pixel de prova; L035 exige RAM/SHA da ROM; L036 impede representação (booleano, relatório) virar progresso. L138 estende a mesma lei à projeção de evidência: o booleano só vale para o binário que a fonte cita."
   },
   "lessons": [
@@ -95,7 +99,9 @@
   ],
   "closure": {
     "new_lesson_ids_emitted": true,
-    "ids": ["L138"],
+    "ids": [
+      "L138"
+    ],
     "registry_updated": "issued_through L137 -> L138",
     "sms_global_updated": "§130 apendada",
     "skills_updated": [],
@@ -103,5 +109,57 @@
     "next_gate_to_run": "audit_learning_capture.py --root .",
     "open_gap": "cap5 MWF/MRP3/FPS/audio, PAL, oracle full-frame e regressao de gameplay"
   },
-  "dedup_key": "l138_projecao_rom_sha_20261019"
+  "dedup_key": "l138_projecao_rom_sha_20261019",
+  "follow_up_20261102": {
+    "project": "SMS_projects/luta_mugem_rev2",
+    "authorization": "Pedido anexado de 2026-11-02: curadoria estritamente necessaria para identidade, baseline e recuperacao.",
+    "new_lesson_id": null,
+    "related_lesson_ids": [
+      "L013",
+      "L035",
+      "L138",
+      "L089"
+    ],
+    "implemented": [
+      "ROM selecionada pelo recibo e SHA calculado; legado nominal pelo manifesto; candidata explicita sem promocao nominal",
+      "WAV precisa sidecar, SHA, sessao, PCM integro, rota do PID, duracao e audit_audio no escopo",
+      "Projecao reconsome bundle e valida QA, SHA e estabilidade das fontes",
+      "validation_report=pre_gates_only por hash/conjunto de recursos, fontes, procedencia e ferramentas; memoria=readable_current_rom_reference_only",
+      "SDCC abaixo de4.2 recusado; pacote OpenBOR oficial resolvido no ambiente canonico",
+      "Sessao confere ROM antes/depois de copiar; finally cobre falha do constructor do consumidor"
+    ],
+    "validation": {
+      "focused_identity": "48 passed",
+      "selftest": "137/137; probe opcional de build nao executado no selftest",
+      "measurement_tools": "75/75 self-checks",
+      "independent_review": "/root/identity_review; tres rodadas read-only, achados corrigidos, sem novos achados materiais no fechamento",
+      "native_boot_positive": {
+        "rom_sha256": "b1f7974ce1b9195b132f9748755caa42ca34c98cbe40f32b7fc8718cd16e9919",
+        "session_id": "adfba50f86f34d1399b0cbd742e102f7",
+        "bundle_check": true,
+        "closed": true
+      },
+      "evidence_owner": "SMS_projects/luta_mugem_rev2/out/evidence/20261102_identity_baseline"
+    },
+    "limits": [
+      "Coerencia nao autentica produtor nem aprova delivery.",
+      "Recibos historicos inconsistentes agora reprovam sem serem alterados; nao rehashar evidencia.",
+      "Baseline do rev2 reprovou26.62/22.72FPS; sem audio, HUD/FX ou gameplay aprovado.",
+      "Relatorio Social61v5 continua ausente; viewers Master of Fighters e seus aceites preservados."
+    ],
+    "probe_parser_follow_up": {
+      "finding": "Array __at dimension expression omitted silently; initial report164probes/C800..C9F1 did not measure CA00..D1FF and is invalid for the full recorder.",
+      "fix": "unknown __at declarations fail closed; explicit SDK non-RAM whitelist proves full object spans including16/32KiB headers; comments/strings ignored; zero dimensions rejected",
+      "focused_tests": "16 parser regressions; closing56 identity+parser, selftest137/137, measurement75/75 passed",
+      "tool": "measure_worst_frame.py declared_probes; audit_probe_corridor.py",
+      "evidence_owner": "SMS_projects/luta_mugem_rev2/out/evidence/20261102_identity_baseline",
+      "limits": "No historical report rewritten; new source/ROM/corridor required before using trace.",
+      "independent_review": "/root/identity_review read-only; type order, cross-window arrays and16KiB compatibility findings corrected; no remaining material finding",
+      "compiled_corridor": {
+        "probes": 2212,
+        "range": "C800..D1FF",
+        "data_gap_bytes": 1411
+      }
+    }
+  }
 }

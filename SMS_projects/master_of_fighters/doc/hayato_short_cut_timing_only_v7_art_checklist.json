@@ -1,0 +1,113 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "asset_id": "hayato-cps2-short-cut-v04-timing-only-v7",
+  "producer": "/root",
+  "asset": {
+    "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/cut_source.png",
+    "sha256": "9302a78a9624080aace9234cd5960d43bb8c241d4c498c47a7e628ce0d9ba09d",
+    "kind": "pixel_sprite_sheet"
+  },
+  "source_evidence": {
+    "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_short_cut_v2/sequence_v4/source_assembly.json",
+    "sha256": "930538caa8fb8c6402b17a7acacc03e68bfda9046947d1ecec4c5aea297c99c3"
+  },
+  "required_characters": [
+    "hayato"
+  ],
+  "required_axes": [
+    "equipment_geometry",
+    "face_detail_readability",
+    "frame_pose_integrity",
+    "hand_weapon_attachment",
+    "material_shading",
+    "material_shadow_flow_coherence",
+    "native_size_readability",
+    "outline_and_cutout",
+    "pixel_clusters",
+    "semantic_palette_role_confinement",
+    "continuous_motion"
+  ],
+  "characters": [
+    {
+      "id": "hayato",
+      "references": [
+        {
+          "path": "doc/hayato_short_cut_body_SMS_independent_review_v4.json",
+          "sha256": "cef012df0797095ce503d9b9d6365025f49ecf55555ac013ecab71f6fec0145f"
+        },
+        {
+          "path": "doc/decisions/hayato-short-cut-timing-only_owner_approval.json",
+          "sha256": "a23cc829d5352dd7f1fcb9c1bfef41a21a343db748ae370e49990bce0afb92d0"
+        }
+      ],
+      "observed_defects": [],
+      "revision_notes": [
+        "Owner selected timing-only. No new art, all source and SMS pixels exactly v4; distorted blade preserved as rejected control."
+      ],
+      "review_axes": {
+        "equipment_geometry": {
+          "status": "pass",
+          "note": "Unchanged v4 static review and explicit owner timing-only choice; see temporal checkpoint for scope."
+        },
+        "face_detail_readability": {
+          "status": "pass",
+          "note": "Unchanged v4 static review and explicit owner timing-only choice; see temporal checkpoint for scope."
+        },
+        "frame_pose_integrity": {
+          "status": "pass",
+          "note": "Unchanged v4 static review and explicit owner timing-only choice; see temporal checkpoint for scope."
+        },
+        "hand_weapon_attachment": {
+          "status": "pass",
+          "note": "Unchanged v4 static review and explicit owner timing-only choice; see temporal checkpoint for scope."
+        },
+        "material_shading": {
+          "status": "pass",
+          "note": "Unchanged v4 static review and explicit owner timing-only choice; see temporal checkpoint for scope."
+        },
+        "material_shadow_flow_coherence": {
+          "status": "pass",
+          "note": "Unchanged v4 static review and explicit owner timing-only choice; see temporal checkpoint for scope."
+        },
+        "native_size_readability": {
+          "status": "pass",
+          "note": "Unchanged v4 static review and explicit owner timing-only choice; see temporal checkpoint for scope."
+        },
+        "outline_and_cutout": {
+          "status": "pass",
+          "note": "Unchanged v4 static review and explicit owner timing-only choice; see temporal checkpoint for scope."
+        },
+        "pixel_clusters": {
+          "status": "pass",
+          "note": "Unchanged v4 static review and explicit owner timing-only choice; see temporal checkpoint for scope."
+        },
+        "semantic_palette_role_confinement": {
+          "status": "pass",
+          "note": "Unchanged v4 static review and explicit owner timing-only choice; see temporal checkpoint for scope."
+        },
+        "continuous_motion": {
+          "status": "pass",
+          "note": "Unchanged v4 static review and explicit owner timing-only choice; see temporal checkpoint for scope."
+        }
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "passed",
+    "reviewer": "/root/hayato_cut_art_review",
+    "report": {
+      "path": "doc/hayato_short_cut_body_SMS_independent_review_v4.json",
+      "sha256": "cef012df0797095ce503d9b9d6365025f49ecf55555ac013ecab71f6fec0145f"
+    }
+  },
+  "owner_approval": {
+    "approved": true,
+    "reviewer": "project_owner",
+    "date": "2026-10-29",
+    "scope": "Only source-preview original art and8/1/2/7/2/5 timing, as selected in direct message."
+  },
+  "temporal_checkpoint": {
+    "path": "doc/hayato_short_cut_timing_only_v7_checkpoint.json",
+    "sha256": "a5202da26e30e549e8e19054624cd53a6561a9f9ae818fcc85ebadf584dd52b5"
+  }
+}

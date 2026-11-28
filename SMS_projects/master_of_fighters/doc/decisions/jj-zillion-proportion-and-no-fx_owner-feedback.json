@@ -1,0 +1,34 @@
+{
+  "schema": "mof_owner_equipment_feedback_v2",
+  "actor": "project_owner",
+  "recorded_at": "2026-10-30T08:52:26.658639+00:00",
+  "verbatim": "a zillion e uma arma grande, mas vendo os candidatos ela esta desproporional da do personagem JJ isso precisa ser corrigido no concept model sheet, segue anexo uma imagem do anime / jogo de referencia\n\najuste a propor;'ao da arma mantendo a forma\nn'ao coloque a `bala/tiro` saindo da arma os sparks, fx e objetos tem de ser colocados depois n'ao fazem parte do personagem\n\nmantenha os quadros de anima;'ao e as poses o problema e de fidelidade de arte",
+  "reference_files": [
+    {
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/reference_01.png",
+      "sha256": "68d6ef2d62c381091a2e428d2bb293d9f877ce023079f360023f42678acb83a6",
+      "role": "Owner-supplied gun-to-hand/forearm/body proportion and original context only. No costume/palette/moveset substitution or source pixels copied into art."
+    },
+    {
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/reference_02.png",
+      "sha256": "16225561ec85ad3ff06a3b7304f97f574c7c6bb67f28385af25f8035aa6a7e5c",
+      "role": "Owner-supplied gun-to-hand/forearm/body proportion and original context only. No costume/palette/moveset substitution or source pixels copied into art."
+    },
+    {
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/reference_03.png",
+      "sha256": "40515a5db2f57cabdbf488eaf15e31f2631872ff0ed5a4ffe4e3174cccb9a6f4",
+      "role": "Owner-supplied gun-to-hand/forearm/body proportion and original context only. No costume/palette/moveset substitution or source pixels copied into art."
+    },
+    {
+      "path": "data/source_art/concept_art/jj_zillion_ii/review_drafts/weapon_proportion_v5/reference_04.png",
+      "sha256": "e5c30ae185d82a8faaded3d80eede6a864146135fb20574c48a50411ac0de150",
+      "role": "Owner-supplied gun-to-hand/forearm/body proportion and original context only. No costume/palette/moveset substitution or source pixels copied into art."
+    }
+  ],
+  "mandatory_delta": [
+    "Correct weapon-to-J.J.proportion in concept/model first, preserve canonical weapon shape",
+    "Keep original6frames and allbodyposes; do not solve this artdefect by changing posecount or timing",
+    "Remove pulse/projectile/shot/sparks/FX/objects from character drawings; plan them separately later"
+  ],
+  "scope": "Equipment/art fidelity correction, no new movement design or new gameplay system."
+}

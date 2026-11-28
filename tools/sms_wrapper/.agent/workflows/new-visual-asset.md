@@ -12,6 +12,8 @@ ciclo, compor e revisar o concept/model sheet e guardar fonte, prompt,
 metadados, lineage e validação em `data/source_art/`. Não gerar em massa todo o
 catálogo por padrão. Este workflow cobre a conversão e integração posterior.
 
+Para um personagem em produção, localize sua ficha editável e a edição em PDF. Quando a revisão mudar o contrato visual, sincronize as duas vias e confira as ilustrações afetadas conforme §136 e `doc/game-design/ficha-tecnica-de-personagem.md`.
+
 Orquestre as transições conforme `workflows/artwork-to-rom-lifecycle.md`:
 cada saída preserva papel, versão/hash e aprovação própria; não promova por
 herança de uma etapa anterior.
@@ -32,15 +34,16 @@ herança de uma etapa anterior.
    Em folha de animação, declarar geometria por quadro (canvas, bbox visível,
    baseline e pivô), comparando cada ação com a escala do model sheet aprovado;
    uma célula igual não prova tamanho ou pés alinhados (L102).
-   Em Master of Fighters, derivar escala corporal do GDD: Fatal Fury Special
-   (Game Gear) é projetado de 160×144 para SMS 256×192; a faixa de trabalho é
-   66–72 px, alvo 70 px. É direção visual, não limite físico. Canvas é escolhido
+   Derivar escala corporal do GDD e da decisão vigente por papel/hash. A faixa
+   histórica de 66–72 px em Master of Fighters não é preset atual/universal;
+   amostras CPS2 e contratos posteriores precisam ser resolvidos na memória.
+   Corpo e equipamento são medidas separadas. Canvas é escolhido
    por pose, múltiplo de 8, com ao menos 1 px transparente em cada borda;
    arma/equipamento cortados reprovam a prova (L110).
    Antes da folha animada, produzir somente duas poses-chave separadas (idle e
    ação), conforme o GDD e o padrão de prova técnica v4 do projeto. Isso não é
    uma animação de dois quadros; não exibir a sequência completa nessa prova.
-   Depois da aprovação da prova e antes de desenhar a folha, selar um contrato
+   Antes de desenhar a folha, selar um contrato
    de sequência por ação com estado inicial/final, loop/transição, IDs e
    contagem de poses-fonte, duração por pose, trilha do personagem e de cada
    objeto/efeito animado, física/hitbox quando aplicável e revisão dos 12
@@ -50,6 +53,9 @@ herança de uma etapa anterior.
    ator. Gate: `audit_animation_contract.py`. Separar essa
    contagem de poses do número de objetos físicos 8×8/8×16, tiles, SAT e VBlank;
    contagens hardware não medidas ficam `pending`.
+   Fazer coreografia/gesto e teste temporal preliminar conforme
+   `sms-sprite-animation.md`; a prova técnica pode iterar cedo para testar
+   legibilidade e composição, sem herdar aprovação artística do concept.
    Em elenco de jogo, consultar também o contrato de harmonia do roster:
    confrontar a pose-fonte com concepts aceitas em uma prancha com baseline
    comum, medir altura/largura e relações declaradas com
@@ -101,7 +107,9 @@ herança de uma etapa anterior.
    `sms-asset-to-rom.md` (L121). Um passe estático não aprova movimento,
    gameplay, FPS, áudio, integração de produção ou budgets da cena.
 6. Após prova técnica e aprovação dos gates humanos/hardware, exportar PNG
-   indexado 8-bit para `res/` (índice 0 transparente, ≤15 úteis).
+   indexado 8-bit para `res/`. No BG o índice 0 desenha a cor da tabela
+   selecionada pelo tile. Em sprites/folhas o índice 0 é transparente e
+   os demais são opacos. Escolha o `--kind` correspondente no gate.
 7. Rodar gates:
    - `audit_validate_resources.py`
    - `audit_luma_floor.py`

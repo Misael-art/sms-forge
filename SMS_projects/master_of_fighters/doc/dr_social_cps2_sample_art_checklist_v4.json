@@ -1,0 +1,111 @@
+{
+  "schema": "sms_art_review_checklist_v1",
+  "producer": "/root",
+  "asset": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v4/jab_source.png",
+    "sha256": "edc9de375cfb12e036c3bb037c9bdefaf2fffabe267df43374c51b69d817bfc5",
+    "kind": "pixel_sprite_sheet"
+  },
+  "source_evidence": {
+    "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+    "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644"
+  },
+  "required_characters": [
+    "dr_social"
+  ],
+  "required_axes": [
+    "pixel_clusters",
+    "face_detail_readability",
+    "outline_and_cutout",
+    "material_shading",
+    "material_shadow_flow_coherence",
+    "semantic_palette_role_confinement",
+    "hand_weapon_attachment",
+    "equipment_geometry",
+    "frame_pose_integrity",
+    "native_size_readability",
+    "morphology_and_biotype",
+    "pose_anatomy_and_joint_continuity",
+    "support_and_pivot"
+  ],
+  "characters": [
+    {
+      "id": "dr_social",
+      "references": [
+        {
+          "path": "/home/misael/Projects/SMSForge/SMS_projects/master_of_fighters/data/source_art/concept_art/dr_social/dr_social_model_sheet_cps2_alpha_cel_v4.png",
+          "sha256": "ddce2f5a302dd679610c1b0eb915ce10718a5df852f80e4a78af18db33426644",
+          "role": "approved identity model, later neutral-gray hair and brass glasses override brown-gray text"
+        }
+      ],
+      "observed_defects": [
+        "Producer inspection: faces did not clearly close native spectacle defect; generation also altered body/clothing pixels outside head."
+      ],
+      "revision_notes": [
+        "v4 attempted face-only edit at previous high-res registration; delta measured per cell.",
+        "v3 remains observed ROM baseline; v4 not integrated."
+      ],
+      "review_axes": {
+        "pixel_clusters": {
+          "status": "pending",
+          "note": "Await independent inspection of v4 source, delta and invariants; previous v3 judgment not inherited."
+        },
+        "face_detail_readability": {
+          "status": "fail",
+          "note": "Producer sees no convincing stable native round-rim construction after extraction; request independent comparison."
+        },
+        "outline_and_cutout": {
+          "status": "pending",
+          "note": "Await independent inspection of v4 source, delta and invariants; previous v3 judgment not inherited."
+        },
+        "material_shading": {
+          "status": "pending",
+          "note": "Await independent inspection of v4 source, delta and invariants; previous v3 judgment not inherited."
+        },
+        "material_shadow_flow_coherence": {
+          "status": "pending",
+          "note": "Await independent inspection of v4 source, delta and invariants; previous v3 judgment not inherited."
+        },
+        "semantic_palette_role_confinement": {
+          "status": "pending",
+          "note": "Await independent inspection of v4 source, delta and invariants; previous v3 judgment not inherited."
+        },
+        "hand_weapon_attachment": {
+          "status": "pending",
+          "note": "Await independent inspection of v4 source, delta and invariants; previous v3 judgment not inherited."
+        },
+        "equipment_geometry": {
+          "status": "pending",
+          "note": "Await independent inspection of v4 source, delta and invariants; previous v3 judgment not inherited."
+        },
+        "frame_pose_integrity": {
+          "status": "pending",
+          "note": "Await independent inspection of v4 source, delta and invariants; previous v3 judgment not inherited."
+        },
+        "native_size_readability": {
+          "status": "pending",
+          "note": "Await independent inspection of v4 source, delta and invariants; previous v3 judgment not inherited."
+        },
+        "morphology_and_biotype": {
+          "status": "pending",
+          "note": "Await independent inspection of v4 source, delta and invariants; previous v3 judgment not inherited."
+        },
+        "pose_anatomy_and_joint_continuity": {
+          "status": "pending",
+          "note": "Await independent inspection of v4 source, delta and invariants; previous v3 judgment not inherited."
+        },
+        "support_and_pivot": {
+          "status": "pending",
+          "note": "Await independent inspection of v4 source, delta and invariants; previous v3 judgment not inherited."
+        }
+      }
+    }
+  ],
+  "owner_approval": {
+    "approved": false
+  },
+  "independent_review": {
+    "status": "pending",
+    "reviewer": "/root/social_art_review"
+  }
+}

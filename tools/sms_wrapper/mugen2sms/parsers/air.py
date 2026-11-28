@@ -34,6 +34,8 @@ class Action:
     frames: list[Frame] = field(default_factory=list)
     loopstart: int = 0
     line: int = 0
+    explicit_loopstart: bool = False
+    unparsed_lines: list[int] = field(default_factory=list)
 
 
 @dataclass
@@ -75,6 +77,7 @@ def parse(text: str, source: str = "<air>") -> AirParseResult:
             continue
         if line.lower().startswith("loopstart"):
             cur.loopstart = len(cur.frames)
+            cur.explicit_loopstart = True
             continue
         m = _CLSN_HDR.match(line)
         if m:
@@ -90,6 +93,7 @@ def parse(text: str, source: str = "<air>") -> AirParseResult:
                 box = _box(m.group(2))
             except ValueError:
                 warnings.append(f"{source}:{ln}: caixa invalida '{line}'")
+                cur.unparsed_lines.append(ln)
                 continue
             kind = m.group(1)
             if reading_default and reading == kind:
@@ -105,6 +109,7 @@ def parse(text: str, source: str = "<air>") -> AirParseResult:
                 g, i, x, y, t = (int(p) for p in parts[:5])
             except ValueError:
                 warnings.append(f"{source}:{ln}: frame invalido '{line}'")
+                cur.unparsed_lines.append(ln)
                 continue
             flip = parts[5].upper() if len(parts) > 5 else ""
             blend = parts[6].upper() if len(parts) > 6 else ""
@@ -116,6 +121,7 @@ def parse(text: str, source: str = "<air>") -> AirParseResult:
             reading = None
             continue
         warnings.append(f"{source}:{ln}: linha ignorada '{line[:40]}'")
+        cur.unparsed_lines.append(ln)
     for a in actions.values():
         if not a.frames:
             warnings.append(f"{source}:{a.line}: action {a.number} sem frames")

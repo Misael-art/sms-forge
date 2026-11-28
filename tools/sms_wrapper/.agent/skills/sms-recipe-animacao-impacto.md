@@ -8,22 +8,30 @@ slash com frames de fonte selecionada. É a camada visual da receita
 Complementa (não substitui) `sms-sprite-animation.md` e
 `sms-sprites-metasprite.md`.
 
+**Alcance histórico:** demonstra ligação estado→pose→consequência. Os golpes
+de um quadro deste molde não ensinam atuação corporal, aceleração ou fluidez;
+para novas ações usar o procedimento gestual/temporal de `sms-sprite-animation.md`
+e o checkpoint de `workflows/art-review.md`. Os números, orientação e código
+abaixo são do molde, não defaults da fábrica ou evidência da build atual.
+
 ## 1. Contrato
 
-- **Toda pose do GDD tem folha própria.** No molde: 8 poses distintas
-  (idle, walk, punch, special, hit, KO, crouch, jump). Duas poses que
-  desenham a mesma silhueta são mentira — `ST_JUMP` com folha de andar foi
-  defeito pago (corrigido; `poses.json` re-medido, JUMP com menor y=67).
-- **Convenção de orientação única:** folhas olham para a **esquerda**; o
+- **Toda ação do GDD precisa de representação coerente.** No molde: 8 poses distintas
+  (idle, walk, punch, special, hit, KO, crouch, jump). Nesse caso, `ST_JUMP`
+  com folha de andar não representava a ação contratada; foi defeito corrigido
+  (`poses.json` re-medido, JUMP com menor y=67). Igualdade de imagens por si
+  só não classifica a semântica de outro contrato.
+- **Convenção do molde:** folhas olham para a **esquerda**; o
   flip é **runtime** (bitrev + dx-mirror em `want_flip`/`apply_pose`). Folha
   autorizada na orientação contrária quebra a convenção e renderiza de
   costas (pago na v086: as 8 folhas do Guile espelhadas, tamanhos idênticos).
 - **Upload de pose dentro do orçamento de VBlank:** stream de 96 B/frame, um
   lutador por vez (`STREAM_BYTES`; não mexer sem remedir fps). Troca de pose
   é o pico de custo — worst-frame **medido**, não afirmado.
-- **Impacto tem consequência física visível:** `g_hitstop` (6 cheio / 3 chip)
+- **Impacto do molde tem consequência visível:** `g_hitstop` (6 cheio / 3 chip)
   congela o tick, `g_shake` treme, pose `POSE_HIT`/`POSE_KO` assume a
-  silhueta de dano. Golpe sem hitstop/shake/pose não lê como golpe.
+  silhueta de dano. Escolher feedback conforme ação/GDD; shake e esses tempos
+  não são obrigatórios nem prova de impacto convincente.
 - **Física não depende de estado:** gravidade roda em qualquer estado
   (`airborne()` é altura, não `ST_JUMP` — L050); `separate()` ignora quem
   está no ar — por isso o pulo por cima cruza e o facing vira ao aterrissar
@@ -56,6 +64,11 @@ remodela a **silhueta a partir das folhas próprias** do lutador — custo
 medido: 2560 B. No kage, slash2/jump vieram de **fontes selecionadas do
 acervo** (`anim_kage_slash2/f015.png`, `anim_kage_combo/f025.png`), com proof
 16×32 gerado — zero tile novo de cena.
+
+Esse registro é histórico: transformação mecânica não autoriza autoria de
+pixels finais por código, nem substitui fonte/poses autorais aprovadas. Holds
+e repetição da mesma imagem em elementos semânticos diferentes podem ser
+intencionais; não impor uma imagem única por estado sem examinar o contrato.
 
 ## 3. Comando de reprodução
 
@@ -105,6 +118,42 @@ em `probe_hitstop`, facing virando após troca de lado no ar (kage/MSSF2T:
   mais e diverge da convenção.
 - Gate de animação com frames reordenados ou ação clonada com outro nome —
   `audit_animation_semantics.py` reprova (L037, §42).
+
+### Comparar os contatos de duas gravações
+
+Para os recibos MFD1 do gravador de round e de seu replay contínuo, execute
+da raiz da fábrica, com o SHA do binário ensaiado. O exemplo usa a b11-r2
+preservada no acervo do Master of Fighters.
+
+```sh
+base=SMS_projects/master_of_fighters/out/diagnostics/repertoire_20261119
+tool=tools/sms_wrapper/audit_duel_contacts.py
+rtk proxy tools/sms_wrapper/run_host.sh python "$tool" --self-check
+rtk proxy tools/sms_wrapper/run_host.sh python "$tool" \
+  --rom-sha256 f76fe86f5b3d874a7317c7727f350aa8e750af7a1dba9d85b8d71722c3a126b7 \
+  --stepped "$base/scene02-actions-qa6-b11-r2/6-round/round-completo.json" \
+  --continuous "$base/scene02-actions-continuous6-b11-r2-v2/6-continuous/round-continuo.json"
+```
+
+O controle é o primeiro soco, pose 8 e vida de Alis 100→94. A reprodução
+completa deve sair com código 1. No nono contato a ordem e o dano conferem,
+mas no VDP 674 o probe indica pose pedida 46 e publicada 45. No contínuo,
+consulte a imagem 552, tick 472, que registra 46/46. Use os hashes dos
+recibos para cotejar a auditoria. A ferramenta lê identificadores publicados
+e compara contatos com dano relatados por duas sessões ligadas à mesma ROM.
+Guarda, whiff, integridade dos pixels de P0/P1, duração do hitstop, FPS e
+determinismo por tick exigem observações próprias. Para hitstop, fixe o
+evento inicial, o avanço dos relógios de input, lógica, apresentação e som,
+e o primeiro comando que volta a produzir ação.
+
+Confira ainda de onde o gravador tira cada ID. No Saque desta build,
+`pose_used_for_contact=2` é a segunda exposição do golpe. O primeiro
+desenho no repertório é 45, logo a exposição corresponde a 45 + 2 − 1 = 46.
+Comparar diretamente 2 com 46 criaria um segundo defeito fictício. Há também
+um perfil da Cena 02 sem repertório que copia o mesmo valor para pedida,
+residente e apresentada. Para esse perfil, verificar a publicação exige
+observar SAT/PNT e o framebuffer. Antes de reutilizar a receita em outra
+build, conferir o produtor da sonda, o perfil compilado e a unidade do ID.
 
 ## 5. Vídeo nativo
 

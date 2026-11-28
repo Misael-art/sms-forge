@@ -1,0 +1,243 @@
+{
+  "source": "support_poses_generated_raw.png",
+  "source_sha256": "ee88c74453e25c83d1437f6c37a4194da185df15c0a5a491e558fb22e0c4ada7",
+  "raw_size": [
+    1254,
+    1254
+  ],
+  "scale": [
+    2,
+    9
+  ],
+  "alpha_threshold": 128,
+  "canvas": [
+    144,
+    144
+  ],
+  "pivot": [
+    68,
+    127
+  ],
+  "source_colors": 32,
+  "sheet_columns": 2,
+  "sheet_filename": "support_poses_source.png",
+  "frames": [
+    {
+      "id": "C01",
+      "rect": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "cell_origin": [
+        0,
+        0
+      ],
+      "raw_pivot": [
+        296,
+        562
+      ]
+    },
+    {
+      "id": "C03",
+      "rect": [
+        0,
+        627,
+        627,
+        1254
+      ],
+      "cell_origin": [
+        0,
+        627
+      ],
+      "raw_pivot": [
+        296,
+        561
+      ]
+    },
+    {
+      "id": "C04",
+      "rect": [
+        627,
+        627,
+        1254,
+        1254
+      ],
+      "cell_origin": [
+        627,
+        627
+      ],
+      "raw_pivot": [
+        296,
+        562
+      ]
+    }
+  ],
+  "notes": [
+    "Single uniform2/9raw-raster translation for ALL three generated support poses, fixed BEFORE any hardware conversion; source CPS2unit matches frozen102~104pxbody/pixel density. Not a per-pose height fit. Returned raw1254 differs from1152edit-target request; native body/mass/ratios require joint independent review.",
+    "Only whole-pose registration to observed sole boundary; no pixel paint, cut, separate body resize or SMS output recolor. C02 redraw cell not extracted; final assembly will copy frozenC02 byte-for-byte."
+  ],
+  "source_palette_rgb": [
+    [
+      253,
+      249,
+      242
+    ],
+    [
+      252,
+      246,
+      234
+    ],
+    [
+      253,
+      244,
+      230
+    ],
+    [
+      246,
+      241,
+      234
+    ],
+    [
+      223,
+      216,
+      212
+    ],
+    [
+      207,
+      197,
+      195
+    ],
+    [
+      251,
+      178,
+      105
+    ],
+    [
+      177,
+      175,
+      199
+    ],
+    [
+      254,
+      91,
+      7
+    ],
+    [
+      253,
+      87,
+      2
+    ],
+    [
+      253,
+      86,
+      2
+    ],
+    [
+      240,
+      113,
+      35
+    ],
+    [
+      144,
+      117,
+      104
+    ],
+    [
+      253,
+      85,
+      2
+    ],
+    [
+      252,
+      83,
+      1
+    ],
+    [
+      202,
+      76,
+      26
+    ],
+    [
+      238,
+      18,
+      4
+    ],
+    [
+      231,
+      2,
+      1
+    ],
+    [
+      230,
+      1,
+      1
+    ],
+    [
+      237,
+      0,
+      1
+    ],
+    [
+      174,
+      15,
+      7
+    ],
+    [
+      187,
+      1,
+      2
+    ],
+    [
+      204,
+      0,
+      1
+    ],
+    [
+      149,
+      0,
+      1
+    ],
+    [
+      74,
+      50,
+      56
+    ],
+    [
+      43,
+      25,
+      33
+    ],
+    [
+      39,
+      8,
+      15
+    ],
+    [
+      14,
+      7,
+      15
+    ],
+    [
+      62,
+      1,
+      5
+    ],
+    [
+      21,
+      1,
+      16
+    ],
+    [
+      13,
+      1,
+      13
+    ],
+    [
+      5,
+      1,
+      7
+    ]
+  ]
+}

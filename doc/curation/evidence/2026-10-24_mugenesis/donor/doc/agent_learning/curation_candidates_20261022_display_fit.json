@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_kind": "local_canonical_curation_candidates",
+  "source_project": "Mugenesis_Demo [VER.001] [SGDK 211] [GEN] [GAME] [FIGHTING]",
+  "date": "2026-10-22",
+  "canonical_promotion_performed": false,
+  "human_approval_required": true,
+  "existing_owners_only": true,
+  "apply_status": "not_applied",
+  "build_version": "build_v007",
+  "items": [
+    {
+      "id": "mcp_display_fit_cps2_h40_20261022",
+      "title": "Encaixe horizontal opcional de sprite CPS2 no H40, sem reconverter estados",
+      "source_learning_cards": [
+        "doc/agent_learning/display_fit_cps2_h40_20261022.md"
+      ],
+      "ledger_headings": [
+        "MCP_080",
+        "MCP_081",
+        "MCP_082",
+        "MCP_083",
+        "MCP_084",
+        "MCP_085",
+        "MCP_086",
+        "MCP_087",
+        "MCP_088",
+        "MCP_089",
+        "MCP_090"
+      ],
+      "ledger_capture": {
+        "ignored_by_extractor_until_copied_into_required_markdown": true,
+        "previous_capture_without_these_lessons": "doc/agent_learning/evidence/display_fit_cps2_h40_20261022/learning_capture.json",
+        "previous_lesson_count": 327,
+        "previous_candidate_count": 209,
+        "ingested_capture": "doc/agent_learning/evidence/display_fit_cps2_h40_20261022/learning_capture_ledger.json",
+        "ingested_capture_sha256": "f4b13710c9575dd4a1064458ba292a47f2274a9680f1e165db0bafda1cce535f",
+        "ledger_sha256": "c9216de26f720ac15f89d7f0e4d403aea1e061bd00b86aed1e038ccf0e3f8fd6",
+        "lesson_count": 348,
+        "candidate_count": 227,
+        "new_lessons": 21,
+        "canonical_promotion_performed": false,
+        "apply_status": "not_applied"
+      },
+      "canonical_owner": [
+        "tools/mugen2sgdk_forge/mugen2sgdk_forge/converters/display_fit.py"
+      ],
+      "lesson": "Arte desenhada em 384x224 e mostrada em H40 320x224 pede escala X de 5/6 e Y de 1/1, porque as 224 linhas ja ocupam o mesmo campo. O gatilho e opcional, recusa fonte desconhecida, e o marcador impede segunda passagem. Em personagem ja gerado, mexer so em sheet, eixo X, ox e caixas X. Reconverter o ZIP muda estado e som.",
+      "risk": "Escalar Y, ou pad so a direita, desloca hitbox e o flip. Tratar a queda de 192 para 160 px no FX 8060 como cena resolvida repete o falso verde do recorte. O digest de gameplay muda junto com as caixas; compara-lo como se o combate fosse identico esconde o efeito.",
+      "evidence": [
+        {
+          "card": "doc/mugen/display_fit_cps2_h40_20261022.json",
+          "result": "Tiles 4bpp 3630112 para 3137600. ROM alinhada 3801088 para 3538944. A/B 3x1200: 39,768 para 40,829 updates/s; over budget 902 para 529; digest 3241500951 para 65670647."
+        }
+      ],
+      "required_follow_up": [
+        "Medir a SAT da cena FX80 de novo se alguem quiser dizer que o corte de 24 px fechou.",
+        "Aprovacao humana antes de qualquer patch em SGDK_GLOBAL ou skill canonica."
+      ],
+      "classification": "local_note",
+      "decision": "no_canonical_patch",
+      "action": "none",
+      "human_approval_required": true,
+      "human_approval": null,
+      "apply_status": "not_applied",
+      "canonical_promotion_performed": false
+    }
+  ]
+}

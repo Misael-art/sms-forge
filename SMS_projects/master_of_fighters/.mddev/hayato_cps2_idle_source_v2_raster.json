@@ -1,0 +1,35 @@
+{
+  "schema": "sms_source_raster_contract_v1",
+  "image_sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1",
+  "dimensions_px": [
+    144,
+    144
+  ],
+  "frame_count": 1,
+  "expected_frame_ids": [
+    "idle"
+  ],
+  "frames": [
+    {
+      "id": "idle",
+      "rect_px": [
+        0,
+        0,
+        144,
+        144
+      ]
+    }
+  ],
+  "transparency": {
+    "mode": "binary_alpha"
+  },
+  "grid": {
+    "columns": 1,
+    "rows": 1,
+    "cell_px": [
+      144,
+      144
+    ]
+  },
+  "max_unique_rgb": 33
+}

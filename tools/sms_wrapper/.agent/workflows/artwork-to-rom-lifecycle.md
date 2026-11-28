@@ -6,6 +6,9 @@ System. Este runbook coordena `original-artwork.md`, `art-review.md`,
 substitui os contratos técnicos ou os documentos do projeto.
 Organização/retomada segue `artifact-organization.md`: um registro por projeto,
 heads por papel e revisão, decisões ligadas ao hash e reservas antes da escrita.
+Para um lutador, execute o recorte por personagem, ação e adversário em
+[`playable-fighter.md`](playable-fighter.md). A mesma fonte de arte alimenta
+a revisão do gesto e a medição do contato no duelo.
 
 ## Estados de promoção
 
@@ -71,6 +74,9 @@ aprovação de um estágio para outro nem de um hash para outro.
    restante. `source_pose_count` é desenho, não objeto VDP. Valores não medidos
    ficam `pending`/proposta. Rodar `audit_animation_contract.py`; após PNGs,
    `audit_animation_semantics.py` e revisão do movimento.
+   Antes do acabamento, aplicar coreografia corporal e teste gestual temporal
+   de `sms-sprite-animation.md`. Separar sete aplicações planejadas de efeitos
+   observados; não congelar postura para preservar identidade.
 7. **Produzir a prova técnica conforme o padrão do projeto.** Duas poses
    distintas (idle e ação), paleta, escala, canvas tile-alinhado, equipamento
    inteiro e mapa de tiles em painel separado. Essa prova valida a rota de
@@ -103,14 +109,19 @@ aprovação de um estágio para outro nem de um hash para outro.
     frame-paced e revisão da timeline. ACK ou screenshot estático não provam
     movimento. Igualdade pixel a pixel prova renderização daquela ROM, não
     anatomia, estilo, timing, gameplay ou qualidade AAA.
+    Abrir o checkpoint de seis eixos em `art-review.md`, com o gate existente
+    `audit_art_review_checklist.py`. Stepping confere estados; captura em run
+    livre e percepção contínua têm escopos próprios. `needs_evidence` conserva
+    a candidata/controle sem fabricar revisão temporal ou autorizar produção.
 11. **Integrar somente após a aprovação da conversão.** Obter revisão
     independente e humana do que aparece no ROM. Mapear paleta por material
     para P1 compartilhada; medir coexistência de elenco, cenário/HUD, VRAM,
     RAM, ROM/banking, SAT/scanline e pior VBlank da cena real. ROM diagnóstica
     fica fora de `res/` e não é entrega.
 12. **Fechar produção com evidência atual.** Validar gameplay/interação,
-    animação, FPS apropriado (50/60), áudio, memória e budgets conforme
-    GDD/TDD/spec. Mudança/relink da ROM exige evidência fresca. Declarar apenas
+    animação, alvo de 60 FPS com piso de 58 por janela válida (SMS_GLOBAL §133),
+    áudio, memória e budgets conforme GDD/TDD/spec. PAL50 é diagnóstico
+    regional. Mudança/relink da ROM exige evidência fresca. Declarar apenas
     eixos pagos e dentro do teto de claims aprovado.
 
 ## Curadoria

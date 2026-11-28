@@ -23,24 +23,25 @@ def run(args, expect_code, label):
     return ok
 
 BOOTSTRAP_REQUIRED = (
-    ".mddev/project.json", "doc/00-diretrizes-agente.md", "doc/10-memory-bank.md",
+    ".mddev/project.json", "doc/00-diretrizes-agente.md", "doc/08-bible-artistica.md", "doc/10-memory-bank.md",
     "doc/11-gdd.md", "doc/12-roteiro.md", "doc/13-spec-cenas.md",
     "doc/15-tdd.md", "doc/artifact_registry.json", "src/main.c", "build.sh",
 )
 
 def _check_bootstrap():
     """Cria um projeto descartavel e prova que a hierarquia de verdade materializa."""
-    name = "_selftest_bootstrap_tmp"
+    from uuid import uuid4
+    name = "_selftest_bootstrap_" + uuid4().hex
     dest = os.path.normpath(os.path.join(HERE, "..", "..", "SMS_projects", name))
     script = os.path.join(HERE, "new_project.sh")
-    if os.path.exists(dest):
-        shutil.rmtree(dest, ignore_errors=True)
+    created = False
     try:
         r = subprocess.run(["bash", script, name], capture_output=True, text=True)
         if r.returncode != 0:
             tail = (r.stdout + r.stderr).strip().splitlines()
             print(f"  [XX ] bootstrap new_project.sh falhou  ({tail[-1][:80] if tail else ''})")
             return False
+        created = True
         # ausente OU vazio conta como nao materializado
         bad = [f for f in BOOTSTRAP_REQUIRED
                if not (os.path.isfile(os.path.join(dest, f))
@@ -59,11 +60,39 @@ def _check_bootstrap():
         if leftover.returncode == 0:
             print("  [XX ] bootstrap deixou placeholder __PROJECT_NAME__ sem substituir")
             return False
+        from pathlib import Path
+        memory = Path(dest, "doc/10-memory-bank.md").read_text(encoding="utf-8")
+        fps_rows = [row.lower() for row in memory.splitlines() if row.startswith("|") and "fps" in row.lower()]
+        if len(fps_rows) != 1 or not all(part in fps_rows[0] for part in ("ntsc", "60", "58", "não iniciado")):
+            print("  [XX ] memory bank inicial perdeu o alvo, piso ou estado pendente de FPS")
+            return False
+        check = [os.path.join(HERE, "audit_specialization.py"), "--project", dest, "--slice-plan"]
+        if not run(check, 1, "roteiro recém-materializado ainda não pode avançar"):
+            return False
+        script = Path(dest, "doc/12-roteiro.md")
+        text = script.read_text(encoding="utf-8").replace(
+            "_(gesto ou gatilho, estado inicial e consequência no mundo)_",
+            "Ao soltar a direção, o personagem para no chão.")
+        text = text.replace("| pendente | — | — | — | — |",
+                            "| fora | Recorte de parada em piso plano | — | — | — |")
+        for family in ("Ciclo central", "Repouso", "Locomoção"):
+            text = text.replace(f"| {family} | fora | Recorte de parada em piso plano | — | — | — |",
+                                f"| {family} | agora | B01 | Pé estabiliza | Sem deriva em neutro | Volta a andar |")
+        script.write_text(text, encoding="utf-8")
+        if not run(check, 0, "roteiro de plataforma liga parada, repouso e retomada ao beat"):
+            return False
+        script.write_text(text.replace("Sem deriva em neutro", "—"), encoding="utf-8")
+        if not run(check, 1, "caso sem controle negativo reprovado"):
+            return False
+        if "new-project.md" not in r.stdout or "--slice-plan" not in r.stdout:
+            print("  [XX ] bootstrap omitiu a entrada de produção ou a verificação do roteiro")
+            return False
         print(f"  [OK ] bootstrap materializa hierarquia de verdade  "
               f"({len(BOOTSTRAP_REQUIRED)} arquivos, sem placeholder)")
         return True
     finally:
-        shutil.rmtree(dest, ignore_errors=True)
+        if created:
+            shutil.rmtree(dest)
 
 def _art_review_manifest(root, asset_kind="concept", required_axes=None):
     """Create a hash-bound, structurally complete art-review fixture."""
@@ -113,6 +142,31 @@ def _art_review_manifest(root, asset_kind="concept", required_axes=None):
         json.dump(manifest, stream)
     return path
 
+def _material_landmark_cases(tmp):
+    from pathlib import Path
+    from png_io import write_indexed_png
+    # Same palette and histogram for every cel. Only the middle cel loses its
+    # authored highlight position. Its visible bbox also starts one pixel lower.
+    region = {"name": "tecido", "anchor": "visible_bbox_top", "offset_px": [2, 0],
+              "size_px": [2, 1], "allowed_rgb": ["#AA0055", "#FF55AA"],
+              "minimum_pixels_by_rgb": {"#AA0055": 1, "#FF55AA": 1},
+              "samples": [{"frame": 1, "at_px": [1, 0], "rgb": "#FF55AA"}]}
+    contract = {"sheet": {"columns": 3, "rows": 1, "sheet_px": [24, 8], "frame_px": [8, 8]},
+                "pixel_cleanup_profile": {"minimum_opaque_component_px": 2, "regions": [region]}}
+    path = Path(tmp) / "tecido.json"
+    path.write_text(json.dumps(contract), encoding="utf-8")
+    image = Path(tmp) / "poses.png"
+    command = [os.path.join(HERE, "audit_sprite_cutout.py"), "--contract", str(path), "--image", str(image)]
+    pixels = [bytearray(24) for _ in range(8)]
+    pixels[2][2:4] = pixels[2][18:20] = pixels[3][10:12] = bytes((1, 2))
+    palette = [(0, 0, 0), (170, 0, 85), (255, 85, 170)]
+    write_indexed_png(image, 24, 8, palette, pixels, trns=(0,))
+    good = run(command, 0, "tecido: luz na posição contratada no quadro intermediário")
+    pixels[3][10:12] = bytes((2, 1))
+    write_indexed_png(image, 24, 8, palette, pixels, trns=(0,))
+    return [good, run(command, 1, "tecido: troca de sombra e luz com histograma idêntico")]
+
+
 def main():
     import gen_fixtures
     results = []
@@ -122,7 +176,7 @@ def main():
               "capture_evidence.py",
               "audit_meaningful_change.py", "audit_placeholder_quarantine.py",
               "audit_deterministic_boot.py", "canonical_fixture_gate.py",
-              "audit_mastery_registry.py",
+              "audit_mastery_registry.py", "audit_asset_proof_sheet.py",
               "audit_specialization.py",
               "audit_audio.py",
               "measure_fps.py",
@@ -137,6 +191,7 @@ def main():
               "audit_hardware_constants.py",
               "audit_debug_markers.py",
               "audit_observed_cases.py",
+              "audit_duel_contacts.py",
               "audit_tilemap_bounds.py",
               "audit_tilemap_mirror.py",
               "audit_vscroll_wrap.py",
@@ -155,7 +210,7 @@ def main():
               "audit_stage_attribution.py",
               "audit_import_semantics.py",
               "quality_review_router.py",
-              "audit_animation_semantics.py",
+              "audit_animation_semantics.py", "audit_animation_contract.py",
               "audit_learning_capture.py",
               "audit_psg_channel_binding.py",
               "audit_hscroll_blank.py",
@@ -172,12 +227,106 @@ def main():
               "measure_worst_frame.py",
               "audit_header_claims.py", "audit_mugen_engine_contract.py",
               "audit_art_review_checklist.py",
+              "audit_composition_gate.py", "audit_sole_alignment.py",
+              "host_bootstrap.py",
+              "recovery_bundle.py",
               "mugen2sms/runtime/vram_plan.py",
               "mugen2sms/runtime/commit_budget.py"):
         results.append(run([os.path.join(HERE, g), "--self-check"], 0,
                            f"selfcheck:{g}"))
     print("== Fase 2: fixtures geradas ==")
     tmp = tempfile.mkdtemp(prefix="smsforge_selftest_")
+    results.extend(_material_landmark_cases(tmp))
+    sheet_test = os.path.join(HERE, "tests", "test_character_sheet.py")
+    results.append(run([sheet_test, "Sheet.test_matching_export", "Sheet.test_active_images"],
+                       0, "ficha: PDF da edição e imagens ativas conferem"))
+    results.append(run([sheet_test, "Sheet.test_stale_svg", "Sheet.test_old_edition",
+                        "Sheet.test_same_text_wrong_illustration", "Sheet.test_missing_figure"],
+                       0, "ficha: rejeita revisão, desenho ou ilustração desatualizados"))
+    results.append(run([os.path.join(HERE, "audit_sprite_cutout.py"), "--self-check"],
+                       0, "recorte: região com e sem o mínimo de pixels da cor do material"))
+    from audit_duel_contacts import fixture as contact_fixture
+    stepped, replay, rom_sha = contact_fixture()
+    stepped_path = os.path.join(tmp, "stepped.json")
+    replay_path = os.path.join(tmp, "continuous.json")
+    with open(stepped_path, "w", encoding="utf-8") as stream:
+        json.dump(stepped, stream)
+    command = [os.path.join(HERE, "audit_duel_contacts.py"), "--stepped", stepped_path,
+               "--continuous", replay_path, "--rom-sha256", rom_sha]
+    for pose, status in ((8, 0), (7, 1)):
+        replay["actual_contacts"][0]["presented"] = pose
+        with open(replay_path, "w", encoding="utf-8") as stream:
+            json.dump(replay, stream)
+        results.append(run(command, status, f"contact receipts: requested 8, presented {pose}"))
+    matrix_path = os.path.join(tmp, "actor-matrix.json")
+    matrix_command = [os.path.join(HERE, "audit_duel_contacts.py"), "--actor-matrix", matrix_path,
+                      "--scenario", "air", "--rom-sha256", rom_sha]
+    for victim, status in ((63, 0), (9, 1)):
+        event = {"case": "air-block", "actor": "p2", "vdp_frame": 12, "logic_tick": 6,
+                 "attacker_pose": [43, 43, 43], "victim_pose": [63, victim]}
+        with open(matrix_path, "w", encoding="utf-8") as stream:
+            json.dump({"rom_sha256": rom_sha, "scenarios": [
+                {"folder": "air", "session_id": "stepped", "contacts": [event]}]}, stream)
+        results.append(run(matrix_command, status, f"actor matrix: victim requested 63, presented {victim}"))
+    from audit_animation_contract import _minimal_valid as animation_fixture
+    animation_path = os.path.join(tmp, "animation.json")
+    with open(animation_path, "w", encoding="utf-8") as stream:
+        json.dump(animation_fixture(), stream)
+    exposure = [os.path.join(HERE, "audit_animation_contract.py"), "--manifest",
+                animation_path, "--exposure-sheet", "demo", "--active-window"]
+    results.append(run(exposure + ["1", "3"], 0, "exposição cobre fronteira entre poses"))
+    results.append(run(exposure + ["3", "5"], 1, "janela além da última pose reprovada"))
+    # Registry CLI must reject prose and bind real files, not merely truthy evidence.
+    mastery_path = os.path.join(tmp, "mastery.json")
+    refs = []
+    for kind in ("source", "build"):
+        path = os.path.join(tmp, kind)
+        with open(path, "wb") as stream:
+            stream.write(("synthetic " + kind).encode())
+        refs.append({"path": kind, "kind": kind,
+                     "sha256": hashlib.sha256(open(path, "rb").read()).hexdigest()})
+    record = {"tracks": {"tiles": {"V01": {"level": "incorporada",
+              "evidence": {"scope": "custody fixture only", "artifacts": refs}}}}}
+    with open(mastery_path, "w") as stream: json.dump(record, stream)
+    results.append(run(["audit_mastery_registry.py", "--registry", mastery_path,
+                        "--root", tmp], 0, "mastery accepts hash-bound files"))
+    record["tracks"]["tiles"]["V01"]["evidence"] = "gate passou"
+    with open(mastery_path, "w") as stream: json.dump(record, stream)
+    results.append(run(["audit_mastery_registry.py", "--registry", mastery_path,
+                        "--root", tmp], 1, "mastery refuses prose promotion"))
+    # Candidate diagnostics remain unpromoted; test both valid and invalid
+    # inputs here so future curators can assess their actual contract.
+    import audit_composition_gate as composition
+    import audit_sole_alignment as sole
+    from pathlib import Path
+    candidate_root = Path(tmp) / "candidate_pose_tools"
+    candidate_root.mkdir()
+    source = candidate_root / "cut.h"
+    source.write_text(composition.SYNTHETIC_HEADER)
+    results.append(run(["audit_composition_gate.py", "--header", str(source),
+                        "--anim-count", "2"], 0, "candidate composition valid header"))
+    results.append(run(["audit_composition_gate.py", "--header", str(source),
+                        "--out-header", str(source)], 3, "candidate refuses input overwrite"))
+    results.append(source.read_text() == composition.SYNTHETIC_HEADER)
+    invalid = candidate_root / "invalid.h"
+    invalid.write_text(composition.SYNTHETIC_HEADER.replace("0x80 };", "0x00 };", 1))
+    results.append(run(["audit_composition_gate.py", "--header", str(invalid)],
+                       3, "candidate composition malformed rejected"))
+    overlap = composition.peak_scanline([(0, 0, 0)] * 3 + [(8, 8, 0)] * 3)
+    adjacent = composition.peak_scanline([(0, 0, 0)] * 3 + [(8, 16, 0)] * 3)
+    results.append(overlap == 6 and adjacent == 3)
+    print(f"  [{'OK ' if results[-1] else 'XX '}] candidate scanline overlap vs adjacent")
+    import struct
+    def alpha_chunk(values):
+        return b"\x89PNG\r\n\x1a\n" + struct.pack(">I", len(values)) + b"tRNS" + bytes(values) + b"\0" * 4
+    alpha_ok = sole.transparent_indices(alpha_chunk([0, 0, 255])) == {0, 1}
+    try:
+        sole.transparent_indices(alpha_chunk([0, 127, 255]))
+        alpha_rejected = False
+    except sole.SoleError:
+        alpha_rejected = True
+    results.append(alpha_ok and alpha_rejected)
+    print(f"  [{'OK ' if results[-1] else 'XX '}] candidate sole alpha indices / partial rejected")
     from artifact_registry import fixture as artifact_fixture, audit as audit_artifacts
     artifact_project = os.path.join(tmp, "artifact_game")
     registry = artifact_fixture(artifact_project)
@@ -314,7 +463,8 @@ def main():
         ([R, fx["valid_bg"]], 0, "bg valido aprovado"),
         ([R, fx["bad_grid"]], 1, "gate reprovou grid fora de 8x8"),
         ([R, fx["bad_color"]], 1, "gate reprovou cor fora dos codigos 6-bit"),
-        ([R, fx["opaque_idx0"]], 1, "gate reprovou indice 0 opaco"),
+        ([R, "--kind", "bg", fx["opaque_idx0"]], 0, "BG com índice zero opaco aprovado"),
+        ([R, "--kind", "sheet", fx["opaque_idx0"]], 1, "folha de sprites com índice zero opaco reprovada"),
         ([R, "--kind", "sprite", fx["valid_sprite"]], 0, "sprite 16x16 aprovado"),
         ([R, "--kind", "sprite", fx["bad_sprite"]], 1, "gate reprovou sprite 12x12"),
         ([S, fx["scene_ok"]], 0, "cena com 10 sprites dispersos aprovada"),
@@ -348,6 +498,19 @@ def main():
     results.append(run(args, 1, "MUGEN número MD rejeitado no SMS"))
 
     art_gate = os.path.join(HERE, "audit_art_review_checklist.py")
+    from tests.test_art_temporal_review import temporal_fixture
+    from pathlib import Path
+    temporal_root = Path(tmp) / "temporal_review"
+    temporal_root.mkdir()
+    temporal = temporal_fixture(temporal_root)
+    temporal_path = temporal_root / "checkpoint.json"
+    temporal_path.write_text(json.dumps(temporal))
+    temporal_args = [art_gate, "--manifest", str(temporal_path),
+                     "--project-root", str(temporal_root), "--verify-hashes"]
+    results.append(run(temporal_args, 0, "temporal: declarações válidas com seis eixos"))
+    temporal["observations"][3]["method"] = "framewise"
+    temporal_path.write_text(json.dumps(temporal))
+    results.append(run(temporal_args, 1, "temporal: inspeção estática não aprova percepção"))
     art_valid_root = os.path.join(tmp, "art_review_valid")
     art_valid = _art_review_manifest(art_valid_root)
     results.append(run([art_gate, "--manifest", art_valid,

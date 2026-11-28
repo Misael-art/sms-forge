@@ -1,0 +1,992 @@
+{
+  "estado": "Candidata de arte e jogabilidade. A decisão sobre regras do agente cabe ao curador.",
+  "rom": {
+    "arquivo": "out/candidates/palma_luzes_r2/rom/master_of_fighters.sms",
+    "sha256": "5be7bc6a8706acddaed144f4fd831fddebcc65787c603e043e76f74fce6fd615"
+  },
+  "bytes": 1048576,
+  "baseline": {
+    "arquivo": "out/candidates/palma_tres_elenco/rom/master_of_fighters.sms",
+    "sha256": "50bc2ba6e55ec9f3517ce36a3ac518eb3a5f49b200dcdbc942a1022dc0f4d685"
+  },
+  "origem": {
+    "model_sheet": {
+      "arquivo": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png",
+      "sha256": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95"
+    },
+    "atlas_integrado": {
+      "arquivo": "data/source_art/sprite_studies/alis_revisao_ficha/poses.png",
+      "sha256": "e33594dae646146849800ed8bf86e9fe0cc6127a230989cd648845141c0c1587"
+    },
+    "recibo_do_atlas": {
+      "arquivo": "data/source_art/sprite_studies/alis_revisao_ficha/revisao.json",
+      "sha256": "b1867f6927274eb7d6eb878ec51c9eb6249333d275ad4ac1a610e5b5e5dc6c8c"
+    },
+    "poses_no_atlas": 38,
+    "arte_da_pista": {
+      "arquivo": "data/source_art/scenes/alis_espacoporto/palma_saturn_v3.png",
+      "sha256": "31d136e7d4e640cd7ef3ba967b34b7dcf4100080077aaff403adae43f1cdcb76"
+    }
+  },
+  "procedimento": [
+    "Comparar modelo v4, a prancha R5, os recortes do trabalho R6 e a trajetória de cor entre poses vizinhas.",
+    "Isolar os materiais na importação, priorizar os recortes conferidos do atlas e preservar o contorno.",
+    "Restringir as exposições a padrões já pintados da V3, com células fixas de controle.",
+    "O primeiro link excedeu o banco fixo. Mover o planejamento ambiental para o banco de apresentação e publicar pela fila de VBlank.",
+    "Preparar, compilar e exercitar a rota pública de seleção, os dois controles, especiais e carga de combate. Arquivar insumos e vincular cada sessão ao SHA do cartucho."
+  ],
+  "paleta": {
+    "rosa_sombra_e_luz": [
+      39,
+      59
+    ],
+    "indigo": 37,
+    "verde_sombra_e_luz": [
+      24,
+      44
+    ],
+    "poses": 94,
+    "mascaras_do_atlas": {
+      "poses": 38,
+      "variantes": 152,
+      "pixels_de_tecido": 9980,
+      "sha256": "e33594dae646146849800ed8bf86e9fe0cc6127a230989cd648845141c0c1587"
+    },
+    "variantes": 376,
+    "posicoes_e_pacotes_comparados": {
+      "arquivo": "out/qa/palma_luzes_r2/materiais_rom/cores.json",
+      "sha256": "bd81a376260a2150434350e0ba834f1477f534b07f8c2bf2da7f20922c5941b5"
+    },
+    "poses_42_43_44_antes": [
+      53,
+      0,
+      57
+    ],
+    "poses_42_43_44_depois": [
+      53,
+      52,
+      57
+    ],
+    "prancha": {
+      "arquivo": "out/qa/palma_luzes_r2/materiais_rom/comparacao-trajes.png",
+      "sha256": "12549d61850bf3bd538eb15954f23442f3517b7fb43c6e48cf9a85c905ae2208"
+    },
+    "correspondencias_nativas": [
+      {
+        "pose": 42,
+        "player": 1,
+        "frame": 387,
+        "pivot": [
+          87,
+          86
+        ],
+        "pixels": 750,
+        "file": "p1-pose-42.png",
+        "sha256": "957f9c404b797c0187408eb162998d821067d601445f0a58f664a7e961bf1480"
+      },
+      {
+        "pose": 43,
+        "player": 1,
+        "frame": 391,
+        "pivot": [
+          87,
+          74
+        ],
+        "pixels": 685,
+        "file": "p1-pose-43.png",
+        "sha256": "507f679dc9df11b0280f50e2475fde9892ab542d44760a3b862daab0bcaba4e7"
+      },
+      {
+        "pose": 44,
+        "player": 1,
+        "frame": 397,
+        "pivot": [
+          87,
+          66
+        ],
+        "pixels": 743,
+        "file": "p1-pose-44.png",
+        "sha256": "e0cd2f81ed3e65c2b972166740e97bc8249db7bd68da7ae87a3429f1b51e61ba"
+      },
+      {
+        "pose": 46,
+        "player": 1,
+        "frame": 447,
+        "pivot": [
+          87,
+          69
+        ],
+        "pixels": 563,
+        "file": "p1-pose-46.png",
+        "sha256": "a3cb69cb00d176dd58ff6b3f65b0f04707bb92596f20e98f20cd36176fcdeb3b"
+      },
+      {
+        "pose": 47,
+        "player": 1,
+        "frame": 453,
+        "pivot": [
+          87,
+          66
+        ],
+        "pixels": 715,
+        "file": "p1-pose-47.png",
+        "sha256": "f46df1498f96e2e632e05bcc3c65b37cb35ef94f3563359650160d33c5bee65d"
+      },
+      {
+        "pose": 42,
+        "player": 2,
+        "frame": 500,
+        "pivot": [
+          168,
+          86
+        ],
+        "pixels": 750,
+        "file": "p2-pose-42.png",
+        "sha256": "51b4d3b211766526e425578beaceae1f6d155a249c2c6251d6f5bd50cf6eed5c"
+      },
+      {
+        "pose": 43,
+        "player": 2,
+        "frame": 504,
+        "pivot": [
+          168,
+          74
+        ],
+        "pixels": 685,
+        "file": "p2-pose-43.png",
+        "sha256": "cd922a5bc5f60f94bbf88b212c08f2c84155ffc96079642681c6dad4a8282992"
+      },
+      {
+        "pose": 44,
+        "player": 2,
+        "frame": 510,
+        "pivot": [
+          168,
+          66
+        ],
+        "pixels": 743,
+        "file": "p2-pose-44.png",
+        "sha256": "834b69a750965cc2677a43ea3527673c7f37de9c054d3be242d6a33778e490f5"
+      },
+      {
+        "pose": 46,
+        "player": 2,
+        "frame": 559,
+        "pivot": [
+          168,
+          74
+        ],
+        "pixels": 563,
+        "file": "p2-pose-46.png",
+        "sha256": "b7603b7588c0ebcbe154158c4ab3ddffd31e32a665ba039aa5629889c4f67900"
+      },
+      {
+        "pose": 47,
+        "player": 2,
+        "frame": 565,
+        "pivot": [
+          168,
+          66
+        ],
+        "pixels": 715,
+        "file": "p2-pose-47.png",
+        "sha256": "c8aca2f8dc345902a2fba2df4278fc0b9579adbd65560574cc3b4b0c2865fc29"
+      },
+      {
+        "pose": 66,
+        "player": 2,
+        "frame": 696,
+        "pivot": [
+          143,
+          144
+        ],
+        "pixels": 845,
+        "file": "p2-pose-66.png",
+        "sha256": "021ff2a3a1bb23b653abae4d2fb4f1cacccc8cdf5b20ea4221e9bf498eada2cc"
+      },
+      {
+        "pose": 66,
+        "player": 1,
+        "frame": 803,
+        "pivot": [
+          110,
+          144
+        ],
+        "pixels": 845,
+        "file": "p1-pose-66.png",
+        "sha256": "913bd253dadd20a0f4d345d7075e3cdb390559051bf8389ca72d7c88fbfbc2c8"
+      }
+    ],
+    "sequencias_no_controle": [
+      [
+        0,
+        5,
+        6,
+        7,
+        8,
+        9,
+        42,
+        43,
+        44,
+        15,
+        9,
+        86,
+        87,
+        42,
+        46,
+        47,
+        9,
+        0,
+        86,
+        87,
+        88,
+        89,
+        86,
+        87,
+        1,
+        2,
+        3,
+        4,
+        1,
+        0,
+        5,
+        6,
+        10,
+        39,
+        40,
+        41,
+        9,
+        0,
+        86,
+        87,
+        1,
+        0,
+        86,
+        11,
+        66,
+        11,
+        0
+      ],
+      [
+        0,
+        5,
+        6,
+        7,
+        8,
+        5,
+        0,
+        86,
+        87,
+        88,
+        89,
+        86,
+        42,
+        43,
+        44,
+        15,
+        9,
+        86,
+        9,
+        13,
+        42,
+        46,
+        47,
+        9,
+        0,
+        86,
+        87,
+        1,
+        2,
+        3,
+        4,
+        1,
+        0,
+        11,
+        66,
+        11,
+        0,
+        5,
+        6,
+        10,
+        39,
+        40,
+        41,
+        9,
+        0,
+        86,
+        87,
+        1,
+        0
+      ]
+    ],
+    "antecipacao_forte": "A fase 1 compartilha a pose 42 com o soco curto. A pose 45 foi conferida nos bytes do cartucho.",
+    "video": {
+      "arquivo": "out/qa/palma_luzes_r2/materiais/air-guard-art.mp4",
+      "sha256": "07018619661f558f3782e07df9e98e658a28dada5dc704616bf9e22f90a2dca1"
+    },
+    "retrato_espelhado_pixels_por_cor_p2": {
+      "24": 8,
+      "44": 149
+    },
+    "prancha_preservada": {
+      "arquivo": "doc/decisions/2026-11-27_alis_trajes_comparacao.png",
+      "sha256": "12549d61850bf3bd538eb15954f23442f3517b7fb43c6e48cf9a85c905ae2208"
+    }
+  },
+  "cenario": {
+    "geometria_original_identica_nos_bancos": [
+      47,
+      36,
+      48
+    ],
+    "bytes_de_arte_por_versao": 10553,
+    "bancos_dos_guardioes_identicos": [
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "iluminacao": {
+      "frames": 320,
+      "grupos": {
+        "luz sob o trem de pouso": {
+          "maximo_de_pixels_no_tom_alternado": 18,
+          "mudancas": 33,
+          "quadros": [
+            2,
+            4,
+            6,
+            52,
+            54,
+            64,
+            66,
+            103,
+            105,
+            107,
+            115,
+            117,
+            119,
+            129,
+            131,
+            133,
+            135,
+            181,
+            183,
+            193,
+            195,
+            231,
+            233,
+            235,
+            243,
+            245,
+            247,
+            257,
+            259,
+            261,
+            263,
+            309,
+            311
+          ],
+          "cores_SMS_base_alternada": [
+            [
+              27,
+              63
+            ]
+          ]
+        },
+        "reflexo do casco": {
+          "maximo_de_pixels_no_tom_alternado": 14,
+          "mudancas": 26,
+          "quadros": [
+            56,
+            58,
+            68,
+            70,
+            72,
+            78,
+            109,
+            111,
+            121,
+            123,
+            125,
+            127,
+            185,
+            187,
+            197,
+            199,
+            201,
+            207,
+            237,
+            239,
+            249,
+            251,
+            253,
+            255,
+            313,
+            315
+          ],
+          "cores_SMS_base_alternada": [
+            [
+              22,
+              27
+            ]
+          ]
+        },
+        "baliza próxima esquerda": {
+          "maximo_de_pixels_no_tom_alternado": 12,
+          "mudancas": 28,
+          "quadros": [
+            12,
+            14,
+            16,
+            22,
+            30,
+            32,
+            34,
+            38,
+            80,
+            88,
+            141,
+            143,
+            145,
+            151,
+            159,
+            161,
+            163,
+            167,
+            209,
+            217,
+            269,
+            271,
+            273,
+            279,
+            287,
+            289,
+            291,
+            295
+          ],
+          "cores_SMS_base_alternada": [
+            [
+              63,
+              27
+            ]
+          ]
+        },
+        "baliza distante direita": {
+          "maximo_de_pixels_no_tom_alternado": 2,
+          "mudancas": 6,
+          "quadros": [
+            42,
+            50,
+            171,
+            179,
+            299,
+            307
+          ],
+          "cores_SMS_base_alternada": [
+            [
+              63,
+              27
+            ]
+          ]
+        }
+      },
+      "celulas_estaveis": [
+        [
+          2,
+          18
+        ],
+        [
+          25,
+          21
+        ],
+        [
+          26,
+          21
+        ],
+        [
+          25,
+          22
+        ],
+        [
+          26,
+          22
+        ]
+      ],
+      "deslocamento_pista": 1
+    },
+    "nuvens": {
+      "vdp": 320,
+      "pixels": 40
+    },
+    "seletor": {
+      "v1": {
+        "choices": [
+          {
+            "name": "abertura",
+            "version": 3,
+            "pan": 20,
+            "sha256": "4ff0761ad057c2bb803a3da48ec88f1822e21fe0d5c381a1b344f2e34d32be60"
+          },
+          {
+            "name": "entrada",
+            "version": 3,
+            "pan": 0,
+            "sha256": "092a1909029f5c4debc8c384cb792bcb60f2d792972773b664a0902ef1c57163"
+          },
+          {
+            "name": "toque",
+            "version": 1,
+            "pan": 20,
+            "sha256": "fbcc3fb971e6ab5cde0fa3dec32024d6d56cda00a317558589a08c786a2e2195"
+          },
+          {
+            "name": "baixo_2",
+            "version": 2,
+            "pan": 0,
+            "sha256": "95c390a73a8d927a33352cd4cd399f4e25c189a47ce4f767647d8abba7e8d5b7"
+          },
+          {
+            "name": "baixo_3",
+            "version": 3,
+            "pan": 0,
+            "sha256": "092a1909029f5c4debc8c384cb792bcb60f2d792972773b664a0902ef1c57163"
+          },
+          {
+            "name": "baixo_1",
+            "version": 1,
+            "pan": 0,
+            "sha256": "f394a8b9f3b0190aae5205b1f08d986c288f960d13a3859d33d0442ef705ca97"
+          }
+        ],
+        "stage_match_pixels": 2664,
+        "stage_pixels": 2664
+      },
+      "v2": {
+        "choices": [
+          {
+            "name": "abertura",
+            "version": 3,
+            "pan": 20,
+            "sha256": "4ff0761ad057c2bb803a3da48ec88f1822e21fe0d5c381a1b344f2e34d32be60"
+          },
+          {
+            "name": "entrada",
+            "version": 3,
+            "pan": 0,
+            "sha256": "092a1909029f5c4debc8c384cb792bcb60f2d792972773b664a0902ef1c57163"
+          },
+          {
+            "name": "toque",
+            "version": 2,
+            "pan": 20,
+            "sha256": "faa7e9102fdb168e8ae9773d84d16223ea95b20222b0fdb92e7437234af75694"
+          },
+          {
+            "name": "cima_1",
+            "version": 1,
+            "pan": 0,
+            "sha256": "f394a8b9f3b0190aae5205b1f08d986c288f960d13a3859d33d0442ef705ca97"
+          },
+          {
+            "name": "cima_3",
+            "version": 3,
+            "pan": 0,
+            "sha256": "092a1909029f5c4debc8c384cb792bcb60f2d792972773b664a0902ef1c57163"
+          },
+          {
+            "name": "cima_2",
+            "version": 2,
+            "pan": 0,
+            "sha256": "95c390a73a8d927a33352cd4cd399f4e25c189a47ce4f767647d8abba7e8d5b7"
+          }
+        ],
+        "stage_match_pixels": 2664,
+        "stage_pixels": 2664
+      },
+      "v3": {
+        "choices": [
+          {
+            "name": "abertura",
+            "version": 3,
+            "pan": 20,
+            "sha256": "4ff0761ad057c2bb803a3da48ec88f1822e21fe0d5c381a1b344f2e34d32be60"
+          },
+          {
+            "name": "entrada",
+            "version": 3,
+            "pan": 0,
+            "sha256": "092a1909029f5c4debc8c384cb792bcb60f2d792972773b664a0902ef1c57163"
+          },
+          {
+            "name": "toque",
+            "version": 1,
+            "pan": 20,
+            "sha256": "fbcc3fb971e6ab5cde0fa3dec32024d6d56cda00a317558589a08c786a2e2195"
+          },
+          {
+            "name": "volta",
+            "version": 3,
+            "pan": 20,
+            "sha256": "4ff0761ad057c2bb803a3da48ec88f1822e21fe0d5c381a1b344f2e34d32be60"
+          }
+        ],
+        "stage_match_pixels": 2664,
+        "stage_pixels": 2664
+      }
+    },
+    "video": {
+      "arquivo": "out/qa/palma_luzes_r2/v3/terminal.mp4",
+      "sha256": "2bcd42cc71850bda4c8ed5244afa8eb80653bb5eab34e158390f7c660e136427"
+    }
+  },
+  "historia_fire": {
+    "label": "historia_fire",
+    "vdp": 572,
+    "nominal_hz": 59.92274340431231,
+    "publications": 71,
+    "overruns": 0,
+    "min_vcount": 200,
+    "sealed": 0,
+    "chapter": [
+      1,
+      1,
+      1,
+      0,
+      0,
+      2,
+      0,
+      59,
+      11,
+      2,
+      2,
+      19,
+      0,
+      0,
+      0,
+      1
+    ],
+    "duel": {
+      "protocol": "MFD1",
+      "stamp": 142,
+      "logic_tick": 64,
+      "p1": {
+        "fighter": 1,
+        "keys_consumed": 0,
+        "state": 0,
+        "action_tick": 34,
+        "pose_requested": 85,
+        "pose_resident": 85,
+        "pose_presented": 85,
+        "pose_used_for_contact": 0,
+        "contact": 0,
+        "life": 92,
+        "facing_right": false,
+        "pivot": [
+          107,
+          144
+        ],
+        "boxes": {
+          "attack": null,
+          "hurt": {
+            "left": 94,
+            "top": 91,
+            "right": 118,
+            "bottom": 141
+          }
+        },
+        "can_act": true,
+        "free_since": 30,
+        "presented_facing_right": false
+      },
+      "p2": {
+        "fighter": 1,
+        "keys_consumed": 8,
+        "state": 3,
+        "action_tick": 0,
+        "pose_requested": 63,
+        "pose_resident": 255,
+        "pose_presented": 44,
+        "pose_used_for_contact": 0,
+        "contact": 0,
+        "life": 94,
+        "facing_right": true,
+        "pivot": [
+          49,
+          144
+        ],
+        "boxes": {
+          "attack": null,
+          "hurt": {
+            "left": 37,
+            "top": 91,
+            "right": 61,
+            "bottom": 141
+          }
+        },
+        "can_act": false,
+        "free_since": 55,
+        "presented_facing_right": false
+      }
+    },
+    "casts": [
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "hits": [
+      1,
+      0
+    ],
+    "guards": [
+      0,
+      0
+    ],
+    "reflections": [
+      0,
+      0
+    ],
+    "edge": 0,
+    "scene": 0,
+    "dizzy": [
+      0,
+      0
+    ],
+    "spell": [
+      1,
+      0
+    ],
+    "shots": [
+      [
+        65,
+        -4,
+        111,
+        0,
+        1,
+        8,
+        0,
+        25,
+        6
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "audio_versus_fm": {
+    "arquivo": "out/qa/palma_luzes_r2/v3/battle.wav",
+    "sha256": "3c1a2799f797a0d168f02cedf1e0cfca5ee811e420254b6c9698bba6e8d50f83"
+  },
+  "janelas_fps": {
+    "historia_em_guarda": [
+      42.758473579768655,
+      44.629051739681216,
+      43.16731408110617
+    ],
+    "versus_misto": [
+      47.43883852841391,
+      47.93819472344985,
+      45.441413748270165
+    ],
+    "versus_especiais": [
+      30.960084092228026,
+      57.92531862416856,
+      48.93690711352171,
+      52.931756673809204,
+      48.93690711352171,
+      48.93690711352171,
+      52.931756673809204,
+      48.93690711352171,
+      48.93690711352171,
+      52.931756673809204,
+      31.958796482299896,
+      57.425962429132625,
+      52.931756673809204,
+      48.93690711352171,
+      48.93690711352171,
+      53.43111286884514,
+      48.93690711352171,
+      48.93690711352171,
+      52.931756673809204,
+      30.46072789719209,
+      57.92531862416856,
+      52.931756673809204,
+      48.437550918485776,
+      48.93690711352171,
+      53.43111286884514,
+      48.93690711352171
+    ]
+  },
+  "minimo_por_carga": {
+    "historia_em_guarda": 42.758473579768655,
+    "versus_misto": 45.441413748270165,
+    "versus_especiais": 30.46072789719209
+  },
+  "piso_fps": 58,
+  "passou_em_todas_as_janelas": false,
+  "pior_vblank": {
+    "misto": {
+      "verdicto": "pass",
+      "vline_min": 200,
+      "vovf_delta": 0,
+      "amostras": 1,
+      "vline_kind": "sealed_min",
+      "frames_medidos": 3000,
+      "frames_rom_final": 3056,
+      "janela_s_min": 50.0,
+      "janela_selada": true,
+      "schema": "smsforge.worst_frame/v2",
+      "sealed_field": "vline_min"
+    },
+    "especiais": {
+      "selado": 1,
+      "vcount_min": 200,
+      "overruns": 0
+    }
+  },
+  "sessoes": {
+    "v1": {
+      "id": "727b267ef84d4d389fdc00b0faafa1f6",
+      "estado": "closed",
+      "arquivo": "out/qa/palma_luzes_r2/v1/observations.json",
+      "sha256": "2a410ef6bf16e587a3b46b556c727e20eb0f85f42e54e99c313e0e941df57bc7"
+    },
+    "v2": {
+      "id": "62d70e41ad6a49ac9fc0d553bebf355d",
+      "estado": "closed",
+      "arquivo": "out/qa/palma_luzes_r2/v2/observations.json",
+      "sha256": "5e2dfa6d4a26c4909e5b5aa468c51cc2f656a9c39ad08afb7956ecf20d3646c1"
+    },
+    "v3": {
+      "id": "7016e2b4ea5847b9af22edcde6c30f66",
+      "estado": "closed",
+      "arquivo": "out/qa/palma_luzes_r2/v3/observations.json",
+      "sha256": "dd499dbd86f3212c268e2da8ec54969081c8b729f4af31374293101b7b3472eb"
+    },
+    "historia": {
+      "id": "9fe384d544434aa897655875a12c3168",
+      "estado": "closed",
+      "arquivo": "out/qa/palma_luzes_r2/historia/observations.json",
+      "sha256": "ced75d3833c1340c1eae5b9af8573d4556c53bf9cead2de50347b6222a8c8429"
+    },
+    "misto": {
+      "id": "1a14ebf8e7a04a6d8e640abf178e4a4c",
+      "estado": "closed",
+      "arquivo": "out/qa/palma_luzes_r2/misto/observations.json",
+      "sha256": "d145929ba8c009f4acad8c508cec5198db7109537c2783226d7dd146ac8542fd"
+    },
+    "fps": {
+      "id": "9b8ae1ee921f4619afcca5200c33fb23",
+      "estado": "closed",
+      "arquivo": "out/qa/palma_luzes_r2/fps/observations.json",
+      "sha256": "292d3aa8bec16ca8e14fef8add1c59c50becf52682646f0c65cc01bf1e7b5475"
+    },
+    "magias": {
+      "id": "429de5deedb54f7c9eea8ed9dcf8f634",
+      "estado": "closed",
+      "arquivo": "out/qa/palma_luzes_r2/magias/observations.json",
+      "sha256": "dad1435956f44c7de4762c3736e7738fcbb4a330c8269941b5d338e981512eb5"
+    },
+    "materiais": {
+      "id": "88747b056b0a4dc2aaa6405db4f11363",
+      "estado": "closed",
+      "arquivo": "out/qa/palma_luzes_r2/materiais/observations.json",
+      "sha256": "a5f82f9f735a54fa085b6c78203319a010ea7d449586ef9d4ad5514454f4043f"
+    }
+  },
+  "build": {
+    "registro": {
+      "arquivo": "out/candidates/palma_luzes_r2/build_record.json",
+      "sha256": "c18097e19e159c1eb7981dbc486c66ac8b0ea9c6c169acce081cc71c660e1cad"
+    },
+    "receita": {
+      "arquivo": "out/diagnostics/palma_luzes_r2/chapter.json",
+      "sha256": "c0082b873573731b4ae6abaf4ac307b399bce614d7d8c69d1aea417dfd58e106"
+    },
+    "fontes_efetivas": {
+      "arquivo": "out/qa/palma_luzes_r2/fontes-integradas.zip",
+      "sha256": "3c7016feb012a4c614313b8888c1928eac83c57e903246fc1f3048a450a94046"
+    },
+    "sdcc": "SDCC : mcs51/z80/z180/r2k/r2ka/r3ka/r4k/r5k/r6k/sm83/tlcs90/ez80/z80n/r800/ds390/pic16/pic14/TININative/ds400/hc08/s08/stm8/pdk13/pdk14/pdk15/mos6502/mos65c02/f8/f8l 4.6.0 #16555 (Linux)\npublished under GNU General Public License (GPL)",
+    "bancos": [
+      47,
+      36,
+      48
+    ],
+    "segmento_final": {
+      "l__GSFINAL": "0x1",
+      "s__GSFINAL": "0x7D7C"
+    },
+    "preparo": [
+      "prepare_alis_chapter.py out/diagnostics/alis_chapter_v1 out/diagnostics/palma_luzes_r2 --resume-postures --spaceport --model-palette",
+      "pack_palma_versions.py out/diagnostics/alis_palma_horizonte_r3/matchup out/diagnostics/alis_ficha_r4/matchup ../../.runtime/downloads out/diagnostics/palma_luzes_r2 --fighters out/diagnostics/palma_luzes_r2/fighters"
+    ]
+  },
+  "host": {
+    "execucao": "Fôlego, um job, 760 MiB RAM, 170 MiB disco, CPUQuota 70%, limite preventivo 85 °C",
+    "telemetria": "out/qa/alis_palma_horizonte/palma-luzes-r2-host.jsonl",
+    "max_C": 68.0,
+    "min_MemAvailable_KiB": 8121996
+  },
+  "curadoria": "doc/curadoria_capitulo_alis.md",
+  "fila_fabrica": "../../doc/curation/2026-11-27_mof_capitulo_alis.json"
+}

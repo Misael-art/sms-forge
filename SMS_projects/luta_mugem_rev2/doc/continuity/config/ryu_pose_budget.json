@@ -1,0 +1,95 @@
+{
+  "actions": [
+    {
+      "role": "idle",
+      "action": 0,
+      "loop_start": 0
+    },
+    {
+      "role": "walk_f",
+      "action": 20
+    },
+    {
+      "role": "walk_b",
+      "action": 21
+    },
+    {
+      "role": "jump",
+      "action": 41
+    },
+    {
+      "role": "crouch",
+      "action": 11
+    },
+    {
+      "role": "guard",
+      "action": 120
+    },
+    {
+      "role": "punch",
+      "action": 260
+    },
+    {
+      "role": "hp",
+      "action": 280
+    },
+    {
+      "role": "kick",
+      "action": 200
+    },
+    {
+      "role": "hk",
+      "action": 240
+    },
+    {
+      "role": "special",
+      "action": 1000
+    },
+    {
+      "role": "ko",
+      "action": 170
+    }
+  ],
+  "palette_p1": "ryu02",
+  "palette_p2": "ryu02",
+  "source_limitations": [
+    "pap\u00e9is comuns idle(0)/crouch(11)/jump(41)/guard(120): estados 0/11/50/120 do ryu s\u00e3o forge_proxy (common_forge.cns) porque common1.cns est\u00e1 ausente do pacote (intake: common1_in_archive false) \u2014 anims 0/11/41/120 existem no ryu.air do pr\u00f3prio pacote; decis\u00e3o de contrato espelha o registro do Ken no memory bank 2026-10-15 (forge_proxy_unproven / approximate; N\u00c3O \u00e9 equival\u00eancia MUGEN)",
+    "walk_f(20)/walk_b(21): estados 18/19 hard_absent_no_proxy na matriz t4; anims correspondentes s\u00f3 s\u00e3o aceitas se existirem no ryu.air do pr\u00f3prio pacote \u2014 se o gerador reprovar, walk fica blocked e vira gate humano",
+    "ko(170): estado pr\u00f3prio 170 \u00e9 unmapped_orphan (ryu.cns:55, rationale 'LOSE block: anim 170'); alvo de KO do motor usa pose do AIR se existir (anim 170 presente no ryu.air), sen\u00e3o reprova\u00e7\u00e3o expl\u00edcita",
+    "supers/especiais gateados por bot\u00f5es y/b ou 3-bot\u00f5es ficam fora deste corte diagn\u00f3stico: matriz t4 ryu registra 18 estados needs_remap_decision e out/semantics/cmd_2button_audit.json ryu registra 113 comandos parseados com 15 dropped_button_only e 4 tr\u00eas-simult\u00e2neos; nada removido em sil\u00eancio",
+    "escala 80px alvo: medi\u00e7\u00f5es t3 mostram composi\u00e7\u00f5es punch/crouch, proj\u00e9til+impacto, esquina e kick-vs-guard IMPOSSIBLE em sprite-only (>8/scanline); este pacote \u00e9 dados, a decis\u00e3o de renderer (h\u00edbrido-BG) vem com o envelope t3; banda aceita 72\u201388"
+  ],
+  "commands": {
+    "punch": "a",
+    "hp": "c",
+    "kick": "x",
+    "hk": "z",
+    "special": "SP1_w"
+  },
+  "size_policy": "pose_budget",
+  "source": "cps2",
+  "target": "sms",
+  "fx_groups": [
+    1150,
+    1160,
+    1250,
+    1260,
+    3050,
+    8000,
+    8010,
+    8020,
+    8030,
+    8040,
+    8050,
+    8060,
+    8210,
+    8220,
+    8230,
+    8300,
+    8310,
+    8320,
+    8330,
+    8400,
+    8410
+  ]
+}

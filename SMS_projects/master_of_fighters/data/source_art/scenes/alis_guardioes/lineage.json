@@ -1,0 +1,130 @@
+{
+  "colecao": "Especiais de Alis e Guardiões de Algol",
+  "origem": "Ilustrações novas produzidas com ImageGen. A história, o equipamento e os personagens de Phantasy Star orientam os desenhos.",
+  "referencia": "https://www.smstributes.co.uk/images/db/manual_phantasystarusa.pdf",
+  "referencia_de_regra": "https://www.youtube.com/watch?v=HhgmTaUsqG8",
+  "arquivos": [
+    {
+      "arquivo": "guardioes.png",
+      "sha256": "bb3d9f11e4f747ecd87a2f63bedaaeed6e92a20e8df96d73b2f7a1f842895110",
+      "prompt": "Create a production Sega Master System Phantasy Star I fan-game cutscene master sheet, SIX equal rectangular 2:1 wide illustrations arranged precisely in TWO columns and THREE rows, edge-to-edge, entire resulting page landscape 4:3. Each cell independently letterbox ready. No text anywhere, no captions, no gutters, no outlines around panels. Vintage expressive 1980s Japanese science-fantasy anime key animation rendered as clean hand-placed low resolution pixel clusters, dramatic composition, very restricted saturated SMS colors, deep navy negative space. Original Phantasy Star I character identities: Alis Landale, brown long hair and pink armor, blue short tunic, sword and round shield. TOP LEFT Alis drawn in powerful profile close-up, hand gripping sword, pink shoulder armor; TOP RIGHT muscular blond short-haired fighter Odin wearing green armor, firing his sci-fi raygun to the right, unmistakable striped laser; MIDDLE LEFT Noah/Lutz with pale blue long hair in white and blue wizard robes, violet-gold forked thunder bursting from staff, dynamic side portrait; MIDDLE RIGHT Myau, distinctly a tawny golden cat with very long pointed ears and a blue necklace vial, biting a single golden Laerma nut in foreground and silhouette of wings unfurling behind; BOTTOM LEFT transformed majestic white-feather-winged golden feline Myau with the cat face, long ears, all four paws and tail, swooping diagonally through speed lines; BOTTOM RIGHT Alis in pink armor delivering a diagonally rising critical Laconian sword strike through a dark silhouette of a rival swordswoman. Anamorphic foreshortening, varied silhouettes and composition, sparse detail for faithful 192x96 conversion. NO words, bullets, logos, title, or watermarks."
+    },
+    {
+      "arquivo": "magias.png",
+      "sha256": "0015179364a739e94ce56661c04ca785bcd1f11849b92615501b1f4b4476114a",
+      "prompt": "Sega Master System 8-bit pixel sprite master atlas. EXACTLY 3 columns and 3 rows of equal square cells, transparent alpha background. One separate centered isolated sprite in each cell with a large transparent moat. Consistent handdrawn early Phantasy Star RPG sprites, designed to reduce to 8 or 16 pixels, use simple chunky contiguous high-contrast clusters. FIRST ROW left: a bright orange and red fiery comet with a white core shooting to the RIGHT, center: a tall cyan-blue crescent horizontal sword energy wave heading RIGHT, right: one luminous upright cyan saber slash climbing diagonally right. SECOND ROW left: Myau a golden long-eared cat with four paws and blue vial collar facing RIGHT biting a golden nut; center: same cat with huge white FEATHERED WINGS flying toward RIGHT, readable face pointed to the right and extended paws; right: golden winged Myau dives down-right forepaws forward. THIRD ROW left: small mint-green healing spark cluster in shape of a plus; center: a constellation of three golden dizzy stars in a circular orbit over a missing character's head; right: mirror shield glint, round blue oval with a sharp white starburst at upper right. No letters, words, grid, shadows, outlines of cells, UI labels or key legends. All nine cells each same size; no overlapping items."
+    },
+    {
+      "arquivo": "pecas.png",
+      "sha256": "24556292d05c160c30365424d4162cd5dd05f2f963f2f314a0717d234f468d5e",
+      "origem": "ImageGen, edição da prancha guardioes.png que o proprietário anexou novamente em 26/11",
+      "direcao": "Seis elementos individuais em RGBA. Reação de Alis, reação de Hayato, corte diagonal rosa, asas semiflexionadas de Myau, clarão do cano e brilho da espada. Sem atacante e defensor na mesma célula."
+    }
+  ],
+  "referencia_do_proprietario_sha256": "cd4c20418d586ad2caa2ebb642418823d24ed79428dee1c9feadad2f4e628d06",
+  "audio": {
+    "voz": "Algol!",
+    "interpretacao": "Síntese eSpeak pt-br+f3, velocidade 160, altura 67",
+    "uso": "Ataque dos Guardiões de Algol, close de Alis",
+    "taxa_de_origem_dos_niveis": 6000,
+    "bytes_de_volume_psg": 3391,
+    "sha256_bytes_psg": "e19b7c5fd97a564472657fee07578d5324b348bf08bb78c5f598d8f3f772eda9",
+    "efeitos": "Gestos, cura e voo em PSGlib. Composição original e cues do próprio capítulo."
+  },
+  "revisao_visual_da_ficha": {
+    "estado": "Três planos de construção. Tempos e vídeo da ROM G6e referem-se à montagem histórica.",
+    "origem": "ImageGen, edição da folha guardioes.png. Recorte individual, encaixe sem esticar em 224 × 112 e quantização na paleta SMS por plano. No corte laconiano a vítima tem plano próprio.",
+    "origem_gerada_sha256": "47bf5b0192ff50202fc6a8cb05e757005b749a156fd038a38dc681973ffa3eaa",
+    "concept_alis": "data/source_art/concept_art/alis_landale/alis_concept_sheet_v4.png",
+    "concept_sha256": "b7b01f18ae71b5538404935f4ce2e1cf6b10991dde6522c6697c0b52ab6ede95",
+    "odin": "https://www.sega.jp/fb/album/07_ps/character.html",
+    "equipamento": "https://www.sega.jp/fb/album/07_ps/play.html",
+    "arquivos": [
+      {
+        "arquivo": "revisao_ficha/alis.png",
+        "sha256": "ef5507afb1710384834e6a6dc6c905a9a340c8fee912d3ec3053965baf7462f9",
+        "paleta_sms": [
+          16,
+          0,
+          1,
+          6,
+          11,
+          15,
+          19,
+          35,
+          37,
+          42,
+          43,
+          47,
+          63,
+          57,
+          60,
+          32
+        ]
+      },
+      {
+        "arquivo": "revisao_ficha/odin.png",
+        "sha256": "db66883d17fe0395426c80db13e50c0ff73437f9496f9171bcd07cb0156bfb5e",
+        "paleta_sms": [
+          16,
+          0,
+          1,
+          6,
+          11,
+          15,
+          42,
+          21,
+          22,
+          27,
+          43,
+          47,
+          63,
+          35,
+          59,
+          37
+        ]
+      },
+      {
+        "arquivo": "revisao_ficha/laconiana.png",
+        "sha256": "40764b23cbaca71f26a74f41ef31606e1a9c6cab1d484bc7ea75aacd4a11c877",
+        "paleta_sms": [
+          16,
+          0,
+          1,
+          6,
+          11,
+          15,
+          19,
+          35,
+          37,
+          42,
+          43,
+          47,
+          63,
+          57,
+          60,
+          32
+        ]
+      }
+    ],
+    "origem_gerada": "revisao_ficha/estudo.png"
+  },
+  "tiara_lutz": {
+    "arquivo": "revisao_ficha/tiara_lutz.png",
+    "sha256": "3ad318b24680fc9402b6425d2fe0d56b5c8ea008c4edd56c6bed0c143e54c17e",
+    "origem": "ImageGen integrado. Acessório criado separadamente e aplicado sobre a testa do plano de Lutz (Noah).",
+    "referencia": "https://www.sega.jp/fb/album/07_ps/character.html",
+    "retrato": "https://www.sega.jp/fb/album/img/07_ps/chara_04.gif",
+    "retrato_sha256": "593743456e23cf10a29c08859d00cf7ad89d0c4e343f536622da35019dad449a",
+    "uso_da_referencia": "Identificação da tiara de Lutz. A ilustração da Sega é referência visual e não fornece pixels à ROM.",
+    "posicao_na_tela": [
+      74,
+      54
+    ],
+    "tamanho": [
+      22,
+      8
+    ],
+    "prompt": "Asset for precise compositing in an existing Sega Master System cutscene. The first reference is the existing frame and defines the right-facing three-quarter/profile angle and pixel-art linework. The second is the official Lutz portrait and defines his small gold tiara with central engraved raised leaf and dark inset. Produce just the isolated tiara, transparent everywhere else, as a small horizontal gold brow band in the exact side perspective of the figure facing right in the first image. A thin slightly ascending band from left visible temple rising to the brow at right, gently tapering at the left and ornament above the right three-quarter point. Restrained dark outline, warm ochre shadow, light gold high edge in hand-plotted compact pixel art. Tiny diadem sitting against forehead, not a tall crown. Target legibility within 20×8 native pixels. No head, no skin or hair, no clothing, no face, no background, no labels, no shadow, no white halo. Center a single accessory, enlarging with nearest neighbor for presentation. It will be registered as an alpha layer so the original scene stays pixel-identical outside the forehead."
+  }
+}

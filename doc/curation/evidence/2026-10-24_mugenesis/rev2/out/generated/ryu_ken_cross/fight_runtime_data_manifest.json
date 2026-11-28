@@ -1,0 +1,615 @@
+{
+  "schema": "sms_fight_runtime_data_v5",
+  "source_slots": [
+    {
+      "character_initializer": "p1_frames_all, p1_anims, p1_states, p1_commands, 3, P1_CUT_POSE_COUNT, P1_POSE_BASE, 118, 1000, 2355, 102, 12, 5, 5, p1_close_distances_q8, p1_far_distances_q8, 3762",
+      "meta_max_bytes": 118,
+      "source_sha256": "6db7e29d82fff1034e8c2ddab600e500fe8377ebdeef9b626fd6b580b812300d",
+      "source_def": "ryu/ryu.def",
+      "source_routes": [],
+      "source_route_pattern_count": 0,
+      "state_coverage": {
+        "idle": {
+          "available": true,
+          "source_action": 0,
+          "source_state": null
+        },
+        "walk_f": {
+          "available": true,
+          "source_action": 20,
+          "source_state": null
+        },
+        "walk_b": {
+          "available": true,
+          "source_action": 21,
+          "source_state": null
+        },
+        "jump": {
+          "available": true,
+          "source_action": 41,
+          "source_state": null
+        },
+        "crouch": {
+          "available": true,
+          "source_action": 11,
+          "source_state": null
+        },
+        "guard": {
+          "available": true,
+          "source_action": 120,
+          "source_state": null
+        },
+        "punch": {
+          "available": true,
+          "source_action": 260,
+          "source_state": null
+        },
+        "hp": {
+          "available": true,
+          "source_action": 280,
+          "source_state": null
+        },
+        "special": {
+          "available": true,
+          "source_action": 1000,
+          "source_state": null
+        },
+        "ko": {
+          "available": true,
+          "source_action": 170,
+          "source_state": null
+        },
+        "kick": {
+          "available": true,
+          "source_action": 200,
+          "source_state": null
+        },
+        "hk": {
+          "available": true,
+          "source_action": 240,
+          "source_state": null
+        },
+        "punch_close": {
+          "available": false
+        },
+        "hp_close": {
+          "available": false
+        },
+        "kick_close": {
+          "available": false
+        },
+        "hk_close": {
+          "available": false
+        },
+        "punch_far": {
+          "available": false
+        },
+        "hp_far": {
+          "available": false
+        },
+        "kick_far": {
+          "available": false
+        },
+        "hk_far": {
+          "available": false
+        }
+      },
+      "unconsumed_source_roles": [],
+      "command_coverage": {
+        "special": {
+          "source_command": "SP1_w",
+          "pattern_symbol": "P1_CUT_CMD_SPECIAL",
+          "runtime_command": "FIGHT_CMD_SPECIAL_UNSUPPORTED"
+        },
+        "hp": {
+          "source_command": "c",
+          "pattern_symbol": "P1_CUT_CMD_HP",
+          "runtime_command": "FIGHT_CMD_HP"
+        },
+        "hk": {
+          "source_command": "z",
+          "pattern_symbol": "P1_CUT_CMD_HK",
+          "runtime_command": "FIGHT_CMD_HK"
+        }
+      },
+      "command_priority": [
+        "special",
+        "hp",
+        "hk"
+      ],
+      "input_thresholds": {
+        "key1": 6,
+        "key2": 6
+      },
+      "damage_models": [
+        {
+          "role": "punch",
+          "source_state": 260,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hp",
+          "source_state": 280,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "kick",
+          "source_state": 200,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hk",
+          "source_state": 240,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        }
+      ],
+      "unsupported_capabilities": [
+        {
+          "role": "special",
+          "source_action": 1000,
+          "source_state": 1000,
+          "fidelity": "unsupported",
+          "reason": "projectile entities are not implemented in the fight runtime"
+        }
+      ],
+      "source_limitations": [
+        "papéis comuns idle(0)/crouch(11)/jump(41)/guard(120): estados 0/11/50/120 do ryu são forge_proxy (common_forge.cns) porque common1.cns está ausente do pacote (intake: common1_in_archive false) — anims 0/11/41/120 existem no ryu.air do próprio pacote; decisão de contrato espelha o registro do Ken no memory bank 2026-10-15 (forge_proxy_unproven / approximate; NÃO é equivalência MUGEN)",
+        "walk_f(20)/walk_b(21): estados 18/19 hard_absent_no_proxy na matriz t4; anims correspondentes só são aceitas se existirem no ryu.air do próprio pacote — se o gerador reprovar, walk fica blocked e vira gate humano",
+        "ko(170): estado próprio 170 é unmapped_orphan (ryu.cns:55, rationale 'LOSE block: anim 170'); alvo de KO do motor usa pose do AIR se existir (anim 170 presente no ryu.air), senão reprovação explícita",
+        "supers/especiais gateados por botões y/b ou 3-botões ficam fora deste corte diagnóstico: matriz t4 ryu registra 18 estados needs_remap_decision e out/semantics/cmd_2button_audit.json ryu registra 113 comandos parseados com 15 dropped_button_only e 4 três-simultâneos; nada removido em silêncio",
+        "escala 80px alvo: medições t3 mostram composições punch/crouch, projétil+impacto, esquina e kick-vs-guard IMPOSSIBLE em sprite-only (>8/scanline); este pacote é dados, a decisão de renderer (híbrido-BG) vem com o envelope t3; banda aceita 72–88"
+      ],
+      "optional_state_role_coverage": {
+        "punch_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "punch",
+          "distance_runtime_q8": 0
+        },
+        "hp_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "hp",
+          "distance_runtime_q8": 0
+        },
+        "kick_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "kick",
+          "distance_runtime_q8": 0
+        },
+        "hk_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "hk",
+          "distance_runtime_q8": 0
+        }
+      },
+      "close_attack_coverage": [],
+      "optional_far_attack_role_coverage": {
+        "punch_far": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "punch",
+          "distance_runtime_q8": 0
+        },
+        "hp_far": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "hp",
+          "distance_runtime_q8": 0
+        },
+        "kick_far": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "kick",
+          "distance_runtime_q8": 0
+        },
+        "hk_far": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "hk",
+          "distance_runtime_q8": 0
+        }
+      },
+      "far_attack_coverage": [],
+      "close_distance_q8_values": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "far_distance_q8_values": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "ground_front_runtime_q8": 3762,
+      "close_geometry": {
+        "ground_front_source_units": 18,
+        "fighter_scale_ratio": {
+          "numerator": 40,
+          "denominator": 49
+        },
+        "ground_front_runtime_q8": 3762
+      }
+    },
+    {
+      "character_initializer": "p2_frames_all, p2_anims, p2_states, p2_commands, 3, P2_CUT_POSE_COUNT, P2_POSE_BASE, 118, 1000, 2304, 110, 11, 5, 5, p2_close_distances_q8, p2_far_distances_q8, 1881",
+      "meta_max_bytes": 118,
+      "source_sha256": "b244ec9a105fa0131b37c075dc06b032a87cf0f839f46ec7054ac60d9bd6f14c",
+      "source_def": "ken8/ken8.def",
+      "source_routes": [],
+      "source_route_pattern_count": 0,
+      "state_coverage": {
+        "idle": {
+          "available": true,
+          "source_action": 0,
+          "source_state": null
+        },
+        "walk_f": {
+          "available": true,
+          "source_action": 20,
+          "source_state": null
+        },
+        "walk_b": {
+          "available": true,
+          "source_action": 21,
+          "source_state": null
+        },
+        "jump": {
+          "available": true,
+          "source_action": 41,
+          "source_state": null
+        },
+        "crouch": {
+          "available": true,
+          "source_action": 11,
+          "source_state": null
+        },
+        "guard": {
+          "available": true,
+          "source_action": 120,
+          "source_state": null
+        },
+        "punch": {
+          "available": true,
+          "source_action": 250,
+          "source_state": null
+        },
+        "hp": {
+          "available": true,
+          "source_action": 450,
+          "source_state": null
+        },
+        "special": {
+          "available": true,
+          "source_action": 1000,
+          "source_state": null
+        },
+        "ko": {
+          "available": true,
+          "source_action": 5080,
+          "source_state": null
+        },
+        "kick": {
+          "available": true,
+          "source_action": 200,
+          "source_state": null
+        },
+        "hk": {
+          "available": true,
+          "source_action": 220,
+          "source_state": null
+        },
+        "punch_close": {
+          "available": false
+        },
+        "hp_close": {
+          "available": false
+        },
+        "kick_close": {
+          "available": false
+        },
+        "hk_close": {
+          "available": false
+        },
+        "punch_far": {
+          "available": false
+        },
+        "hp_far": {
+          "available": false
+        },
+        "kick_far": {
+          "available": false
+        },
+        "hk_far": {
+          "available": false
+        }
+      },
+      "unconsumed_source_roles": [],
+      "command_coverage": {
+        "special": {
+          "source_command": "fireball_x",
+          "pattern_symbol": "P2_CUT_CMD_SPECIAL",
+          "runtime_command": "FIGHT_CMD_SPECIAL_UNSUPPORTED"
+        },
+        "hp": {
+          "source_command": "c",
+          "pattern_symbol": "P2_CUT_CMD_HP",
+          "runtime_command": "FIGHT_CMD_HP"
+        },
+        "hk": {
+          "source_command": "z",
+          "pattern_symbol": "P2_CUT_CMD_HK",
+          "runtime_command": "FIGHT_CMD_HK"
+        }
+      },
+      "command_priority": [
+        "special",
+        "hp",
+        "hk"
+      ],
+      "input_thresholds": {
+        "key1": 6,
+        "key2": 6
+      },
+      "damage_models": [
+        {
+          "role": "punch",
+          "source_state": 250,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hp",
+          "source_state": 450,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "kick",
+          "source_state": 200,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        },
+        {
+          "role": "hk",
+          "source_state": 220,
+          "source_hitdef_count": 1,
+          "runtime_hit_policy": "first_visible_overlap_once",
+          "fidelity": "approximate",
+          "reason": "runtime does not preserve separate HitDef timing, hit count, or per-hit damage"
+        }
+      ],
+      "unsupported_capabilities": [
+        {
+          "role": "special",
+          "source_action": 1000,
+          "source_state": 1000,
+          "fidelity": "unsupported",
+          "reason": "projectile entities are not implemented in the fight runtime"
+        }
+      ],
+      "source_limitations": [
+        "papéis comuns idle(0)/crouch(11)/jump(41)/guard(120): nenhuma state própria no ken.cns; origem comum é common1.cns ausente — anims usadas existem no AIR do personagem, decisão de contrato registrada no memory bank 2026-10-15 (forge_proxy_unproven / approximate; NÃO é equivalência MUGEN)",
+        "walk_f(20)/walk_b(21): estados 18/19 hard_absent_no_proxy; anims correspondentes só são aceitas se existirem no ken.air do próprio pacote — se o gerador reprovar, walk fica blocked e vira gate humano",
+        "ko(5080): estado próprio 170 é unmapped_orphan; alvo de KO do motor usa pose do AIR se existir, senão reprovação explícita",
+        "supers/9 especiais gateados por botões y/b ou 3-botoes (cmd_2button_audit) ficam fora deste corte diagnóstico; nada removido em silêncio",
+        "escala 80px alvo: medições t3 mostram composições punch/crouch, projétil+impacto, esquina e kick-vs-guard IMPOSSIBLE em sprite-only (>8/scanline); este pacote é dados, a decisão de renderer vem com o envelope t3"
+      ],
+      "optional_state_role_coverage": {
+        "punch_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "punch",
+          "distance_runtime_q8": 0
+        },
+        "hp_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "hp",
+          "distance_runtime_q8": 0
+        },
+        "kick_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "kick",
+          "distance_runtime_q8": 0
+        },
+        "hk_close": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "hk",
+          "distance_runtime_q8": 0
+        }
+      },
+      "close_attack_coverage": [],
+      "optional_far_attack_role_coverage": {
+        "punch_far": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "punch",
+          "distance_runtime_q8": 0
+        },
+        "hp_far": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "hp",
+          "distance_runtime_q8": 0
+        },
+        "kick_far": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "kick",
+          "distance_runtime_q8": 0
+        },
+        "hk_far": {
+          "available": false,
+          "runtime_state_id": 65535,
+          "runtime_flags": "0",
+          "runtime_damage": 0,
+          "fallback_role": "hk",
+          "distance_runtime_q8": 0
+        }
+      },
+      "far_attack_coverage": [],
+      "close_distance_q8_values": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "far_distance_q8_values": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "ground_front_runtime_q8": 1881,
+      "close_geometry": {
+        "ground_front_source_units": 9,
+        "fighter_scale_ratio": {
+          "numerator": 40,
+          "denominator": 49
+        },
+        "ground_front_runtime_q8": 1881
+      }
+    }
+  ],
+  "role_policy": [
+    "idle",
+    "walk_f",
+    "walk_b",
+    "jump",
+    "crouch",
+    "guard",
+    "punch",
+    "hp",
+    "special",
+    "ko",
+    "kick",
+    "hk",
+    "punch_close",
+    "hp_close",
+    "kick_close",
+    "hk_close",
+    "punch_far",
+    "hp_far",
+    "kick_far",
+    "hk_far"
+  ],
+  "unsupported_runtime_roles": {
+    "special": "projectile entities are not implemented; command recognition never enters a strike state",
+    "close_attacks": "close variants use source State -1 P2BodyDist X rules after scale conversion",
+    "far_attack_variants": "far fallbacks use the ordered complement of an earlier near rule; chain/cancel trigger groups are not executed",
+    "unconsumed_source_roles": "source actions are imported as data but have no runtime state/input mapping"
+  },
+  "role_accounting": {
+    "required_runtime_roles": [
+      "idle",
+      "walk_f",
+      "walk_b",
+      "jump",
+      "crouch",
+      "guard",
+      "punch",
+      "hp",
+      "special",
+      "ko",
+      "kick",
+      "hk"
+    ],
+    "optional_runtime_roles": [
+      "punch_close",
+      "hp_close",
+      "kick_close",
+      "hk_close",
+      "punch_far",
+      "hp_far",
+      "kick_far",
+      "hk_far"
+    ],
+    "unconsumed_source_roles_by_slot": {
+      "p1": [],
+      "p2": []
+    },
+    "scope": "unconsumed roles are not selectable; distance variants need matching imported source rules"
+  },
+  "source_route_dispatch_contract": {
+    "compiled_tables": [
+      "p1_source_routes",
+      "p2_source_routes"
+    ],
+    "fields": [
+      "pattern",
+      "source_state",
+      "source_action",
+      "action_anim"
+    ],
+    "scope": "pattern-to-source target binding only; source controller predicates and gameplay effects are not executed by these tables"
+  },
+  "unknown_source_state_id": 65535,
+  "scope": "current fixed common-state subset; not a general CNS VM",
+  "close_geometry_contract": {
+    "required_when_close_attacks_exist": false,
+    "required_when_far_attack_variants_exist": false,
+    "ground_front_runtime_q8_by_slot": [
+      3762,
+      1881
+    ]
+  },
+  "input_profile_header": {
+    "path": "fight_input_profile.h",
+    "sha256": "b4fe476194c07d576653910db2ddb46d9672bc3281b07b8f3ec72bfcdb3fa3bd"
+  }
+}

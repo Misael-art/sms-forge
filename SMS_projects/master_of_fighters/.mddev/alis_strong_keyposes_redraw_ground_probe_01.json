@@ -1,0 +1,114 @@
+{
+  "schema": "sms_authored_sprite_sample_v2",
+  "project_root": "..",
+  "notes": "Redesenho 01; y da guarda ajustado pelo chao, escala experimental; nao aprovado.",
+  "poses": [
+    {
+      "id": "idle",
+      "path": "out/diagnostics/alis_strong_thrust_round1/keypose_redraw_01_aspect/native/idle.png",
+      "sha256": "cfff12bfe4fa18601657c0e534d8e0c51a9bc1ed2d1ecab7a32c37bb676a2b39",
+      "pivot": [
+        90,
+        98
+      ],
+      "palette_index_codes": {
+        "1": 16,
+        "7": 56,
+        "17": 56,
+        "18": 35,
+        "21": 19
+      },
+      "packing_phase_px": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "thrust",
+      "path": "out/diagnostics/alis_strong_thrust_round1/keypose_redraw_01_aspect/native/thrust.png",
+      "sha256": "a07ff74c2473e5fa1560689a6142aca3e5da752f7fc78acf667a171a256126d6",
+      "pivot": [
+        90,
+        96
+      ],
+      "palette_index_codes": {
+        "1": 16,
+        "7": 56,
+        "17": 56,
+        "18": 35,
+        "21": 19
+      },
+      "packing_phase_px": [
+        0,
+        0
+      ]
+    }
+  ],
+  "durations": [
+    3
+  ],
+  "extra_scale": [
+    2,
+    3
+  ],
+  "reference": {
+    "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/guard_revision_v2/idle_source.png",
+    "sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1",
+    "pivot": [
+      68,
+      127
+    ],
+    "extra_scale": [
+      2,
+      3
+    ],
+    "palette_index_codes": {
+      "5": 42,
+      "13": 21,
+      "16": 22,
+      "26": 0
+    },
+    "packing_phase_px": [
+      3,
+      5
+    ]
+  },
+  "flip_actor": false,
+  "flip_reference": true,
+  "canvas_px": [
+    128,
+    88
+  ],
+  "pivot_px": [
+    40,
+    80
+  ],
+  "positions": [
+    [
+      24,
+      64
+    ],
+    [
+      136,
+      64
+    ]
+  ],
+  "shared_palette_codes": [
+    0,
+    1,
+    3,
+    6,
+    7,
+    11,
+    16,
+    19,
+    21,
+    22,
+    27,
+    35,
+    42,
+    56,
+    63
+  ],
+  "sprite_size": "8x8"
+}

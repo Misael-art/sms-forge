@@ -1,0 +1,40 @@
+{
+  "schema": "sms_authored_sprite_sample_v2",
+  "project_root": "..",
+  "notes": "Paleta por material exploratoria; escala, continuidade e aprovacao artistica pendentes.",
+  "poses": [
+    {
+      "id": "idle",
+      "path": "out/diagnostics/alis_strong_thrust_round1/keypose_lower_aspect/native/idle.png",
+      "sha256": "7107d10652bb7a9d170fbc8703c8d9f3395e4e1db69afd2067fea39f7f59592d",
+      "pivot": [84, 115],
+      "palette_index_codes": {"1": 16, "7": 56, "17": 56, "18": 35, "21": 19},
+      "packing_phase_px": [0, 0]
+    },
+    {
+      "id": "thrust",
+      "path": "out/diagnostics/alis_strong_thrust_round1/keypose_lower_aspect/native/thrust.png",
+      "sha256": "316e62fb5764bfee06b37a35bb2c1618a6ecd35c4c31162aa23b1701ed5ebc0a",
+      "pivot": [84, 115],
+      "palette_index_codes": {"1": 16, "7": 56, "17": 56, "18": 35, "21": 19},
+      "packing_phase_px": [0, 0]
+    }
+  ],
+  "durations": [3],
+  "extra_scale": [2, 3],
+  "reference": {
+    "path": "data/source_art/sprite_studies/hayato/review_drafts/cps2_sample_v1/guard_revision_v2/idle_source.png",
+    "sha256": "0b72e603bbdebe50f81a62087ea2d070fab644641b8b70b1599c3dbe4ff6a8c1",
+    "pivot": [68, 127],
+    "extra_scale": [2, 3],
+    "palette_index_codes": {"5": 42, "13": 21, "16": 22, "26": 0},
+    "packing_phase_px": [3, 5]
+  },
+  "flip_actor": false,
+  "flip_reference": true,
+  "canvas_px": [128, 88],
+  "pivot_px": [40, 80],
+  "positions": [[24, 64], [136, 64]],
+  "shared_palette_codes": [0, 1, 3, 6, 7, 11, 16, 19, 21, 22, 27, 35, 42, 56, 63],
+  "sprite_size": "8x8"
+}

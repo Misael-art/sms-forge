@@ -181,7 +181,8 @@ def read_indexed_png(path):
     raw = zlib.decompress(bytes(idat))
     out = _unfilter(raw, w, h, 1)
     return {"w": w, "h": h, "palette": palette, "pixels": out,
-            "trns": set(trns) if trns else set()}
+            "trns": {i for i, alpha in enumerate(trns or ()) if alpha == 0},
+            "partial_alpha": {i for i, alpha in enumerate(trns or ()) if 0 < alpha < 255}}
 
 def read_png_luma_samples(path, max_samples=4096, box=None):
     """Le QUALQUER PNG 8-bit (gray/RGB/indexed/RGBA) e retorna amostras de luma.

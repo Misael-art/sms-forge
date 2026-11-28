@@ -1,0 +1,380 @@
+{
+  "schema": "dr_social_coverage_matrix_v1",
+  "date": "2026-11-01",
+  "character": "dr_ferdinand_social",
+  "producer_verdict": null,
+  "do_not_treat_as_approval": true,
+  "package_status": "incomplete",
+  "distinctions": {
+    "produced": "Três chaves de luta, bustos de atenção, fala, vitória e derrota, placas de tiles da conversa e do versus, GQ01 sem cauda fechada, GQ02 como shear diagnóstico, a guarda autoral GQ03 medida no par e as chaves da provocação 1. Intervalos de luta não desenhados. A provocação não é combate nem comando.",
+    "converted": false,
+    "diagnostic_adapter": "prepare_authored_sprite_sample.py gravou derivados e conversion.json em out/diagnostics. O viewer da provocação 1 tem uma ROM diagnóstica própria. Ela não promove assets a res/ e não observa o pacote.",
+    "observed_in_emulator": false,
+    "approved": false
+  },
+  "scale": {
+    "source_j01_crown_to_sole_px": 104,
+    "source_j01_bbox": [31, 12, 95, 115],
+    "source_pivot_declared": [64, 116],
+    "gdd_target_px": "66-72, centro 70, coroa-sola, sem arma",
+    "common_transform": "35/52 nearest, mesma razão em toda pose, sola de referência Y115 da fonte",
+    "j01_at_transform_crown_to_sole_px": 70,
+    "common_sole_y_after_transform": 77,
+    "existing_sms_sample_bbox_height_px": 59,
+    "existing_sms_sample_note": "O derivado já convertido da amostra v8 não usa esta razão e não fecha o alvo do GDD.",
+    "exploratory_columns_7_5_15": "Contagem antiga de colunas opacas x//8 no preview nearest, sem adversário. Não é audit_sprite_line_sim.py e não fecha orçamento."
+  },
+  "official_pair_2026_11_01": {
+    "line_sim": "audit_sprite_line_sim.py --self-check passou nesta continuação: [SELF-CHECK OK] sprite_line_sim. Depois leu os manifests da cena.",
+    "opponent": "Ken de construção já usado pelo adaptador, out/diagnostics/dr_social_cps2_sample_v1/ken_a0_g0_i0.png. Corpo 53×30 px. Não é o par de elenco e não foi reescalado pelo extra 4/6.",
+    "placement": "Os dois no mesmo Y, Social sem espelho e a referência espelhada, como a receita v8. Cantos, a outra face de Social e um adversário do elenco não foram medidos.",
+    "adapter_capacity": "O schema v2 aceita extra_scale como numerador/denominador, com 0 < razão ≤ 1, comum às poses. A conversão aplica o encaixe CPS2→SMS e depois essa razão. 1/1 e 4/6 são dois casos testados, não o domínio da ferramenta. O estudo isotrópico 35/52 não equivale a usar 35/52 como segundo passe.",
+    "why_35_52_is_not_this_receipt": "O adaptador aplica o encaixe de framebuffer 2/3 por 6/7 e só então uma escala extra até 1. Não aplica 35/52 uniforme no lugar desse encaixe.",
+    "coordinator_gdd_band_2026_11_01": {
+      "source": "out/diagnostics/social_scale_review_20261101/",
+      "not_rerun_here": true,
+      "note": "Altura é a bbox opaca da guarda. Nesta fonte os extremos coincidem com coroa e sola; isso não vale para qualquer pose. As duas saídas principais têm 34 px de largura opaca. Pico do simulador não é sprite observado caindo no emulador. Nenhum destes pares deve ser buildado.",
+      "variants": [
+        {"extra": "7/9", "mode": "8x16", "height_px": 69, "idle_peak": 9, "bc04_peak": 10, "idle_sat": 36, "bc04_sat": 38},
+        {"extra": "4/5", "mode": "8x16", "height_px": 71, "idle_peak": 9, "bc04_peak": 10, "idle_sat": 40, "bc04_sat": 42},
+        {"extra": "7/9", "mode": "8x8", "height_px": 69, "idle_peak": 10, "bc04_peak": 10, "idle_sat": 58, "bc04_sat": 60},
+        {"extra": "7/9", "mode": "8x16", "phase_px": [3, 9], "height_px": 69, "idle_peak": 9, "bc04_peak": 10, "idle_sat": 36, "bc04_sat": 37}
+      ]
+    },
+    "width_band_read_from_extra7_9_png": {
+      "idle_rows_wider_than_32px": 3,
+      "idle_max_span_px": 34,
+      "idle_where": "sola, três linhas no fim do corpo",
+      "bc04_rows_wider_than_32px": 7,
+      "bc04_max_span_px": 39,
+      "bc04_where": "faixa da bengala e a mesma sola",
+      "phases_that_fit_all_rows_into_4_columns": [],
+      "shared_lines_with_ken": "O controle Ken ocupa 4 colunas. A guarda soma 9 na sola. A bengala soma 10 nessa faixa do peito.",
+      "eight_by_eight": "No mesmo extra 7/9 o modo 8×8 sobe o pico e a SAT. Não remove o encontro.",
+      "reading": "A altura 66–72 é alcançável. Estas composições não cabem. Isso não prova inviabilidade de todo desenho nessa faixa e não aceita baixar o alvo para 60 px."
+    },
+    "extra_1_1": {
+      "dir": "out/diagnostics/dr_social_cps2_keys_v1/official_fit_extra11/",
+      "body_px": 89,
+      "idle_width_px": 43,
+      "note": "89 px passa de 66–72 e a guarda fica espremida na horizontal.",
+      "adapter_solo_peak_tall": {"idle": 6, "BC04": 7, "K04": 6, "ken_reference": 4},
+      "line_sim_pair": {
+        "idle": {"sprites": 48, "peak": 10, "overflow_lines": 48, "legal": false, "peak_lines": "14 linhas a partir da 148"},
+        "BC04": {"sprites": 50, "peak": 11, "overflow_lines": 64, "legal": false, "peak_lines": "16 linhas a partir da 100"},
+        "K04": {"sprites": 46, "peak": 10, "overflow_lines": 18, "legal": false, "peak_lines": "16 linhas a partir da 132"}
+      },
+      "header_sha256": "e486d92702b0846fbace8b33be62bf1f11563809cbe7dfec77f2281773e1859c",
+      "art_approval": "pending",
+      "rom": false
+    },
+    "extra_4_6": {
+      "dir": "out/diagnostics/dr_social_cps2_keys_v1/official_fit_extra46b/",
+      "ignored_dir": "official_fit_extra46/ cortava o corpo num canvas de 96 px e não é resultado.",
+      "body_px": 60,
+      "idle_width_px": 28,
+      "note": "60 px fica abaixo de 66–72. A guarda do par passa. A bengala acrescenta uma coluna e o par falha.",
+      "adapter_solo_peak_tall": {"idle": 4, "BC04": 5, "ken_reference": 4},
+      "K04": "não submetida nesta escala",
+      "line_sim_pair": {
+        "idle": {"sprites": 34, "peak": 8, "overflow_lines": 0, "legal": true},
+        "BC04": {"sprites": 34, "peak": 9, "overflow_lines": 16, "legal": false, "peak_lines": "16 linhas a partir da 114", "dropped_visible_on_114": [25]}
+      },
+      "header_sha256": "262c5d2e149437095b6641411850bece945643fb9087f5f91a6eb50190e49de2",
+      "art_approval": "pending",
+      "rom": false
+    },
+    "owner_tradeoff": "O alvo 66–72 permanece. Redução para 60 px não foi aceita. GQ02 é diagnóstico de shear, não a guarda a promover. GQ03 é a candidata autoral medida: 69 px, par legal, pico 8 sem folga. O toque continua ilegal. A faixa da bengala tem casaco na esquerda e haste na direita; a sola do toque também passa de quatro colunas. Mudança de alcance ou de identidade fica com o dono.",
+    "gq02_pair_2026_11_01": {
+      "source": "logical/GQ02_stacked_guard.png",
+      "sha256": "499a39323279b0efef90341b746fd4a7ac6d58a0aa01f6cbdb731d710aad57a1",
+      "extra": "7/9",
+      "opaque_height_px": 69,
+      "opaque_width_px": 27,
+      "neutral_columns_after_extra": 4,
+      "ken_control": "out/diagnostics/dr_social_cps2_sample_v1/ken_a0_g0_i0.png",
+      "line_sim": "35 sprites, pico 8, overflow 0, PASS",
+      "adapter_self_check": "pass",
+      "line_sim_self_check": "pass",
+      "rom": false,
+      "art_approval": "pending",
+      "limit": "Estudo geométrico. A escada do shear não é arte final e não pede aceite do dono. Não mede BC04, K04 nem RL05."
+    },
+    "gq03_pair_2026_11_01": {
+      "source": "logical/GQ03_authored_guard.png",
+      "sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
+      "recipe": "encaixe 2/3×6/7 e depois extra 7/9, após assentar a fonte a 104 px",
+      "opaque_height_px": 69,
+      "opaque_width_px": 25,
+      "neutral_columns_after_extra": 4,
+      "line_sim": "32 sprites, pico 8, overflow 0",
+      "also_measured": "oito fases horizontais, dois cantos, face espelhada e packing x 1/4/7, todos pico 8",
+      "art_approval": "pending",
+      "rom": false,
+      "connects_to_jab_v8": false
+    }
+  },
+  "rows": [
+    {
+      "id": "social_light_jab",
+      "status": "reuse_control",
+      "file": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_sample_v1/jab_revision_v8/jab_source.png",
+      "sha256": "877f6e5b232b542f29b0d5794026fe3894d469beee6c47c02e9520d5c976ae41",
+      "version": "jab_revision_v8",
+      "purpose": "Controle J01–J06. Não redesenhar.",
+      "dimensions_pivot": "células 128×128, pivô (64,116)",
+      "duration_tracks": "proposta 2,1,1,1,1,3; corpo e bengala acoplada",
+      "dependencies": "Revisão contínua, tradução SMS e aceite do dono seguem eixos separados."
+    },
+    {
+      "id": "basic_cane_tap",
+      "status": "contact_key_only",
+      "file": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/logical/BC04_cane_tap_contact.png",
+      "sha256": "ee6d32596240ebae73bec446ceff6f1df43f56ae26c6d7d907749bb0fce12b3b",
+      "version": "cps2_keys_v1 BC04",
+      "purpose": "Contato do toque: cabo na luva, haste para a frente, ponta romba dourada, punho de guarda alto.",
+      "dimensions_pivot": "128×128. Estudo 35/52: coroa–sola 70, 7 colunas exploratórias sem adversário. Par oficial extra 1/1: corpo 89 px, pico 11, ilegal. Extra 4/6: corpo 60 px, pico 9, ilegal.",
+      "duration_tracks": "Proposta do contrato: oito desenhos, 15 ticks. Só a guarda J01 e o contato BC04 existem. Carga, recolha e retorno não desenhados de propósito.",
+      "dependencies": "Tentativa 1 rejeitada e preservada. Ponta alta: duas armas erradas preservadas e o experimento fechado. Não multiplicar BC04 até haver composição legal ou decisão do dono. No extra 7/9 a faixa da haste ocupa 6 colunas, casaco à esquerda e haste à direita, e a sola ocupa 5, bota nas duas pontas. Ver proposals/BC04_overflow_materials_v1.json."
+    },
+    {
+      "id": "social_low_boot_check",
+      "status": "contact_key_only",
+      "file": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/logical/K04_boot_check_contact.png",
+      "sha256": "98d72ee59779ba860aef8a7809fc74fc20adfcac9d3c001d10bd25998cd3dfcf",
+      "version": "cps2_keys_v1 K04",
+      "purpose": "Checagem baixa: perna de apoio no chão, bota à frente, bengala ainda na mão.",
+      "dimensions_pivot": "128×128. Estudo 35/52: coroa–sola 70, 5 colunas exploratórias sem adversário. Par oficial extra 1/1: corpo 89 px, pico 10, ilegal. Extra 4/6 não mediu a bota.",
+      "duration_tracks": "Proposta de sete desenhos. Só o contato existe.",
+      "dependencies": "Confirmar na revisão se o joelho lê como flick curto e não como chute médio."
+    },
+    {
+      "id": "rapier_lunge",
+      "status": "extension_key_only",
+      "file": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/logical/RL05_lunge_key.png",
+      "sha256": "14944cc00fd18bfdc4d38ebe4b23b4b778452187776146d9f17384e1bc4b8652",
+      "version": "cps2_keys_v1 RL05",
+      "purpose": "Estocada comprometida: lâmina reta inteira, pega no guarda-mão, bengala na mão de trás, pés no chão.",
+      "dimensions_pivot": "256×128 para a lâmina caber. Sola da fonte em Y115. Estudo 35/52: 172×86, bbox vertical 63 porque o corpo inclina, 15 colunas exploratórias sem adversário.",
+      "duration_tracks": "Proposta de doze desenhos. Só a extensão existe. Carga, freio e retorno não desenhados.",
+      "dependencies": "Não entrou no adaptador: cortar para 128 perderia a lâmina. Outro objeto não cria capacidade na mesma scanline. Intervalos não serão gerados enquanto esta forma não tiver decisão."
+    },
+    {
+      "id": "boomerang_throw",
+      "status": "not_started",
+      "purpose": "Uma instância, arco próprio, rastro violeta breve e separado. Regra após hit/block e colisão na volta pendentes de design, não de desenho inventado."
+    },
+    {
+      "id": "social_read_super_attempt",
+      "status": "not_started",
+      "purpose": "Preparação de contra-leitura de bengala. Um ramo do Super Laudo Final."
+    },
+    {
+      "id": "social_read_super_hit",
+      "status": "not_started",
+      "purpose": "Captura física, desvio, pivô, estocada, recolha. Sem teleporte."
+    },
+    {
+      "id": "social_read_super_whiff",
+      "status": "not_started",
+      "purpose": "Falha distinta do sucesso, retorno exposto."
+    },
+    {
+      "id": "cane_riposte",
+      "status": "not_produced_superseded",
+      "purpose": "Absorvido pelo Super. Não há terceiro especial."
+    },
+    {
+      "id": "idle",
+      "status": "not_started",
+      "purpose": "A pose estática J01 não fecha o ciclo."
+    },
+    {
+      "id": "walk_forward",
+      "status": "not_started"
+    },
+    {
+      "id": "walk_backward",
+      "status": "not_started"
+    },
+    {
+      "id": "jump",
+      "status": "not_started",
+      "purpose": "Impulso, voo e aterrissagem."
+    },
+    {
+      "id": "crouch",
+      "status": "not_started",
+      "purpose": "Entrada e saída."
+    },
+    {
+      "id": "dash_run",
+      "status": "not_started"
+    },
+    {
+      "id": "guard",
+      "status": "authored_candidate_pair_passed_art_pending",
+      "file": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/logical/GQ03_authored_guard.png",
+      "sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
+      "purpose": "Guarda autoral de apoio fechado, 69 px, par com Ken a pico 8 sem folga. Não liga ao jab v8. GQ02 permanece só como diagnóstico. Não é intervalo, não é ROM e não aprova o toque."
+    },
+    {
+      "id": "knockdown_fall",
+      "status": "not_started"
+    },
+    {
+      "id": "tech_roll_getup",
+      "status": "not_started"
+    },
+    {
+      "id": "intro_01",
+      "status": "not_started"
+    },
+    {
+      "id": "intro_02",
+      "status": "not_started",
+      "purpose": "Encenação distinta de intro_01, não um espelho."
+    },
+    {
+      "id": "taunt_01",
+      "status": "diagnostic_cycle_observed_not_approved",
+      "file": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/proposals/TA01_cycle_v3.json",
+      "guard_sha256": "44c64bc957d24127d056ce0437c270814838616e8b0e04357d9c1ede5cb7819b",
+      "purpose": "Candidata v3 no viewer, sem pose nova no terminal. A mão livre sobe da cintura (y=112) ao peito (y=102) e o último passo até a guarda é 3 px acima e 2,5 px para o rival, solas em y=151. A coroa 2 px mais alta acompanha a escala já presente em TA06/TA07 (fonte 877 contra 836). Casaco da TA08 mistura códigos 20/57/56; a guarda concentra o 56. VBlank selado nesta ROM: 3000 frames, vline_min 207, derrame zero. Janelas 59,65 e 59,62. Botões 1 e 2 são revisão. Arte, GQ03, jab, comando, áudio e pacote seguem sem aceite."
+    },
+    {
+      "id": "taunt_02",
+      "status": "not_started"
+    },
+    {
+      "id": "victory_01",
+      "status": "not_started"
+    },
+    {
+      "id": "victory_02",
+      "status": "not_started"
+    },
+    {
+      "id": "defeat_timeout",
+      "status": "not_started",
+      "purpose": "Distinta do KO."
+    },
+    {
+      "id": "draw",
+      "status": "not_started",
+      "purpose": "Distinto de vitória e de derrota."
+    },
+    {
+      "id": "versus_neutral",
+      "status": "tile_plate_candidate",
+      "file": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/originals/bust_neutral_attempt2.jpg",
+      "sha256": "60a3c94afd2d590475e314c666a162b57da0880b4b0340b0bec82f93e5ad5a55",
+      "sms_plate": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/preview/versus_neutral_sms_256.png",
+      "sms_plate_sha256": "48c1ff4f121b8101b8a788155e480763833d573d2cad3ab9a21aa0c4e45fe604",
+      "purpose": "Placa versus 256×192, retrato à esquerda e vão vazio à direita. Não é a cena 07, não é seleção, não é ROM e não é texto de runtime."
+    },
+    {
+      "id": "versus_win",
+      "status": "tile_plate_candidate",
+      "file": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/originals/bust_versus_win_attempt1.jpg",
+      "sha256": "fe9d1afa993292480da022a691440cd161ac6cf7bc0975ab0ed4ad962860997d",
+      "sms_plate": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/preview/versus_win_sms_256.png",
+      "sms_plate_sha256": "d089c0873a816d45985bc14578e811e69623f1586b74fcc1aa995296db7a6b06",
+      "purpose": "Sorriso fechado no mesmo layout. Ainda se lê no 4×. Não é o ciclo de seis poses do contrato e não está aprovado."
+    },
+    {
+      "id": "versus_loss",
+      "status": "tile_plate_candidate",
+      "file": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/originals/bust_versus_loss_attempt1.jpg",
+      "sha256": "983280d4bd857a5f2bdae618381cc1e28be049843c2f06a971e1d2d98cc41af0",
+      "sms_plate": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/preview/versus_loss_sms_256.png",
+      "sms_plate_sha256": "357f1c39cff12761a434df33ee05c5eb99939d8164846211fc2fcd43da9b488f",
+      "purpose": "Boca fechada e testa mais baixa. No 4× fica perto do neutro. Não é sequência nem aprovação.",
+      "refined_plate": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/preview/versus_loss_refined_256.png",
+      "refined_sha256": "2e5610cbb381e752798fc14266e6e140d91eb1f838d71fff187b0de67baa0223",
+      "refined_note": "Dez pontos de casaco limpos e sete pixels de franzir sobre pele. Crop e óculos no mesmo lugar. Não é animação nem aprovação."
+    },
+    {
+      "id": "hit_high",
+      "status": "gap_recorded_not_drawn",
+      "purpose": "Resposta visual. Não é ataque novo."
+    },
+    {
+      "id": "hit_low",
+      "status": "gap_recorded_not_drawn"
+    },
+    {
+      "id": "hit_air",
+      "status": "gap_recorded_not_drawn"
+    },
+    {
+      "id": "guard_impact",
+      "status": "gap_recorded_not_drawn"
+    },
+    {
+      "id": "guard_low",
+      "status": "gap_recorded_not_drawn"
+    },
+    {
+      "id": "ko_rest",
+      "status": "gap_recorded_not_drawn"
+    },
+    {
+      "id": "ko_getup",
+      "status": "gap_recorded_not_drawn"
+    },
+    {
+      "id": "conversation_busts",
+      "status": "neutral_and_speech_candidates",
+      "file": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/preview/conversa07_layout_candidate_256.png",
+      "sha256": "85f4a9048157f72bd53d04c4bc445430510aba35857ee24ae17cce5fd56846f5",
+      "speech_file": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/originals/bust_speech_attempt1.jpg",
+      "speech_sha256": "86aa181bd11bfab4c40d657e9cc18f0daecd5521a630459df43099d01ddda1e1",
+      "speech_plate_sha256": "26d3d26e81c05661a70c5dc3b15d5a4785e54ee5519715e912ab3b591791c797",
+      "sms_plate": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/preview/conversa07_sms_attention_256.png",
+      "sms_plate_sha256": "62a084cd70bd720c19f201dd1d892f349b6ac9acaa38d43b77ae4750cbf7fa50",
+      "sms_speech_plate_sha256": "7b6e1d80b1a5433d25d2b7eb6cbec0014204d5035a056b81646cc59b438c2aea",
+      "purpose": "Placa em 16 cores de 6 bits, maioria por bloco, glifos de 8×8. ç, ã e í estão nos tiles. 143/144 tiles únicos, cerca de 4600 bytes de padrão, sem ROM. A segunda linha só prova acento e comprimento. A boca muda 321 pixels no retângulo e não sustenta animação labial. Palco é sonda, não Kenseiden."
+    },
+    {
+      "id": "boomerang_object_and_trail",
+      "status": "not_started",
+      "purpose": "Objeto livre e rastro violeta só nele. Não duplicar a arma no corpo."
+    }
+  ],
+  "principles_on_drawn_keys": {
+    "temporal_axis": "Pendente. Não há sequência vista em velocidade normal e lenta. Inclinar o corpo não demonstra squash/stretch. Trocar uma pose parada não demonstra follow-through.",
+    "basic_cane_tap": {
+      "status": "planejado_sobre_imagens_paradas",
+      "stills": ["J01", "BC04"],
+      "anticipation": "Não desenhada.",
+      "staging_on_still": "No BC04 o punho, o cabo e a ponta romba ocupam lugares diferentes da silhueta. Isso não é trajetória.",
+      "pose_to_pose": "Guarda e contato são desenhos diferentes. Intermediários não existem.",
+      "follow_through": "Não desenhado.",
+      "arcs": "Não desenhados.",
+      "timing": "Proposta do contrato, não medida.",
+      "solid_drawing_on_still": "No BC04 o cabo está na luva e a haste segue até a ponta.",
+      "not_shown": ["squash_and_stretch", "slow_in_slow_out", "secondary_action", "exaggeration", "follow_through"]
+    },
+    "rapier_lunge": {
+      "status": "planejado_sobre_uma_imagem_parada",
+      "stills": ["RL05"],
+      "lean_is_not_squash": "O bbox vertical da fonte cai de 104 para 93 px porque o tronco inclina. Isso não é squash.",
+      "anticipation": "Não desenhada.",
+      "staging_on_still": "Lâmina, guarda-mão e rosto ocupam faixas diferentes neste quadro.",
+      "solid_drawing_on_still": "A lâmina sai da luva e continua reta até a ponta, dentro do quadro largo.",
+      "not_shown": ["follow_through", "slow_in_slow_out", "arco", "freio"]
+    }
+  },
+  "review_board": "data/source_art/sprite_studies/dr_social/review_drafts/cps2_keys_v1/preview/keys_sms70_board_4x.png",
+  "missing_for_approval": [
+    "Guarda e toque em 69 e 71 px falham no par testado; o alvo 66–72 permanece e 60 px não foi aceito",
+    "Sequência da bengala só depois dessa decisão ou de uma composição legal",
+    "Bota, rapieira viável, bumerangue, Super e estados",
+    "Suspeita, determinação, surpresa, alívio, versus/vitória/derrota e seleção",
+    "ROM diagnóstica no SHA próprio, as duas faces, cantos e adversário do elenco",
+    "FPS com piso 58 em cada janela e pior frame",
+    "Áudio, se a ROM de revisão não o tiver",
+    "Revisão do coordenador e decisão do dono; este produtor não assina aprovação"
+  ]
+}

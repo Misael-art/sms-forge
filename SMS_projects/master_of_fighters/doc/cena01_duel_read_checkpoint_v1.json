@@ -1,0 +1,37 @@
+{
+  "schema": "mof_art_direction_checkpoint_v1",
+  "scene": "cena_01_duel_read",
+  "producer_role": "art_direction",
+  "approvals": {
+    "identity": "unchanged_existing_owner_decisions",
+    "static_art": "pending_independent_review",
+    "animation": "not_reopened",
+    "integration": "pending_owner"
+  },
+  "identity_invariants": {
+    "dr_social": "homem adulto, cabelo grisalho, óculos, casaco azul, bengala romba, guarda",
+    "jj": "jovem de cabelo azul, macacão vermelho e branco, botas brancas, Zillion navy/ciano sem projétil"
+  },
+  "defect": "O par aprovado aparecia sobre um campo cinza, sem chão, nome ou vida. A primeira placa punha a linha em Y144 e deixava a sola de J.J. separada do chão por um pixel de backdrop.",
+  "delta": "Placa P0 com nomes DR e JJ, medidores contínuos, fio e chão. A linha de contato foi para Y143. Sprites, origens e tempos permanecem os da fonte v6.",
+  "close_criterion": "No framebuffer da ROM deste SHA, as colunas de apoio encostam na linha e o HUD permanece acima das cabeças, em tamanho nativo.",
+  "observed": {
+    "rom_sha256": "90ea0f98febf4e047e6ca4637af1c454dd9ac7971e5b0bd00fec058c5ebf2405",
+    "plate_sha256": "be41497a29f8c9870a5d5f4b84e0d79a56423d0db94e968f2e69c19ac98bc44d",
+    "session": "e99a50ec2298424787a94de432ae5e50",
+    "frame": 150,
+    "capture_sha256": "9126950ea7c10a5563b6a42890ecc08066b18b4240d429223b285414f831c2cb",
+    "contact": "linha preta em Y143 nas colunas vazias; sola dos dois cobre essa linha ou termina na anterior"
+  },
+  "pending": [
+    "percepção contínua desta ROM: um quadro não aprova o ciclo",
+    "FPS e VBlank não foram medidos de novo",
+    "revisão independente e aceite do dono da placa",
+    "cenário ilustrado, timer e round continuam fora"
+  ],
+  "preserved_attempt": {
+    "rom_sha256": "3a4a83eaee314e984b9715e58d78a8ebd0b49028389f7ced70989215c150de31",
+    "path": "out/diagnostics/cena01_duel_read_v1/rom_gap_3a4a83ea.sms",
+    "reason": "linha de contato em Y144"
+  }
+}

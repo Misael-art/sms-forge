@@ -1,0 +1,57 @@
+{
+  "status": "candidate_for_future_curation",
+  "scope": "Master of Fighters / Cena 02 / Alis",
+  "prior_record": "2026-11-21_alis_paleta_movimento_audio.json",
+  "baseline_rom_sha256": "3f0ee085a36c0a6249098a21682b747ea65dc427971a34adc13ddd03fcd56757",
+  "baseline_trace": "../../out/diagnostics/alis_20261121_salto/qa-b29-mixed/input.json",
+  "verified_candidate": {
+    "revision": "b32",
+    "rom_sha256": "201757c38220c8890bd1bb09b00f6b1fad2a0ace4e5b92184578fe3cfb57e03e",
+    "stepped_session": "0eff089ffae144cd97e855493e3fd9d9",
+    "continuous_session": "951e17d1d82d4fda8708aa174fffc7b4",
+    "qa": "../scene02_hayato_alis_qa.md#b32--sequência-mista-corrigida-no-emulicious",
+    "runtime_trace": "../../out/diagnostics/alis_20261121_salto/qa-b32/input.json",
+    "native_framebuffer_receipt": "../../out/diagnostics/alis_20261121_salto/qa-b32/pixels.json",
+    "cadence_nominal_fps_windows": [37.951070822731126, 43.943345163162356],
+    "cadence_floor_fps": 58,
+    "cadence_passed": false,
+    "review_status": "mixed_input_and_animation_regressions_verified_ntsc_acceptance_pending"
+  },
+  "entries": [
+    {
+      "topic": "Física e velocidade aprovadas pelo dono",
+      "history": "A b26 subia 26 pixels em 28 ticks no ar. A b27 subiu 78 pixels em 24 ticks. O ensaio b28, de 82 pixels, invadiu a faixa do HUD. O dono aprovou altura e velocidade da b29 após jogar.",
+      "contract": "Dois ticks de flexão antes da decolagem. Impulso inicial de 14,625 px/tick para cima, gravidade de 1,5 px/tick², 20 ticks no ar, ápice de 78 pixels e pouso em Y144. Na diagonal, 6 px/tick livres, com o vetor registrado no comando. Corpo, borda e folga no destino limitam o cruzamento.",
+      "verification": "Comparar cada delta vertical, o deslocamento e a face em ambas as travessias. Medir VDP e tempo de parede separadamente. Conferir que a silhueta deixa livre a faixa do HUD.",
+      "evidence": "../scene02_hayato_alis_qa.md#salto-alto-e-cruzamento-de-lado"
+    },
+    {
+      "topic": "Salto durante recuperação da espadada",
+      "report": "Após alternar saltos e espadada com trás e diagonal para trás, o jogador perdeu a resposta do salto.",
+      "diagnosis": "Na b29, atrás + 1 acionou a espadada. A pressão de cima durante a recuperação chegou ao jogo, mas o detector já a havia consumido quando a lutadora voltou a ficar livre. A diagonal sustentada deu zero decolagens. Soltar e apertar cima novamente produziu o salto vertical completo.",
+      "action": "Registrar cada nova pressão de cima com seu vetor. Manter a pressão sustentada na fila até a janela livre. Aceitar até três leituras de soltura na recuperação, consumir uma vez e cancelar após a janela, com baixo ou fim do round. Separar o controle físico do impulso entregue à física.",
+      "verification": "Cobrir cima durante espadada, soltura dentro e fora da janela, pressionar no ar e manter até depois do pouso, cancelamento com baixo, ausência de golpe aéreo fantasma e nova espadada após rearmar o botão."
+    },
+    {
+      "topic": "Guarda aérea e montagem por fase",
+      "report": "A sequência podia insistir em um mesmo sprite por todo o salto com trás sustentado.",
+      "diagnosis": "A b29 selecionou a pose 59 em todos os 20 ticks desse arco. O estado de defesa interrompia a leitura visual do impulso, da subida e da extensão para o pouso.",
+      "action": "Usar a extensão de decolagem, o recolhimento com escudo e a extensão de descida como chaves de uma guarda em movimento. A direção de guarda continua sendo lida a cada tick. Usar as poses autorais da b25 com seus pivôs, escala, paleta e equipamento.",
+      "verification": "Registrar cada chave pedida, publicada e exibida. Rever pressão contínua, soltar e retomar a guarda, e confirmar os pixels no framebuffer."
+    },
+    {
+      "topic": "Residência de poses e troca de lado",
+      "report": "Em algumas sequências a transição diagonal parecia incompleta.",
+      "diagnosis": "Na b29, a pose diagonal 58 foi solicitada durante cinco ticks e nunca ficou residente nem apareceu. A pose visual 55 continuou no ar até a troca para o ápice. O planejamento podia proteger a previsão tardia antes de reservar espaço para a pose mais urgente.",
+      "action": "Antecipar a diagonal desde a flexão e a subida. Reservar as poses atuais e previstas por ordem de uso, com proteção para os sprites já visíveis e as âncoras de virada. Liberar a reserva permanente de guarda em pé durante o arco e recalcular a previsão para entrada ou saída da guarda aérea.",
+      "verification": "Testar a diagonal após marcha e espadada com cache de padrões já renovado. Comparar ambas as faces, poses pedidas e publicadas, recorte no framebuffer, linha de sprites, atraso máximo e transferências em VBlank."
+    },
+    {
+      "topic": "Primeira espadada a partir da guarda",
+      "diagnosis": "A primeira espadada da b30 acertou com a preparação 17 na tela. O árbitro usou o golpe 18 e deduziu a vida antes de a pose ativa ficar residente. A recuperação 19 também ficou ausente. O segundo acerto, após a primeira passagem pelo cache, exibiu a pose 18.",
+      "action": "Prever os quadros do ataque enquanto o botão amadurece sob a guarda em pé. Ceder os padrões da guarda depois de iniciado o ataque. Na guarda aérea, limitar a previsão a ações compatíveis com a fase e o controle de cada lutador.",
+      "verification": "Começar do boot com cache frio, segurar trás e 1 e apertar cima na recuperação. Repetir o golpe após rearmar o botão. Conferir preparação 17, contato 18 e recuperação 19 por exposição, alinhamento da hitbox e pixels no primeiro contato.",
+      "evidence": "../scene02_hayato_alis_qa.md#b30--teste-de-entrada-e-diagnóstico-da-primeira-espadada"
+    }
+  ]
+}

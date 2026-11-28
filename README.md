@@ -27,12 +27,19 @@ arte, áudio PSG e um framework de agentes que trabalha com evidências do emula
 
 ## O que estamos construindo
 
+**Migrando de computador?** Comece pelo
+[guia de recuperação de 24/10/2026](doc/continuity/20261024-start-here.md).
+Ele reúne bootstrap para Ubuntu/WSL2, assets verificados e o ponto de entrada
+do próximo agente para o motor de luta.
+
 O SMSForge reúne o ambiente de desenvolvimento e os projetos usados para
 evoluí-lo: jogos de luta, ação, experiências musicais e laboratórios de hardware.
 O objetivo é produzir jogos com **visual marcante, som bem trabalhado,
 comandos responsivos e cadência consistente**, respeitando o console.
 
-O alvo de produção é **60 FPS em NTSC e 50 FPS em PAL**. A aprovação depende
+O aceite vigente tem objetivo de **60 FPS, com piso de 58 em cada janela**,
+sem arredondamento, dispersão máxima de 2 FPS e teto de 61. PAL50 é diagnóstico
+regional e não fecha esse aceite. A aprovação depende
 da medição de cada ROM e da cena completa: uma animação bonita ou um contador
 do emulador, isoladamente, não fecha a qualidade do jogo.
 
@@ -50,12 +57,12 @@ do emulador, isoladamente, não fecha a qualidade do jogo.
 | **MUGEN → SMS · rev2** | Importação de Ken/Ryu e motor de luta | ROMs diagnósticas dos pares Ken/Ken, Ryu/Ryu e cruzados. Render simultâneo, cadência, comandos e fidelidade da conversão ainda em desenvolvimento. |
 | **Kage Matsuri** | Ação, movimento, combate e apresentação de cena | Protótipo executável com cenário e ciclos de ação capturados. Orçamento do ciclo completo e acabamento seguem em trabalho. |
 | **Arena Nocturna** | Ação com projéteis, boss e efeitos de impacto | Coreografia de atração registrada. Controle humano e orçamento completo permanecem etapas próprias de validação. |
-| **Master of Fighters** | Direção de arte autoral e conversão de personagens | Concepts, model sheets e estudos de sprites em revisão. Há ROM diagnóstica histórica de poses; ainda não é um jogo de luta completo. |
+| **Master of Fighters** | Direção de arte autoral e conversão de personagens | Arte e viewers de poses com aceites próprios por revisão. Esses viewers não qualificam combate nem o consumidor rev2. |
 | **Pulso de Cristal** | Experiência musical dirigida no PSG | Composição, transições e arbitragem de canais em evolução; aprovação por escuta humana segue pendente. |
 | **Laboratório 01 e probes** | Engines de base e experimentos de Z80/VDP | Estudos de scroll, sprites, memória, streaming e orçamento alimentam as ferramentas e os próximos jogos. |
 
 O `luta_mugen` original permanece como histórico de experimentos e aprendizado;
-a frente paralela de continuidade é `luta_mugem_rev2`. O estado operacional
+o consumidor de continuidade é `luta_mugem_rev2` na mesma raiz canônica. O estado operacional
 de cada consumidor fica no seu `doc/10-memory-bank.md`.
 
 ## Rodando no emulador
@@ -160,14 +167,14 @@ não são transferidas automaticamente ao protocolo GDB ou ao backend SMS.
 
 ### Qualidade com contexto
 
-A última rodada de curadoria registrada em **18/10/2026** inclui **120/120
+A rodada histórica de curadoria de **18/10/2026** registrou **120/120
 verificações do selftest**, **70 ferramentas de medição com self-check
 aprovado** e **25/25 vetores de reteste independente** do novo auditor de
 casos observados. São resultados da infraestrutura, não uma aprovação de
 todos os jogos.
 
-O fechamento global de documentação ainda registra dez problemas do legado
-`luta_mugen` associados a erro de I/O. A entrega de cada jogo continua exigindo
+Aquele fechamento registrou dez problemas do legado `luta_mugen` associados
+a erro de I/O; o relatório é histórico, não um diagnóstico atualizado do host. A entrega de cada jogo continua exigindo
 build, validação, boot, gameplay, FPS, áudio e memória atualizada, além dos
 critérios visuais e do vínculo entre asset e ROM.
 
@@ -182,7 +189,7 @@ critérios visuais e do vínculo entre asset e ROM.
 | **Sprites** | Até 64 entradas na SAT e oito sprites por scanline. Tamanho dos personagens, efeitos e HUD precisam caber juntos. |
 | **Cor** | Paleta mestra de 64 códigos; duas paletas de 16 entradas. O índice zero de sprite é transparente; o de BG é visível. |
 | **Áudio** | PSG com três canais de tom e um de ruído; música e efeitos compartilham recursos. |
-| **Cadência** | Alvos de 60/50 FPS conforme a região. Ritmo da emulação, avanço da lógica e apresentação da animação são medidos separadamente. |
+| **Cadência** | Objetivo60/piso58 por janela (SMS_GLOBAL §133); PAL50 somente diagnóstico. Ritmo da emulação, lógica e apresentação são medidos separadamente. |
 
 A ambição visual é explorar bem esses recursos e preservar a leitura da
 ação. Mais pixels e mais poses só agregam ao jogo quando conseguem aparecer

@@ -174,14 +174,12 @@ static const unsigned char ai_motion_b[AI_MOTION_STEPS] = {
     R_K2, R_K2, 0u
 };
 
-unsigned char fight_input_ai_levels(unsigned short frame, unsigned char face,
-                                    unsigned char *out_beat) {
-    unsigned char beat = (unsigned char)((frame / FI_AI_BEAT_FRAMES) % FI_AI_BEATS);
-    unsigned char sub  = (unsigned char)(frame % FI_AI_BEAT_FRAMES);
+/* O mesmo plano serve a função de consulta aleatória e o relógio sequencial;
+ * só o cálculo da fase muda, não os níveis que entram no anel de input. */
+static unsigned char ai_levels_phase(unsigned char beat, unsigned char sub,
+                                     unsigned char face) {
     unsigned char fwd  = (unsigned char)(face ? K_LEFT : K_RIGHT);
     unsigned char back = (unsigned char)(face ? K_RIGHT : K_LEFT);
-
-    if (out_beat) *out_beat = beat;
 
     switch (beat) {
         case AI_BEAT_WALK_F:   return fwd;
@@ -201,4 +199,36 @@ unsigned char fight_input_ai_levels(unsigned short frame, unsigned char face,
             return rel_to_abs(ai_motion_b[sub], fwd, back);
         default:                 return 0u;      /* idle */
     }
+}
+
+unsigned char fight_input_ai_levels(unsigned short frame, unsigned char face,
+                                    unsigned char *out_beat) {
+    unsigned char beat = (unsigned char)((frame / FI_AI_BEAT_FRAMES) % FI_AI_BEATS);
+    unsigned char sub = (unsigned char)(frame % FI_AI_BEAT_FRAMES);
+    if (out_beat) *out_beat = beat;
+    return ai_levels_phase(beat, sub, face);
+}
+
+void fight_ai_clock_reset(FightAIClock *clock) {
+    clock->beat = 0u;
+    clock->sub = 0u;
+}
+
+void fight_ai_clock_advance(FightAIClock *clock, unsigned short frame) {
+    /* O contador da ROM também volta a zero; 65536 não é múltiplo de 300. */
+    if (frame == 0u) {
+        fight_ai_clock_reset(clock);
+        return;
+    }
+    clock->sub++;
+    if (clock->sub >= FI_AI_BEAT_FRAMES) {
+        clock->sub = 0u;
+        clock->beat++;
+        if (clock->beat >= FI_AI_BEATS) clock->beat = 0u;
+    }
+}
+
+unsigned char fight_input_ai_levels_clock(const FightAIClock *clock,
+                                          unsigned char face) {
+    return ai_levels_phase(clock->beat, clock->sub, face);
 }

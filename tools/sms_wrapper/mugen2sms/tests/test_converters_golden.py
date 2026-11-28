@@ -4,6 +4,8 @@ from __future__ import annotations
 import re
 import struct
 
+import pytest
+
 from mugen2sms.converters.sms_tiles import to_sms_pose
 from mugen2sms.converters.sms_clsn import to_clsn_tables
 from mugen2sms.converters.sms_cmd import to_patterns
@@ -63,6 +65,26 @@ def test_clsn_tables_are_flat_int16():
     assert hit == [0, -14, 12, -8]
     assert hurt == [-8, -16, 8, 0]
     struct.pack("<4h", *hit)                    # coube em int16
+
+
+def test_clsn_cursor_limit_covers_both_sections():
+    box = (0, -14, 12, -8)
+    frame = air.Frame(1, 0, 0, 0, 1, clsn1=[box] * 32, clsn2=[box] * 31)
+    actions = {200: air.Action(200, [frame])}
+
+    hit, hurt = to_clsn_tables(actions)[200][0]
+    assert hit == list(box) * 32
+    assert hurt == list(box) * 31
+    frame.clsn2.append(box)
+    with pytest.raises(ValueError, match=r"anim 200, frame 0: 64 CLSN boxes"):
+        to_clsn_tables(actions)
+
+
+@pytest.mark.parametrize("box", [(-32767, -14, 12, -8), (0, -32767, 12, -8)])
+def test_clsn_coordinate_cannot_be_a_terminator(box):
+    frame = air.Frame(1, 0, 0, 0, 1, clsn2=[box])
+    with pytest.raises(ValueError, match=r"anim 200, frame 0: coordinate -32767"):
+        to_clsn_tables({200: air.Action(200, [frame])})
 
 
 def test_cmd_patterns_map_four_way_direction_modifier():
@@ -146,6 +168,19 @@ def _load_mini(tmp_path):
     from mugen2sms.tests.make_fixtures import build
     ch = load(Source(build(tmp_path / "mini")))
     return ch, classify_character(ch, SmsLimits())
+
+
+def test_invalid_clsn_leaves_previous_generation_intact(tmp_path):
+    from mugen2sms.generators.smsdev import generate
+
+    ch, fidelity = _load_mini(tmp_path)
+    out = tmp_path / "gen"
+    generate(ch, fidelity, out)
+    previous = {path.name: path.read_bytes() for path in out.iterdir()}
+    ch.anims[200].frames[0].clsn1 = [(-32767, -14, 12, -8)]
+    with pytest.raises(ValueError, match=r"anim 200, frame 0: coordinate -32767"):
+        generate(ch, fidelity, out)
+    assert {path.name: path.read_bytes() for path in out.iterdir()} == previous
 
 
 def test_generate_banked_tiles(tmp_path):

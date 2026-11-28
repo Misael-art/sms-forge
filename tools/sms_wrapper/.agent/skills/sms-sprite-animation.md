@@ -2,6 +2,66 @@
 
 Use quando houver idle, walk, golpe, hit, KO ou qualquer ciclo de frames.
 Metasprite e SAT: `sms-sprites-metasprite.md`. Esta skill é **semântica**.
+Em jogos de luta, usar a [direção do lutador](sms-fighter-direction.md) para
+derivar locomoção, assinatura corporal e contrajogo do sheet e do GDD.
+O [fluxo do par em combate](../workflows/playable-fighter.md) acompanha a
+mesma ação até a reação observada do adversário.
+
+Na revisão de cor, alinhe os quadros vizinhos pelo pivô da ação e assista à
+transição a 1×. Em Alis o realce da saia sumia entre dois quadros corretos.
+Escolha pontos de luz e sombra na fonte revista e acompanhe-os nas poses em
+que o tecido fica exposto. Registre a oclusão quando ela explica a mudança.
+Para a folha indexada, `regions[].samples` no perfil de
+`audit_sprite_cutout.py` fixa quadro (base zero, ordem de leitura), posição
+na região e cor, por exemplo `{"frame":1,"at_px":[3,2],"rgb":"#FF55AA"}`.
+Confira o lado, traje e pose realmente apresentados, sobretudo se a arte se
+divide entre BG e SAT. O perfil verifica os pontos declarados. Máscara
+completa e cadência pedem comparação do pacote e vídeo da ROM.
+
+## Atuação antes do acabamento
+
+Intenção do golpe → estudo curto de referências autorizadas → coreografia
+corporal → poses gestuais → teste temporal preliminar → revisão do movimento
+→ acabamento → conversão e ROM. Referência tem papel e SHA: não extrair
+identidade, equipamento ou moveset de uma fonte autorizada apenas para ritmo.
+
+No brief, definir função, personalidade, alvo e contrajogo; desenhar linha de
+ação e silhueta de preparação, execução, acompanhamento e recuperação. Traçar
+apoio/transferência de peso, quadril–tronco–ombros, cadeias dos membros,
+empunhadura e arco da arma. Corpo apoiado pode girar, comprimir e inclinar;
+preservar comprimentos e identidade não significa fixar cabeça, quadril, pés
+e roupa no mesmo pixel. Arma rígida não exige corpo rígido. Cabelo, tecido e
+acessórios respondem à ação com atraso coerente, sem movimento ornamental
+obrigatório. Diagrama de juntas é estudo esquemático, nunca pixel final.
+
+Antes de acabamento, reproduzir o gesto na duração proposta. Comparar
+deslocamento entre poses (espaçamento) e tempo de exposição (timing)
+separadamente: holds diferentes não demonstram aceleração. Acrescentar desenho
+somente para fechar uma lacuna identificada de trajetória, leitura ou retorno.
+Mais desenhos e sete princípios declarados não são pontuação de qualidade.
+Registrar por princípio efeito planejado, efeito observado e pendência; a
+contagem exigida pelo contrato continua uma verificação de cobertura.
+
+Testar cedo a sobrevivência de rosto/mãos/arma na escala SMS e a composição do
+par, antes de expandir atlas. A amostra é definida pela ação e pelo projeto;
+seis poses de Hayato ou Social não são mínimo/preset universal. Converter não
+autoriza redesenhar atuação ou reduzir individualmente a pose larga.
+
+## Decisão temporal
+
+Aplicar o checkpoint de `workflows/art-review.md`: imagens, análise quadro a
+quadro, ordem/exposição, percepção contínua, apresentação ROM e aceite do dono
+são eixos separados. Uma interface que só entrega stills deixa percepção em
+`needs_evidence`. Preparar mídias exatas normal/lenta e intervalos a observar,
+preservar controle e encerrar a repetição de revisões equivalentes. Não gerar
+ou buildar para preencher uma limitação de percepção. Após observação real,
+decidir manter, ajustar exposições ou corrigir a pose responsável.
+
+Após decisão explícita do dono, conservar o aceite por arte **e timing**,
+conforme `art-review.md`. Um timing alternativo pode resolver a percepção sem
+novo desenho (Hayato); deformar arma pode sugerir outra trajetória e piorar
+o golpe. Testar a causa observada antes de adicionar smear/poses. Percepção
+não estabelecida do agente permanece declarada sem reabrir a decisão humana.
 
 ## Princípios (ênfase SMS)
 
@@ -49,11 +109,20 @@ Gate de contrato: `audit_animation_contract.py --manifest <json>` e
 executar também `audit_animation_semantics.py`; os dois gates medem coisas
 diferentes.
 
-## Moveset mínimo (quando o GDD for fighting / action)
+Para montar a folha de exposição, acrescente `--exposure-sheet ID` ao gate
+do contrato. Ela liga os ticks de cada pose às trilhas do corpo e dos objetos.
+Na revisão, marque o apoio, o ponto condutor e a silhueta da ameaça no
+rascunho. Compare o último tick de uma exposição e o primeiro da seguinte.
+Na ROM, procure as mesmas fronteiras no frame apresentado e no estado lógico.
 
-idle, walk/advance, retreat, crouch, jump, landing, guard, hit, knockdown,
-get-up, light, medium, heavy, special, throw, victory, defeat — mais ações
-específicas do GDD. Não invente frame fora do GDD.
+## Cobertura do moveset autorizado (fighting / action)
+
+Cruze os estados do GDD com a lista de conferência: idle, walk/advance, retreat,
+crouch, jump, landing, guard, hit, knockdown, get-up, ataques de cada função,
+special, throw, victory e defeat. Para o conjunto autorizado, cubra entrada,
+permanência, interrupção e saída para o próximo estado. Funções ausentes do
+design ficam identificadas como fora de escopo. Em dois botões, use o mapa
+autorizado pelo designer para distinguir toque, combinação ou carga.
 
 Não colapse estados que têm gatilhos/leituras diferentes (ex.: derrota por
 tempo e empate; queda e recuperação; retratos versus neutro/vitória/derrota).

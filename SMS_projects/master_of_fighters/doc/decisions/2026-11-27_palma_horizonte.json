@@ -1,0 +1,627 @@
+{
+  "candidata": "alis_palma_horizonte_r3",
+  "rom": "out/candidates/alis_palma_horizonte_r3/rom/master_of_fighters.sms",
+  "rom_sha256": "84ca34b7475a54bce7e114140f427813fea05eda950c64d1ac335f82a647f8ea",
+  "bytes": 1048576,
+  "arte": "data/source_art/scenes/alis_espacoporto/palma_horizonte.json",
+  "compilacao": "out/candidates/alis_palma_horizonte_r3/build_record.json",
+  "insumos_integrados": "out/qa/alis_palma_horizonte_r3/fontes-integradas.zip",
+  "sha256_insumos_integrados": "751c41c741633f2e388171645574a32e9fa68d34369630280968f6ad03afa94b",
+  "curadoria": [
+    "Revisão da prancha do Espaçoporto com as proporções do guarda, duas profundidades de escarpa e três grupos de nuvens.",
+    "Primeira candidata: comparação no framebuffer revelou pontas de nuvens retangulares e pouca separação do relevo. O ensaio de 128 quadros confirmou o movimento independente.",
+    "Segunda conversão: fixação dos contornos das nuvens e do guarda, ajuste do azul-violeta da serra e reuso de tiles espelhados no pátio. A composição de magia respeita a orientação de fundo.",
+    "Terceira conversão: o ajuste de tiles preserva a cor da crista sobre o céu, os perfis das duas naves, as janelas dos hangares e a torre. O ajuste pondera as bordas e as quatro orientações nativas.",
+    "Cartão de pré-luta e palco consomem a mesma prancha. O empacotador preserva os nomes, os rostos, a moldura e a paleta de P2.",
+    "Compilação com SDCC e verificação no Emulicious NTSC por controles privados. Os IDs a seguir identificam as sessões encerradas."
+  ],
+  "primeira_candidata": {
+    "session": "f23fae4899b24a4aac9b9a3279d9cb7f",
+    "rom_sha256": "773d66a81e89fd1f0fdadb089adb4f50a91457b8f9ba93002abf1a0cd8bdfe8b",
+    "samples": [
+      {
+        "name": "pista",
+        "vdp": 552,
+        "cloud": -17,
+        "apron": 1,
+        "floor": 1,
+        "hud": "a37384aba01f5b8709b2ccf083585e67a0fed5c30474c0b4c642a01fb5cd3b19"
+      },
+      {
+        "name": "vento",
+        "vdp": 680,
+        "cloud": -33,
+        "apron": 1,
+        "floor": 1,
+        "hud": "a37384aba01f5b8709b2ccf083585e67a0fed5c30474c0b4c642a01fb5cd3b19"
+      },
+      {
+        "name": "oeste",
+        "vdp": 798,
+        "cloud": -43,
+        "apron": 10,
+        "floor": 19,
+        "hud": "a37384aba01f5b8709b2ccf083585e67a0fed5c30474c0b4c642a01fb5cd3b19"
+      },
+      {
+        "name": "leste",
+        "vdp": 916,
+        "cloud": -64,
+        "apron": -2,
+        "floor": -5,
+        "hud": "a37384aba01f5b8709b2ccf083585e67a0fed5c30474c0b4c642a01fb5cd3b19"
+      }
+    ],
+    "clip_sha256": "cafcf34dfe862fbb8dfc7b9c56137e183bf313bca689216a529a61630e397987",
+    "passed": true,
+    "closed": "closed"
+  },
+  "sessoes_emulicious": {
+    "cenario": "551f40c625954ea9938981e69a5186ae",
+    "versus": "cfafa2357eb644d580b07d4a46ebb1fb",
+    "historia": "d0c99904264441d0ac63b3f06bacc377",
+    "misto": "3b29ed4bdf7f496c8965ca73a38b98fa",
+    "fps": "359e440b5cca48be99dc810f72e50168",
+    "magias": "3733c6f39c264c608424c30d12f944d8"
+  },
+  "commit_arte_e_codigo": "b24be96",
+  "reproducao": [
+    "tools/pack_alis_scenes.py out/diagnostics/alis_ficha_r1/fighters out/diagnostics/alis_palma_horizonte_r3/panels --horizon",
+    "tools/pack_alis_magic.py out/diagnostics/alis_palma_horizonte_r3/panels out/diagnostics/alis_palma_horizonte_r3/magic",
+    "tools/pack_alis_matchup.py out/diagnostics/alis_palma_horizonte_r3/magic ../../.runtime/downloads out/diagnostics/alis_palma_horizonte_r3/matchup",
+    "build_inner.py --project SMS_projects/master_of_fighters --manifest SMS_projects/master_of_fighters/out/diagnostics/alis_palma_horizonte_r3/matchup/chapter.json --build-dir SMS_projects/master_of_fighters/out/candidates/alis_palma_horizonte_r3"
+  ],
+  "contexto_da_receita": "Os três conversores recebem caminhos relativos à raiz do jogo. O wrapper de build usa caminhos relativos à raiz do SMSForge e um diretório de saída novo. O ZIP da compilação conserva os fontes e os bancos consumidos deste checkout compartilhado.",
+  "diretorio_medicoes": "out/qa/alis_palma_horizonte_r3",
+  "arena": {
+    "session": "551f40c625954ea9938981e69a5186ae",
+    "rom_sha256": "84ca34b7475a54bce7e114140f427813fea05eda950c64d1ac335f82a647f8ea",
+    "samples": [
+      {
+        "name": "pista",
+        "vdp": 552,
+        "cloud": -17,
+        "apron": 1,
+        "floor": 1,
+        "hud": "bcdfb3967bbdd2c2f46961703c9eb90983807db67c6412f7402ac57f54d7dcc4",
+        "ridge_pixels": 297
+      },
+      {
+        "name": "vento",
+        "vdp": 680,
+        "cloud": -33,
+        "apron": 1,
+        "floor": 1,
+        "hud": "bcdfb3967bbdd2c2f46961703c9eb90983807db67c6412f7402ac57f54d7dcc4",
+        "ridge_pixels": 297
+      },
+      {
+        "name": "oeste",
+        "vdp": 798,
+        "cloud": -43,
+        "apron": 10,
+        "floor": 19,
+        "hud": "bcdfb3967bbdd2c2f46961703c9eb90983807db67c6412f7402ac57f54d7dcc4",
+        "ridge_pixels": 297
+      },
+      {
+        "name": "leste",
+        "vdp": 916,
+        "cloud": -64,
+        "apron": -2,
+        "floor": -5,
+        "hud": "bcdfb3967bbdd2c2f46961703c9eb90983807db67c6412f7402ac57f54d7dcc4",
+        "ridge_pixels": 297
+      }
+    ],
+    "wind_steps": [
+      1,
+      9,
+      17,
+      25,
+      33,
+      41,
+      49,
+      57,
+      65,
+      73,
+      81,
+      89,
+      97,
+      105,
+      113,
+      121
+    ],
+    "clip_sha256": "01da528e14660c43e4e42120ac5b31ac4f0634a6fc9c6e8a41ddee18d6b284e9",
+    "passed": true,
+    "closed": "closed"
+  },
+  "comparacao_da_crista_com_a_prancha_convertida": {
+    "alis_palma_horizonte_r2": {
+      "region_xywh": [
+        88,
+        64,
+        93,
+        8
+      ],
+      "pixels_azul_53_no_mapa": 69,
+      "intersecao": 57,
+      "uniao": 298,
+      "orientacoes_de_fundo": 148,
+      "entradas_com_flip": 19,
+      "pixels_azul_53_na_referencia": 286
+    },
+    "alis_palma_horizonte_r3": {
+      "region_xywh": [
+        88,
+        64,
+        93,
+        8
+      ],
+      "pixels_azul_53_no_mapa": 297,
+      "intersecao": 263,
+      "uniao": 320,
+      "orientacoes_de_fundo": 148,
+      "entradas_com_flip": 19,
+      "pixels_azul_53_na_referencia": 286
+    }
+  },
+  "versus": {
+    "posicoes_conferidas": 21,
+    "dados_de_camera": [
+      {
+        "step": 1,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "0207bbf1409861a632f3d56e6f5b8ab666ef967f1f398a87bfb02eb86db62374"
+      },
+      {
+        "step": 2,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "d421d6a85e4c5c5dbd942597eb54922f47f5ca32c2f9f18748f28a57bd8c1591"
+      },
+      {
+        "step": 3,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "6949e886fc2de64b2f3929d5c9b2a834e9c9eb479d72235a9a64112576160989"
+      },
+      {
+        "step": 4,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "4ce1bab3d630349f779d264475dddb2fcb855f8d2de9434590eb21df85d665fe"
+      },
+      {
+        "step": 5,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "15d1cde1139302154905aa801812c8dd0cf8004dccd3c8cff26a207dfce949ad"
+      },
+      {
+        "step": 6,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "88335a1ec78ef75706751839e4ec5010eb962cb5af1d1f84b73900bb69eb23d1"
+      },
+      {
+        "step": 7,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "10439c7d5cd656da106e772cc344c5d83b4009ac90691a4e6604cadef727b6e4"
+      },
+      {
+        "step": 8,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "1d727d19d143e4913b802014eb6be058e1283a3fc020d84745d6d695cc547cc8"
+      },
+      {
+        "step": 9,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "87dd62fbda50496cbb950fec6149b98b310ae752bcb8ec2c00a898f80743a9e7"
+      },
+      {
+        "step": 10,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "1278def5b2f0498a119eb129a53cccaf4fd28484c2675e8e1dbf485855b8714b"
+      },
+      {
+        "step": 11,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "175843ad1ff96efc9495e14fe905ec8f1e058fcb545a2daf9a1e5c91a473d067"
+      },
+      {
+        "step": 12,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "0a8e573654382fe900268299aff67c63b9415a24ad7e7649c198cc512f8fbd15"
+      },
+      {
+        "step": 13,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "020364f9308d246d1a7e7f5ebce5a47ef759347de54cd5ced2a11975728a3d7d"
+      },
+      {
+        "step": 14,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "81960341c433582529c5be30f9187a6fd5598d7874afec52739c90beb0b37c50"
+      },
+      {
+        "step": 15,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "6983fbc72fec514b57560d88be3b4768f58410f4794542fdc52677505eaa2bf1"
+      },
+      {
+        "step": 16,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "c4ff25988cbd38f04bff153cca599fd1a8b76aa075469e75e9c8519bfcb274fe"
+      },
+      {
+        "step": 17,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "9825cca806120ecf44a5856997bd39f27bf4c457f4b9d2d7f30e1e6d8172aad6"
+      },
+      {
+        "step": 18,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "55224054d2ef0019e28129dc8e55b6a5e66754d78cb16e871f6ac2cc6e90135f"
+      },
+      {
+        "step": 19,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "2984efbc999369b956bd99c8c5197c74501838c9de773af64870fcfb62ff131d"
+      },
+      {
+        "step": 20,
+        "end_line": 237,
+        "spills": 0,
+        "sha256": "17d3dabaf263df1efadc6f8cab069b3d0aa138b3faad893b1fec31e713221fb6"
+      }
+    ],
+    "arte": {
+      "name_ink_pixels": [
+        59,
+        20
+      ],
+      "costume_pixels_compared": 157
+    },
+    "musica_fm": true,
+    "fontes": {
+      "title": "Battle",
+      "composer": "Tokuhiko Uwabo",
+      "game": "Phantasy Star",
+      "recording": "Valley Bell (SMS Power!)",
+      "FM": {
+        "source_sha256": "61528cb9a677cad75ecfc050f58951e505dfdafd4eed7663f18c9ac83065671d",
+        "frames": 1538,
+        "loop_frame": 2,
+        "bytes": 7132,
+        "writes": 2410
+      },
+      "PSG": {
+        "source_sha256": "5c106cc7a58ec22e6089e29241cbfcf0fee2d692267b789e7f47a61667c07763",
+        "frames": 1536,
+        "loop_frame": 0,
+        "bytes": 5092,
+        "writes": 3780
+      },
+      "camera_x": [
+        80,
+        76,
+        72,
+        68,
+        64,
+        60,
+        56,
+        52,
+        48,
+        44,
+        40,
+        36,
+        32,
+        28,
+        24,
+        20,
+        16,
+        12,
+        8,
+        4,
+        0
+      ],
+      "window": [
+        16,
+        94,
+        144,
+        72
+      ],
+      "name_font": {
+        "family": "Barlow SemiBold",
+        "sha256": "86577cb32f8abe3673db53ca0f4221e6856751a4f6730c867e00f720f8bb1fc5"
+      },
+      "pattern_count": 448,
+      "portraits": "2e6f47f25869876eb16c9e9b11ccbf19638251167878b9c7c43c341bd651ed7b",
+      "stage": "021b061320fb635e64efb99682a3e3f52f774e738c58b8c2eb57d0d9ed972e7e"
+    }
+  },
+  "historia": {
+    "golpe": "historia_fire",
+    "contador_fire": 1,
+    "acertos": [
+      1,
+      0
+    ]
+  },
+  "vblank": {
+    "mista": {
+      "done": 1,
+      "min_vcount": 200,
+      "overruns": 0,
+      "frames": 3081,
+      "session_id": "3b29ed4bdf7f496c8965ca73a38b98fa",
+      "rom_sha256": "84ca34b7475a54bce7e114140f427813fea05eda950c64d1ac335f82a647f8ea",
+      "judgment": {
+        "verdicto": "pass",
+        "vline_min": 200,
+        "vovf_delta": 0,
+        "amostras": 1,
+        "vline_kind": "sealed_min",
+        "frames_medidos": 3000,
+        "frames_rom_final": 3081,
+        "janela_s_min": 50.0,
+        "janela_selada": true,
+        "schema": "smsforge.worst_frame/v2",
+        "sealed_field": "vline_min"
+      }
+    },
+    "especiais": {
+      "selado": 1,
+      "vcount_min": 200,
+      "overruns": 0
+    }
+  },
+  "fps": {
+    "piso": 58,
+    "guarda_na_historia": [
+      38.81706982789073,
+      43.7857906853973,
+      41.916066643430156
+    ],
+    "misto_no_versus": [
+      {
+        "vdp": 120,
+        "publications": 95,
+        "nominal_hz": 59.92274340431231,
+        "fps": 47.43883852841391,
+        "active": true
+      },
+      {
+        "vdp": 120,
+        "publications": 94,
+        "nominal_hz": 59.92274340431231,
+        "fps": 46.939482333377974,
+        "active": true
+      },
+      {
+        "vdp": 120,
+        "publications": 91,
+        "nominal_hz": 59.92274340431231,
+        "fps": 45.441413748270165,
+        "active": true
+      }
+    ],
+    "especiais_no_versus": [
+      {
+        "fps": 33.456865067407705,
+        "publicados": 67,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 52.43240047877327,
+        "publicados": 105,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 53.43111286884514,
+        "publicados": 107,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 52.931756673809204,
+        "publicados": 106,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 33.95622126244364,
+        "publicados": 68,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 52.931756673809204,
+        "publicados": 106,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 53.43111286884514,
+        "publicados": 107,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 52.931756673809204,
+        "publicados": 106,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 33.95622126244364,
+        "publicados": 68,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 52.931756673809204,
+        "publicados": 106,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 52.931756673809204,
+        "publicados": 106,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      },
+      {
+        "fps": 48.93690711352171,
+        "publicados": 98,
+        "vdp": 120,
+        "derramamentos": 0,
+        "ativo": true
+      }
+    ],
+    "minimo": 33.456865067407705,
+    "atingiu_piso": false
+  },
+  "ambiente": {
+    "plataforma": "Steam Deck LCD / Jupiter, NTSC",
+    "launcher": "Fôlego, uma carga por vez",
+    "reserva_participante_mib": {
+      "ram": 760,
+      "disco": 170
+    },
+    "build": {
+      "maxima_amostrada_c": 50.0,
+      "minima_mem_disponivel_kib": 8703796
+    },
+    "qa": {
+      "maxima_amostrada_c": 48.0,
+      "minima_mem_disponivel_kib": 8746116
+    }
+  }
+}
