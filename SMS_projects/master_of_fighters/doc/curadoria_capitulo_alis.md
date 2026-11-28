@@ -87,6 +87,8 @@ A primeira candidata a regra é a comparação por material, ação, orientaçã
 
 O caso R6b amplia este caderno com a leitura do controle, o retorno do salto, a identificação de cada pose jogada, as camadas dos Guardiões, a hiperpausa, o ganho de HP/MP e a saída do combo nos dois cantos. O registro reúne as observações do dono, as falhas de verificações anteriores e os ensaios reproduzíveis para o próximo personagem. [Dossiê da ficha e do combate](curation_candidates/2026-11-27_alis_ficha_comando_cor_e_combo.md)
 
+O proprietário exige a ficha canônica de construção para cada personagem em Word e PDF da mesma revisão. O dossiê registra o conteúdo mínimo, os dois caminhos de referência da Alis e os casos de regressão para homologação futura. [Requisito de construção e verificação](curation_candidates/2026-11-27_alis_ficha_comando_cor_e_combo.md#requisito-do-proprietário-para-a-ficha-de-cada-personagem)
+
 ## Revisão R8 dos cortes e do combate
 
 Na primeira prancha dos cortes, o escudo perdeu a divisão em cunhas, as meias ficaram interrompidas e as ombreiras e a tiara desapareceram em alguns quadros. A segunda prancha adotou o Conceptual Model Sheet v4 como referência de identidade. A referência de movimento serviu para a posição dos pés, o arco da espada e a função antiaérea.

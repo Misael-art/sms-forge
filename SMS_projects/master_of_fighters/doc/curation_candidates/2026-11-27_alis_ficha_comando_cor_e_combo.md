@@ -2,6 +2,14 @@
 
 **Destino** — revisão pelo curador da fábrica SMSForge. **Escopo observado** — Master of Fighters, capítulos de Alis, em particular o Versus Alis × Alis do Espaçoporto de Palma. Alis × Hayato tem repertório e evidência próprios. Um resultado do espelho só sustenta afirmações sobre as ações exercitadas nesse confronto.
 
+## Requisito do proprietário para a ficha de cada personagem
+
+Cada personagem deve ter uma ficha canônica de construção em Word editável e um PDF exportado do mesmo Word. A ficha é obrigatória na construção do personagem e deve acompanhar toda revisão de arte ou jogabilidade que altere o contrato. Para Alis, as duas vias canônicas são [ficha_tecnica_alis_g6e_v1.docx](../ficha_tecnica_alis_g6e_v1.docx) e [ficha_alis_r6b.pdf](../../out/qa/alis_ficha_r6b/ficha_alis_r6b.pdf). O nome histórico do PDF conserva o caminho. A edição válida aparece na capa e nas referências da ficha.
+
+A ficha reúne movimentação e defesa, comandos, sequência ilustrada de poses por ação, contato, recuperação, alcance, caixas, custo, hitstop, hitstun, dano, recuo, reação em guarda, erro, quedas, efeitos audiovisuais, recuperação de HP e MP e limites de combo quando aplicáveis. Use o Model Sheet aprovado para materiais, escala e identidade. Vincule as ilustrações ao atlas e vincule cada resultado de emulador ao SHA da ROM. Registre separadamente o que foi especificado, observado em bancada e conferido no cartucho.
+
+O aceite documental exige abrir as duas vias, conferir a mesma revisão, comparar imagens e conteúdo e revisar as páginas do PDF exportado. O caso de regressão da Alis deve detectar um PDF atrasado e uma imagem SVG antiga que ainda apareça depois da troca do PNG. A decisão de como transformar esse requisito em gate de fábrica fica registrada para a curadoria futura. [Exemplo e histórico no caderno do projeto](../curadoria_capitulo_alis.md#revisão-r8-dos-cortes-e-do-combate)
+
 ## Origem das decisões e critérios de reprodução
 
 | Tema e observação | Decisão de construção ou correção | Evidência que o próximo personagem deve produzir |
